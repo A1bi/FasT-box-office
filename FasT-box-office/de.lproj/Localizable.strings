@@ -19,3 +19,5 @@
 "yes" = "ja";
 "no" = "nein";
 "paid" = "bezahlt";
+"searchControllerTabTitle" = "Suche";
+"searchControllerNavigationTitle" = "Suche nach Bestellung oder Ticket";

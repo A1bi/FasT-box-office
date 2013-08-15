@@ -8,6 +8,7 @@
 
 #import "FasTAppDelegate.h"
 #import "FasTOrdersTableViewController.h"
+#import "FasTSearchViewController.h"
 #import "FasTApi.h"
 
 @implementation FasTAppDelegate
@@ -30,11 +31,14 @@
     }
     
     FasTOrdersTableViewController *ordersController = [[[FasTOrdersTableViewController alloc] init] autorelease];
-    UINavigationController *orderNavigationController = [[[UINavigationController alloc] initWithRootViewController:ordersController] autorelease];
+    UINavigationController *ordersNavigationController = [[[UINavigationController alloc] initWithRootViewController:ordersController] autorelease];
+    
+    FasTSearchViewController *searchController = [[[FasTSearchViewController alloc] init] autorelease];
+    UINavigationController *searchNavigationController = [[[UINavigationController alloc] initWithRootViewController:searchController] autorelease];
     
     UITabBarController *tbc = [[[UITabBarController alloc] init] autorelease];
     [tbc setDelegate:self];
-    [tbc setViewControllers:@[orderNavigationController]];
+    [tbc setViewControllers:@[searchNavigationController, ordersNavigationController]];
     self.window.rootViewController = tbc;
     
     return YES;

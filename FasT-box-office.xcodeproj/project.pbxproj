@@ -54,6 +54,12 @@
 		6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EC17BCD4BD0038009C /* Settings.bundle */; };
 		6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */; };
 		6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F217BD02A20038009C /* FasTTicketsViewController.m */; };
+		6156C5F717BD18580038009C /* FasTSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F517BD18560038009C /* FasTSearchViewController.m */; };
+		6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5F617BD18570038009C /* FasTSearchViewController.xib */; };
+		6156C62017BD63EB0038009C /* LNHexNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C61017BD63EB0038009C /* LNHexNumberpad.xib */; };
+		6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C61217BD63EB0038009C /* LNNumberpad.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C62217BD63EB0038009C /* LNNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C61317BD63EB0038009C /* LNNumberpad.xib */; };
+		6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C62717BD6C9C0038009C /* FasTNumberpad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +157,14 @@
 		6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsViewController.m; sourceTree = "<group>"; };
 		6156C5F117BD02A20038009C /* FasTTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketsViewController.h; sourceTree = "<group>"; };
 		6156C5F217BD02A20038009C /* FasTTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketsViewController.m; sourceTree = "<group>"; };
+		6156C5F417BD18560038009C /* FasTSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSearchViewController.h; sourceTree = "<group>"; };
+		6156C5F517BD18560038009C /* FasTSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSearchViewController.m; sourceTree = "<group>"; };
+		6156C5F617BD18570038009C /* FasTSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTSearchViewController.xib; sourceTree = "<group>"; };
+		6156C61017BD63EB0038009C /* LNHexNumberpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LNHexNumberpad.xib; path = LNNumberpad/LNHexNumberpad.xib; sourceTree = "<group>"; };
+		6156C61117BD63EB0038009C /* LNNumberpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNNumberpad.h; path = LNNumberpad/LNNumberpad.h; sourceTree = "<group>"; };
+		6156C61217BD63EB0038009C /* LNNumberpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNNumberpad.m; path = LNNumberpad/LNNumberpad.m; sourceTree = "<group>"; };
+		6156C61317BD63EB0038009C /* LNNumberpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LNNumberpad.xib; path = LNNumberpad/LNNumberpad.xib; sourceTree = "<group>"; };
+		6156C62717BD6C9C0038009C /* FasTNumberpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTNumberpad.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +204,7 @@
 		6156B60C17BC4C9B0038009C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6156C5F917BD63EA0038009C /* LNNumberpad */,
 				6156B63117BC4F680038009C /* MBProgressHUD */,
 				6156BFB617BC50200038009C /* MKNetworkKit */,
 				6156BFD817BC504A0038009C /* socket.IO */,
@@ -215,6 +230,10 @@
 				6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */,
 				6156C5F117BD02A20038009C /* FasTTicketsViewController.h */,
 				6156C5F217BD02A20038009C /* FasTTicketsViewController.m */,
+				6156C5F417BD18560038009C /* FasTSearchViewController.h */,
+				6156C5F517BD18560038009C /* FasTSearchViewController.m */,
+				6156C5F617BD18570038009C /* FasTSearchViewController.xib */,
+				6156C62717BD6C9C0038009C /* FasTNumberpad.xib */,
 				6156BFB217BC4FD20038009C /* FasT-objc-common */,
 				6156B61417BC4C9B0038009C /* Supporting Files */,
 			);
@@ -381,6 +400,18 @@
 			path = "submodules/FasT-objc-common/PrintKit";
 			sourceTree = "<group>";
 		};
+		6156C5F917BD63EA0038009C /* LNNumberpad */ = {
+			isa = PBXGroup;
+			children = (
+				6156C61017BD63EB0038009C /* LNHexNumberpad.xib */,
+				6156C61117BD63EB0038009C /* LNNumberpad.h */,
+				6156C61217BD63EB0038009C /* LNNumberpad.m */,
+				6156C61317BD63EB0038009C /* LNNumberpad.xib */,
+			);
+			name = LNNumberpad;
+			path = submodules/LNNumberpad;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -439,6 +470,10 @@
 				6156BFB517BC50050038009C /* staccato.ttf in Resources */,
 				6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */,
 				6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */,
+				6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */,
+				6156C62017BD63EB0038009C /* LNHexNumberpad.xib in Resources */,
+				6156C62217BD63EB0038009C /* LNNumberpad.xib in Resources */,
+				6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +538,8 @@
 				6156C5E617BCC1820038009C /* FasTOrdersTableViewController.m in Sources */,
 				6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */,
 				6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */,
+				6156C5F717BD18580038009C /* FasTSearchViewController.m in Sources */,
+				6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

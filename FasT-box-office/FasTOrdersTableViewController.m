@@ -41,8 +41,21 @@
             [hud hide:YES];
             
             if (o) {
+                NSMutableArray *tmpOrders = [NSMutableArray array];
+                for (FasTOrder *order in o) {
+                    NSInteger empty = 0;
+                    NSArray *requiredKeys = @[@"lastName", @"firstName"];
+                    for (NSString *key in requiredKeys) {
+                        id value = [order performSelector:NSSelectorFromString(key)];
+                        if (![value isKindOfClass:[NSString class]] || [value length] <= 0) {
+                            empty++;
+                        }
+                    }
+                    if (empty < [requiredKeys count]) [tmpOrders addObject:order];
+                }
+                
                 [orders release];
-                orders = [o retain];
+                orders = [[NSMutableArray arrayWithArray:tmpOrders] retain];
                 
                 [lastUpdate release];
                 lastUpdate = [[NSDate date] retain];
