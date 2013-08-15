@@ -1,0 +1,600 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6156B60E17BC4C9B0038009C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60D17BC4C9B0038009C /* UIKit.framework */; };
+		6156B61017BC4C9B0038009C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60F17BC4C9B0038009C /* Foundation.framework */; };
+		6156B61217BC4C9B0038009C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B61117BC4C9B0038009C /* CoreGraphics.framework */; };
+		6156B61817BC4C9B0038009C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6156B61617BC4C9B0038009C /* InfoPlist.strings */; };
+		6156B61A17BC4C9B0038009C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156B61917BC4C9B0038009C /* main.m */; };
+		6156B61E17BC4C9B0038009C /* FasTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156B61D17BC4C9B0038009C /* FasTAppDelegate.m */; };
+		6156B62C17BC4F3A0038009C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B62B17BC4F3A0038009C /* Security.framework */; };
+		6156B62E17BC4F420038009C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B62D17BC4F420038009C /* CFNetwork.framework */; };
+		6156B63017BC4F490038009C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B62F17BC4F490038009C /* libicucore.dylib */; };
+		6156B66617BC4F680038009C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156B64F17BC4F680038009C /* MBProgressHUD.m */; };
+		6156BFA517BC4FCC0038009C /* FasTApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF8C17BC4FCB0038009C /* FasTApi.m */; };
+		6156BFA617BC4FCC0038009C /* FasTBarcode3of9.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF8E17BC4FCB0038009C /* FasTBarcode3of9.m */; };
+		6156BFA717BC4FCC0038009C /* FasTEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9017BC4FCB0038009C /* FasTEvent.m */; };
+		6156BFA817BC4FCC0038009C /* FasTEventDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9217BC4FCB0038009C /* FasTEventDate.m */; };
+		6156BFA917BC4FCC0038009C /* FasTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9417BC4FCB0038009C /* FasTFormatter.m */; };
+		6156BFAA17BC4FCC0038009C /* FasTOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9617BC4FCB0038009C /* FasTOrder.m */; };
+		6156BFAB17BC4FCC0038009C /* FasTPrintersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9817BC4FCB0038009C /* FasTPrintersTableViewController.m */; };
+		6156BFAC17BC4FCC0038009C /* FasTSeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9A17BC4FCB0038009C /* FasTSeat.m */; };
+		6156BFAD17BC4FCC0038009C /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9C17BC4FCB0038009C /* FasTSeatingView.m */; };
+		6156BFAE17BC4FCC0038009C /* FasTSeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9E17BC4FCB0038009C /* FasTSeatView.m */; };
+		6156BFAF17BC4FCC0038009C /* FasTTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFA017BC4FCB0038009C /* FasTTicket.m */; };
+		6156BFB017BC4FCC0038009C /* FasTTicketPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFA217BC4FCC0038009C /* FasTTicketPrinter.m */; };
+		6156BFB117BC4FCC0038009C /* FasTTicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFA417BC4FCC0038009C /* FasTTicketType.m */; };
+		6156BFB517BC50050038009C /* staccato.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6156BFB417BC50050038009C /* staccato.ttf */; };
+		6156BFCF17BC50200038009C /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFBB17BC50200038009C /* NSData+MKBase64.m */; };
+		6156BFD017BC50200038009C /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFBD17BC50200038009C /* NSDate+RFC1123.m */; };
+		6156BFD117BC50200038009C /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFBF17BC50200038009C /* NSDictionary+RequestEncoding.m */; };
+		6156BFD217BC50200038009C /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFC117BC50200038009C /* NSString+MKNetworkKitAdditions.m */; };
+		6156BFD317BC50200038009C /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFC317BC50200038009C /* UIAlertView+MKNetworkKitAdditions.m */; };
+		6156BFD417BC50200038009C /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFC517BC50200038009C /* UIImageView+MKNetworkKitAdditions.m */; };
+		6156BFD517BC50200038009C /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFC717BC50200038009C /* MKNetworkEngine.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156BFD617BC50200038009C /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFCA17BC50200038009C /* MKNetworkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156BFD717BC50200038009C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFCD17BC50200038009C /* Reachability.m */; };
+		6156C32A17BC504E0038009C /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFDE17BC504A0038009C /* SocketIO.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C32B17BC504E0038009C /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFE017BC504A0038009C /* SocketIOJSONSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C32C17BC504E0038009C /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFE217BC504A0038009C /* SocketIOPacket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C32D17BC504E0038009C /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFE517BC504A0038009C /* SocketIOTransportWebsocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C32E17BC504E0038009C /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BFE717BC504A0038009C /* SocketIOTransportXHR.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C59A17BC504E0038009C /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2EB17BC504E0038009C /* base64.c */; };
+		6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2EE17BC504E0038009C /* NSData+SRB64Additions.m */; };
+		6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2F117BC504E0038009C /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6156C5E217BC52390038009C /* FasTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5E117BC52390038009C /* FasTConstants.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6156B60A17BC4C9B0038009C /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6156B60D17BC4C9B0038009C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6156B60F17BC4C9B0038009C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6156B61117BC4C9B0038009C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6156B61517BC4C9B0038009C /* FasT-box-office-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FasT-box-office-Info.plist"; sourceTree = "<group>"; };
+		6156B61917BC4C9B0038009C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6156B61B17BC4C9B0038009C /* FasT-box-office-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FasT-box-office-Prefix.pch"; sourceTree = "<group>"; };
+		6156B61C17BC4C9B0038009C /* FasTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTAppDelegate.h; sourceTree = "<group>"; };
+		6156B61D17BC4C9B0038009C /* FasTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTAppDelegate.m; sourceTree = "<group>"; };
+		6156B62A17BC4CF00038009C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6156B62B17BC4F3A0038009C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6156B62D17BC4F420038009C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6156B62F17BC4F490038009C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		6156B64E17BC4F680038009C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		6156B64F17BC4F680038009C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		6156BF8B17BC4FCB0038009C /* FasTApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTApi.h; sourceTree = "<group>"; };
+		6156BF8C17BC4FCB0038009C /* FasTApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTApi.m; sourceTree = "<group>"; };
+		6156BF8D17BC4FCB0038009C /* FasTBarcode3of9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTBarcode3of9.h; sourceTree = "<group>"; };
+		6156BF8E17BC4FCB0038009C /* FasTBarcode3of9.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTBarcode3of9.m; sourceTree = "<group>"; };
+		6156BF8F17BC4FCB0038009C /* FasTEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTEvent.h; sourceTree = "<group>"; };
+		6156BF9017BC4FCB0038009C /* FasTEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTEvent.m; sourceTree = "<group>"; };
+		6156BF9117BC4FCB0038009C /* FasTEventDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTEventDate.h; sourceTree = "<group>"; };
+		6156BF9217BC4FCB0038009C /* FasTEventDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTEventDate.m; sourceTree = "<group>"; };
+		6156BF9317BC4FCB0038009C /* FasTFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTFormatter.h; sourceTree = "<group>"; };
+		6156BF9417BC4FCB0038009C /* FasTFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTFormatter.m; sourceTree = "<group>"; };
+		6156BF9517BC4FCB0038009C /* FasTOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrder.h; sourceTree = "<group>"; };
+		6156BF9617BC4FCB0038009C /* FasTOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrder.m; sourceTree = "<group>"; };
+		6156BF9717BC4FCB0038009C /* FasTPrintersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTPrintersTableViewController.h; sourceTree = "<group>"; };
+		6156BF9817BC4FCB0038009C /* FasTPrintersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTPrintersTableViewController.m; sourceTree = "<group>"; };
+		6156BF9917BC4FCB0038009C /* FasTSeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeat.h; sourceTree = "<group>"; };
+		6156BF9A17BC4FCB0038009C /* FasTSeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeat.m; sourceTree = "<group>"; };
+		6156BF9B17BC4FCB0038009C /* FasTSeatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeatingView.h; sourceTree = "<group>"; };
+		6156BF9C17BC4FCB0038009C /* FasTSeatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeatingView.m; sourceTree = "<group>"; };
+		6156BF9D17BC4FCB0038009C /* FasTSeatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeatView.h; sourceTree = "<group>"; };
+		6156BF9E17BC4FCB0038009C /* FasTSeatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeatView.m; sourceTree = "<group>"; };
+		6156BF9F17BC4FCB0038009C /* FasTTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicket.h; sourceTree = "<group>"; };
+		6156BFA017BC4FCB0038009C /* FasTTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicket.m; sourceTree = "<group>"; };
+		6156BFA117BC4FCC0038009C /* FasTTicketPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketPrinter.h; sourceTree = "<group>"; };
+		6156BFA217BC4FCC0038009C /* FasTTicketPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketPrinter.m; sourceTree = "<group>"; };
+		6156BFA317BC4FCC0038009C /* FasTTicketType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketType.h; sourceTree = "<group>"; };
+		6156BFA417BC4FCC0038009C /* FasTTicketType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketType.m; sourceTree = "<group>"; };
+		6156BFB417BC50050038009C /* staccato.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = staccato.ttf; sourceTree = "<group>"; };
+		6156BFBA17BC50200038009C /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
+		6156BFBB17BC50200038009C /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
+		6156BFBC17BC50200038009C /* NSDate+RFC1123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC1123.h"; sourceTree = "<group>"; };
+		6156BFBD17BC50200038009C /* NSDate+RFC1123.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC1123.m"; sourceTree = "<group>"; };
+		6156BFBE17BC50200038009C /* NSDictionary+RequestEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+RequestEncoding.h"; sourceTree = "<group>"; };
+		6156BFBF17BC50200038009C /* NSDictionary+RequestEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+RequestEncoding.m"; sourceTree = "<group>"; };
+		6156BFC017BC50200038009C /* NSString+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		6156BFC117BC50200038009C /* NSString+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		6156BFC217BC50200038009C /* UIAlertView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		6156BFC317BC50200038009C /* UIAlertView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		6156BFC417BC50200038009C /* UIImageView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		6156BFC517BC50200038009C /* UIImageView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		6156BFC617BC50200038009C /* MKNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
+		6156BFC717BC50200038009C /* MKNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkEngine.m; sourceTree = "<group>"; };
+		6156BFC817BC50200038009C /* MKNetworkKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
+		6156BFC917BC50200038009C /* MKNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkOperation.h; sourceTree = "<group>"; };
+		6156BFCA17BC50200038009C /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
+		6156BFCC17BC50200038009C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6156BFCD17BC50200038009C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6156BFDD17BC504A0038009C /* SocketIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
+		6156BFDE17BC504A0038009C /* SocketIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
+		6156BFDF17BC504A0038009C /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
+		6156BFE017BC504A0038009C /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
+		6156BFE117BC504A0038009C /* SocketIOPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
+		6156BFE217BC504A0038009C /* SocketIOPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
+		6156BFE317BC504A0038009C /* SocketIOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
+		6156BFE417BC504A0038009C /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
+		6156BFE517BC504A0038009C /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
+		6156BFE617BC504A0038009C /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
+		6156BFE717BC504A0038009C /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
+		6156C2EB17BC504E0038009C /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = SocketRocket/base64.c; sourceTree = "<group>"; };
+		6156C2EC17BC504E0038009C /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = SocketRocket/base64.h; sourceTree = "<group>"; };
+		6156C2ED17BC504E0038009C /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SRB64Additions.h"; path = "SocketRocket/NSData+SRB64Additions.h"; sourceTree = "<group>"; };
+		6156C2EE17BC504E0038009C /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "SocketRocket/NSData+SRB64Additions.m"; sourceTree = "<group>"; };
+		6156C2EF17BC504E0038009C /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SocketRocket-Prefix.pch"; path = "SocketRocket/SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		6156C2F017BC504E0038009C /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		6156C2F117BC504E0038009C /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
+		6156C5DB17BC50F70038009C /* PKJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKJob.h; sourceTree = "<group>"; };
+		6156C5DC17BC50F70038009C /* PKPaper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKPaper.h; sourceTree = "<group>"; };
+		6156C5DD17BC50F80038009C /* PKPrinter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKPrinter.h; sourceTree = "<group>"; };
+		6156C5DE17BC50F80038009C /* PKPrinterBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKPrinterBrowser.h; sourceTree = "<group>"; };
+		6156C5DF17BC50F80038009C /* PKPrintSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKPrintSettings.h; sourceTree = "<group>"; };
+		6156C5E017BC52390038009C /* FasTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTConstants.h; sourceTree = "<group>"; };
+		6156C5E117BC52390038009C /* FasTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTConstants.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6156B60717BC4C9B0038009C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6156B63017BC4F490038009C /* libicucore.dylib in Frameworks */,
+				6156B62E17BC4F420038009C /* CFNetwork.framework in Frameworks */,
+				6156B62C17BC4F3A0038009C /* Security.framework in Frameworks */,
+				6156B60E17BC4C9B0038009C /* UIKit.framework in Frameworks */,
+				6156B61017BC4C9B0038009C /* Foundation.framework in Frameworks */,
+				6156B61217BC4C9B0038009C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6156B60117BC4C9B0038009C = {
+			isa = PBXGroup;
+			children = (
+				6156B61317BC4C9B0038009C /* FasT-box-office */,
+				6156B60C17BC4C9B0038009C /* Frameworks */,
+				6156B60B17BC4C9B0038009C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6156B60B17BC4C9B0038009C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6156B60A17BC4C9B0038009C /* FasT-box-office.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6156B60C17BC4C9B0038009C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6156B63117BC4F680038009C /* MBProgressHUD */,
+				6156BFB617BC50200038009C /* MKNetworkKit */,
+				6156BFD817BC504A0038009C /* socket.IO */,
+				6156C5DA17BC50F70038009C /* PrintKit */,
+				6156B62F17BC4F490038009C /* libicucore.dylib */,
+				6156B62D17BC4F420038009C /* CFNetwork.framework */,
+				6156B62B17BC4F3A0038009C /* Security.framework */,
+				6156B60D17BC4C9B0038009C /* UIKit.framework */,
+				6156B60F17BC4C9B0038009C /* Foundation.framework */,
+				6156B61117BC4C9B0038009C /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6156B61317BC4C9B0038009C /* FasT-box-office */ = {
+			isa = PBXGroup;
+			children = (
+				6156B61C17BC4C9B0038009C /* FasTAppDelegate.h */,
+				6156B61D17BC4C9B0038009C /* FasTAppDelegate.m */,
+				6156BFB217BC4FD20038009C /* FasT-objc-common */,
+				6156B61417BC4C9B0038009C /* Supporting Files */,
+			);
+			path = "FasT-box-office";
+			sourceTree = "<group>";
+		};
+		6156B61417BC4C9B0038009C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6156BFB317BC50050038009C /* assets */,
+				6156B61517BC4C9B0038009C /* FasT-box-office-Info.plist */,
+				6156B61617BC4C9B0038009C /* InfoPlist.strings */,
+				6156B61917BC4C9B0038009C /* main.m */,
+				6156B61B17BC4C9B0038009C /* FasT-box-office-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6156B63117BC4F680038009C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6156B64E17BC4F680038009C /* MBProgressHUD.h */,
+				6156B64F17BC4F680038009C /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			path = submodules/MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		6156BFB217BC4FD20038009C /* FasT-objc-common */ = {
+			isa = PBXGroup;
+			children = (
+				6156BF8B17BC4FCB0038009C /* FasTApi.h */,
+				6156BF8C17BC4FCB0038009C /* FasTApi.m */,
+				6156BF8D17BC4FCB0038009C /* FasTBarcode3of9.h */,
+				6156BF8E17BC4FCB0038009C /* FasTBarcode3of9.m */,
+				6156C5E017BC52390038009C /* FasTConstants.h */,
+				6156C5E117BC52390038009C /* FasTConstants.m */,
+				6156BF8F17BC4FCB0038009C /* FasTEvent.h */,
+				6156BF9017BC4FCB0038009C /* FasTEvent.m */,
+				6156BF9117BC4FCB0038009C /* FasTEventDate.h */,
+				6156BF9217BC4FCB0038009C /* FasTEventDate.m */,
+				6156BF9317BC4FCB0038009C /* FasTFormatter.h */,
+				6156BF9417BC4FCB0038009C /* FasTFormatter.m */,
+				6156BF9517BC4FCB0038009C /* FasTOrder.h */,
+				6156BF9617BC4FCB0038009C /* FasTOrder.m */,
+				6156BF9717BC4FCB0038009C /* FasTPrintersTableViewController.h */,
+				6156BF9817BC4FCB0038009C /* FasTPrintersTableViewController.m */,
+				6156BF9917BC4FCB0038009C /* FasTSeat.h */,
+				6156BF9A17BC4FCB0038009C /* FasTSeat.m */,
+				6156BF9B17BC4FCB0038009C /* FasTSeatingView.h */,
+				6156BF9C17BC4FCB0038009C /* FasTSeatingView.m */,
+				6156BF9D17BC4FCB0038009C /* FasTSeatView.h */,
+				6156BF9E17BC4FCB0038009C /* FasTSeatView.m */,
+				6156BF9F17BC4FCB0038009C /* FasTTicket.h */,
+				6156BFA017BC4FCB0038009C /* FasTTicket.m */,
+				6156BFA117BC4FCC0038009C /* FasTTicketPrinter.h */,
+				6156BFA217BC4FCC0038009C /* FasTTicketPrinter.m */,
+				6156BFA317BC4FCC0038009C /* FasTTicketType.h */,
+				6156BFA417BC4FCC0038009C /* FasTTicketType.m */,
+			);
+			name = "FasT-objc-common";
+			path = "../submodules/FasT-objc-common";
+			sourceTree = "<group>";
+		};
+		6156BFB317BC50050038009C /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				6156BFB417BC50050038009C /* staccato.ttf */,
+			);
+			name = assets;
+			path = "submodules/FasT-objc-common/assets";
+			sourceTree = SOURCE_ROOT;
+		};
+		6156BFB617BC50200038009C /* MKNetworkKit */ = {
+			isa = PBXGroup;
+			children = (
+				6156BFB717BC50200038009C /* Categories */,
+				6156BFC617BC50200038009C /* MKNetworkEngine.h */,
+				6156BFC717BC50200038009C /* MKNetworkEngine.m */,
+				6156BFC817BC50200038009C /* MKNetworkKit.h */,
+				6156BFC917BC50200038009C /* MKNetworkOperation.h */,
+				6156BFCA17BC50200038009C /* MKNetworkOperation.m */,
+				6156BFCB17BC50200038009C /* Reachability */,
+			);
+			name = MKNetworkKit;
+			path = "submodules/FasT-objc-common/submodules/MKNetworkKit/MKNetworkKit";
+			sourceTree = "<group>";
+		};
+		6156BFB717BC50200038009C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6156BFBA17BC50200038009C /* NSData+MKBase64.h */,
+				6156BFBB17BC50200038009C /* NSData+MKBase64.m */,
+				6156BFBC17BC50200038009C /* NSDate+RFC1123.h */,
+				6156BFBD17BC50200038009C /* NSDate+RFC1123.m */,
+				6156BFBE17BC50200038009C /* NSDictionary+RequestEncoding.h */,
+				6156BFBF17BC50200038009C /* NSDictionary+RequestEncoding.m */,
+				6156BFC017BC50200038009C /* NSString+MKNetworkKitAdditions.h */,
+				6156BFC117BC50200038009C /* NSString+MKNetworkKitAdditions.m */,
+				6156BFC217BC50200038009C /* UIAlertView+MKNetworkKitAdditions.h */,
+				6156BFC317BC50200038009C /* UIAlertView+MKNetworkKitAdditions.m */,
+				6156BFC417BC50200038009C /* UIImageView+MKNetworkKitAdditions.h */,
+				6156BFC517BC50200038009C /* UIImageView+MKNetworkKitAdditions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		6156BFCB17BC50200038009C /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				6156BFCC17BC50200038009C /* Reachability.h */,
+				6156BFCD17BC50200038009C /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		6156BFD817BC504A0038009C /* socket.IO */ = {
+			isa = PBXGroup;
+			children = (
+				6156BFDD17BC504A0038009C /* SocketIO.h */,
+				6156BFDE17BC504A0038009C /* SocketIO.m */,
+				6156BFDF17BC504A0038009C /* SocketIOJSONSerialization.h */,
+				6156BFE017BC504A0038009C /* SocketIOJSONSerialization.m */,
+				6156BFE117BC504A0038009C /* SocketIOPacket.h */,
+				6156BFE217BC504A0038009C /* SocketIOPacket.m */,
+				6156BFE317BC504A0038009C /* SocketIOTransport.h */,
+				6156BFE417BC504A0038009C /* SocketIOTransportWebsocket.h */,
+				6156BFE517BC504A0038009C /* SocketIOTransportWebsocket.m */,
+				6156BFE617BC504A0038009C /* SocketIOTransportXHR.h */,
+				6156BFE717BC504A0038009C /* SocketIOTransportXHR.m */,
+				6156C1B617BC504C0038009C /* SocketRocket */,
+			);
+			name = socket.IO;
+			path = "submodules/FasT-objc-common/submodules/socket.IO";
+			sourceTree = "<group>";
+		};
+		6156C1B617BC504C0038009C /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				6156C2EB17BC504E0038009C /* base64.c */,
+				6156C2EC17BC504E0038009C /* base64.h */,
+				6156C2ED17BC504E0038009C /* NSData+SRB64Additions.h */,
+				6156C2EE17BC504E0038009C /* NSData+SRB64Additions.m */,
+				6156C2EF17BC504E0038009C /* SocketRocket-Prefix.pch */,
+				6156C2F017BC504E0038009C /* SRWebSocket.h */,
+				6156C2F117BC504E0038009C /* SRWebSocket.m */,
+			);
+			name = SocketRocket;
+			path = "submodules/socket-rocket";
+			sourceTree = "<group>";
+		};
+		6156C5DA17BC50F70038009C /* PrintKit */ = {
+			isa = PBXGroup;
+			children = (
+				6156C5DB17BC50F70038009C /* PKJob.h */,
+				6156C5DC17BC50F70038009C /* PKPaper.h */,
+				6156C5DD17BC50F80038009C /* PKPrinter.h */,
+				6156C5DE17BC50F80038009C /* PKPrinterBrowser.h */,
+				6156C5DF17BC50F80038009C /* PKPrintSettings.h */,
+			);
+			name = PrintKit;
+			path = "submodules/FasT-objc-common/PrintKit";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6156B60917BC4C9B0038009C /* FasT-box-office */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6156B62717BC4C9B0038009C /* Build configuration list for PBXNativeTarget "FasT-box-office" */;
+			buildPhases = (
+				6156B60617BC4C9B0038009C /* Sources */,
+				6156B60717BC4C9B0038009C /* Frameworks */,
+				6156B60817BC4C9B0038009C /* Resources */,
+				6156C5E317BC52C90038009C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FasT-box-office";
+			productName = "FasT-box-office";
+			productReference = 6156B60A17BC4C9B0038009C /* FasT-box-office.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6156B60217BC4C9B0038009C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = FasT;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Albisigns;
+			};
+			buildConfigurationList = 6156B60517BC4C9B0038009C /* Build configuration list for PBXProject "FasT-box-office" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+			);
+			mainGroup = 6156B60117BC4C9B0038009C;
+			productRefGroup = 6156B60B17BC4C9B0038009C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6156B60917BC4C9B0038009C /* FasT-box-office */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6156B60817BC4C9B0038009C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6156B61817BC4C9B0038009C /* InfoPlist.strings in Resources */,
+				6156BFB517BC50050038009C /* staccato.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6156C5E317BC52C90038009C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# This script automatically sets the version string of\n# an Xcode project from the Git repository containing the project.\n\nset -o errexit\nset -o nounset\n\nINFO_PLIST=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Info\"\n\nVERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}/\" rev-list master | wc -l)\n\ndefaults write $INFO_PLIST CFBundleVersion $VERSION\n\necho \"VERSION: ${VERSION}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6156B60617BC4C9B0038009C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6156B61A17BC4C9B0038009C /* main.m in Sources */,
+				6156B61E17BC4C9B0038009C /* FasTAppDelegate.m in Sources */,
+				6156B66617BC4F680038009C /* MBProgressHUD.m in Sources */,
+				6156BFA517BC4FCC0038009C /* FasTApi.m in Sources */,
+				6156BFA617BC4FCC0038009C /* FasTBarcode3of9.m in Sources */,
+				6156BFA717BC4FCC0038009C /* FasTEvent.m in Sources */,
+				6156BFA817BC4FCC0038009C /* FasTEventDate.m in Sources */,
+				6156BFA917BC4FCC0038009C /* FasTFormatter.m in Sources */,
+				6156BFAA17BC4FCC0038009C /* FasTOrder.m in Sources */,
+				6156BFAB17BC4FCC0038009C /* FasTPrintersTableViewController.m in Sources */,
+				6156BFAC17BC4FCC0038009C /* FasTSeat.m in Sources */,
+				6156BFAD17BC4FCC0038009C /* FasTSeatingView.m in Sources */,
+				6156BFAE17BC4FCC0038009C /* FasTSeatView.m in Sources */,
+				6156BFAF17BC4FCC0038009C /* FasTTicket.m in Sources */,
+				6156BFB017BC4FCC0038009C /* FasTTicketPrinter.m in Sources */,
+				6156BFB117BC4FCC0038009C /* FasTTicketType.m in Sources */,
+				6156BFCF17BC50200038009C /* NSData+MKBase64.m in Sources */,
+				6156BFD017BC50200038009C /* NSDate+RFC1123.m in Sources */,
+				6156BFD117BC50200038009C /* NSDictionary+RequestEncoding.m in Sources */,
+				6156BFD217BC50200038009C /* NSString+MKNetworkKitAdditions.m in Sources */,
+				6156BFD317BC50200038009C /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				6156BFD417BC50200038009C /* UIImageView+MKNetworkKitAdditions.m in Sources */,
+				6156BFD517BC50200038009C /* MKNetworkEngine.m in Sources */,
+				6156BFD617BC50200038009C /* MKNetworkOperation.m in Sources */,
+				6156BFD717BC50200038009C /* Reachability.m in Sources */,
+				6156C32A17BC504E0038009C /* SocketIO.m in Sources */,
+				6156C32B17BC504E0038009C /* SocketIOJSONSerialization.m in Sources */,
+				6156C32C17BC504E0038009C /* SocketIOPacket.m in Sources */,
+				6156C32D17BC504E0038009C /* SocketIOTransportWebsocket.m in Sources */,
+				6156C32E17BC504E0038009C /* SocketIOTransportXHR.m in Sources */,
+				6156C59A17BC504E0038009C /* base64.c in Sources */,
+				6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */,
+				6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */,
+				6156C5E217BC52390038009C /* FasTConstants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6156B61617BC4C9B0038009C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6156B62A17BC4CF00038009C /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6156B62517BC4C9B0038009C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-force_flat_namespace";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		6156B62617BC4C9B0038009C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-force_flat_namespace";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6156B62817BC4C9B0038009C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
+				INFOPLIST_FILE = "FasT-box-office/FasT-box-office-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6156B62917BC4C9B0038009C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
+				INFOPLIST_FILE = "FasT-box-office/FasT-box-office-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6156B60517BC4C9B0038009C /* Build configuration list for PBXProject "FasT-box-office" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6156B62517BC4C9B0038009C /* Debug */,
+				6156B62617BC4C9B0038009C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6156B62717BC4C9B0038009C /* Build configuration list for PBXNativeTarget "FasT-box-office" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6156B62817BC4C9B0038009C /* Debug */,
+				6156B62917BC4C9B0038009C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6156B60217BC4C9B0038009C /* Project object */;
+}
