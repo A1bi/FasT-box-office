@@ -9,9 +9,8 @@
 #import "FasTOrdersTableViewController.h"
 #import "FasTApi.h"
 #import "FasTOrder.h"
+#import "FasTOrderDetailsViewController.h"
 #import "MBProgressHUD.h"
-
-static NSString *cellId = @"orderCell";
 
 @interface FasTOrdersTableViewController ()
 
@@ -29,7 +28,7 @@ static NSString *cellId = @"orderCell";
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -75,9 +74,10 @@ static NSString *cellId = @"orderCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *cellId = @"orderCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];   
     }
     
@@ -92,7 +92,8 @@ static NSString *cellId = @"orderCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    FasTOrderDetailsViewController *details = [[[FasTOrderDetailsViewController alloc] initWithOrderNumber:[orders[[indexPath row]] number]] autorelease];
+    [[self navigationController] pushViewController:details animated:YES];
 }
 
 @end
