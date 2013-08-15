@@ -49,6 +49,9 @@
 		6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2EE17BC504E0038009C /* NSData+SRB64Additions.m */; };
 		6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2F117BC504E0038009C /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6156C5E217BC52390038009C /* FasTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5E117BC52390038009C /* FasTConstants.m */; };
+		6156C5E617BCC1820038009C /* FasTOrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */; };
+		6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EB17BCCD4D0038009C /* Localizable.strings */; };
+		6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EC17BCD4BD0038009C /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +141,10 @@
 		6156C5DF17BC50F80038009C /* PKPrintSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKPrintSettings.h; sourceTree = "<group>"; };
 		6156C5E017BC52390038009C /* FasTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTConstants.h; sourceTree = "<group>"; };
 		6156C5E117BC52390038009C /* FasTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTConstants.m; sourceTree = "<group>"; };
+		6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrdersTableViewController.h; sourceTree = "<group>"; };
+		6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersTableViewController.m; sourceTree = "<group>"; };
+		6156C5EA17BCCD4D0038009C /* de */ = {isa = PBXFileReference; lastKnownFileType = file; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6156C5EC17BCD4BD0038009C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +203,8 @@
 			children = (
 				6156B61C17BC4C9B0038009C /* FasTAppDelegate.h */,
 				6156B61D17BC4C9B0038009C /* FasTAppDelegate.m */,
+				6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */,
+				6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */,
 				6156BFB217BC4FD20038009C /* FasT-objc-common */,
 				6156B61417BC4C9B0038009C /* Supporting Files */,
 			);
@@ -210,6 +219,8 @@
 				6156B61617BC4C9B0038009C /* InfoPlist.strings */,
 				6156B61917BC4C9B0038009C /* main.m */,
 				6156B61B17BC4C9B0038009C /* FasT-box-office-Prefix.pch */,
+				6156C5EB17BCCD4D0038009C /* Localizable.strings */,
+				6156C5EC17BCD4BD0038009C /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -416,6 +427,8 @@
 			files = (
 				6156B61817BC4C9B0038009C /* InfoPlist.strings in Resources */,
 				6156BFB517BC50050038009C /* staccato.ttf in Resources */,
+				6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */,
+				6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +490,7 @@
 				6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */,
 				6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */,
 				6156C5E217BC52390038009C /* FasTConstants.m in Sources */,
+				6156C5E617BCC1820038009C /* FasTOrdersTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +503,14 @@
 				6156B62A17BC4CF00038009C /* de */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6156C5EB17BCCD4D0038009C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6156C5EA17BCCD4D0038009C /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
