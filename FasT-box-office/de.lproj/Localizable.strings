@@ -21,3 +21,9 @@
 "paid" = "bezahlt";
 "searchControllerTabTitle" = "Suche";
 "searchControllerNavigationTitle" = "Suche nach Bestellung oder Ticket";
+"settings" = "Einstellungen";
+"printer" = "Drucker";
+"cashDrawer" = "Kassenschublade";
+"selectPrinter" = "Drucker auswählen";
+"select" = "auswählen";
+"selectCashDrawer" = "Kassenschublade auswählen";

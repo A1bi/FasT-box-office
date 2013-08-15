@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		611C419217BD7A8700552192 /* FasTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419117BD7A8700552192 /* FasTSettingsViewController.m */; };
+		611C419517BD7F5300552192 /* FasTCashDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419417BD7F5300552192 /* FasTCashDrawerTableViewController.m */; };
+		611C419817BD88E900552192 /* FasTCashDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419717BD88E900552192 /* FasTCashDrawer.m */; };
 		6156B60E17BC4C9B0038009C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60D17BC4C9B0038009C /* UIKit.framework */; };
 		6156B61017BC4C9B0038009C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60F17BC4C9B0038009C /* Foundation.framework */; };
 		6156B61217BC4C9B0038009C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B61117BC4C9B0038009C /* CoreGraphics.framework */; };
@@ -63,6 +66,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		611C419017BD7A8700552192 /* FasTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSettingsViewController.h; sourceTree = "<group>"; };
+		611C419117BD7A8700552192 /* FasTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSettingsViewController.m; sourceTree = "<group>"; };
+		611C419317BD7F5300552192 /* FasTCashDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCashDrawerTableViewController.h; sourceTree = "<group>"; };
+		611C419417BD7F5300552192 /* FasTCashDrawerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTCashDrawerTableViewController.m; sourceTree = "<group>"; };
+		611C419617BD88E900552192 /* FasTCashDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCashDrawer.h; sourceTree = "<group>"; };
+		611C419717BD88E900552192 /* FasTCashDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTCashDrawer.m; sourceTree = "<group>"; };
 		6156B60A17BC4C9B0038009C /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156B60D17BC4C9B0038009C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6156B60F17BC4C9B0038009C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -151,7 +160,7 @@
 		6156C5E117BC52390038009C /* FasTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTConstants.m; sourceTree = "<group>"; };
 		6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrdersTableViewController.h; sourceTree = "<group>"; };
 		6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersTableViewController.m; sourceTree = "<group>"; };
-		6156C5EA17BCCD4D0038009C /* de */ = {isa = PBXFileReference; lastKnownFileType = file; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6156C5EA17BCCD4D0038009C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6156C5EC17BCD4BD0038009C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsViewController.h; sourceTree = "<group>"; };
 		6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsViewController.m; sourceTree = "<group>"; };
@@ -234,6 +243,12 @@
 				6156C5F517BD18560038009C /* FasTSearchViewController.m */,
 				6156C5F617BD18570038009C /* FasTSearchViewController.xib */,
 				6156C62717BD6C9C0038009C /* FasTNumberpad.xib */,
+				611C419017BD7A8700552192 /* FasTSettingsViewController.h */,
+				611C419117BD7A8700552192 /* FasTSettingsViewController.m */,
+				611C419317BD7F5300552192 /* FasTCashDrawerTableViewController.h */,
+				611C419417BD7F5300552192 /* FasTCashDrawerTableViewController.m */,
+				611C419617BD88E900552192 /* FasTCashDrawer.h */,
+				611C419717BD88E900552192 /* FasTCashDrawer.m */,
 				6156BFB217BC4FD20038009C /* FasT-objc-common */,
 				6156B61417BC4C9B0038009C /* Supporting Files */,
 			);
@@ -540,6 +555,9 @@
 				6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */,
 				6156C5F717BD18580038009C /* FasTSearchViewController.m in Sources */,
 				6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */,
+				611C419217BD7A8700552192 /* FasTSettingsViewController.m in Sources */,
+				611C419517BD7F5300552192 /* FasTCashDrawerTableViewController.m in Sources */,
+				611C419817BD88E900552192 /* FasTCashDrawer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +682,7 @@
 				6156B62917BC4C9B0038009C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

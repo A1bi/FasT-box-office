@@ -9,6 +9,7 @@
 #import "FasTAppDelegate.h"
 #import "FasTOrdersTableViewController.h"
 #import "FasTSearchViewController.h"
+#import "FasTSettingsViewController.h"
 #import "FasTApi.h"
 
 @implementation FasTAppDelegate
@@ -30,15 +31,19 @@
         [[FasTApi defaultApi] initNodeConnection];
     }
     
-    FasTOrdersTableViewController *ordersController = [[[FasTOrdersTableViewController alloc] init] autorelease];
-    UINavigationController *ordersNavigationController = [[[UINavigationController alloc] initWithRootViewController:ordersController] autorelease];
+    UIViewController *vc;
+    vc = [[[FasTOrdersTableViewController alloc] init] autorelease];
+    UINavigationController *ordersNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     
-    FasTSearchViewController *searchController = [[[FasTSearchViewController alloc] init] autorelease];
-    UINavigationController *searchNavigationController = [[[UINavigationController alloc] initWithRootViewController:searchController] autorelease];
+    vc = [[[FasTSearchViewController alloc] init] autorelease];
+    UINavigationController *searchNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
+    
+    vc = [[[FasTSettingsViewController alloc] init] autorelease];
+    UINavigationController *settingsNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     
     UITabBarController *tbc = [[[UITabBarController alloc] init] autorelease];
     [tbc setDelegate:self];
-    [tbc setViewControllers:@[searchNavigationController, ordersNavigationController]];
+    [tbc setViewControllers:@[searchNavigationController, ordersNavigationController, settingsNavigationController]];
     self.window.rootViewController = tbc;
     
     return YES;
