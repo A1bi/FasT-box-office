@@ -31,3 +31,7 @@
 "purchaseControllerNavigationTitle" = "Einkauf";
 "selectedProducts" = "Warenkorb";
 "selectedProductsTotalPrice" = "Gesamtbetrag: %@";
+"finishedPurchaseTitle" = "Barzahlung";
+"finishedPurchaseDetails" = "Gesamtbetrag: %@";
+"finishedPurchaseErrorTitle" = "Fehler";
+"finishedPurchaseErrorDetails" = "Kauf konnte nicht abgeschlossen werden.";

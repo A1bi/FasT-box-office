@@ -13,6 +13,7 @@
 {
     NSArray *products;
     NSMutableDictionary *selectedProducts;
+    float total;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *buyTicketsBtn;

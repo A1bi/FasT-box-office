@@ -9,6 +9,8 @@
 #import "FasTPurchaseViewController.h"
 #import "FasTCashDrawer.h"
 #import "FasTFormatter.h"
+#import "FasTApi.h"
+#import "MBProgressHUD.h"
 
 static NSString *cellId = @"selectedProductCell";
 
@@ -16,6 +18,8 @@ static NSString *cellId = @"selectedProductCell";
 
 - (void)selectedProduct:(UIButton *)btn;
 - (void)updateTotal;
+- (void)finishedPurchase;
+- (void)showAlertWithTitle:(NSString *)title details:(NSString *)details;
 
 @end
 
@@ -86,7 +90,7 @@ static NSString *cellId = @"selectedProductCell";
 
 - (void)updateTotal
 {
-    float total = 0;
+    total = 0;
     for (NSDictionary *productInfo in selectedProducts) {
         total += [productInfo[@"price"] floatValue] * [selectedProducts[productInfo] intValue];
     }
@@ -100,13 +104,42 @@ static NSString *cellId = @"selectedProductCell";
 
 - (IBAction)finishPurchase:(id)sender
 {
+    NSMutableArray *items = [NSMutableArray array];
+    for (NSDictionary *productInfo in selectedProducts) {
+        NSDictionary *itemInfo = @{ @"id": productInfo[@"id"], @"number": selectedProducts[productInfo], @"type": @"product" };
+        [items addObject:itemInfo];
+    }
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setMode:MBProgressHUDModeIndeterminate];
+    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
+    [[FasTApi defaultApi] finishPurchaseWithItems:items total:total callback:^(NSDictionary *response) {
+        [hud hide:YES];
+        if (response && [response[@"ok"] boolValue]) {
+            [self finishedPurchase];
+        } else {
+            [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseErrorTitle") details:NSLocalizedStringByKey(@"finishedPurchaseErrorDetails")];
+        }
+    }];
+}
+
+- (void)finishedPurchase
+{
+    [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseTitle") details:[NSString stringWithFormat:NSLocalizedStringByKey(@"finishedPurchaseDetails"), [FasTFormatter stringForPrice:total]]];
+    [self clearPurchase:nil];
     [self openCashDrawer];
 }
 
 - (IBAction)clearPurchase:(id)sender
 {
     [selectedProducts removeAllObjects];
+    [self updateTotal];
     [[self selectedProductsTable] reloadData];
+}
+
+- (void)showAlertWithTitle:(NSString *)title details:(NSString *)details
+{
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:title message:details delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
+    [alert show];
 }
 
 #pragma mark table view data source
