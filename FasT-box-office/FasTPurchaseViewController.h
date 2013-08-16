@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "FasTSelectedProductTableViewCell.h"
+#import "FasTOrderViewController.h"
 
-@interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, FasTSelectedProductTableViewCellDelegate>
+@interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, FasTSelectedProductTableViewCellDelegate, FasTOrderViewControllerDelegate>
 {
     NSArray *products;
     NSMutableDictionary *selectedProducts;
     float total;
+    FasTOrderViewController *orderController;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *buyTicketsBtn;
@@ -23,5 +25,6 @@
 - (IBAction)openCashDrawer;
 - (IBAction)finishPurchase:(id)sender;
 - (IBAction)clearPurchase:(id)sender;
+- (IBAction)showOrderController:(id)sender;
 
 @end

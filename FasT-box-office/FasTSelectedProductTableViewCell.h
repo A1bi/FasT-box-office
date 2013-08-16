@@ -32,5 +32,6 @@
 @property (assign, nonatomic) id<FasTSelectedProductTableViewCellDelegate> delegate;
 
 - (IBAction)stepperChangedNumber:(id)sender;
+- (void)enableOrderStyle:(BOOL)enable;
 
 @end

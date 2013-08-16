@@ -10,6 +10,10 @@
 #import "FasTCashDrawer.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
+#import "FasTOrder.h"
+#import "FasTTicketType.h"
+#import "FasTEventDate.h"
+#import "FasTTicketPrinter.h"
 #import "MBProgressHUD.h"
 
 static NSString *cellId = @"selectedProductCell";
@@ -30,10 +34,13 @@ static NSString *cellId = @"selectedProductCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         products = [@[
-                     @{@"id": @"1", @"name": @"Programmheft", @"price": @(1)},
-                     @{@"id": @"2", @"name": @"Regenponcho", @"price": @(1)}
+                     @{@"type": @"product", @"id": @"1", @"name": @"Programmheft", @"price": @(1)},
+                     @{@"type": @"product", @"id": @"2", @"name": @"Regenponcho", @"price": @(1)}
                      ] retain];
         selectedProducts = [[NSMutableDictionary dictionary] retain];
+        
+        orderController = [[FasTOrderViewController alloc] init];
+        [orderController setDelegate:self];
         
         [self setTitle:NSLocalizedStringByKey(@"purchaseControllerTabTitle")];
         [[self navigationItem] setTitle:NSLocalizedStringByKey(@"purchaseControllerNavigationTitle")];
@@ -43,11 +50,11 @@ static NSString *cellId = @"selectedProductCell";
 
 - (void)dealloc
 {
-    [_buyTicketsBtn release];
     [products release];
     [selectedProducts release];
     [_selectedProductsTable release];
     [_totalLabel release];
+    [_buyTicketsBtn release];
     [super dealloc];
 }
 
@@ -92,7 +99,7 @@ static NSString *cellId = @"selectedProductCell";
 {
     total = 0;
     for (NSDictionary *productInfo in selectedProducts) {
-        total += [productInfo[@"price"] floatValue] * [selectedProducts[productInfo] intValue];
+        total += [productInfo[@"price"] floatValue] * ([productInfo[@"type"] isEqualToString:@"order"] ? 1 : [selectedProducts[productInfo] intValue]);
     }
     [[self totalLabel] setText:[NSString stringWithFormat:NSLocalizedStringByKey(@"selectedProductsTotalPrice"), [FasTFormatter stringForPrice:total]]];
 }
@@ -104,17 +111,31 @@ static NSString *cellId = @"selectedProductCell";
 
 - (IBAction)finishPurchase:(id)sender
 {
+    NSDictionary *newOrder = nil;
     NSMutableArray *items = [NSMutableArray array];
     for (NSDictionary *productInfo in selectedProducts) {
-        NSDictionary *itemInfo = @{ @"id": productInfo[@"id"], @"number": selectedProducts[productInfo], @"type": @"product" };
-        [items addObject:itemInfo];
+        if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
+            NSMutableDictionary *tickets = [NSMutableDictionary dictionary];
+            for (NSDictionary *type in [[orderController order] tickets]) {
+                tickets[[type[@"type"] typeId]] = type[@"number"];
+            }
+            newOrder = @{@"date": [[[orderController order] date] dateId], @"tickets": tickets};
+        } else {
+            NSDictionary *itemInfo = @{ @"id": productInfo[@"id"], @"number": selectedProducts[productInfo], @"type": @"product" };
+            [items addObject:itemInfo];
+        }
     }
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
-    [[FasTApi defaultApi] finishPurchaseWithItems:items total:total callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] finishPurchaseWithItems:items newOrder:newOrder total:total callback:^(NSDictionary *response) {
         [hud hide:YES];
         if (response && [response[@"ok"] boolValue]) {
+            if (response[@"new_order"]) {
+                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"new_order"] event:[[FasTApi defaultApi] event]] autorelease];
+                [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
+            }
             [self finishedPurchase];
         } else {
             [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseErrorTitle") details:NSLocalizedStringByKey(@"finishedPurchaseErrorDetails")];
@@ -134,6 +155,13 @@ static NSString *cellId = @"selectedProductCell";
     [selectedProducts removeAllObjects];
     [self updateTotal];
     [[self selectedProductsTable] reloadData];
+    [[self buyTicketsBtn] setHidden:NO];
+    [orderController resetOrder];
+}
+
+- (IBAction)showOrderController:(id)sender
+{
+    [self presentViewController:orderController animated:YES completion:NULL];
 }
 
 - (void)showAlertWithTitle:(NSString *)title details:(NSString *)details
@@ -159,9 +187,15 @@ static NSString *cellId = @"selectedProductCell";
     FasTSelectedProductTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     NSDictionary *productInfo = [selectedProducts allKeys][[indexPath row]];
     [[cell nameLabel] setText:productInfo[@"name"]];
+    BOOL orderStyle = NO;
+    if ([productInfo[@"type"] isEqualToString:@"order"]) {
+        orderStyle = YES;
+    } else {
+        [cell setDelegate:self];
+    }
+    [cell enableOrderStyle:orderStyle];
     [cell setProductInfo:productInfo];
     [cell setNumber:[selectedProducts[productInfo] intValue]];
-    [cell setDelegate:self];
     return cell;
 }
 
@@ -175,6 +209,19 @@ static NSString *cellId = @"selectedProductCell";
     } else {
         selectedProducts[[cell productInfo]] = @([cell number]);
     }
+    [self updateTotal];
+}
+
+#pragma mark order controller delegate
+
+- (void)dismissorderViewController:(FasTOrderViewController *)ovc finished:(BOOL)finished
+{
+    [ovc dismissViewControllerAnimated:YES completion:NULL];
+    [[self buyTicketsBtn] setHidden:finished];
+    FasTOrder *order = [ovc order];
+    selectedProducts[@{@"type": @"order", @"name": @"Tickets", @"price": @([order total])}] = @([order numberOfTickets]);
+    
+    [[self selectedProductsTable] reloadData];
     [self updateTotal];
 }
 

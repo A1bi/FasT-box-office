@@ -230,14 +230,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">buyTicketsBtn</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="112032149"/>
-					</object>
-					<int key="connectionID">55</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">selectedProductsTable</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="721011234"/>
@@ -253,6 +245,14 @@
 					<int key="connectionID">169</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">buyTicketsBtn</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="112032149"/>
+					</object>
+					<int key="connectionID">171</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">openCashDrawer</string>
 						<reference key="source" ref="813485941"/>
@@ -260,6 +260,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">109</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">showOrderController:</string>
+						<reference key="source" ref="112032149"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">170</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1014,7 +1023,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">169</int>
+			<int key="maxID">171</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

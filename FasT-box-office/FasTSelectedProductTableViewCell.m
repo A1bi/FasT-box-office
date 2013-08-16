@@ -35,7 +35,7 @@
 {
     number = n;
     [[self numberLabel] setText:[NSString stringWithFormat:@"%d", number]];
-    [[self totalLabel] setText:[FasTFormatter stringForPrice:number * [productInfo[@"price"] floatValue]]];
+    [[self totalLabel] setText:[FasTFormatter stringForPrice:([[self numberStepper] isHidden] ? 1 : number) * [productInfo[@"price"] floatValue]]];
     [[self numberStepper] setValue:number];
 }
 
@@ -43,6 +43,11 @@
 {
     [self setNumber:[sender value]];
     [delegate selectedProductCellChangedNumber:self];
+}
+
+- (void)enableOrderStyle:(BOOL)enable
+{
+    [[self numberStepper] setHidden:enable];
 }
 
 @end

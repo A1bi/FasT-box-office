@@ -14,6 +14,15 @@
 		611C419D17BD950000552192 /* FasTPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C419B17BD950000552192 /* FasTPurchaseViewController.xib */; };
 		611C41A217BDAAD500552192 /* FasTSelectedProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41A117BDAAD500552192 /* FasTSelectedProductTableViewCell.xib */; };
 		611C41A817BE1BE300552192 /* FasTSelectedProductTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41A717BE1BE300552192 /* FasTSelectedProductTableViewCell.m */; };
+		611C41B117BE4A6F00552192 /* FasTOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41AF17BE4A6F00552192 /* FasTOrderViewController.m */; };
+		611C41B217BE4A6F00552192 /* FasTOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41B017BE4A6F00552192 /* FasTOrderViewController.xib */; };
+		611C41B617BE4A7700552192 /* FasTSeatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41B417BE4A7700552192 /* FasTSeatsViewController.m */; };
+		611C41B717BE4A7700552192 /* FasTSeatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41B517BE4A7700552192 /* FasTSeatsViewController.xib */; };
+		611C41BA17BE4A8300552192 /* FasTStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41B917BE4A8300552192 /* FasTStepViewController.m */; };
+		611C41BF17BE4AC200552192 /* FasTTicketTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41BD17BE4AC200552192 /* FasTTicketTypeViewController.m */; };
+		611C41C017BE4AC200552192 /* FasTTicketTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41BE17BE4AC200552192 /* FasTTicketTypeViewController.xib */; };
+		611C41C417BE4F5000552192 /* FasTTicketTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41C217BE4F5000552192 /* FasTTicketTypesViewController.m */; };
+		611C41C517BE4F5000552192 /* FasTTicketTypesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41C317BE4F5000552192 /* FasTTicketTypesViewController.xib */; };
 		6156B60E17BC4C9B0038009C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60D17BC4C9B0038009C /* UIKit.framework */; };
 		6156B61017BC4C9B0038009C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60F17BC4C9B0038009C /* Foundation.framework */; };
 		6156B61217BC4C9B0038009C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B61117BC4C9B0038009C /* CoreGraphics.framework */; };
@@ -82,6 +91,20 @@
 		611C41A117BDAAD500552192 /* FasTSelectedProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTSelectedProductTableViewCell.xib; sourceTree = "<group>"; };
 		611C41A617BE1BE200552192 /* FasTSelectedProductTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSelectedProductTableViewCell.h; sourceTree = "<group>"; };
 		611C41A717BE1BE300552192 /* FasTSelectedProductTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSelectedProductTableViewCell.m; sourceTree = "<group>"; };
+		611C41AE17BE4A6E00552192 /* FasTOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderViewController.h; sourceTree = "<group>"; };
+		611C41AF17BE4A6F00552192 /* FasTOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderViewController.m; sourceTree = "<group>"; };
+		611C41B017BE4A6F00552192 /* FasTOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTOrderViewController.xib; sourceTree = "<group>"; };
+		611C41B317BE4A7700552192 /* FasTSeatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeatsViewController.h; sourceTree = "<group>"; };
+		611C41B417BE4A7700552192 /* FasTSeatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeatsViewController.m; sourceTree = "<group>"; };
+		611C41B517BE4A7700552192 /* FasTSeatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTSeatsViewController.xib; sourceTree = "<group>"; };
+		611C41B817BE4A8300552192 /* FasTStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTStepViewController.h; sourceTree = "<group>"; };
+		611C41B917BE4A8300552192 /* FasTStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTStepViewController.m; sourceTree = "<group>"; };
+		611C41BC17BE4AC200552192 /* FasTTicketTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketTypeViewController.h; sourceTree = "<group>"; };
+		611C41BD17BE4AC200552192 /* FasTTicketTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketTypeViewController.m; sourceTree = "<group>"; };
+		611C41BE17BE4AC200552192 /* FasTTicketTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTTicketTypeViewController.xib; sourceTree = "<group>"; };
+		611C41C117BE4F5000552192 /* FasTTicketTypesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketTypesViewController.h; sourceTree = "<group>"; };
+		611C41C217BE4F5000552192 /* FasTTicketTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketTypesViewController.m; sourceTree = "<group>"; };
+		611C41C317BE4F5000552192 /* FasTTicketTypesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTTicketTypesViewController.xib; sourceTree = "<group>"; };
 		6156B60A17BC4C9B0038009C /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156B60D17BC4C9B0038009C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6156B60F17BC4C9B0038009C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -203,6 +226,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		611C41BB17BE4A9F00552192 /* FasTOrderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				611C41AE17BE4A6E00552192 /* FasTOrderViewController.h */,
+				611C41AF17BE4A6F00552192 /* FasTOrderViewController.m */,
+				611C41B017BE4A6F00552192 /* FasTOrderViewController.xib */,
+				611C41B317BE4A7700552192 /* FasTSeatsViewController.h */,
+				611C41B417BE4A7700552192 /* FasTSeatsViewController.m */,
+				611C41B517BE4A7700552192 /* FasTSeatsViewController.xib */,
+				611C41B817BE4A8300552192 /* FasTStepViewController.h */,
+				611C41B917BE4A8300552192 /* FasTStepViewController.m */,
+				611C41C117BE4F5000552192 /* FasTTicketTypesViewController.h */,
+				611C41C217BE4F5000552192 /* FasTTicketTypesViewController.m */,
+				611C41C317BE4F5000552192 /* FasTTicketTypesViewController.xib */,
+				611C41BC17BE4AC200552192 /* FasTTicketTypeViewController.h */,
+				611C41BD17BE4AC200552192 /* FasTTicketTypeViewController.m */,
+				611C41BE17BE4AC200552192 /* FasTTicketTypeViewController.xib */,
+			);
+			name = FasTOrderViewController;
+			sourceTree = "<group>";
+		};
 		6156B60117BC4C9B0038009C = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +309,7 @@
 				611C41A617BE1BE200552192 /* FasTSelectedProductTableViewCell.h */,
 				611C41A717BE1BE300552192 /* FasTSelectedProductTableViewCell.m */,
 				611C41A117BDAAD500552192 /* FasTSelectedProductTableViewCell.xib */,
+				611C41BB17BE4A9F00552192 /* FasTOrderViewController */,
 				6156BFB217BC4FD20038009C /* FasT-objc-common */,
 				6156B61417BC4C9B0038009C /* Supporting Files */,
 			);
@@ -507,6 +552,10 @@
 				6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */,
 				611C419D17BD950000552192 /* FasTPurchaseViewController.xib in Resources */,
 				611C41A217BDAAD500552192 /* FasTSelectedProductTableViewCell.xib in Resources */,
+				611C41B217BE4A6F00552192 /* FasTOrderViewController.xib in Resources */,
+				611C41B717BE4A7700552192 /* FasTSeatsViewController.xib in Resources */,
+				611C41C017BE4AC200552192 /* FasTTicketTypeViewController.xib in Resources */,
+				611C41C517BE4F5000552192 /* FasTTicketTypesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +627,11 @@
 				611C419817BD88E900552192 /* FasTCashDrawer.m in Sources */,
 				611C419C17BD950000552192 /* FasTPurchaseViewController.m in Sources */,
 				611C41A817BE1BE300552192 /* FasTSelectedProductTableViewCell.m in Sources */,
+				611C41B117BE4A6F00552192 /* FasTOrderViewController.m in Sources */,
+				611C41B617BE4A7700552192 /* FasTSeatsViewController.m in Sources */,
+				611C41BA17BE4A8300552192 /* FasTStepViewController.m in Sources */,
+				611C41BF17BE4AC200552192 /* FasTTicketTypeViewController.m in Sources */,
+				611C41C417BE4F5000552192 /* FasTTicketTypesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
