@@ -16,6 +16,7 @@
     NSMutableDictionary *selectedProducts;
     float total;
     FasTOrderViewController *orderController;
+    NSMutableArray *ordersToPay;
 }
 
 @property (retain, nonatomic) IBOutlet UIButton *buyTicketsBtn;
@@ -26,5 +27,6 @@
 - (IBAction)finishPurchase:(id)sender;
 - (IBAction)clearPurchase:(id)sender;
 - (IBAction)showOrderController:(id)sender;
+- (void)addOrderToPay:(FasTOrder *)order;
 
 @end

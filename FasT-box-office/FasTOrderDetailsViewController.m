@@ -11,11 +11,13 @@
 #import "FasTOrder.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
+#import "FasTPurchaseViewController.h"
 #import "MBProgressHUD.h"
 
 @interface FasTOrderDetailsViewController ()
 
 - (NSArray *)getRowForIndexPath:(NSIndexPath *)indexPath;
+- (void)pay;
 
 @end
 
@@ -71,6 +73,12 @@
                         ]}
                     ] retain];
         
+        if (![order paid]) {
+            // TODO: fix
+            UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:@"bezahlen" style:UIBarButtonItemStyleBordered target:self action:@selector(pay)] autorelease];
+            [[self navigationItem] setRightBarButtonItem:btn];
+        }
+        
         [[self tableView] reloadData];
         [self setTitle:[NSString stringWithFormat:NSLocalizedStringByKey(@"orderDetailsTitleNumber"), [order number]]];
     }];
@@ -79,6 +87,17 @@
 - (NSArray *)getRowForIndexPath:(NSIndexPath *)indexPath
 {
     return sections[[indexPath section]][@"rows"][[indexPath row]];
+}
+
+- (void)pay
+{
+    UITabBarController *tbc = [self tabBarController];
+    for (UIViewController *controller in [tbc viewControllers]) {
+        if ([controller isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)controller visibleViewController] isKindOfClass:[FasTPurchaseViewController class]]) {
+            [(FasTPurchaseViewController *)[(UINavigationController *)controller visibleViewController] addOrderToPay:order];
+            [tbc setSelectedViewController:controller];
+        }
+    }
 }
 
 #pragma mark - Table view data source

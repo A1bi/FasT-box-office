@@ -8,8 +8,11 @@
 
 #import "FasTTicketsViewController.h"
 #import "FasTTicket.h"
+#import "FasTTicketPrinter.h"
 
 @interface FasTTicketsViewController ()
+
+- (void)print;
 
 @end
 
@@ -22,6 +25,9 @@
         tickets = [t retain];
         
         [self setTitle:NSLocalizedStringByKey(@"ticketOverview")];
+        // TODO: fix
+        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:@"drucken" style:UIBarButtonItemStyleBordered target:self action:@selector(print)] autorelease];
+        [[self navigationItem] setRightBarButtonItem:btn];
     }
     return self;
 }
@@ -30,6 +36,11 @@
 {
     [tickets release];
     [super dealloc];
+}
+
+- (void)print
+{
+    [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:[tickets[0] order]];
 }
 
 #pragma mark - Table view data source
@@ -54,7 +65,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@: %@", [ticket number], [[ticket type] name]]];
-    [[cell detailTextLabel] setText:NSLocalizedStringByKey([ticket canCheckIn] ? @"yes" : @"no")];
+    // TODO: fix
+    [[cell detailTextLabel] setText:[ticket canCheckIn] ? @"gültig" : @"noch nicht oder nicht mehr gültig"];
     
     return cell;
 }

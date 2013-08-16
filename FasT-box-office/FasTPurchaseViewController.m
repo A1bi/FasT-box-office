@@ -38,6 +38,7 @@ static NSString *cellId = @"selectedProductCell";
                      @{@"type": @"product", @"id": @"2", @"name": @"Regenponcho", @"price": @(1)}
                      ] retain];
         selectedProducts = [[NSMutableDictionary dictionary] retain];
+        ordersToPay = [[NSMutableArray alloc] init];
         
         orderController = [[FasTOrderViewController alloc] init];
         [orderController setDelegate:self];
@@ -121,7 +122,7 @@ static NSString *cellId = @"selectedProductCell";
             }
             newOrder = @{@"date": [[[orderController order] date] dateId], @"tickets": tickets};
         } else {
-            NSDictionary *itemInfo = @{ @"id": productInfo[@"id"], @"number": selectedProducts[productInfo], @"type": @"product" };
+            NSDictionary *itemInfo = @{ @"id": productInfo[@"id"], @"number": selectedProducts[productInfo], @"type": productInfo[@"type"] };
             [items addObject:itemInfo];
         }
     }
@@ -145,6 +146,9 @@ static NSString *cellId = @"selectedProductCell";
 
 - (void)finishedPurchase
 {
+    for (FasTOrder *order in ordersToPay) {
+        [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
+    }
     [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseTitle") details:[NSString stringWithFormat:NSLocalizedStringByKey(@"finishedPurchaseDetails"), [FasTFormatter stringForPrice:total]]];
     [self clearPurchase:nil];
     [self openCashDrawer];
@@ -157,6 +161,7 @@ static NSString *cellId = @"selectedProductCell";
     [[self selectedProductsTable] reloadData];
     [[self buyTicketsBtn] setHidden:NO];
     [orderController resetOrder];
+    [ordersToPay removeAllObjects];
 }
 
 - (IBAction)showOrderController:(id)sender
@@ -168,6 +173,15 @@ static NSString *cellId = @"selectedProductCell";
 {
     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:title message:details delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
     [alert show];
+}
+
+- (void)addOrderToPay:(FasTOrder *)order
+{
+    [ordersToPay addObject:order];
+    selectedProducts[@{@"type": @"order", @"id": [order bunchId], @"name": @"Tickets", @"price": @([order total])}] = @([[order tickets] count]);
+    
+    [[self selectedProductsTable] reloadData];
+    [self updateTotal];
 }
 
 #pragma mark table view data source
@@ -218,6 +232,8 @@ static NSString *cellId = @"selectedProductCell";
 {
     [ovc dismissViewControllerAnimated:YES completion:NULL];
     [[self buyTicketsBtn] setHidden:finished];
+    if (!finished) return;
+    
     FasTOrder *order = [ovc order];
     selectedProducts[@{@"type": @"order", @"name": @"Tickets", @"price": @([order total])}] = @([order numberOfTickets]);
     
