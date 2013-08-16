@@ -10,6 +10,7 @@
 #import "FasTOrdersTableViewController.h"
 #import "FasTSearchViewController.h"
 #import "FasTSettingsViewController.h"
+#import "FasTPurchaseViewController.h"
 #import "FasTApi.h"
 
 @implementation FasTAppDelegate
@@ -41,9 +42,12 @@
     vc = [[[FasTSettingsViewController alloc] init] autorelease];
     UINavigationController *settingsNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     
+    vc = [[[FasTPurchaseViewController alloc] init] autorelease];
+    UINavigationController *purchaseNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
+    
     UITabBarController *tbc = [[[UITabBarController alloc] init] autorelease];
     [tbc setDelegate:self];
-    [tbc setViewControllers:@[searchNavigationController, ordersNavigationController, settingsNavigationController]];
+    [tbc setViewControllers:@[purchaseNavigationController, searchNavigationController, ordersNavigationController, settingsNavigationController]];
     self.window.rootViewController = tbc;
     
     return YES;
@@ -56,9 +60,10 @@
 
 #pragma mark tab bar controller delegate
 
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    [[tabBarController navigationController] popToRootViewControllerAnimated:NO];
+    [(UINavigationController *)[tabBarController selectedViewController] popToRootViewControllerAnimated:[tabBarController selectedViewController] == viewController];
+    return YES;
 }
 
 @end

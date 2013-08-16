@@ -27,3 +27,7 @@
 "selectPrinter" = "Drucker auswählen";
 "select" = "auswählen";
 "selectCashDrawer" = "Kassenschublade auswählen";
+"purchaseControllerTabTitle" = "Kaufen";
+"purchaseControllerNavigationTitle" = "Einkauf";
+"selectedProducts" = "Warenkorb";
+"selectedProductsTotalPrice" = "Gesamtbetrag: %@";
