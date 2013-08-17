@@ -58,3 +58,4 @@
 "block" = "Block";
 "row" = "Reihe";
 "seat" = "Sitz";
+"orderExpiredMessage" = "Ihre Sitzung ist abgelaufen";

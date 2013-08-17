@@ -18,6 +18,7 @@
 @protocol FasTOrderViewControllerDelegate <NSObject>
 
 - (void)dismissorderViewController:(FasTOrderViewController *)ovc finished:(BOOL)finished;
+- (void)orderInViewControllerExpired:(FasTOrderViewController *)ovc;
 
 @end
 
@@ -43,6 +44,6 @@
 - (FasTEvent *)event;
 - (void)updateNextButton;
 - (void)toggleWaitingSpinner:(BOOL)toggle;
-- (void)resetOrder;
+- (void)resetSeating;
 
 @end

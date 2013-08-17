@@ -12,6 +12,7 @@
 #import "FasTSeatsViewController.h"
 #import "FasTApi.h"
 #import "FasTEvent.h"
+#import "FasTEventDate.h"
 #import "MBProgressHUD.h"
 
 @interface FasTOrderViewController ()
@@ -26,6 +27,7 @@
 - (void)toggleBtns:(BOOL)toggle;
 - (void)disableBtns;
 - (void)dismissWithFinished:(BOOL)finished;
+- (void)resetOrder;
 
 @end
 
@@ -79,7 +81,13 @@
 {
     [order release];
     order = [[FasTOrder alloc] init];
-    [order setDate:[[self event] dates][0]];
+    for (FasTEventDate *date in [[self event] dates]) {
+        if ([[date date] isToday]) {
+            [order setDate:date];
+            break;
+        }
+    }
+    if (![order date]) [order setDate:[[self event] dates][0]];
     
     currentStepIndex = -1;
     
@@ -98,9 +106,15 @@
     [self pushNextStepController];
 }
 
-- (void)resetOrder
+- (void)resetSeating
 {
     [[FasTApi defaultApi] resetSeating];
+    [[FasTApi defaultApi] unlockSeats];
+}
+
+- (void)resetOrder
+{
+    [self resetSeating];
     [self initSteps];
 }
 
@@ -140,7 +154,11 @@
 
 - (void)expireOrder
 {
-    [self showLocalizedAlertWithKey:@"orderExpiredMessage"];
+    if ([[self presentingViewController] presentedViewController] == self) {
+        [self showLocalizedAlertWithKey:@"orderExpiredMessage"];
+    } else {
+        [delegate orderInViewControllerExpired:self];
+    }
 }
 
 - (void)showLocalizedAlertWithKey:(NSString *)key
@@ -182,6 +200,9 @@
 - (void)dismissWithFinished:(BOOL)finished
 {
     [[self delegate] dismissorderViewController:self finished:finished];
+    if (!finished) {
+        [self resetSeating];
+    }
 }
 
 #pragma mark actions

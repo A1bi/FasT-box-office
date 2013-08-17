@@ -23,6 +23,7 @@
 		611C41C017BE4AC200552192 /* FasTTicketTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41BE17BE4AC200552192 /* FasTTicketTypeViewController.xib */; };
 		611C41C417BE4F5000552192 /* FasTTicketTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41C217BE4F5000552192 /* FasTTicketTypesViewController.m */; };
 		611C41C517BE4F5000552192 /* FasTTicketTypesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41C317BE4F5000552192 /* FasTTicketTypesViewController.xib */; };
+		611C41CD17BFA4FC00552192 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41CA17BFA4FC00552192 /* NSDate-Utilities.m */; };
 		6156B60E17BC4C9B0038009C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60D17BC4C9B0038009C /* UIKit.framework */; };
 		6156B61017BC4C9B0038009C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B60F17BC4C9B0038009C /* Foundation.framework */; };
 		6156B61217BC4C9B0038009C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6156B61117BC4C9B0038009C /* CoreGraphics.framework */; };
@@ -72,9 +73,7 @@
 		6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F217BD02A20038009C /* FasTTicketsViewController.m */; };
 		6156C5F717BD18580038009C /* FasTSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F517BD18560038009C /* FasTSearchViewController.m */; };
 		6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5F617BD18570038009C /* FasTSearchViewController.xib */; };
-		6156C62017BD63EB0038009C /* LNHexNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C61017BD63EB0038009C /* LNHexNumberpad.xib */; };
 		6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C61217BD63EB0038009C /* LNNumberpad.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		6156C62217BD63EB0038009C /* LNNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C61317BD63EB0038009C /* LNNumberpad.xib */; };
 		6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C62717BD6C9C0038009C /* FasTNumberpad.xib */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +104,8 @@
 		611C41C117BE4F5000552192 /* FasTTicketTypesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketTypesViewController.h; sourceTree = "<group>"; };
 		611C41C217BE4F5000552192 /* FasTTicketTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketTypesViewController.m; sourceTree = "<group>"; };
 		611C41C317BE4F5000552192 /* FasTTicketTypesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTTicketTypesViewController.xib; sourceTree = "<group>"; };
+		611C41C917BFA4FC00552192 /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
+		611C41CA17BFA4FC00552192 /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
 		6156B60A17BC4C9B0038009C /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6156B60D17BC4C9B0038009C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6156B60F17BC4C9B0038009C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -247,6 +248,16 @@
 			name = FasTOrderViewController;
 			sourceTree = "<group>";
 		};
+		611C41C717BFA4FC00552192 /* NSDate-Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				611C41C917BFA4FC00552192 /* NSDate-Utilities.h */,
+				611C41CA17BFA4FC00552192 /* NSDate-Utilities.m */,
+			);
+			name = "NSDate-Extensions";
+			path = "submodules/NSDate-Extensions";
+			sourceTree = "<group>";
+		};
 		6156B60117BC4C9B0038009C = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +278,7 @@
 		6156B60C17BC4C9B0038009C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				611C41C717BFA4FC00552192 /* NSDate-Extensions */,
 				6156C5F917BD63EA0038009C /* LNNumberpad */,
 				6156B63117BC4F680038009C /* MBProgressHUD */,
 				6156BFB617BC50200038009C /* MKNetworkKit */,
@@ -547,8 +559,6 @@
 				6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */,
 				6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */,
 				6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */,
-				6156C62017BD63EB0038009C /* LNHexNumberpad.xib in Resources */,
-				6156C62217BD63EB0038009C /* LNNumberpad.xib in Resources */,
 				6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */,
 				611C419D17BD950000552192 /* FasTPurchaseViewController.xib in Resources */,
 				611C41A217BDAAD500552192 /* FasTSelectedProductTableViewCell.xib in Resources */,
@@ -632,6 +642,7 @@
 				611C41BA17BE4A8300552192 /* FasTStepViewController.m in Sources */,
 				611C41BF17BE4AC200552192 /* FasTTicketTypeViewController.m in Sources */,
 				611C41C417BE4F5000552192 /* FasTTicketTypesViewController.m in Sources */,
+				611C41CD17BFA4FC00552192 /* NSDate-Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

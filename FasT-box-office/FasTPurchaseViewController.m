@@ -21,7 +21,9 @@ static NSString *cellId = @"selectedProductCell";
 @interface FasTPurchaseViewController ()
 
 - (void)selectedProduct:(UIButton *)btn;
+- (void)updateTableAndTotal;
 - (void)updateTotal;
+- (void)updateTable;
 - (void)finishedPurchase;
 - (void)showAlertWithTitle:(NSString *)title details:(NSString *)details;
 
@@ -92,7 +94,7 @@ static NSString *cellId = @"selectedProductCell";
     }
     selectedProducts[productInfo] = number;
     
-    if (number) [[self selectedProductsTable] reloadData];
+    if (number) [self updateTable];
     [self updateTotal];
 }
 
@@ -103,6 +105,17 @@ static NSString *cellId = @"selectedProductCell";
         total += [productInfo[@"price"] floatValue] * ([productInfo[@"type"] isEqualToString:@"order"] ? 1 : [selectedProducts[productInfo] intValue]);
     }
     [[self totalLabel] setText:[NSString stringWithFormat:NSLocalizedStringByKey(@"selectedProductsTotalPrice"), [FasTFormatter stringForPrice:total]]];
+}
+
+- (void)updateTable
+{
+    [[self selectedProductsTable] reloadData];
+}
+
+- (void)updateTableAndTotal
+{
+    [self updateTotal];
+    [self updateTable];
 }
 
 - (IBAction)openCashDrawer
@@ -157,10 +170,9 @@ static NSString *cellId = @"selectedProductCell";
 - (IBAction)clearPurchase:(id)sender
 {
     [selectedProducts removeAllObjects];
-    [self updateTotal];
-    [[self selectedProductsTable] reloadData];
+    [self updateTableAndTotal];
     [[self buyTicketsBtn] setHidden:NO];
-    [orderController resetOrder];
+    [orderController resetSeating];
     [ordersToPay removeAllObjects];
 }
 
@@ -180,8 +192,7 @@ static NSString *cellId = @"selectedProductCell";
     [ordersToPay addObject:order];
     selectedProducts[@{@"type": @"order", @"id": [order bunchId], @"name": @"Tickets", @"price": @([order total])}] = @([[order tickets] count]);
     
-    [[self selectedProductsTable] reloadData];
-    [self updateTotal];
+    [self updateTableAndTotal];
 }
 
 #pragma mark table view data source
@@ -219,7 +230,7 @@ static NSString *cellId = @"selectedProductCell";
 {
     if ([cell number] <= 0) {
         [selectedProducts removeObjectForKey:[cell productInfo]];
-        [[self selectedProductsTable] reloadData];
+        [self updateTable];
     } else {
         selectedProducts[[cell productInfo]] = @([cell number]);
     }
@@ -237,8 +248,18 @@ static NSString *cellId = @"selectedProductCell";
     FasTOrder *order = [ovc order];
     selectedProducts[@{@"type": @"order", @"name": @"Tickets", @"price": @([order total])}] = @([order numberOfTickets]);
     
-    [[self selectedProductsTable] reloadData];
-    [self updateTotal];
+    [self updateTableAndTotal];
+}
+
+- (void)orderInViewControllerExpired:(FasTOrderViewController *)ovc
+{
+    for (NSDictionary *productInfo in selectedProducts) {
+        if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
+            [selectedProducts removeObjectForKey:productInfo];
+            [self updateTableAndTotal];
+            return;
+        }
+    }
 }
 
 @end

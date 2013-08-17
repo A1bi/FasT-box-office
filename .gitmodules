@@ -7,3 +7,6 @@
 [submodule "submodules/LNNumberpad"]
 	path = submodules/LNNumberpad
 	url = git@github.com:lnafziger/Numberpad.git
+[submodule "submodules/NSDate-Extensions"]
+	path = submodules/NSDate-Extensions
+	url = git@github.com:erica/NSDate-Extensions.git

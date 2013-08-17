@@ -11,6 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "NSDate-Utilities.h"
 #endif
 
 #define NSLocalizedStringByKey(key) NSLocalizedString(key, nil)
