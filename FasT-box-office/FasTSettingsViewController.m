@@ -47,7 +47,7 @@
     static NSString *cellId = @"settingsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     NSString *descriptionKey, *i18nKey;

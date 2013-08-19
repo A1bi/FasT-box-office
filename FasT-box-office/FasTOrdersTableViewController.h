@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FasTOrdersTableViewController : UITableViewController
+@interface FasTOrdersTableViewController : UITableViewController <UISearchDisplayDelegate>
 {
-    NSArray *orders;
+    NSArray *orders, *foundOrders, *displayedOrders;
     NSDate *lastUpdate;
+    UISearchDisplayController *searchDisplay;
 }
 
 @end

@@ -9,6 +9,8 @@
 #import "FasTTicketsViewController.h"
 #import "FasTTicket.h"
 #import "FasTTicketPrinter.h"
+#import "FasTFormatter.h"
+#import "FasTSeat.h"
 
 @interface FasTTicketsViewController ()
 
@@ -26,7 +28,7 @@
         
         [self setTitle:NSLocalizedStringByKey(@"ticketOverview")];
         // TODO: fix
-        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:@"drucken" style:UIBarButtonItemStyleBordered target:self action:@selector(print)] autorelease];
+        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringByKey(@"print") style:UIBarButtonItemStyleBordered target:self action:@selector(print)] autorelease];
         [[self navigationItem] setRightBarButtonItem:btn];
     }
     return self;
@@ -40,7 +42,7 @@
 
 - (void)print
 {
-    [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:[tickets[0] order]];
+    [[FasTTicketPrinter sharedPrinter] printTickets:tickets];
 }
 
 #pragma mark - Table view data source
@@ -62,11 +64,11 @@
     static NSString *cellId = @"ticketCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];
     }
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@: %@", [ticket number], [[ticket type] name]]];
     // TODO: fix
-    [[cell detailTextLabel] setText:[ticket canCheckIn] ? @"gültig" : @"noch nicht oder nicht mehr gültig"];
+    [[cell detailTextLabel] setText:[ticket canCheckIn] ? [NSString stringWithFormat:NSLocalizedStringByKey(@"ticketsControllerCellDescription"), [FasTFormatter stringForEventDate:[[ticket date] date]], [[ticket seat] blockName], [[ticket seat] number]] : NSLocalizedStringByKey(@"ticketsControllerCellInvalid")];
     
     return cell;
 }

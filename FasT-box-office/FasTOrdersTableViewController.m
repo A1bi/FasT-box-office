@@ -14,6 +14,8 @@
 
 @interface FasTOrdersTableViewController ()
 
+- (void)resetDisplayedOrders;
+
 @end
 
 @implementation FasTOrdersTableViewController
@@ -24,6 +26,15 @@
     if (self) {
         [self setTitle:NSLocalizedStringByKey(@"ordersControllerTabTitle")];
         [[self navigationItem] setTitle:NSLocalizedStringByKey(@"ordersControllerNavigationTitle")];
+        
+        UISearchBar *searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
+        [searchBar setKeyboardType:UIKeyboardTypeDecimalPad];
+        [searchBar setPlaceholder:NSLocalizedStringByKey(@"ordersSearchPlaceholder")];
+        [[self tableView] setTableHeaderView:searchBar];
+        
+        searchDisplay = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
+        [searchDisplay setDelegate:self];
+        [searchDisplay setSearchResultsDataSource:self];
     }
     return self;
 }
@@ -56,6 +67,7 @@
                 
                 [orders release];
                 orders = [[NSMutableArray arrayWithArray:tmpOrders] retain];
+                [self resetDisplayedOrders];
                 
                 [lastUpdate release];
                 lastUpdate = [[NSDate date] retain];
@@ -69,8 +81,14 @@
 - (void)dealloc
 {
     [orders release];
+    [foundOrders release];
     [lastUpdate release];
     [super dealloc];
+}
+
+- (void)resetDisplayedOrders
+{
+    displayedOrders = orders;
 }
 
 #pragma mark - Table view data source
@@ -82,7 +100,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [orders count];
+    return [displayedOrders count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,7 +112,7 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];   
     }
     
-    FasTOrder *order = orders[[indexPath row]];
+    FasTOrder *order = displayedOrders[[indexPath row]];
     [[cell textLabel] setText:[order fullNameWithLastNameFirst:YES]];
     [[cell detailTextLabel] setText:[NSString stringWithFormat:NSLocalizedStringByKey(@"numberOfTickets"), [order numberOfTickets]]];
     
@@ -107,6 +125,22 @@
 {
     FasTOrderDetailsViewController *details = [[[FasTOrderDetailsViewController alloc] initWithOrderNumber:[orders[[indexPath row]] number]] autorelease];
     [[self navigationController] pushViewController:details animated:YES];
+}
+
+#pragma mark search display delegate
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"firstName beginswith[c] $search || lastName beginswith[c] $search || number beginswith $search"];
+    predicate = [predicate predicateWithSubstitutionVariables:@{@"search": searchString}];
+    [foundOrders release];
+    displayedOrders = foundOrders = [[orders filteredArrayUsingPredicate:predicate] retain];
+    return YES;
+}
+
+- (void)searchDisplayControllerWillEndSearch:(UISearchDisplayController *)controller
+{
+    [self resetDisplayedOrders];
 }
 
 @end

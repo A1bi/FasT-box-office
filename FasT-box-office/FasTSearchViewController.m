@@ -78,7 +78,7 @@
     if (textField == _ticketField) {
         [self moveFieldsUp:NO];
     } else if (targetTextField) {
-        vc = [[FasTOrderDetailsViewController alloc] initWithOrderNumber:[textField text]];
+        vc = [[[FasTOrderDetailsViewController alloc] initWithOrderNumber:[textField text]] autorelease];
     }
     if (vc) [[self navigationController] pushViewController:vc animated:YES];
     [textField setText:@""];
