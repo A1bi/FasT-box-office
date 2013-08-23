@@ -28,13 +28,13 @@
         [[self navigationItem] setTitle:NSLocalizedStringByKey(@"ordersControllerNavigationTitle")];
         
         UISearchBar *searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
-        [searchBar setKeyboardType:UIKeyboardTypeDecimalPad];
         [searchBar setPlaceholder:NSLocalizedStringByKey(@"ordersSearchPlaceholder")];
         [[self tableView] setTableHeaderView:searchBar];
         
         searchDisplay = [[UISearchDisplayController alloc] initWithSearchBar:searchBar contentsController:self];
         [searchDisplay setDelegate:self];
         [searchDisplay setSearchResultsDataSource:self];
+        [searchDisplay setSearchResultsDelegate:self];
     }
     return self;
 }
@@ -123,7 +123,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FasTOrderDetailsViewController *details = [[[FasTOrderDetailsViewController alloc] initWithOrderNumber:[orders[[indexPath row]] number]] autorelease];
+    FasTOrderDetailsViewController *details = [[[FasTOrderDetailsViewController alloc] initWithOrderNumber:[displayedOrders[[indexPath row]] number]] autorelease];
     [[self navigationController] pushViewController:details animated:YES];
 }
 

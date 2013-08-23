@@ -63,3 +63,4 @@
 "ticketsControllerCellDescription" = "gültig | %@ | Block: %@ | Sitz: %@";
 "ticketsControllerCellInvalid" = "noch nicht oder nicht mehr gültig";
 "print" = "drucken";
+"noPrinter" = "Kein Drucker";
