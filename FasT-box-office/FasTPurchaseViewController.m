@@ -26,6 +26,7 @@ static NSString *cellId = @"selectedProductCell";
 - (void)updateTable;
 - (void)finishedPurchase;
 - (void)showAlertWithTitle:(NSString *)title details:(NSString *)details;
+- (void)receivedOrderToPay:(NSNotification *)note;
 
 @end
 
@@ -45,6 +46,8 @@ static NSString *cellId = @"selectedProductCell";
         orderController = [[FasTOrderViewController alloc] init];
         [orderController setDelegate:self];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedOrderToPay:) name:@"FasTPurchaseControllerAddOrderToPay" object:nil];
+        
         [self setTitle:NSLocalizedStringByKey(@"purchaseControllerTabTitle")];
         [[self navigationItem] setTitle:NSLocalizedStringByKey(@"purchaseControllerNavigationTitle")];
     }
@@ -53,6 +56,7 @@ static NSString *cellId = @"selectedProductCell";
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [products release];
     [selectedProducts release];
     [_selectedProductsTable release];
@@ -187,12 +191,15 @@ static NSString *cellId = @"selectedProductCell";
     [alert show];
 }
 
-- (void)addOrderToPay:(FasTOrder *)order
+- (void)receivedOrderToPay:(NSNotification *)note
 {
+    FasTOrder *order = [note userInfo][@"order"];
     [ordersToPay addObject:order];
     selectedProducts[@{@"type": @"order", @"id": [order bunchId], @"name": @"Tickets", @"price": @([order total])}] = @([[order tickets] count]);
     
     [self updateTableAndTotal];
+    
+    [[self tabBarController] setSelectedViewController:[self parentViewController]];
 }
 
 #pragma mark table view data source

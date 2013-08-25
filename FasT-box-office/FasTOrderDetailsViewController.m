@@ -11,7 +11,6 @@
 #import "FasTOrder.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
-#import "FasTPurchaseViewController.h"
 #import "MBProgressHUD.h"
 
 @interface FasTOrderDetailsViewController ()
@@ -91,13 +90,7 @@
 
 - (void)pay
 {
-    UITabBarController *tbc = [self tabBarController];
-    for (UIViewController *controller in [tbc viewControllers]) {
-        if ([controller isKindOfClass:[UINavigationController class]] && [[(UINavigationController *)controller visibleViewController] isKindOfClass:[FasTPurchaseViewController class]]) {
-            [(FasTPurchaseViewController *)[(UINavigationController *)controller visibleViewController] addOrderToPay:order];
-            [tbc setSelectedViewController:controller];
-        }
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddOrderToPay" object:nil userInfo:@{ @"order": order }];
 }
 
 #pragma mark - Table view data source

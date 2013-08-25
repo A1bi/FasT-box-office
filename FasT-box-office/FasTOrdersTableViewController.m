@@ -15,6 +15,7 @@
 @interface FasTOrdersTableViewController ()
 
 - (void)resetDisplayedOrders;
+- (void)reload;
 
 @end
 
@@ -26,6 +27,8 @@
     if (self) {
         [self setTitle:NSLocalizedStringByKey(@"ordersControllerTabTitle")];
         [[self navigationItem] setTitle:NSLocalizedStringByKey(@"ordersControllerNavigationTitle")];
+        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload)] autorelease];
+        [[self navigationItem] setRightBarButtonItem:btn];
         
         UISearchBar *searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
         [searchBar setPlaceholder:NSLocalizedStringByKey(@"ordersSearchPlaceholder")];
@@ -43,38 +46,8 @@
 {
     [super viewWillAppear:animated];
     
-    if (!orders || !lastUpdate || [lastUpdate timeIntervalSinceNow] > 300) {
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [hud setMode:MBProgressHUDModeIndeterminate];
-        [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
-        
-        [[FasTApi defaultApi] getOrdersForCurrentDateWithCallback:^(NSArray *o) {
-            [hud hide:YES];
-            
-            if (o) {
-                NSMutableArray *tmpOrders = [NSMutableArray array];
-                for (FasTOrder *order in o) {
-                    NSInteger empty = 0;
-                    NSArray *requiredKeys = @[@"lastName", @"firstName"];
-                    for (NSString *key in requiredKeys) {
-                        id value = [order performSelector:NSSelectorFromString(key)];
-                        if (![value isKindOfClass:[NSString class]] || [value length] <= 0) {
-                            empty++;
-                        }
-                    }
-                    if (empty < [requiredKeys count]) [tmpOrders addObject:order];
-                }
-                
-                [orders release];
-                orders = [[NSMutableArray arrayWithArray:tmpOrders] retain];
-                [self resetDisplayedOrders];
-                
-                [lastUpdate release];
-                lastUpdate = [[NSDate date] retain];
-                
-                [[self tableView] reloadData];
-            }
-        }];
+    if (!orders || !lastUpdate || fabs([lastUpdate timeIntervalSinceNow]) > 600) {
+        [self reload];
     }
 }
 
@@ -89,6 +62,41 @@
 - (void)resetDisplayedOrders
 {
     displayedOrders = orders;
+}
+
+- (void)reload
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setMode:MBProgressHUDModeIndeterminate];
+    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
+    
+    [[FasTApi defaultApi] getOrdersForCurrentDateWithCallback:^(NSArray *o) {
+        [hud hide:YES];
+        
+        if (o) {
+            NSMutableArray *tmpOrders = [NSMutableArray array];
+            for (FasTOrder *order in o) {
+                NSInteger empty = 0;
+                NSArray *requiredKeys = @[@"lastName", @"firstName"];
+                for (NSString *key in requiredKeys) {
+                    id value = [order performSelector:NSSelectorFromString(key)];
+                    if (![value isKindOfClass:[NSString class]] || [value length] <= 0) {
+                        empty++;
+                    }
+                }
+                if (empty < [requiredKeys count]) [tmpOrders addObject:order];
+            }
+            
+            [orders release];
+            orders = [[NSMutableArray arrayWithArray:tmpOrders] retain];
+            [self resetDisplayedOrders];
+            
+            [lastUpdate release];
+            lastUpdate = [[NSDate date] retain];
+            
+            [[self tableView] reloadData];
+        }
+    }];
 }
 
 #pragma mark - Table view data source
