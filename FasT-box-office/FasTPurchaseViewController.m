@@ -194,10 +194,11 @@ static NSString *cellId = @"selectedProductCell";
 - (void)receivedOrderToPay:(NSNotification *)note
 {
     FasTOrder *order = [note userInfo][@"order"];
-    [ordersToPay addObject:order];
-    selectedProducts[@{@"type": @"order", @"id": [order bunchId], @"name": @"Tickets", @"price": @([order total])}] = @([[order tickets] count]);
-    
-    [self updateTableAndTotal];
+    if (![ordersToPay containsObject:order]) {
+        [ordersToPay addObject:order];
+        selectedProducts[@{@"type": @"order", @"id": [order bunchId], @"name": @"Tickets", @"price": @([order total])}] = @([[order tickets] count]);
+        [self updateTableAndTotal];
+    }
     
     [[self tabBarController] setSelectedViewController:[self parentViewController]];
 }

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FasTTicketsViewController : UITableViewController
+@interface FasTTicketsViewController : UITableViewController <UIAlertViewDelegate>
 {
     NSArray *tickets;
+    UIBarButtonItem *printBtn;
 }
 
 - (id)initWithTickets:(NSArray *)t;

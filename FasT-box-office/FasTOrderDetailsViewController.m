@@ -11,12 +11,14 @@
 #import "FasTOrder.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
+#import "FasTTicketPrinter.h"
 #import "MBProgressHUD.h"
 
 @interface FasTOrderDetailsViewController ()
 
 - (NSArray *)getRowForIndexPath:(NSIndexPath *)indexPath;
 - (void)pay;
+- (void)printTickets;
 
 @end
 
@@ -72,11 +74,17 @@
                         ]}
                     ] retain];
         
+        SEL btnSelector;
+        NSString *btnText;
         if (![order paid]) {
-            // TODO: fix
-            UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:@"bezahlen" style:UIBarButtonItemStyleBordered target:self action:@selector(pay)] autorelease];
-            [[self navigationItem] setRightBarButtonItem:btn];
+            btnSelector = @selector(pay);
+            btnText = NSLocalizedStringByKey(@"pay");
+        } else {
+            btnSelector = @selector(printTickets);
+            btnText = NSLocalizedStringByKey(@"printTickets");
         }
+        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:btnText style:UIBarButtonItemStyleBordered target:self action:btnSelector] autorelease];
+        [[self navigationItem] setRightBarButtonItem:btn];
         
         [[self tableView] reloadData];
         [self setTitle:[NSString stringWithFormat:NSLocalizedStringByKey(@"orderDetailsTitleNumber"), [order number]]];
@@ -91,6 +99,12 @@
 - (void)pay
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddOrderToPay" object:nil userInfo:@{ @"order": order }];
+}
+
+- (void)printTickets
+{
+    [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
+    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
 }
 
 #pragma mark - Table view data source

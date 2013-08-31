@@ -14,6 +14,7 @@
 
 @interface FasTTicketsViewController ()
 
+- (void)updatePrintBtn;
 - (void)print;
 
 @end
@@ -26,10 +27,9 @@
     if (self) {
         tickets = [t retain];
         
+        printBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringByKey(@"printTickets") style:UIBarButtonItemStyleBordered target:self action:@selector(print)];
+        [[self tableView] setAllowsMultipleSelection:YES];
         [self setTitle:NSLocalizedStringByKey(@"ticketOverview")];
-        // TODO: fix
-        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringByKey(@"print") style:UIBarButtonItemStyleBordered target:self action:@selector(print)] autorelease];
-        [[self navigationItem] setRightBarButtonItem:btn];
     }
     return self;
 }
@@ -37,12 +37,24 @@
 - (void)dealloc
 {
     [tickets release];
+    [printBtn release];
     [super dealloc];
+}
+
+- (void)updatePrintBtn
+{
+    [printBtn setEnabled:YES];
+    [[self navigationItem] setRightBarButtonItem:!![[[self tableView] indexPathsForSelectedRows] count] ? printBtn : nil];
 }
 
 - (void)print
 {
-    [[FasTTicketPrinter sharedPrinter] printTickets:tickets];
+    [printBtn setEnabled:NO];
+    NSMutableArray *ticketsToPrint = [NSMutableArray array];
+    for (NSIndexPath *path in [[self tableView] indexPathsForSelectedRows]) {
+        [ticketsToPrint addObject:tickets[[path row]]];
+    }
+    [[FasTTicketPrinter sharedPrinter] printTickets:ticketsToPrint];
 }
 
 #pragma mark - Table view data source
@@ -67,10 +79,21 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];
     }
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@: %@", [ticket number], [[ticket type] name]]];
-    // TODO: fix
     [[cell detailTextLabel] setText:[ticket canCheckIn] ? [NSString stringWithFormat:NSLocalizedStringByKey(@"ticketsControllerCellDescription"), [FasTFormatter stringForEventDate:[[ticket date] date]], [[ticket seat] blockName], [[ticket seat] number]] : NSLocalizedStringByKey(@"ticketsControllerCellInvalid")];
     
     return cell;
+}
+
+#pragma mark table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self updatePrintBtn];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self updatePrintBtn];
 }
 
 @end

@@ -62,5 +62,6 @@
 "ordersSearchPlaceholder" = "Vor-, Nachname oder Bestellnummer";
 "ticketsControllerCellDescription" = "gültig | %@ | Block: %@ | Sitz: %@";
 "ticketsControllerCellInvalid" = "noch nicht oder nicht mehr gültig";
-"print" = "drucken";
+"printTickets" = "Tickets drucken";
 "noPrinter" = "Kein Drucker";
+"pay" = "bezahlen";
