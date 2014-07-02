@@ -75,6 +75,7 @@
 		6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5F617BD18570038009C /* FasTSearchViewController.xib */; };
 		6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C61217BD63EB0038009C /* LNNumberpad.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C62717BD6C9C0038009C /* FasTNumberpad.xib */; };
+		6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6190F6031964A1D000F42B03 /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -208,6 +209,7 @@
 		6156C61217BD63EB0038009C /* LNNumberpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNNumberpad.m; path = LNNumberpad/LNNumberpad.m; sourceTree = "<group>"; };
 		6156C61317BD63EB0038009C /* LNNumberpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LNNumberpad.xib; path = LNNumberpad/LNNumberpad.xib; sourceTree = "<group>"; };
 		6156C62717BD6C9C0038009C /* FasTNumberpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTNumberpad.xib; sourceTree = "<group>"; };
+		6190F6031964A1D000F42B03 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +301,7 @@
 			children = (
 				6156B61C17BC4C9B0038009C /* FasTAppDelegate.h */,
 				6156B61D17BC4C9B0038009C /* FasTAppDelegate.m */,
+				6190F6031964A1D000F42B03 /* Storyboard.storyboard */,
 				6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */,
 				6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */,
 				6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */,
@@ -563,6 +566,7 @@
 				611C419D17BD950000552192 /* FasTPurchaseViewController.xib in Resources */,
 				611C41A217BDAAD500552192 /* FasTSelectedProductTableViewCell.xib in Resources */,
 				611C41B217BE4A6F00552192 /* FasTOrderViewController.xib in Resources */,
+				6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */,
 				611C41B717BE4A7700552192 /* FasTSeatsViewController.xib in Resources */,
 				611C41C017BE4AC200552192 /* FasTTicketTypeViewController.xib in Resources */,
 				611C41C517BE4F5000552192 /* FasTTicketTypesViewController.xib in Resources */,
@@ -692,7 +696,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-force_flat_namespace";
 				SDKROOT = iphoneos;
@@ -717,7 +721,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-force_flat_namespace";
 				SDKROOT = iphoneos;

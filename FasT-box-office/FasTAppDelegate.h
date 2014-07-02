@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FasTAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface FasTAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

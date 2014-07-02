@@ -47,9 +47,6 @@ static NSString *cellId = @"selectedProductCell";
         [orderController setDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedOrderToPay:) name:@"FasTPurchaseControllerAddOrderToPay" object:nil];
-        
-        [self setTitle:NSLocalizedStringByKey(@"purchaseControllerTabTitle")];
-        [[self navigationItem] setTitle:NSLocalizedStringByKey(@"purchaseControllerNavigationTitle")];
     }
     return self;
 }
@@ -67,6 +64,9 @@ static NSString *cellId = @"selectedProductCell";
 
 - (void)viewDidLoad
 {
+    [self setTitle:NSLocalizedStringByKey(@"purchaseControllerTabTitle")];
+    [[self navigationItem] setTitle:NSLocalizedStringByKey(@"purchaseControllerNavigationTitle")];
+    
     [[self selectedProductsTable] setDataSource:self];
     [[self selectedProductsTable] registerNib:[UINib nibWithNibName:@"FasTSelectedProductTableViewCell" bundle:nil] forCellReuseIdentifier:cellId];
     

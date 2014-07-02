@@ -15,40 +15,13 @@
 
 @implementation FasTAppDelegate
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    [self.window makeKeyAndVisible];
-    
     NSString *clientId = [[NSUserDefaults standardUserDefaults] valueForKey:@"boxOfficeId"];
     if (clientId && [clientId length] > 0) {
         [FasTApi defaultApiWithClientType:@"seating" clientId:clientId];
         [[FasTApi defaultApi] initNodeConnection];
     }
-    
-    UIViewController *vc;
-    vc = [[[FasTOrdersTableViewController alloc] init] autorelease];
-    UINavigationController *ordersNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
-    
-    vc = [[[FasTSearchViewController alloc] init] autorelease];
-    UINavigationController *searchNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
-    
-    vc = [[[FasTSettingsViewController alloc] init] autorelease];
-    UINavigationController *settingsNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
-    
-    vc = [[[FasTPurchaseViewController alloc] init] autorelease];
-    UINavigationController *purchaseNavigationController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
-    
-    UITabBarController *tbc = [[[UITabBarController alloc] init] autorelease];
-    [tbc setDelegate:self];
-    [tbc setViewControllers:@[purchaseNavigationController, searchNavigationController, ordersNavigationController, settingsNavigationController]];
-    self.window.rootViewController = tbc;
     
     return YES;
 }
@@ -58,12 +31,10 @@
     [application setIdleTimerDisabled:YES];
 }
 
-#pragma mark tab bar controller delegate
-
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+- (void)dealloc
 {
-    [(UINavigationController *)[tabBarController selectedViewController] popToRootViewControllerAnimated:[tabBarController selectedViewController] == viewController];
-    return YES;
+    [_window release];
+    [super dealloc];
 }
 
 @end
