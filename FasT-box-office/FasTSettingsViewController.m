@@ -19,7 +19,7 @@
 {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-        [self setTitle:NSLocalizedStringByKey(@"settings")];
+        
     }
     return self;
 }

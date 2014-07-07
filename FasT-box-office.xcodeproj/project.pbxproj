@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		611C369A196B2AFF00E76D02 /* FasTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C3699196B2AFF00E76D02 /* FasTMainViewController.m */; };
+		611C369D196B4C1900E76D02 /* FasTMainViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C369C196B4C1900E76D02 /* FasTMainViewControllerSegue.m */; };
 		611C419217BD7A8700552192 /* FasTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419117BD7A8700552192 /* FasTSettingsViewController.m */; };
 		611C419517BD7F5300552192 /* FasTCashDrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419417BD7F5300552192 /* FasTCashDrawerTableViewController.m */; };
 		611C419817BD88E900552192 /* FasTCashDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419717BD88E900552192 /* FasTCashDrawer.m */; };
@@ -79,6 +81,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		611C3698196B2AFF00E76D02 /* FasTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTMainViewController.h; sourceTree = "<group>"; };
+		611C3699196B2AFF00E76D02 /* FasTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTMainViewController.m; sourceTree = "<group>"; };
+		611C369B196B4C1900E76D02 /* FasTMainViewControllerSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTMainViewControllerSegue.h; sourceTree = "<group>"; };
+		611C369C196B4C1900E76D02 /* FasTMainViewControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTMainViewControllerSegue.m; sourceTree = "<group>"; };
 		611C419017BD7A8700552192 /* FasTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSettingsViewController.h; sourceTree = "<group>"; };
 		611C419117BD7A8700552192 /* FasTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSettingsViewController.m; sourceTree = "<group>"; };
 		611C419317BD7F5300552192 /* FasTCashDrawerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCashDrawerTableViewController.h; sourceTree = "<group>"; };
@@ -302,6 +308,10 @@
 				6156B61C17BC4C9B0038009C /* FasTAppDelegate.h */,
 				6156B61D17BC4C9B0038009C /* FasTAppDelegate.m */,
 				6190F6031964A1D000F42B03 /* Storyboard.storyboard */,
+				611C3698196B2AFF00E76D02 /* FasTMainViewController.h */,
+				611C3699196B2AFF00E76D02 /* FasTMainViewController.m */,
+				611C369B196B4C1900E76D02 /* FasTMainViewControllerSegue.h */,
+				611C369C196B4C1900E76D02 /* FasTMainViewControllerSegue.m */,
 				6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */,
 				6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */,
 				6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */,
@@ -598,7 +608,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6156B61A17BC4C9B0038009C /* main.m in Sources */,
+				611C369A196B2AFF00E76D02 /* FasTMainViewController.m in Sources */,
 				6156B61E17BC4C9B0038009C /* FasTAppDelegate.m in Sources */,
+				611C369D196B4C1900E76D02 /* FasTMainViewControllerSegue.m in Sources */,
 				6156B66617BC4F680038009C /* MBProgressHUD.m in Sources */,
 				6156BFA517BC4FCC0038009C /* FasTApi.m in Sources */,
 				6156BFA617BC4FCC0038009C /* FasTBarcode3of9.m in Sources */,

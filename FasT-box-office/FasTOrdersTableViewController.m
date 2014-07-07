@@ -25,8 +25,6 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        [self setTitle:NSLocalizedStringByKey(@"ordersControllerTabTitle")];
-        [[self navigationItem] setTitle:NSLocalizedStringByKey(@"ordersControllerNavigationTitle")];
         UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reload)] autorelease];
         [[self navigationItem] setRightBarButtonItem:btn];
         

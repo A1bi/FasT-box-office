@@ -63,10 +63,7 @@ static NSString *cellId = @"selectedProductCell";
 }
 
 - (void)viewDidLoad
-{
-    [self setTitle:NSLocalizedStringByKey(@"purchaseControllerTabTitle")];
-    [[self navigationItem] setTitle:NSLocalizedStringByKey(@"purchaseControllerNavigationTitle")];
-    
+{    
     [[self selectedProductsTable] setDataSource:self];
     [[self selectedProductsTable] registerNib:[UINib nibWithNibName:@"FasTSelectedProductTableViewCell" bundle:nil] forCellReuseIdentifier:cellId];
     
