@@ -1,21 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="eC4-jN-snL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="eC4-jN-snL">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
-        <!--FasT Orders Table View Controller - Bestellungen-->
-        <scene sceneID="PAY-Fk-Ep8">
+        <!--Suche nach Ticket oder Bestellung-->
+        <scene sceneID="Kgn-q2-Fkm">
             <objects>
-                <viewController id="HNd-s6-wSz" customClass="FasTOrdersTableViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Bestellungen" id="VMs-2l-hPY"/>
+                <viewController id="Fej-s0-EEf" customClass="FasTOrdersSearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P3D-In-hMl"/>
+                        <viewControllerLayoutGuide type="bottom" id="pd0-oA-Bf0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dIy-5H-AFt">
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Ticket- oder Bestellnummer" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NXW-Sr-Kdg">
+                                <rect key="frame" x="20" y="79" width="859" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Name des Bestellers" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Lhq-uv-3N5">
+                                <rect key="frame" x="20" y="133" width="859" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gjB-sT-JHf">
+                                <rect key="frame" x="0.0" y="198" width="899" height="570"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FasTOrdersTableCell" id="MCu-Ca-QnW">
+                                        <rect key="frame" x="0.0" y="66" width="899" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MCu-Ca-QnW" id="Yjg-Lr-VHj">
+                                            <rect key="frame" x="0.0" y="0.0" width="866" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6s-jg-zd9">
+                                                    <rect key="frame" x="20" y="12" width="445" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2 Tickets" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BN-IP-wdA">
+                                                    <rect key="frame" x="563" y="11" width="104" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3,00 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDe-va-4PF">
+                                                    <rect key="frame" x="742" y="11" width="104" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="WaT-vd-ydS" kind="push" id="sox-YA-wBy"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Fej-s0-EEf" id="Hd8-v1-tnd"/>
+                                    <outlet property="delegate" destination="Fej-s0-EEf" id="zyn-kA-V7Y"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Suche nach Ticket oder Bestellung" id="Emy-Uf-QCv"/>
+                    <connections>
+                        <outlet property="tableView" destination="gjB-sT-JHf" id="kr1-Nr-cnl"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sM6-1n-VZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7VT-vI-fDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1969.5" y="306"/>
+            <point key="canvasLocation" x="1969.5" y="304"/>
         </scene>
-        <!--FasT Purchase View Controller - Item 1-->
+        <!--Bestellungsdetails-->
+        <scene sceneID="Y0h-YY-abH">
+            <objects>
+                <viewController id="WaT-vd-ydS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UoO-5g-385"/>
+                        <viewControllerLayoutGuide type="bottom" id="n8s-dm-XlI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z7S-oA-p2J">
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bestellungsdetails" id="g9O-Hg-pUD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UjK-zU-MPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3012.5" y="306"/>
+        </scene>
+        <!--Item 1-->
         <scene sceneID="xPD-Gi-SdB">
             <objects>
                 <viewController autoresizesArchivedViewToFullSize="NO" id="WAc-pj-Rng" customClass="FasTPurchaseViewController" sceneMemberID="viewController">
@@ -46,7 +129,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="126" height="768"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdX-qb-vhy">
-                                        <rect key="frame" x="13" y="444" width="100" height="40"/>
+                                        <rect key="frame" x="13" y="708" width="100" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Einstellungen">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,17 +139,17 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyD-WE-Eak">
-                                        <rect key="frame" x="30" y="357" width="66" height="40"/>
+                                        <rect key="frame" x="30" y="408" width="66" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Suchen">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="We8-TW-PaE" kind="custom" identifier="OrdersSegue" customClass="FasTMainViewControllerSegue" id="fij-4l-dnf"/>
+                                            <segue destination="We8-TW-PaE" kind="custom" identifier="OrdersSearchSegue" customClass="FasTMainViewControllerSegue" id="fij-4l-dnf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oye-w8-Caa">
-                                        <rect key="frame" x="30" y="268" width="66" height="40"/>
+                                        <rect key="frame" x="30" y="319" width="66" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Kasse">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,19 +166,19 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="containerView" destination="Pve-6H-dvg" id="mUh-nv-6iW"/>
+                        <outlet property="navView" destination="mMn-fU-LIx" id="6lm-wk-8gG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="02s-gG-216" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-267" y="306"/>
         </scene>
-        <!--FasT Settings View Controller - Einstellungen-->
+        <!--Einstellungen-->
         <scene sceneID="OOx-7n-Agf">
             <objects>
                 <viewController id="JNK-Vx-cBw" customClass="FasTSettingsViewController" sceneMemberID="viewController">
@@ -105,7 +188,7 @@
             </objects>
             <point key="canvasLocation" x="1969.5" y="1170"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Item-->
         <scene sceneID="YXb-0q-6A5">
             <objects>
                 <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="w4g-lM-tze" sceneMemberID="viewController">
@@ -126,7 +209,7 @@
             </objects>
             <point key="canvasLocation" x="882.5" y="1170"/>
         </scene>
-        <!--Navigation Controller - Item 2-->
+        <!--Item 2-->
         <scene sceneID="3Ap-oQ-Jpp">
             <objects>
                 <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="We8-TW-PaE" sceneMemberID="viewController">
@@ -140,7 +223,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HNd-s6-wSz" kind="relationship" relationship="rootViewController" id="E57-Uv-UD1"/>
+                        <segue destination="Fej-s0-EEf" kind="relationship" relationship="rootViewController" id="rsK-V2-bye"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKc-gx-rMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,6 +234,9 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination">
+            <size key="portraitSize" width="768" height="1024"/>
+            <size key="landscapeSize" width="1024" height="768"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>

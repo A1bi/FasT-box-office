@@ -7,10 +7,6 @@
 //
 
 #import "FasTAppDelegate.h"
-#import "FasTOrdersTableViewController.h"
-#import "FasTSearchViewController.h"
-#import "FasTSettingsViewController.h"
-#import "FasTPurchaseViewController.h"
 #import "FasTApi.h"
 
 @implementation FasTAppDelegate

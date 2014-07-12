@@ -11,5 +11,7 @@
 @interface FasTMainViewController : UIViewController
 
 @property (retain, nonatomic) IBOutlet UIView *containerView;
+@property (assign, nonatomic) UIViewController *currentViewController;
+@property (retain, nonatomic) IBOutlet UIView *navView;
 
 @end

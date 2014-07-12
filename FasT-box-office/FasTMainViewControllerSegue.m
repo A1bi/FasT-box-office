@@ -14,13 +14,16 @@
 - (void)perform
 {
     FasTMainViewController *main = (FasTMainViewController *)self.sourceViewController;
-    UIViewController *dst = (UIViewController *) self.destinationViewController;
+    UIViewController *dst = self.destinationViewController;
     
     for (UIView *view in main.containerView.subviews) {
         [view removeFromSuperview];
     }
+    [main.currentViewController removeFromParentViewController];
     
     [main.containerView addSubview:dst.view];
+    main.currentViewController = dst;
+    [main addChildViewController:dst];
 }
 
 @end

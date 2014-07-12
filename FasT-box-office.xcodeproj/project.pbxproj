@@ -68,13 +68,11 @@
 		6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2EE17BC504E0038009C /* NSData+SRB64Additions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C2F117BC504E0038009C /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6156C5E217BC52390038009C /* FasTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5E117BC52390038009C /* FasTConstants.m */; };
-		6156C5E617BCC1820038009C /* FasTOrdersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */; };
+		6156C5E617BCC1820038009C /* FasTOrdersSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5E517BCC1820038009C /* FasTOrdersSearchViewController.m */; };
 		6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EB17BCCD4D0038009C /* Localizable.strings */; };
 		6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EC17BCD4BD0038009C /* Settings.bundle */; };
 		6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */; };
 		6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F217BD02A20038009C /* FasTTicketsViewController.m */; };
-		6156C5F717BD18580038009C /* FasTSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F517BD18560038009C /* FasTSearchViewController.m */; };
-		6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5F617BD18570038009C /* FasTSearchViewController.xib */; };
 		6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C61217BD63EB0038009C /* LNNumberpad.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6156C62717BD6C9C0038009C /* FasTNumberpad.xib */; };
 		6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6190F6031964A1D000F42B03 /* Storyboard.storyboard */; };
@@ -199,17 +197,14 @@
 		6156C5DF17BC50F80038009C /* PKPrintSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PKPrintSettings.h; sourceTree = "<group>"; };
 		6156C5E017BC52390038009C /* FasTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTConstants.h; sourceTree = "<group>"; };
 		6156C5E117BC52390038009C /* FasTConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTConstants.m; sourceTree = "<group>"; };
-		6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrdersTableViewController.h; sourceTree = "<group>"; };
-		6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersTableViewController.m; sourceTree = "<group>"; };
+		6156C5E417BCC1820038009C /* FasTOrdersSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrdersSearchViewController.h; sourceTree = "<group>"; };
+		6156C5E517BCC1820038009C /* FasTOrdersSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersSearchViewController.m; sourceTree = "<group>"; };
 		6156C5EA17BCCD4D0038009C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6156C5EC17BCD4BD0038009C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsViewController.h; sourceTree = "<group>"; };
 		6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsViewController.m; sourceTree = "<group>"; };
 		6156C5F117BD02A20038009C /* FasTTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketsViewController.h; sourceTree = "<group>"; };
 		6156C5F217BD02A20038009C /* FasTTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketsViewController.m; sourceTree = "<group>"; };
-		6156C5F417BD18560038009C /* FasTSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSearchViewController.h; sourceTree = "<group>"; };
-		6156C5F517BD18560038009C /* FasTSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSearchViewController.m; sourceTree = "<group>"; };
-		6156C5F617BD18570038009C /* FasTSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FasTSearchViewController.xib; sourceTree = "<group>"; };
 		6156C61017BD63EB0038009C /* LNHexNumberpad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LNHexNumberpad.xib; path = LNNumberpad/LNHexNumberpad.xib; sourceTree = "<group>"; };
 		6156C61117BD63EB0038009C /* LNNumberpad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LNNumberpad.h; path = LNNumberpad/LNNumberpad.h; sourceTree = "<group>"; };
 		6156C61217BD63EB0038009C /* LNNumberpad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LNNumberpad.m; path = LNNumberpad/LNNumberpad.m; sourceTree = "<group>"; };
@@ -312,15 +307,12 @@
 				611C3699196B2AFF00E76D02 /* FasTMainViewController.m */,
 				611C369B196B4C1900E76D02 /* FasTMainViewControllerSegue.h */,
 				611C369C196B4C1900E76D02 /* FasTMainViewControllerSegue.m */,
-				6156C5E417BCC1820038009C /* FasTOrdersTableViewController.h */,
-				6156C5E517BCC1820038009C /* FasTOrdersTableViewController.m */,
+				6156C5E417BCC1820038009C /* FasTOrdersSearchViewController.h */,
+				6156C5E517BCC1820038009C /* FasTOrdersSearchViewController.m */,
 				6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */,
 				6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */,
 				6156C5F117BD02A20038009C /* FasTTicketsViewController.h */,
 				6156C5F217BD02A20038009C /* FasTTicketsViewController.m */,
-				6156C5F417BD18560038009C /* FasTSearchViewController.h */,
-				6156C5F517BD18560038009C /* FasTSearchViewController.m */,
-				6156C5F617BD18570038009C /* FasTSearchViewController.xib */,
 				6156C62717BD6C9C0038009C /* FasTNumberpad.xib */,
 				611C419017BD7A8700552192 /* FasTSettingsViewController.h */,
 				611C419117BD7A8700552192 /* FasTSettingsViewController.m */,
@@ -571,7 +563,6 @@
 				6156BFB517BC50050038009C /* staccato.ttf in Resources */,
 				6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */,
 				6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */,
-				6156C5F817BD18580038009C /* FasTSearchViewController.xib in Resources */,
 				6156C62817BD6C9C0038009C /* FasTNumberpad.xib in Resources */,
 				611C419D17BD950000552192 /* FasTPurchaseViewController.xib in Resources */,
 				611C41A217BDAAD500552192 /* FasTSelectedProductTableViewCell.xib in Resources */,
@@ -643,10 +634,9 @@
 				6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */,
 				6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */,
 				6156C5E217BC52390038009C /* FasTConstants.m in Sources */,
-				6156C5E617BCC1820038009C /* FasTOrdersTableViewController.m in Sources */,
+				6156C5E617BCC1820038009C /* FasTOrdersSearchViewController.m in Sources */,
 				6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */,
 				6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */,
-				6156C5F717BD18580038009C /* FasTSearchViewController.m in Sources */,
 				6156C62117BD63EB0038009C /* LNNumberpad.m in Sources */,
 				611C419217BD7A8700552192 /* FasTSettingsViewController.m in Sources */,
 				611C419517BD7F5300552192 /* FasTCashDrawerTableViewController.m in Sources */,
