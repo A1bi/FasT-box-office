@@ -79,6 +79,77 @@
             </objects>
             <point key="canvasLocation" x="1969.5" y="304"/>
         </scene>
+        <!--Einstellungen-->
+        <scene sceneID="isM-qs-7BK">
+            <objects>
+                <tableViewController id="KKK-TJ-6kF" customClass="FasTSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SdD-AW-ryq">
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="6Xq-ND-eM1">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ticketPrinterSettingCell" textLabel="CRb-i1-YNK" detailTextLabel="QbZ-NZ-25G" style="IBUITableViewCellStyleValue1" id="wrN-js-WjU">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wrN-js-WjU" id="CQl-FV-XKU">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Ticketdrucker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CRb-i1-YNK">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QbZ-NZ-25G">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="xuy-J3-RyE" kind="push" id="3f9-y5-Tdt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="receiptPrinterSettingCell" textLabel="uc7-DD-K4E" detailTextLabel="xEG-u1-zNH" style="IBUITableViewCellStyleValue1" id="bzS-cM-AuW">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bzS-cM-AuW" id="bXo-h1-dBS">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Bondrucker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uc7-DD-K4E">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xEG-u1-zNH">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="6Os-dS-Z9e" kind="push" id="Ejx-7r-idX"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="KKK-TJ-6kF" id="iWC-Bz-gCs"/>
+                            <outlet property="delegate" destination="KKK-TJ-6kF" id="iSk-uG-1mI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Einstellungen" id="fXs-Mn-MvX"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1k4-eV-DWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969.5" y="1170"/>
+        </scene>
         <!--Bestellungsdetails-->
         <scene sceneID="Y0h-YY-abH">
             <objects>
@@ -139,8 +210,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyD-WE-Eak">
-                                        <rect key="frame" x="30" y="408" width="66" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <rect key="frame" x="22" y="422" width="83" height="40"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="Suchen">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -149,8 +220,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oye-w8-Caa">
-                                        <rect key="frame" x="30" y="319" width="66" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <rect key="frame" x="30" y="305" width="66" height="40"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="Kasse">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -178,15 +249,59 @@
             </objects>
             <point key="canvasLocation" x="-267" y="306"/>
         </scene>
-        <!--Einstellungen-->
-        <scene sceneID="OOx-7n-Agf">
+        <!--Ticketdrucker auswählen-->
+        <scene sceneID="bvO-cL-Lv3">
             <objects>
-                <viewController id="JNK-Vx-cBw" customClass="FasTSettingsViewController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Einstellungen" id="mLr-Yc-jyy"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z8h-ug-e4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="xuy-J3-RyE" customClass="FasTTicketPrintersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tC1-bc-3gn">
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTTicketPrintersTableCell" id="4ZS-qH-bcL">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ZS-qH-bcL" id="GMk-uT-A1P">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xuy-J3-RyE" id="Izk-cg-Hy5"/>
+                            <outlet property="delegate" destination="xuy-J3-RyE" id="8s9-x0-VvS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Ticketdrucker auswählen" id="Tre-t3-Xtn"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WrD-Ro-dUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1969.5" y="1170"/>
+            <point key="canvasLocation" x="3012.5" y="1170"/>
+        </scene>
+        <!--Bondrucker auswählen-->
+        <scene sceneID="vaU-ID-eFe">
+            <objects>
+                <tableViewController id="6Os-dS-Z9e" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lFV-tx-5h6">
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTReceiptPrintersTableCell" id="5H5-PN-wq2">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5H5-PN-wq2" id="KMH-wm-n3G">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6Os-dS-Z9e" id="YUG-uT-WlZ"/>
+                            <outlet property="delegate" destination="6Os-dS-Z9e" id="Gs7-ho-xlt"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Bondrucker auswählen" id="4z4-9t-Sf5"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GYY-3D-Pkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3012.5" y="2049"/>
         </scene>
         <!--Item-->
         <scene sceneID="YXb-0q-6A5">
@@ -202,7 +317,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="JNK-Vx-cBw" kind="relationship" relationship="rootViewController" id="HNj-pu-Vzd"/>
+                        <segue destination="KKK-TJ-6kF" kind="relationship" relationship="rootViewController" id="Xor-Re-4yc"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOm-Kh-d6r" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -16,14 +16,18 @@
     FasTMainViewController *main = (FasTMainViewController *)self.sourceViewController;
     UIViewController *dst = self.destinationViewController;
     
-    for (UIView *view in main.containerView.subviews) {
-        [view removeFromSuperview];
-    }
+    [main.currentViewController willMoveToParentViewController:nil];
+    [main.currentViewController.view removeFromSuperview];
     [main.currentViewController removeFromParentViewController];
     
-    [main.containerView addSubview:dst.view];
-    main.currentViewController = dst;
+    UIView *dstView = dst.view;
+    CGRect frame = dstView.frame;
+    frame.size = main.containerView.frame.size;
+    dstView.frame = frame;
+    [main.containerView addSubview:dstView];
     [main addChildViewController:dst];
+    [dst didMoveToParentViewController:main];
+    main.currentViewController = dst;
 }
 
 @end

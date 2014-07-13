@@ -19,16 +19,9 @@
 "yes" = "ja";
 "no" = "nein";
 "paid" = "bezahlt";
-"searchControllerTabTitle" = "Suche";
-"searchControllerNavigationTitle" = "Suche nach Bestellung oder Ticket";
-"settings" = "Einstellungen";
-"printer" = "Drucker";
-"cashDrawer" = "Kassenschublade";
 "selectPrinter" = "Drucker auswählen";
 "select" = "auswählen";
 "selectCashDrawer" = "Kassenschublade auswählen";
-"purchaseControllerTabTitle" = "Kaufen";
-"purchaseControllerNavigationTitle" = "Einkauf";
 "selectedProducts" = "Warenkorb";
 "selectedProductsTotalPrice" = "Gesamtbetrag: %@";
 "finishedPurchaseTitle" = "Barzahlung";
@@ -59,7 +52,6 @@
 "row" = "Reihe";
 "seat" = "Sitz";
 "orderExpiredMessage" = "Ihre Sitzung ist abgelaufen";
-"ordersSearchPlaceholder" = "Vor-, Nachname oder Bestellnummer";
 "ticketsControllerCellDescription" = "gültig | %@ | Block: %@ | Sitz: %@";
 "ticketsControllerCellInvalid" = "noch nicht oder nicht mehr gültig";
 "printTickets" = "Tickets drucken";

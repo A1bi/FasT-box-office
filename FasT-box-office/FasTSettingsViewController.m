@@ -15,15 +15,6 @@
 
 @implementation FasTSettingsViewController
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    if (self) {
-        
-    }
-    return self;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -32,45 +23,21 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 2;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"settingsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];
-        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    }
-    NSString *descriptionKey, *i18nKey;
-    if ([indexPath row] == 0) {
-        descriptionKey = FasTPrinterDescriptionPrefKey;
-        i18nKey = @"printer";
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    NSString *descriptionKey;
+    if ([cell.reuseIdentifier isEqualToString:@"ticketPrinterSettingCell"]) {
+        descriptionKey = FasTTicketPrinterDescriptionPrefKey;
     } else {
-        descriptionKey = @"FasTCashDrawerHostNamePrefKey";
-        i18nKey = @"cashDrawer";
+        descriptionKey = @"FasTReceiptPrinterHostNamePrefKey";
     }
-    [[cell textLabel] setText:NSLocalizedStringByKey(i18nKey)];
+    
     NSString *deviceName = [[NSUserDefaults standardUserDefaults] objectForKey:descriptionKey];
     [[cell detailTextLabel] setText:deviceName ? deviceName : NSLocalizedStringByKey(@"select")];
     
     return cell;
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIViewController *vc = [[[NSClassFromString([indexPath row] == 0 ? @"FasTPrintersTableViewController" : @"FasTCashDrawerTableViewController") alloc] init] autorelease];
-    [[self navigationController] pushViewController:vc animated:YES];
 }
 
 @end

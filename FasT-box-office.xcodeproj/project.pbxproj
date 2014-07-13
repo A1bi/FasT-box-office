@@ -42,7 +42,7 @@
 		6156BFA817BC4FCC0038009C /* FasTEventDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9217BC4FCB0038009C /* FasTEventDate.m */; };
 		6156BFA917BC4FCC0038009C /* FasTFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9417BC4FCB0038009C /* FasTFormatter.m */; };
 		6156BFAA17BC4FCC0038009C /* FasTOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9617BC4FCB0038009C /* FasTOrder.m */; };
-		6156BFAB17BC4FCC0038009C /* FasTPrintersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9817BC4FCB0038009C /* FasTPrintersTableViewController.m */; };
+		6156BFAB17BC4FCC0038009C /* FasTTicketPrintersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9817BC4FCB0038009C /* FasTTicketPrintersTableViewController.m */; };
 		6156BFAC17BC4FCC0038009C /* FasTSeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9A17BC4FCB0038009C /* FasTSeat.m */; };
 		6156BFAD17BC4FCC0038009C /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9C17BC4FCB0038009C /* FasTSeatingView.m */; };
 		6156BFAE17BC4FCC0038009C /* FasTSeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156BF9E17BC4FCB0038009C /* FasTSeatView.m */; };
@@ -138,8 +138,8 @@
 		6156BF9417BC4FCB0038009C /* FasTFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTFormatter.m; sourceTree = "<group>"; };
 		6156BF9517BC4FCB0038009C /* FasTOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrder.h; sourceTree = "<group>"; };
 		6156BF9617BC4FCB0038009C /* FasTOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrder.m; sourceTree = "<group>"; };
-		6156BF9717BC4FCB0038009C /* FasTPrintersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTPrintersTableViewController.h; sourceTree = "<group>"; };
-		6156BF9817BC4FCB0038009C /* FasTPrintersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTPrintersTableViewController.m; sourceTree = "<group>"; };
+		6156BF9717BC4FCB0038009C /* FasTTicketPrintersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketPrintersTableViewController.h; sourceTree = "<group>"; };
+		6156BF9817BC4FCB0038009C /* FasTTicketPrintersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketPrintersTableViewController.m; sourceTree = "<group>"; };
 		6156BF9917BC4FCB0038009C /* FasTSeat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeat.h; sourceTree = "<group>"; };
 		6156BF9A17BC4FCB0038009C /* FasTSeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeat.m; sourceTree = "<group>"; };
 		6156BF9B17BC4FCB0038009C /* FasTSeatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeatingView.h; sourceTree = "<group>"; };
@@ -374,8 +374,8 @@
 				6156BF9417BC4FCB0038009C /* FasTFormatter.m */,
 				6156BF9517BC4FCB0038009C /* FasTOrder.h */,
 				6156BF9617BC4FCB0038009C /* FasTOrder.m */,
-				6156BF9717BC4FCB0038009C /* FasTPrintersTableViewController.h */,
-				6156BF9817BC4FCB0038009C /* FasTPrintersTableViewController.m */,
+				6156BF9717BC4FCB0038009C /* FasTTicketPrintersTableViewController.h */,
+				6156BF9817BC4FCB0038009C /* FasTTicketPrintersTableViewController.m */,
 				6156BF9917BC4FCB0038009C /* FasTSeat.h */,
 				6156BF9A17BC4FCB0038009C /* FasTSeat.m */,
 				6156BF9B17BC4FCB0038009C /* FasTSeatingView.h */,
@@ -609,7 +609,7 @@
 				6156BFA817BC4FCC0038009C /* FasTEventDate.m in Sources */,
 				6156BFA917BC4FCC0038009C /* FasTFormatter.m in Sources */,
 				6156BFAA17BC4FCC0038009C /* FasTOrder.m in Sources */,
-				6156BFAB17BC4FCC0038009C /* FasTPrintersTableViewController.m in Sources */,
+				6156BFAB17BC4FCC0038009C /* FasTTicketPrintersTableViewController.m in Sources */,
 				6156BFAC17BC4FCC0038009C /* FasTSeat.m in Sources */,
 				6156BFAD17BC4FCC0038009C /* FasTSeatingView.m in Sources */,
 				6156BFAE17BC4FCC0038009C /* FasTSeatView.m in Sources */,
