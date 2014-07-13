@@ -14,8 +14,6 @@
 
 @interface FasTOrdersSearchViewController ()
 
-- (void)reload;
-
 @end
 
 @implementation FasTOrdersSearchViewController
@@ -23,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    orders = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -38,33 +37,30 @@
     [super dealloc];
 }
 
-- (void)reload
+- (void)didEnterSearchTerm:(UITextField *)sender
 {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
     
-    [[FasTApi defaultApi] getOrdersForCurrentDateWithCallback:^(NSArray *o) {
+    [[FasTApi defaultApi] getResource:@"vorverkauf/bestellungen" withAction:@"suche" data:@{ @"q": sender.text } callback:^(NSDictionary *response) {
         [hud hide:YES];
         
-        if (o) {
-            NSMutableArray *tmpOrders = [NSMutableArray array];
-            for (FasTOrder *order in o) {
-                NSInteger empty = 0;
-                NSArray *requiredKeys = @[@"lastName", @"firstName"];
-                for (NSString *key in requiredKeys) {
-                    id value = [order performSelector:NSSelectorFromString(key)];
-                    if (![value isKindOfClass:[NSString class]] || [value length] <= 0) {
-                        empty++;
-                    }
+        if (!response[@"error"]) {
+            [orders removeAllObjects];
+            
+            if (response[@"orders"]) {
+                for (NSDictionary *orderInfo in response[@"orders"]) {
+                    FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
+                    [orders addObject:order];
                 }
-                if (empty < [requiredKeys count]) [tmpOrders addObject:order];
+            } else if (response[@"order"]) {
+                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:[[FasTApi defaultApi] event]] autorelease];
+                [orders addObject:order];
+                [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }
             
-            [orders release];
-            orders = [[NSMutableArray arrayWithArray:tmpOrders] retain];
-            
-            //[[self tableView] reloadData];
+            [[self tableView] reloadData];
         }
     }];
 }
@@ -78,44 +74,39 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return orders ? [orders count] : 0;
-    return 3;
+    return [orders count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"Suchergebnisse";
+    return [orders count] ? @"Suchergebnisse" : @"Keine Bestellungen gefunden";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FasTOrdersTableCell"];
-    NSArray *labelTexts = @[@"Max Mustermann", @"4 Tickets", @"48,00 €"];
-    int i = 0;
-    for (NSString *text in labelTexts) {
-        [(UILabel *)[cell viewWithTag:i+1] setText:text];
-        i++;
-    }
+    FasTOrder *order = orders[[indexPath row]];
     
-//    FasTOrder *order = orders[[indexPath row]];
-//    [[cell textLabel] setText:[order fullNameWithLastNameFirst:YES]];
-//    [[cell detailTextLabel] setText:[NSString stringWithFormat:NSLocalizedStringByKey(@"numberOfTickets"), [order numberOfTickets]]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:(order.cancelled) ? @"FasTOrdersCancelledTableCell" : @"FasTOrdersTableCell"];
+    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"#%@", [order number]]];
+    [(UILabel *)[cell viewWithTag:2] setText:[order fullNameWithLastNameFirst:YES]];
+    [(UILabel *)[cell viewWithTag:3] setText:[NSString stringWithFormat:NSLocalizedStringByKey(@"numberOfTickets"), [order numberOfTickets]]];
+    [(UILabel *)[cell viewWithTag:4] setText:[order localizedTotal]];
     
     return cell;
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    FasTOrderDetailsViewController *details = [[[FasTOrderDetailsViewController alloc] initWithOrderNumber:[orders[[indexPath row]] number]] autorelease];
-//    [[self navigationController] pushViewController:details animated:YES];
 }
 
 #pragma mark storyboard delegate
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    FasTOrder *order;
+    if ([segue.identifier isEqualToString:@"FasTOrdersSearchDirectDetailsSegue"]) {
+        order = [orders firstObject];
+    } else {
+        NSIndexPath *path = [_tableView indexPathForCell:sender];
+        order = orders[path.row];
+    }
+    
     //FasTOrderDetailsViewController *details = [segue destinationViewController];
 }
 

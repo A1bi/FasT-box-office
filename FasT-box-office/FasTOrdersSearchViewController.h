@@ -10,9 +10,11 @@
 
 @interface FasTOrdersSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *orders;
+    NSMutableArray *orders;
 }
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
+
+- (IBAction)didEnterSearchTerm:(UITextField *)sender;
 
 @end

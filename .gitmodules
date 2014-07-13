@@ -4,9 +4,6 @@
 [submodule "submodules/MBProgressHUD"]
 	path = submodules/MBProgressHUD
 	url = git@github.com:jdg/MBProgressHUD.git
-[submodule "submodules/LNNumberpad"]
-	path = submodules/LNNumberpad
-	url = git@github.com:lnafziger/Numberpad.git
 [submodule "submodules/NSDate-Extensions"]
 	path = submodules/NSDate-Extensions
 	url = git@github.com:erica/NSDate-Extensions.git
