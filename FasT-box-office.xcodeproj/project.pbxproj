@@ -74,6 +74,7 @@
 		6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */; };
 		6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F217BD02A20038009C /* FasTTicketsViewController.m */; };
 		6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6190F6031964A1D000F42B03 /* Storyboard.storyboard */; };
+		F07D4E6E1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,6 +205,8 @@
 		6156C5F117BD02A20038009C /* FasTTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketsViewController.h; sourceTree = "<group>"; };
 		6156C5F217BD02A20038009C /* FasTTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketsViewController.m; sourceTree = "<group>"; };
 		6190F6031964A1D000F42B03 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		F07D4E6C1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsTicketsPopoverViewController.h; sourceTree = "<group>"; };
+		F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsTicketsPopoverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +306,8 @@
 				6156C5E517BCC1820038009C /* FasTOrdersSearchViewController.m */,
 				6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */,
 				6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */,
+				F07D4E6C1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.h */,
+				F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */,
 				6156C5F117BD02A20038009C /* FasTTicketsViewController.h */,
 				6156C5F217BD02A20038009C /* FasTTicketsViewController.m */,
 				611C419017BD7A8700552192 /* FasTSettingsViewController.h */,
@@ -594,6 +599,7 @@
 				6156BFAF17BC4FCC0038009C /* FasTTicket.m in Sources */,
 				6156BFB017BC4FCC0038009C /* FasTTicketPrinter.m in Sources */,
 				6156BFB117BC4FCC0038009C /* FasTTicketType.m in Sources */,
+				F07D4E6E1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */,
 				6156BFCF17BC50200038009C /* NSData+MKBase64.m in Sources */,
 				6156BFD017BC50200038009C /* NSDate+RFC1123.m in Sources */,
 				6156BFD117BC50200038009C /* NSDictionary+RequestEncoding.m in Sources */,

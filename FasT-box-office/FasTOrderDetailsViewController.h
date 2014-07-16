@@ -14,9 +14,13 @@
 {
     NSArray *_infoTableRows;
     NSDateFormatter *_dateFormatter;
+    BOOL _selectAllTicketsToggle;
 }
 
 @property (nonatomic, retain) FasTOrder *order;
 @property (nonatomic, retain) NSString *highlightedTicketId;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *ticketsPopoverBarButton;
+
+- (IBAction)selectAllTickets:(id)sender;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "FasTOrderDetailsViewController.h"
 #import "FasTTicketsViewController.h"
+#import "FasTOrderDetailsTicketsPopoverViewController.h"
 #import "FasTOrder.h"
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
@@ -22,6 +23,7 @@
 
 - (void)printTickets;
 - (void)reload;
+- (void)updateAfterTicketSelection;
 
 @end
 
@@ -33,6 +35,7 @@
     if (self) {
         _dateFormatter = [[NSDateFormatter alloc] init];
         _dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+        _selectAllTicketsToggle = YES;
     }
     return self;
 }
@@ -42,6 +45,7 @@
     [_order release];
     [_highlightedTicketId release];
     [_dateFormatter release];
+    [_ticketsPopoverBarButton release];
     [super dealloc];
 }
 
@@ -53,6 +57,9 @@
         [self reload];
         self.navigationItem.title = [NSString stringWithFormat:self.navigationItem.title, _order.number];
     }
+    
+    [self.tableView setEditing:YES animated:NO];
+    [self.navigationController setToolbarHidden:NO];
 }
 
 - (void)printTickets
@@ -74,6 +81,42 @@
     }
     [_infoTableRows release];
     _infoTableRows = [[NSArray arrayWithArray:rows] retain];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverSegue"]) {
+        FasTOrderDetailsTicketsPopoverViewController *popover = segue.destinationViewController;
+        NSMutableArray *tickets = [NSMutableArray array];
+        for (NSIndexPath *path in self.tableView.indexPathsForSelectedRows) {
+            [tickets addObject:_order.tickets[path.row]];
+        }
+        popover.tickets = tickets;
+    }
+}
+
+- (IBAction)selectAllTickets:(id)sender
+{
+    NSIndexPath *indexPath;
+    for (NSInteger i = 0, count = _order.tickets.count; i < count; i++) {
+        FasTTicket *ticket = _order.tickets[i];
+        if (!ticket.cancelled) {
+            indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+            if (_selectAllTicketsToggle) {
+                [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+            } else {
+                [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            }
+        }
+    }
+    
+    [self updateAfterTicketSelection];
+}
+
+- (void)updateAfterTicketSelection
+{
+    _selectAllTicketsToggle = !_selectAllTicketsToggle;
+    _ticketsPopoverBarButton.enabled = self.tableView.indexPathsForSelectedRows.count > 0;
 }
 
 #pragma mark - Table view data source
@@ -118,6 +161,11 @@
     } else {
         return 44;
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.section == 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,6 +230,16 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) [self updateAfterTicketSelection];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) [self updateAfterTicketSelection];
 }
 
 @end
