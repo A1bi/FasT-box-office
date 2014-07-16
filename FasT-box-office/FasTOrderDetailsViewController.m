@@ -9,6 +9,10 @@
 #import "FasTOrderDetailsViewController.h"
 #import "FasTTicketsViewController.h"
 #import "FasTOrder.h"
+#import "FasTTicket.h"
+#import "FasTTicketType.h"
+#import "FasTSeat.h"
+#import "FasTEventDate.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
 #import "FasTTicketPrinter.h"
@@ -16,152 +20,168 @@
 
 @interface FasTOrderDetailsViewController ()
 
-- (NSArray *)getRowForIndexPath:(NSIndexPath *)indexPath;
-- (void)pay;
 - (void)printTickets;
+- (void)reload;
 
 @end
 
 @implementation FasTOrderDetailsViewController
 
-- (id)initWithOrderNumber:(NSString *)n
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithStyle:UITableViewStyleGrouped];
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        number = [n retain];
-        
-        [self setTitle:NSLocalizedStringByKey(@"orderDetailsTitle")];
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        _dateFormatter.dateStyle = NSDateFormatterMediumStyle;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [sections release];
-    [number release];
-    [order release];
+    [_order release];
+    [_highlightedTicketId release];
+    [_dateFormatter release];
     [super dealloc];
 }
 
 - (void)viewDidLoad
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
+    [super viewDidLoad];
     
-    [[FasTApi defaultApi] getOrderWithNumber:number callback:^(FasTOrder *o) {
-        [hud hide:YES];
-        if (!o) {
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringByKey(@"orderNotFoundTitle") message:NSLocalizedStringByKey(@"orderNotFoundDetails") delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
-            [alert show];
-            return;
-        }
-        
-        [order release];
-        order = [o retain];
-        
-        [sections release];
-        sections = [@[
-                        @{@"title": NSLocalizedStringByKey(@"general"), @"rows": @[
-                            @[NSLocalizedStringByKey(@"order"), [order number]],
-                            @[NSLocalizedStringByKey(@"name"), [order fullNameWithLastNameFirst:NO]],
-                            @[NSLocalizedStringByKey(@"orderedAt"), [NSDateFormatter localizedStringFromDate:[order created] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterMediumStyle]]
-                        ]},
-                        @{@"title": NSLocalizedStringByKey(@"details"), @"rows": @[
-                            @[NSLocalizedStringByKey(@"tickets"), [NSString stringWithFormat:@"%i", [[order tickets] count]], @"tickets"],
-                            @[NSLocalizedStringByKey(@"totalPrice"), [FasTFormatter stringForPrice:[order total]]],
-                            @[NSLocalizedStringByKey(@"paid"), NSLocalizedStringByKey([order paid] ? @"yes" : @"no"), @"paid"]
-                        ]}
-                    ] retain];
-        
-        SEL btnSelector;
-        NSString *btnText;
-        if (![order paid]) {
-            btnSelector = @selector(pay);
-            btnText = NSLocalizedStringByKey(@"pay");
-        } else {
-            btnSelector = @selector(printTickets);
-            btnText = NSLocalizedStringByKey(@"printTickets");
-        }
-        UIBarButtonItem *btn = [[[UIBarButtonItem alloc] initWithTitle:btnText style:UIBarButtonItemStyleBordered target:self action:btnSelector] autorelease];
-        [[self navigationItem] setRightBarButtonItem:btn];
-        
-        [[self tableView] reloadData];
-        [self setTitle:[NSString stringWithFormat:NSLocalizedStringByKey(@"orderDetailsTitleNumber"), [order number]]];
-    }];
-}
-
-- (NSArray *)getRowForIndexPath:(NSIndexPath *)indexPath
-{
-    return sections[[indexPath section]][@"rows"][[indexPath row]];
-}
-
-- (void)pay
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddOrderToPay" object:nil userInfo:@{ @"order": order }];
+    if (_order) {
+        [self reload];
+        self.navigationItem.title = [NSString stringWithFormat:self.navigationItem.title, _order.number];
+    }
 }
 
 - (void)printTickets
 {
-    [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
+    [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:_order];
     [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
+}
+
+- (void)reload
+{
+    NSMutableArray *rows = [NSMutableArray arrayWithArray:@[
+                                                            @[@"Nummer", _order.number],
+                                                            @[@"Besteller", [_order fullNameWithLastNameFirst:YES]],
+                                                            @[@"Gesamtbetrag", [_order localizedTotal]],
+                                                            @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]]
+                                                            ]];
+    if (_order.cancelled) {
+        [rows addObject:@[@"Stornierung", _order.cancelReason, @"FasTOrderDetailsCancellationCell"]];
+    }
+    [_infoTableRows release];
+    _infoTableRows = [[NSArray arrayWithArray:rows] retain];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [sections count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [sections[section][@"rows"] count];
+    return 3;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return sections[section][@"title"];
+    switch (section) {
+        case 0:
+            return @"Allgemein";
+            break;
+        case 1:
+            return [NSString stringWithFormat:@"%d Tickets", _order.numberOfTickets];
+            break;
+        default:
+            return @"Protokoll";
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return _infoTableRows.count;
+            break;
+        case 1:
+            return _order.tickets.count;
+            break;
+        default:
+            return _order.logEvents.count;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1) {
+        return 73;
+    } else {
+        return 44;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"detailsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellId] autorelease];
+    UITableViewCell *cell;
+    
+    switch (indexPath.section) {
+        case 0: {
+            NSArray *row = _infoTableRows[indexPath.row];
+            cell = [tableView dequeueReusableCellWithIdentifier:row.count > 2 ? row[2] : @"FasTOrderDetailsInfoCell"];
+            for (int i = 0; i < 2; i++) {
+                [(UILabel *)[cell viewWithTag:i+1] setText:row[i]];
+            }
+            break;
+        }
+            
+        case 1: {
+            FasTTicket *ticket = _order.tickets[indexPath.row];
+            cell = [tableView dequeueReusableCellWithIdentifier:ticket.cancelled ? @"FasTOrderDetailsCancelledTicketCell" : @"FasTOrderDetailsTicketCell"];
+            for (int i = 1; i <= 6; i++) {
+                UILabel *label = (UILabel *)[cell viewWithTag:i];
+                switch (i) {
+                    case 1:
+                        label.text = [NSString stringWithFormat:label.text, ticket.number];
+                        break;
+                    case 2:
+                        label.text = [NSString stringWithFormat:label.text, ticket.date.localizedString];
+                        break;
+                    case 3:
+                        label.text = [NSString stringWithFormat:label.text, ticket.type.name, ticket.type.localizedPrice];
+                        break;
+                    case 4:
+                        if (ticket.cancelled) {
+                            label.text = [NSString stringWithFormat:label.text, ticket.cancelReason];
+                        } else {
+                            label.text = [NSString stringWithFormat:label.text, ticket.paid ? @"ja" : @"nein"];
+                        }
+                        break;
+                    case 5:
+                        if (ticket.cancelled) {
+                            
+                        }
+                        break;
+                    case 6:
+                        label.text = [NSString stringWithFormat:label.text, ticket.seat.blockName, ticket.seat.number];
+                }
+            }
+            if (_highlightedTicketId && [_highlightedTicketId isEqualToString:ticket.ticketId]) {
+                cell.backgroundColor = [UIColor yellowColor];
+            }
+            break;
+        }
+        
+        default: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"FasTOrderDetailsLogEventCell"];
+            NSArray *event = _order.logEvents[indexPath.row];
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[event[0] integerValue]];
+            
+            [(UILabel *)[cell viewWithTag:1] setText:[_dateFormatter stringFromDate:date]];
+            [(UILabel *)[cell viewWithTag:2] setText:event[1]];
+        }
     }
-    NSArray *row = [self getRowForIndexPath:indexPath];
-    [[cell textLabel] setText:row[0]];
-    [[cell detailTextLabel] setText:row[1]];
-    UITableViewCellAccessoryType type = UITableViewCellAccessoryNone;
-    UIColor *color = [UIColor whiteColor];
-    if ([row count] > 2) {
-        if ([row[2] isEqualToString:@"tickets"]) type = UITableViewCellAccessoryDisclosureIndicator;
-        if ([row[2] isEqualToString:@"paid"] && ![order paid]) color = [UIColor redColor];
-    }
-    [cell setBackgroundColor:color];
-    [cell setAccessoryType:type];
     
     return cell;
-}
-
-#pragma mark table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSArray *row = [self getRowForIndexPath:indexPath];
-    if ([row count] > 2 && [row[2] isEqualToString:@"tickets"]) {
-        FasTTicketsViewController *tickets = [[[FasTTicketsViewController alloc] initWithTickets:[order tickets]] autorelease];
-        [[self navigationController] pushViewController:tickets animated:YES];
-    }
-}
-
-#pragma mark ui alert view delegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 @end

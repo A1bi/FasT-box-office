@@ -34,6 +34,7 @@
 {
     [_tableView release];
     [orders release];
+    [highlightedTicketId release];
     [super dealloc];
 }
 
@@ -54,9 +55,13 @@
                     FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
                     [orders addObject:order];
                 }
+            
             } else if (response[@"order"]) {
                 FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:[[FasTApi defaultApi] event]] autorelease];
                 [orders addObject:order];
+                if (response[@"ticket"]) {
+                    highlightedTicketId = [response[@"ticket"] retain];
+                }
                 [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }
             
@@ -99,15 +104,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    FasTOrder *order;
+    FasTOrderDetailsViewController *details = [segue destinationViewController];
     if ([segue.identifier isEqualToString:@"FasTOrdersSearchDirectDetailsSegue"]) {
-        order = [orders firstObject];
+        details.order = [orders firstObject];
+        details.highlightedTicketId = highlightedTicketId;
     } else {
         NSIndexPath *path = [_tableView indexPathForCell:sender];
-        order = orders[path.row];
+        details.order = orders[path.row];
     }
-    
-    //FasTOrderDetailsViewController *details = [segue destinationViewController];
 }
 
 @end

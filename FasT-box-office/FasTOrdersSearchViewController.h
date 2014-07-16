@@ -11,6 +11,7 @@
 @interface FasTOrdersSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *orders;
+    NSString *highlightedTicketId;
 }
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;

@@ -12,11 +12,11 @@
 
 @interface FasTOrderDetailsViewController : UITableViewController <UIAlertViewDelegate>
 {
-    NSArray *sections;
-    NSString *number;
-    FasTOrder *order;
+    NSArray *_infoTableRows;
+    NSDateFormatter *_dateFormatter;
 }
 
-- (id)initWithOrderNumber:(NSString *)n;
+@property (nonatomic, retain) FasTOrder *order;
+@property (nonatomic, retain) NSString *highlightedTicketId;
 
 @end
