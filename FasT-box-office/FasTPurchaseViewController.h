@@ -15,7 +15,7 @@
     NSMutableArray *_selectedProducts;
     float _total;
     FasTOrderViewController *orderController;
-    NSMutableArray *ordersToPay;
+    NSMutableArray *_ticketsToPay;
 }
 
 @property (retain, nonatomic) IBOutlet UITableView *selectedProductsTable;
@@ -23,7 +23,6 @@
 @property (retain, nonatomic) IBOutlet UILabel *totalLabel;
 
 - (IBAction)openCashDrawer;
-- (IBAction)finishPurchase:(id)sender;
 - (IBAction)clearPurchase:(id)sender;
 
 @end

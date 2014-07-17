@@ -32,6 +32,11 @@
 
 - (void)setTickets:(NSArray *)tickets
 {
+    if (_tickets != tickets) {
+        [_tickets release];
+        _tickets = [tickets retain];
+    }
+    
     [_rows removeAllObjects];
     BOOL pay = YES, print = YES;
     for (FasTTicket *ticket in tickets) {
@@ -53,6 +58,8 @@
     }
 }
 
+#pragma mark table view data source
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -67,6 +74,16 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_rows[indexPath.row]];
     return cell;
+}
+
+#pragma mark table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"FasTOrderDetailsTicketsPopoverPayCell"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddTicketsToPay" object:nil userInfo:@{ @"tickets": _tickets }];
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
 }
 
 @end

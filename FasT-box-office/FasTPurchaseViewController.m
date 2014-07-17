@@ -7,10 +7,12 @@
 //
 
 #import "FasTPurchaseViewController.h"
+#import "FasTPurchasePaymentViewController.h"
+#import "FasTMainViewController.h"
 #import "FasTCashDrawer.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
-#import "FasTOrder.h"
+#import "FasTTicket.h"
 #import "FasTTicketType.h"
 #import "FasTEventDate.h"
 #import "FasTTicketPrinter.h"
@@ -22,9 +24,10 @@
 - (void)updateSelectedProductsTableAndTotal;
 - (void)updateTotal;
 - (void)updateSelectedProductsTable;
+- (void)finishPurchase;
 - (void)finishedPurchase;
 - (void)showAlertWithTitle:(NSString *)title details:(NSString *)details;
-- (void)receivedOrderToPay:(NSNotification *)note;
+- (void)receivedTicketsToPay:(NSNotification *)note;
 
 @end
 
@@ -39,13 +42,12 @@
                       @{@"type": @"product", @"id": @"2", @"name": @"Regenponcho", @"price": @(1)}
                       ] retain];
         _selectedProducts = [[NSMutableArray alloc] init];
-        ordersToPay = [[NSMutableArray alloc] init];
+        _ticketsToPay = [[NSMutableArray alloc] init];
         
         orderController = [[FasTOrderViewController alloc] init];
         [orderController setDelegate:self];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedOrderToPay:) name:@"FasTPurchaseControllerAddOrderToPay" object:nil];
-
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
     }
     return self;
 }
@@ -64,6 +66,15 @@
 - (void)viewDidLoad
 {    
     [self updateTotal];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"FasTPurchasePaymentSegue"]) {
+        FasTPurchasePaymentViewController *payment = segue.destinationViewController;
+        [payment setTotal:_total];
+        //[self finishedPurchase];
+    }
 }
 
 - (NSDictionary *)productInfoForIndexPath:(NSIndexPath *)indexPath
@@ -96,7 +107,7 @@
     [[FasTCashDrawer defaultCashDrawer] open];
 }
 
-- (IBAction)finishPurchase:(id)sender
+- (void)finishPurchase
 {
 //    NSDictionary *newOrder = nil;
 //    NSMutableArray *items = [NSMutableArray array];
@@ -132,7 +143,7 @@
 
 - (void)finishedPurchase
 {
-    for (FasTOrder *order in ordersToPay) {
+    for (FasTOrder *order in _ticketsToPay) {
         [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
     }
     [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseTitle") details:[NSString stringWithFormat:NSLocalizedStringByKey(@"finishedPurchaseDetails"), [FasTFormatter stringForPrice:_total]]];
@@ -144,13 +155,7 @@
 {
     [_selectedProducts removeAllObjects];
     [self updateSelectedProductsTableAndTotal];
-    [orderController resetSeating];
-    [ordersToPay removeAllObjects];
-}
-
-- (IBAction)showOrderController:(id)sender
-{
-    [self presentViewController:orderController animated:YES completion:NULL];
+    [_ticketsToPay removeAllObjects];
 }
 
 - (void)showAlertWithTitle:(NSString *)title details:(NSString *)details
@@ -159,16 +164,19 @@
     [alert show];
 }
 
-- (void)receivedOrderToPay:(NSNotification *)note
+- (void)receivedTicketsToPay:(NSNotification *)note
 {
-    FasTOrder *order = [note userInfo][@"order"];
-    if (![ordersToPay containsObject:order]) {
-        [ordersToPay addObject:order];
-//        _selectedProducts[@{@"type": @"order", @"id": [order bunchId], @"name": @"Tickets", @"price": @([order total])}] = @([[order tickets] count]);
-        [self updateSelectedProductsTableAndTotal];
+    NSArray *tickets = [note userInfo][@"tickets"];
+    for (FasTTicket *ticket in tickets) {
+        if (![_ticketsToPay containsObject:ticket]) {
+            [_ticketsToPay addObject:ticket];
+            NSDictionary *product = @{ @"type": @"ticket", @"number": @(1), @"total": @(ticket.price), @"product": @{ @"name": ticket.type.name, @"price": @(ticket.price) } };
+            [_selectedProducts addObject:product];
+        }
     }
     
-    [[self tabBarController] setSelectedViewController:[self parentViewController]];
+    [self updateSelectedProductsTableAndTotal];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
 }
 
 #pragma mark table view data source
@@ -242,13 +250,13 @@
         NSDictionary *productInfo = [self productInfoForIndexPath:indexPath];
         NSMutableDictionary *selectedProduct = nil;
         for (NSMutableDictionary *product in _selectedProducts) {
-            if ([product[@"id"] isEqualToString:productInfo[@"id"]]) {
+            if ([product[@"product"][@"id"] isEqualToString:productInfo[@"id"]]) {
                 selectedProduct = product;
                 break;
             }
         }
         if (!selectedProduct) {
-            selectedProduct = [NSMutableDictionary dictionaryWithDictionary:@{@"id": productInfo[@"id"], @"product": productInfo, @"number": @(1), @"total": productInfo[@"price"]}];
+            selectedProduct = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @"product", @"product": productInfo, @"number": @(1), @"total": productInfo[@"price"]}];
             [_selectedProducts addObject:selectedProduct];
         } else {
             NSInteger number = [selectedProduct[@"number"] integerValue] + 1;
@@ -269,7 +277,8 @@
     if (!finished) return;
     
     FasTOrder *order = [ovc order];
-    //_selectedProducts[@{@"type": @"order", @"name": @"Tickets", @"price": @([order total])}] = @([order numberOfTickets]);
+    NSDictionary *product = @{@"type": @"order", @"name": @"Tickets", @"product": order, @"price": @([order total])};
+    [_selectedProducts addObject:product];
     
     [self updateSelectedProductsTableAndTotal];
 }
@@ -278,7 +287,7 @@
 {
     for (NSDictionary *productInfo in _selectedProducts) {
         if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
-            [_selectedProducts removeObjectForKey:productInfo];
+            [_selectedProducts removeObject:productInfo];
             [self updateSelectedProductsTableAndTotal];
             return;
         }

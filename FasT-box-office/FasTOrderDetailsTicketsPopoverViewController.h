@@ -13,6 +13,6 @@
     NSMutableArray *_rows;
 }
 
-- (void)setTickets:(NSArray *)tickets;
+@property (nonatomic, retain) NSArray *tickets;
 
 @end

@@ -4,6 +4,62 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
     </dependencies>
     <scenes>
+        <!--FasT Purchase Payment View Controller-->
+        <scene sceneID="vcM-JG-s41">
+            <objects>
+                <viewController id="Od7-Si-dwM" customClass="FasTPurchasePaymentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Kvh-KE-6Vt"/>
+                        <viewControllerLayoutGuide type="bottom" id="o9v-19-fNR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="egX-EU-g8M">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ig-VC-i3c">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                <items>
+                                    <navigationItem title="Bezahlung" id="x8g-vi-jEu"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="24,00 €" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU2-hr-AeX">
+                                <rect key="frame" x="153" y="132" width="234" height="73"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="51"/>
+                                <color key="textColor" red="0.9332540761" green="0.065893878569999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Zum Abschließen der Zahlung bitte Kassenschublade schließen." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CI-gH-Hml">
+                                <rect key="frame" x="25" y="299" width="491" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QT5-Sd-Evd">
+                                <rect key="frame" x="165" y="544" width="210" height="56"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <state key="normal" title="Abschließen">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Zu zahlen:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnD-ua-QTJ">
+                                <rect key="frame" x="25" y="158" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeDrawerNoticeLabel" destination="9CI-gH-Hml" id="zIC-4g-Hkq"/>
+                        <outlet property="finishBtn" destination="QT5-Sd-Evd" id="QhQ-jc-aBh"/>
+                        <outlet property="totalLabel" destination="HU2-hr-AeX" id="L7U-N7-qzf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aRv-wN-kWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1790" y="-544"/>
+        </scene>
         <!--Suche nach Ticket oder Bestellung-->
         <scene sceneID="Kgn-q2-Fkm">
             <objects>
@@ -451,7 +507,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0Y-fE-yFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4097" y="306"/>
+            <point key="canvasLocation" x="3867" y="306"/>
         </scene>
         <!--FasT Purchase View Controller-->
         <scene sceneID="xPD-Gi-SdB">
@@ -588,7 +644,7 @@
                                     <color key="titleColor" red="0.11363265290231465" green="0.68862516983695654" blue="0.18107296559773783" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="finishPurchase:" destination="WAc-pj-Rng" eventType="touchUpInside" id="gm3-1X-Q8y"/>
+                                    <segue destination="Od7-Si-dwM" kind="modal" identifier="FasTPurchasePaymentSegue" modalPresentationStyle="formSheet" id="25M-rE-egZ"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -13,5 +13,8 @@
 @property (retain, nonatomic) IBOutlet UIView *containerView;
 @property (assign, nonatomic) UIViewController *currentViewController;
 @property (retain, nonatomic) IBOutlet UIView *navView;
+@property (nonatomic, readonly) NSMutableDictionary *containedViewControllers;
+
+- (void)switchToPurchaseController;
 
 @end

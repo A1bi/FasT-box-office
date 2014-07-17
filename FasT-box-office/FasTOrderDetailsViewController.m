@@ -7,7 +7,6 @@
 //
 
 #import "FasTOrderDetailsViewController.h"
-#import "FasTTicketsViewController.h"
 #import "FasTOrderDetailsTicketsPopoverViewController.h"
 #import "FasTOrder.h"
 #import "FasTTicket.h"

@@ -14,11 +14,21 @@
 
 @implementation FasTMainViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        _containedViewControllers = [[NSMutableDictionary alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchToPurchaseController) name:@"FasTSwitchToPurchaseController" object:nil];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self performSegueWithIdentifier:@"PurchaseSegue" sender:nil];
+    [self switchToPurchaseController];
     
     CALayer *layer = _navView.layer;
     layer.shadowOffset = CGSizeMake(1, 1);
@@ -32,7 +42,13 @@
 {
     [_containerView release];
     [_navView release];
+    [_containedViewControllers release];
     [super dealloc];
+}
+
+- (void)switchToPurchaseController
+{
+    [self performSegueWithIdentifier:@"PurchaseSegue" sender:nil];
 }
 
 @end

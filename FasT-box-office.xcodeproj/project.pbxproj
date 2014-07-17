@@ -69,8 +69,8 @@
 		6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EB17BCCD4D0038009C /* Localizable.strings */; };
 		6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EC17BCD4BD0038009C /* Settings.bundle */; };
 		6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */; };
-		6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5F217BD02A20038009C /* FasTTicketsViewController.m */; };
 		6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6190F6031964A1D000F42B03 /* Storyboard.storyboard */; };
+		F03D9CB61977CD1E00BF0422 /* FasTPurchasePaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */; };
 		F07D4E6E1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -195,9 +195,9 @@
 		6156C5EC17BCD4BD0038009C /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsViewController.h; sourceTree = "<group>"; };
 		6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsViewController.m; sourceTree = "<group>"; };
-		6156C5F117BD02A20038009C /* FasTTicketsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketsViewController.h; sourceTree = "<group>"; };
-		6156C5F217BD02A20038009C /* FasTTicketsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketsViewController.m; sourceTree = "<group>"; };
 		6190F6031964A1D000F42B03 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		F03D9CB41977CD1E00BF0422 /* FasTPurchasePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTPurchasePaymentViewController.h; sourceTree = "<group>"; };
+		F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTPurchasePaymentViewController.m; sourceTree = "<group>"; };
 		F07D4E6C1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsTicketsPopoverViewController.h; sourceTree = "<group>"; };
 		F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsTicketsPopoverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -301,8 +301,6 @@
 				6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */,
 				F07D4E6C1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.h */,
 				F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */,
-				6156C5F117BD02A20038009C /* FasTTicketsViewController.h */,
-				6156C5F217BD02A20038009C /* FasTTicketsViewController.m */,
 				611C419017BD7A8700552192 /* FasTSettingsViewController.h */,
 				611C419117BD7A8700552192 /* FasTSettingsViewController.m */,
 				611C419317BD7F5300552192 /* FasTCashDrawerTableViewController.h */,
@@ -311,6 +309,8 @@
 				611C419717BD88E900552192 /* FasTCashDrawer.m */,
 				611C419917BD950000552192 /* FasTPurchaseViewController.h */,
 				611C419A17BD950000552192 /* FasTPurchaseViewController.m */,
+				F03D9CB41977CD1E00BF0422 /* FasTPurchasePaymentViewController.h */,
+				F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */,
 				611C41BB17BE4A9F00552192 /* FasTOrderViewController */,
 				6156BFB217BC4FD20038009C /* FasT-objc-common */,
 				6156B61417BC4C9B0038009C /* Supporting Files */,
@@ -607,9 +607,9 @@
 				6156C5E217BC52390038009C /* FasTConstants.m in Sources */,
 				6156C5E617BCC1820038009C /* FasTOrdersSearchViewController.m in Sources */,
 				6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */,
-				6156C5F317BD02A30038009C /* FasTTicketsViewController.m in Sources */,
 				611C419217BD7A8700552192 /* FasTSettingsViewController.m in Sources */,
 				611C419517BD7F5300552192 /* FasTCashDrawerTableViewController.m in Sources */,
+				F03D9CB61977CD1E00BF0422 /* FasTPurchasePaymentViewController.m in Sources */,
 				611C419817BD88E900552192 /* FasTCashDrawer.m in Sources */,
 				611C419C17BD950000552192 /* FasTPurchaseViewController.m in Sources */,
 				611C41B117BE4A6F00552192 /* FasTOrderViewController.m in Sources */,
