@@ -200,12 +200,20 @@
                         if (ticket.cancelled) {
                             label.text = [NSString stringWithFormat:label.text, ticket.cancelReason];
                         } else {
-                            label.text = [NSString stringWithFormat:label.text, ticket.paid ? @"ja" : @"nein"];
+                            NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Bezahlt: "] autorelease], *paid;
+                            if (ticket.paid) {
+                                paid = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
+                            } else {
+                                paid = [[NSMutableAttributedString alloc] initWithString:@"nein"];
+                                [paid addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
+                            }
+                            [text appendAttributedString:paid];
+                            label.attributedText = text;
                         }
                         break;
                     case 5:
-                        if (ticket.cancelled) {
-                            
+                        if (!ticket.cancelled) {
+                            label.text = [NSString stringWithFormat:label.text, @"nein"];
                         }
                         break;
                     case 6:
@@ -229,6 +237,14 @@
     }
     
     return cell;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([tableView cellForRowAtIndexPath:indexPath].selectionStyle == UITableViewCellSelectionStyleNone) {
+        return nil;
+    }
+    return indexPath;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

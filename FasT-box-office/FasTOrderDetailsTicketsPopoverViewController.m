@@ -80,10 +80,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"FasTOrderDetailsTicketsPopoverPayCell"]) {
+    NSString *identifier = [tableView cellForRowAtIndexPath:indexPath].reuseIdentifier;
+    if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverPayCell"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddTicketsToPay" object:nil userInfo:@{ @"tickets": _tickets }];
-        [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    } else if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverPrintCell"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tickets werden gedruckt" message:@"Die ausgewählten Tickets werden nun gedruckt. Einen Moment bitte..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

@@ -24,6 +24,7 @@
 - (void)updateSelectedProductsTableAndTotal;
 - (void)updateTotal;
 - (void)updateSelectedProductsTable;
+- (void)decreaseSelectedProductAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely;
 - (void)finishPurchase;
 - (void)finishedPurchase;
 - (void)showAlertWithTitle:(NSString *)title details:(NSString *)details;
@@ -64,7 +65,8 @@
 }
 
 - (void)viewDidLoad
-{    
+{
+    [super viewDidLoad];
     [self updateTotal];
 }
 
@@ -73,6 +75,11 @@
     if ([segue.identifier isEqualToString:@"FasTPurchasePaymentSegue"]) {
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
         [payment setTotal:_total];
+        
+        if (_ticketsToPay.count > 0) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tickets drucken?" message:@"Möchten Sie die zu bezahlenden Tickets ausdrucken?" delegate:self cancelButtonTitle:@"Nein" otherButtonTitles:@"Ja", nil];
+            [alert show];
+        }
         //[self finishedPurchase];
     }
 }
@@ -100,6 +107,21 @@
 {
     [self updateTotal];
     [self updateSelectedProductsTable];
+}
+
+- (void)decreaseSelectedProductAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely
+{
+    NSMutableDictionary *selectedProduct = _selectedProducts[indexPath.row];
+    NSInteger number = [selectedProduct[@"number"] integerValue];
+    if (completely || --number < 1) {
+        if ([selectedProduct[@"type"] isEqualToString:@"ticket"]) {
+            [_ticketsToPay removeObject:selectedProduct[@"product"][@"ref"]];
+        }
+        [_selectedProducts removeObject:selectedProduct];
+    } else {
+        selectedProduct[@"number"] = @(number);
+        selectedProduct[@"total"] = @(number * [selectedProduct[@"product"][@"price"] floatValue]);
+    }
 }
 
 - (IBAction)openCashDrawer
@@ -170,7 +192,7 @@
     for (FasTTicket *ticket in tickets) {
         if (![_ticketsToPay containsObject:ticket]) {
             [_ticketsToPay addObject:ticket];
-            NSDictionary *product = @{ @"type": @"ticket", @"number": @(1), @"total": @(ticket.price), @"product": @{ @"name": ticket.type.name, @"price": @(ticket.price) } };
+            NSDictionary *product = @{ @"type": @"ticket", @"number": @(1), @"total": @(ticket.price), @"product": @{ @"name": ticket.type.name, @"price": @(ticket.price), @"ref": ticket } };
             [_selectedProducts addObject:product];
         }
     }
@@ -204,6 +226,11 @@
     return 44;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return tableView == _selectedProductsTable;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
@@ -211,7 +238,7 @@
         BOOL firstRow = indexPath.row == 0;
         cell = [tableView dequeueReusableCellWithIdentifier:firstRow ? @"FasTPurchaseProductTicketsCell" : @"FasTPurchaseProductCell"];
         if (firstRow) {
-            cell.detailTextLabel.text = [NSString stringWithFormat:cell.detailTextLabel.text, 5];
+            cell.detailTextLabel.text = [NSString stringWithFormat:cell.detailTextLabel.text, 0];
         } else {
             NSDictionary *productInfo = [self productInfoForIndexPath:indexPath];
             cell.textLabel.text = productInfo[@"name"];
@@ -246,7 +273,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"FasTPurchaseProductCell"]) {
+    NSString *identifier = [tableView cellForRowAtIndexPath:indexPath].reuseIdentifier;
+    if ([identifier isEqualToString:@"FasTPurchaseProductCell"]) {
         NSDictionary *productInfo = [self productInfoForIndexPath:indexPath];
         NSMutableDictionary *selectedProduct = nil;
         for (NSMutableDictionary *product in _selectedProducts) {
@@ -263,10 +291,33 @@
             selectedProduct[@"number"] = @(number);
             selectedProduct[@"total"] = @(number * [productInfo[@"price"] floatValue]);
         }
+    
+    } else if ([identifier isEqualToString:@"FasTPurchaseProductTicketsCell"]) {
+        
+    
+    } else {
+        [self decreaseSelectedProductAtIndexPath:indexPath remove:NO];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self updateSelectedProductsTableAndTotal];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self decreaseSelectedProductAtIndexPath:indexPath remove:YES];
+        [self updateSelectedProductsTableAndTotal];
+    }
+}
+
+#pragma mark alert view delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        // print
+    }
 }
 
 #pragma mark order controller delegate

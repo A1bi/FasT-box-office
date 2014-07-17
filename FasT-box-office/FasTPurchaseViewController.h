@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FasTOrderViewController.h"
 
-@interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FasTOrderViewControllerDelegate>
+@interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, FasTOrderViewControllerDelegate>
 {
     NSArray *_availableProducts;
     NSMutableArray *_selectedProducts;
