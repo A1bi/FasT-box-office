@@ -9,6 +9,7 @@
 #import "FasTOrderDetailsTicketsPopoverViewController.h"
 #import "FasTTicket.h"
 #import "FasTTicketPrinter.h"
+#import "FasTApi.h"
 
 @interface FasTOrderDetailsTicketsPopoverViewController ()
 
@@ -90,8 +91,13 @@
         [alert show];
         
         [[FasTTicketPrinter sharedPrinter] printTickets:_tickets];
+        
+        [[FasTApi defaultApi] markTickets:_tickets paid:NO pickedUp:YES];
     }
-    [_popover dismissPopoverAnimated:YES];
+    
+    if ([_popover.delegate popoverControllerShouldDismissPopover:_popover]) {
+        [_popover dismissPopoverAnimated:YES];
+    }
 }
 
 @end

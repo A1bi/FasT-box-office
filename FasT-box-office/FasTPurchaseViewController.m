@@ -76,8 +76,9 @@
         payment.total = _total;
         payment.delegate = self;
         
-        
         if (_ticketsToPay.count > 0) {
+            [[FasTApi defaultApi] markTickets:_ticketsToPay paid:YES pickedUp:YES];
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tickets drucken?" message:@"Möchten Sie die zu bezahlenden Tickets ausdrucken?" delegate:self cancelButtonTitle:@"Nein" otherButtonTitles:@"Ja", nil];
             [alert show];
         }

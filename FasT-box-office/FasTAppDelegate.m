@@ -15,7 +15,7 @@
 {
     NSString *clientId = [[NSUserDefaults standardUserDefaults] valueForKey:@"boxOfficeId"];
     if (clientId && [clientId length] > 0) {
-        [FasTApi defaultApiWithClientType:@"seating" clientId:clientId];
+        [FasTApi defaultApiWithClientType:@"seating" clientId:@"0"];
         [[FasTApi defaultApi] fetchCurrentEvent:NULL];
     }
     

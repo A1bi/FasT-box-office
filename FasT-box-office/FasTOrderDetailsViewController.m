@@ -85,6 +85,7 @@
         }
         popover.tickets = tickets;
         popover.popover = ((UIStoryboardPopoverSegue *)segue).popoverController;
+        popover.popover.delegate = self;
     }
 }
 
@@ -207,7 +208,7 @@
                         break;
                     case 5:
                         if (!ticket.cancelled) {
-                            label.text = [NSString stringWithFormat:label.text, @"nein"];
+                            label.text = [NSString stringWithFormat:@"Abgeholt: %@", ticket.pickedUp ? @"ja" : @"nein"];
                         }
                         break;
                     case 6:
@@ -249,6 +250,14 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) [self updateAfterTicketSelection];
+}
+
+#pragma mark popover controller delegate
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    [[self tableView] reloadData];
+    return YES;
 }
 
 @end

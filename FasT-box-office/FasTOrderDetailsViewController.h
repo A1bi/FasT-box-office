@@ -10,7 +10,7 @@
 
 @class FasTOrder;
 
-@interface FasTOrderDetailsViewController : UITableViewController <UIAlertViewDelegate>
+@interface FasTOrderDetailsViewController : UITableViewController <UIPopoverControllerDelegate>
 {
     NSArray *_infoTableRows;
     NSDateFormatter *_dateFormatter;
