@@ -40,11 +40,14 @@
 
 - (void)didEnterSearchTerm:(UITextField *)sender
 {
+    NSString *searchTerm = sender.text;
+    if ([searchTerm length] < 1) return;
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
     
-    [[FasTApi defaultApi] getResource:@"vorverkauf/bestellungen" withAction:@"suche" data:@{ @"q": sender.text } callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] getResource:@"vorverkauf/bestellungen" withAction:@"suche" data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
         [hud hide:YES];
         
         if (!response[@"error"]) {

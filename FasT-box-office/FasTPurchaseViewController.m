@@ -7,7 +7,6 @@
 //
 
 #import "FasTPurchaseViewController.h"
-#import "FasTPurchasePaymentViewController.h"
 #import "FasTMainViewController.h"
 #import "FasTCashDrawer.h"
 #import "FasTFormatter.h"
@@ -74,7 +73,9 @@
 {
     if ([segue.identifier isEqualToString:@"FasTPurchasePaymentSegue"]) {
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
-        [payment setTotal:_total];
+        payment.total = _total;
+        payment.delegate = self;
+        
         
         if (_ticketsToPay.count > 0) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tickets drucken?" message:@"Möchten Sie die zu bezahlenden Tickets ausdrucken?" delegate:self cancelButtonTitle:@"Nein" otherButtonTitles:@"Ja", nil];
@@ -126,7 +127,7 @@
 
 - (IBAction)openCashDrawer
 {
-    [[FasTCashDrawer defaultCashDrawer] open];
+    //[[FasTCashDrawer defaultCashDrawer] open];
 }
 
 - (void)finishPurchase
@@ -165,12 +166,7 @@
 
 - (void)finishedPurchase
 {
-    for (FasTOrder *order in _ticketsToPay) {
-        [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
-    }
-    [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseTitle") details:[NSString stringWithFormat:NSLocalizedStringByKey(@"finishedPurchaseDetails"), [FasTFormatter stringForPrice:_total]]];
     [self clearPurchase:nil];
-    [self openCashDrawer];
 }
 
 - (IBAction)clearPurchase:(id)sender
@@ -199,6 +195,11 @@
     
     [self updateSelectedProductsTableAndTotal];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
+}
+
+- (void)dismissedPurchasePaymentViewController
+{
+    [self finishedPurchase];
 }
 
 #pragma mark table view data source
@@ -316,7 +317,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        // print
+        [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPay];
     }
 }
 

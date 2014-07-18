@@ -8,6 +8,7 @@
 
 #import "FasTOrderDetailsTicketsPopoverViewController.h"
 #import "FasTTicket.h"
+#import "FasTTicketPrinter.h"
 
 @interface FasTOrderDetailsTicketsPopoverViewController ()
 
@@ -87,8 +88,10 @@
     } else if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverPrintCell"]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tickets werden gedruckt" message:@"Die ausgewählten Tickets werden nun gedruckt. Einen Moment bitte..." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        
+        [[FasTTicketPrinter sharedPrinter] printTickets:_tickets];
     }
-    [self dismissViewControllerAnimated:YES completion:NULL];
+    [_popover dismissPopoverAnimated:YES];
 }
 
 @end

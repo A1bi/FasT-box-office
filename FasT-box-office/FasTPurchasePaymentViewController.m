@@ -7,6 +7,7 @@
 //
 
 #import "FasTPurchasePaymentViewController.h"
+#import "FasTPurchaseViewController.h"
 #import "FasTFormatter.h"
 
 @interface FasTPurchasePaymentViewController ()
@@ -28,13 +29,19 @@
 {
     [super viewWillAppear:animated];
     _totalLabel.text = [FasTFormatter stringForPrice:_total];
-    [self setDrawerClosed:NO];
+    [self setDrawerClosed:YES];
 }
 
 - (void)setDrawerClosed:(BOOL)toggle
 {
     _closeDrawerNoticeLabel.hidden = toggle;
     _finishBtn.hidden = !toggle;
+}
+
+- (IBAction)finishBtnTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [_delegate dismissedPurchasePaymentViewController];
 }
 
 @end

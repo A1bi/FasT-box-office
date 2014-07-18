@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FasTOrderViewController.h"
+#import "FasTPurchasePaymentViewController.h"
 
-@interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, FasTOrderViewControllerDelegate>
+@interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, FasTPurchasePaymentViewControllerDelegate, FasTOrderViewControllerDelegate>
 {
     NSArray *_availableProducts;
     NSMutableArray *_selectedProducts;

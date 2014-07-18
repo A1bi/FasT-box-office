@@ -13,6 +13,7 @@
     NSMutableArray *_rows;
 }
 
+@property (nonatomic, retain) UIPopoverController *popover;
 @property (nonatomic, retain) NSArray *tickets;
 
 @end

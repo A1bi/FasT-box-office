@@ -40,6 +40,9 @@
                                 <state key="normal" title="Abschließen">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishBtnTapped:" destination="Od7-Si-dwM" eventType="touchUpInside" id="VP1-Ae-hDH"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Zu zahlen:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnD-ua-QTJ">
                                 <rect key="frame" x="25" y="158" width="80" height="21"/>
@@ -52,7 +55,7 @@
                     </view>
                     <connections>
                         <outlet property="closeDrawerNoticeLabel" destination="9CI-gH-Hml" id="zIC-4g-Hkq"/>
-                        <outlet property="finishBtn" destination="QT5-Sd-Evd" id="QhQ-jc-aBh"/>
+                        <outlet property="finishBtn" destination="QT5-Sd-Evd" id="nVO-8n-YnL"/>
                         <outlet property="totalLabel" destination="HU2-hr-AeX" id="L7U-N7-qzf"/>
                     </connections>
                 </viewController>
@@ -264,7 +267,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsInfoCell" id="Vqp-gn-Bzs">
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsInfoCell" id="Vqp-gn-Bzs">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vqp-gn-Bzs" id="eAp-cr-erd">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -284,7 +287,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancellationCell" id="cyC-DS-6Rh">
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancellationCell" id="cyC-DS-6Rh">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cyC-DS-6Rh" id="DM7-fM-1o0">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -393,7 +396,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsLogEventCell" id="7sD-0a-59s">
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsLogEventCell" id="7sD-0a-59s">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7sD-0a-59s" id="DfZ-TM-Fzm">
                                     <autoresizingMask key="autoresizingMask"/>

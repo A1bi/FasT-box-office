@@ -20,7 +20,6 @@
 
 @interface FasTOrderDetailsViewController ()
 
-- (void)printTickets;
 - (void)reload;
 - (void)updateAfterTicketSelection;
 
@@ -61,12 +60,6 @@
     [self.navigationController setToolbarHidden:NO];
 }
 
-- (void)printTickets
-{
-    [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:_order];
-    [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
-}
-
 - (void)reload
 {
     NSMutableArray *rows = [NSMutableArray arrayWithArray:@[
@@ -91,6 +84,7 @@
             [tickets addObject:_order.tickets[path.row]];
         }
         popover.tickets = tickets;
+        popover.popover = ((UIStoryboardPopoverSegue *)segue).popoverController;
     }
 }
 
@@ -220,7 +214,7 @@
                         label.text = [NSString stringWithFormat:label.text, ticket.seat.blockName, ticket.seat.number];
                 }
             }
-            if (_highlightedTicketId && [_highlightedTicketId isEqualToString:ticket.ticketId]) {
+            if ([_highlightedTicketId isKindOfClass:[NSString class]] && [_highlightedTicketId isEqualToString:ticket.ticketId]) {
                 cell.backgroundColor = [UIColor yellowColor];
             }
             break;
