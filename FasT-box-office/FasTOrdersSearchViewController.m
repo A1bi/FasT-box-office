@@ -56,7 +56,9 @@
             if (response[@"orders"]) {
                 for (NSDictionary *orderInfo in response[@"orders"]) {
                     FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
-                    [orders addObject:order];
+                    if ([order.created laterDate:[NSDate dateWithDaysBeforeNow:200]] == order.created) {
+                        [orders addObject:order];
+                    }
                 }
             
             } else if (response[@"order"]) {

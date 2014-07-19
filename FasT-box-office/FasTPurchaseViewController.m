@@ -8,7 +8,6 @@
 
 #import "FasTPurchaseViewController.h"
 #import "FasTMainViewController.h"
-#import "FasTCashDrawer.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
 #import "FasTTicket.h"
@@ -67,6 +66,11 @@
 {
     [super viewDidLoad];
     [self updateTotal];
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    return (![identifier isEqualToString:@"FasTPurchasePaymentSegue"] || _total > 0);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

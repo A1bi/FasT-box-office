@@ -10,11 +10,11 @@
 			<key>IsSecure</key>
 			<false/>
 			<key>Key</key>
-			<string>boxOfficeId</string>
+			<string>FasTBoxOfficeId</string>
 			<key>KeyboardType</key>
 			<string>NumberPad</string>
 			<key>Title</key>
-			<string>Checkin ID</string>
+			<string>Box Office ID</string>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 		</dict>

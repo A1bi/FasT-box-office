@@ -18,7 +18,8 @@
 
 @implementation FasTPurchasePaymentViewController
 
-- (void)dealloc {
+- (void)dealloc
+{
     [_totalLabel release];
     [_closeDrawerNoticeLabel release];
     [_finishBtn release];
@@ -30,6 +31,14 @@
     [super viewWillAppear:animated];
     _totalLabel.text = [FasTFormatter stringForPrice:_total];
     [self setDrawerClosed:YES];
+    [[EPSPrinter sharedPrinter] setDelegate:self];
+    [[EPSPrinter sharedPrinter] openCashDrawer];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[EPSPrinter sharedPrinter] setDelegate:nil];
 }
 
 - (void)setDrawerClosed:(BOOL)toggle
@@ -42,6 +51,13 @@
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
     [_delegate dismissedPurchasePaymentViewController];
+}
+
+#pragma mark eps printer delegate
+
+- (void)printer:(EPSPrinter *)printer drawerOpen:(BOOL)drawerOpen
+{
+    if (!drawerOpen) [self finishBtnTapped:nil];
 }
 
 @end

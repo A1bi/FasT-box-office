@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EPSPrinter.h"
 
 @protocol FasTPurchasePaymentViewControllerDelegate <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface FasTPurchasePaymentViewController : UIViewController
+@interface FasTPurchasePaymentViewController : UIViewController <EPSPrinterDelegate>
 
 @property (retain, nonatomic) IBOutlet UILabel *totalLabel;
 @property (retain, nonatomic) IBOutlet UILabel *closeDrawerNoticeLabel;

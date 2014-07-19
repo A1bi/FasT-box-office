@@ -31,7 +31,7 @@
     if ([cell.reuseIdentifier isEqualToString:@"ticketPrinterSettingCell"]) {
         descriptionKey = FasTTicketPrinterDescriptionPrefKey;
     } else {
-        descriptionKey = @"FasTReceiptPrinterHostNamePrefKey";
+        descriptionKey = @"FasTReceiptPrinterHostname";
     }
     
     NSString *deviceName = [[NSUserDefaults standardUserDefaults] objectForKey:descriptionKey];
