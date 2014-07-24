@@ -8,6 +8,9 @@
 
 #import "FasTPurchaseViewController.h"
 #import "FasTMainViewController.h"
+#import "FasTProduct.h"
+#import "FasTCartProductItem.h"
+#import "FasTCartTicketItem.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
 #import "FasTTicket.h"
@@ -18,7 +21,7 @@
 
 @interface FasTPurchaseViewController ()
 
-- (NSDictionary *)productInfoForIndexPath:(NSIndexPath *)indexPath;
+- (FasTProduct *)productForIndexPath:(NSIndexPath *)indexPath;
 - (void)updateSelectedProductsTableAndTotal;
 - (void)updateTotal;
 - (void)updateSelectedProductsTable;
@@ -36,15 +39,24 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _availableProducts = [@[
-                      @{@"type": @"product", @"id": @"1", @"name": @"Programmheft", @"price": @(1)},
-                      @{@"type": @"product", @"id": @"2", @"name": @"Regenponcho", @"price": @(1)}
-                      ] retain];
-        _selectedProducts = [[NSMutableArray alloc] init];
+        NSArray *products = @[
+                      @[@"1", @"Programmheft", @(1)],
+                      @[@"2", @"Regenponcho", @(1)],
+                      @[@"3", @"Tasse", @(5)],
+                      @[@"4", @"T-Shirt", @(19.95)],
+                      @[@"5", @"Kappe", @(9)]
+                      ];
+        NSMutableArray *tmpProducts = [NSMutableArray array];
+        for (NSArray *product in products) {
+            [tmpProducts addObject:[[[FasTProduct alloc] initWithName:product[1] price:[product[2] floatValue]] autorelease]];
+        }
+        _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
+        
+        _cartItems = [[NSMutableArray alloc] init];
         _ticketsToPay = [[NSMutableArray alloc] init];
         
-        orderController = [[FasTOrderViewController alloc] init];
-        [orderController setDelegate:self];
+//        orderController = [[FasTOrderViewController alloc] init];
+//        [orderController setDelegate:self];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
     }
@@ -55,8 +67,9 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_availableProducts release];
-    [_selectedProducts release];
-    [_selectedProductsTable release];
+    [_cartItems release];
+    [_ticketsToPay release];
+    [_cartItemsTable release];
     [_totalLabel release];
     [_availableProductsTable release];
     [super dealloc];
@@ -90,7 +103,7 @@
     }
 }
 
-- (NSDictionary *)productInfoForIndexPath:(NSIndexPath *)indexPath
+- (FasTProduct *)productForIndexPath:(NSIndexPath *)indexPath
 {
     return _availableProducts[indexPath.row - 1];
 }
@@ -98,15 +111,15 @@
 - (void)updateTotal
 {
     _total = 0;
-    for (NSDictionary *productInfo in _selectedProducts) {
-        _total += [productInfo[@"total"] floatValue];
+    for (FasTCartItem *cartItem in _cartItems) {
+        _total += cartItem.total;
     }
     _totalLabel.text = [NSString stringWithFormat:NSLocalizedStringByKey(@"selectedProductsTotalPrice"), [FasTFormatter stringForPrice:_total]];
 }
 
 - (void)updateSelectedProductsTable
 {
-    [[self selectedProductsTable] reloadData];
+    [self.cartItemsTable reloadData];
 }
 
 - (void)updateSelectedProductsTableAndTotal
@@ -117,16 +130,13 @@
 
 - (void)decreaseSelectedProductAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely
 {
-    NSMutableDictionary *selectedProduct = _selectedProducts[indexPath.row];
-    NSInteger number = [selectedProduct[@"number"] integerValue];
-    if (completely || --number < 1) {
-        if ([selectedProduct[@"type"] isEqualToString:@"ticket"]) {
-            [_ticketsToPay removeObject:selectedProduct[@"product"][@"ref"]];
+    FasTCartItem *cartItem = _cartItems[indexPath.row];
+    [cartItem decreaseQuantity];
+    if (completely || cartItem.quantity < 1) {
+        if ([cartItem isKindOfClass:[FasTCartTicketItem class]]) {
+            [_ticketsToPay removeObject:((FasTCartTicketItem *)cartItem).ticket];
         }
-        [_selectedProducts removeObject:selectedProduct];
-    } else {
-        selectedProduct[@"number"] = @(number);
-        selectedProduct[@"total"] = @(number * [selectedProduct[@"product"][@"price"] floatValue]);
+        [_cartItems removeObject:cartItem];
     }
 }
 
@@ -176,7 +186,7 @@
 
 - (IBAction)clearPurchase:(id)sender
 {
-    [_selectedProducts removeAllObjects];
+    [_cartItems removeAllObjects];
     [self updateSelectedProductsTableAndTotal];
     [_ticketsToPay removeAllObjects];
 }
@@ -193,8 +203,8 @@
     for (FasTTicket *ticket in tickets) {
         if (![_ticketsToPay containsObject:ticket]) {
             [_ticketsToPay addObject:ticket];
-            NSDictionary *product = @{ @"type": @"ticket", @"number": @(1), @"total": @(ticket.price), @"product": @{ @"name": ticket.type.name, @"price": @(ticket.price), @"ref": ticket } };
-            [_selectedProducts addObject:product];
+            FasTCartTicketItem *cartItem = [[[FasTCartTicketItem alloc] initWithTicket:ticket] autorelease];
+            [_cartItems addObject:cartItem];
         }
     }
     
@@ -214,7 +224,7 @@
     if (tableView == _availableProductsTable) {
         return _availableProducts.count + 1;
     } else {
-        return _selectedProducts.count;
+        return _cartItems.count;
     }
 }
 
@@ -234,7 +244,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return tableView == _selectedProductsTable;
+    return tableView == _cartItemsTable;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -246,27 +256,27 @@
         if (firstRow) {
             cell.detailTextLabel.text = [NSString stringWithFormat:cell.detailTextLabel.text, 0];
         } else {
-            NSDictionary *productInfo = [self productInfoForIndexPath:indexPath];
-            cell.textLabel.text = productInfo[@"name"];
-            cell.detailTextLabel.text = [FasTFormatter stringForPrice:[productInfo[@"price"] floatValue]];
+            FasTProduct *product = [self productForIndexPath:indexPath];
+            cell.textLabel.text = product.name;
+            cell.detailTextLabel.text = [FasTFormatter stringForPrice:product.price];
         }
         
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"FasTPurchaseSelectedProductCell"];
-        NSDictionary *productInfo = _selectedProducts[indexPath.row];
+        FasTCartItem *cartItem = _cartItems[indexPath.row];
         for (NSInteger i = 1; i <= 3; i++) {
             UILabel *label = (UILabel *)[cell viewWithTag:i];
             switch (i) {
                 case 1:
-                    label.text = productInfo[@"product"][@"name"];
+                    label.text = cartItem.name;
                     break;
                 case 2: {
-                    NSString *price = [FasTFormatter stringForPrice:[productInfo[@"product"][@"price"] floatValue]];
-                    label.text = [NSString stringWithFormat:@"%@ x %@", productInfo[@"number"], price];
+                    NSString *price = [FasTFormatter stringForPrice:cartItem.price];
+                    label.text = [NSString stringWithFormat:@"%ld x %@", (long)cartItem.quantity, price];
                     break;
                 }
                 default:
-                    label.text = [FasTFormatter stringForPrice:[productInfo[@"total"] floatValue]];
+                    label.text = [FasTFormatter stringForPrice:cartItem.total];
                     break;
             }
         }
@@ -281,21 +291,13 @@
 {
     NSString *identifier = [tableView cellForRowAtIndexPath:indexPath].reuseIdentifier;
     if ([identifier isEqualToString:@"FasTPurchaseProductCell"]) {
-        NSDictionary *productInfo = [self productInfoForIndexPath:indexPath];
-        NSMutableDictionary *selectedProduct = nil;
-        for (NSMutableDictionary *product in _selectedProducts) {
-            if ([product[@"product"][@"id"] isEqualToString:productInfo[@"id"]]) {
-                selectedProduct = product;
-                break;
-            }
-        }
-        if (!selectedProduct) {
-            selectedProduct = [NSMutableDictionary dictionaryWithDictionary:@{@"type": @"product", @"product": productInfo, @"number": @(1), @"total": productInfo[@"price"]}];
-            [_selectedProducts addObject:selectedProduct];
+        FasTProduct *product = [self productForIndexPath:indexPath];
+        FasTCartItem *cartItem = product.cartItem;
+        if (!cartItem) {
+            cartItem = [[[FasTCartProductItem alloc] initWithProduct:product] autorelease];
+            [_cartItems addObject:cartItem];
         } else {
-            NSInteger number = [selectedProduct[@"number"] integerValue] + 1;
-            selectedProduct[@"number"] = @(number);
-            selectedProduct[@"total"] = @(number * [productInfo[@"price"] floatValue]);
+            [cartItem increaseQuantity];
         }
     
     } else if ([identifier isEqualToString:@"FasTPurchaseProductTicketsCell"]) {
@@ -330,25 +332,25 @@
 
 - (void)dismissorderViewController:(FasTOrderViewController *)ovc finished:(BOOL)finished
 {
-    [ovc dismissViewControllerAnimated:YES completion:NULL];
-    if (!finished) return;
-    
-    FasTOrder *order = [ovc order];
-    NSDictionary *product = @{@"type": @"order", @"name": @"Tickets", @"product": order, @"price": @([order total])};
-    [_selectedProducts addObject:product];
-    
-    [self updateSelectedProductsTableAndTotal];
+//    [ovc dismissViewControllerAnimated:YES completion:NULL];
+//    if (!finished) return;
+//    
+//    FasTOrder *order = [ovc order];
+//    NSDictionary *product = @{@"type": @"order", @"name": @"Tickets", @"product": order, @"price": @([order total])};
+//    [_cartItems addObject:product];
+//    
+//    [self updateSelectedProductsTableAndTotal];
 }
 
 - (void)orderInViewControllerExpired:(FasTOrderViewController *)ovc
 {
-    for (NSDictionary *productInfo in _selectedProducts) {
-        if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
-            [_selectedProducts removeObject:productInfo];
-            [self updateSelectedProductsTableAndTotal];
-            return;
-        }
-    }
+//    for (NSDictionary *productInfo in _cartItems) {
+//        if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
+//            [_cartItems removeObject:productInfo];
+//            [self updateSelectedProductsTableAndTotal];
+//            return;
+//        }
+//    }
 }
 
 @end

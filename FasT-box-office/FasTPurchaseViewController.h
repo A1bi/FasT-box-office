@@ -13,13 +13,13 @@
 @interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, FasTPurchasePaymentViewControllerDelegate, FasTOrderViewControllerDelegate>
 {
     NSArray *_availableProducts;
-    NSMutableArray *_selectedProducts;
+    NSMutableArray *_cartItems;
     float _total;
     FasTOrderViewController *orderController;
     NSMutableArray *_ticketsToPay;
 }
 
-@property (retain, nonatomic) IBOutlet UITableView *selectedProductsTable;
+@property (retain, nonatomic) IBOutlet UITableView *cartItemsTable;
 @property (retain, nonatomic) IBOutlet UITableView *availableProductsTable;
 @property (retain, nonatomic) IBOutlet UILabel *totalLabel;
 
