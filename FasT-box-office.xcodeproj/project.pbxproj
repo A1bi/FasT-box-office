@@ -69,9 +69,10 @@
 		6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6156C5EC17BCD4BD0038009C /* Settings.bundle */; };
 		6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */; };
 		6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6190F6031964A1D000F42B03 /* Storyboard.storyboard */; };
+		61BEBBA4197D6DC400A58043 /* FasTLogEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BEBBA3197D6DC400A58043 /* FasTLogEvent.m */; };
 		F03D9CB61977CD1E00BF0422 /* FasTPurchasePaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */; };
 		F07D4E6E1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */; };
-		F0F5DD70197AA71D00303914 /* EPSPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F5DD6F197AA71D00303914 /* EPSPrinter.m */; };
+		F0F5DD70197AA71D00303914 /* ESCPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F5DD6F197AA71D00303914 /* ESCPrinter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -194,12 +195,14 @@
 		6156C5EE17BCEA350038009C /* FasTOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsViewController.h; sourceTree = "<group>"; };
 		6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsViewController.m; sourceTree = "<group>"; };
 		6190F6031964A1D000F42B03 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		61BEBBA2197D6DC400A58043 /* FasTLogEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTLogEvent.h; sourceTree = "<group>"; };
+		61BEBBA3197D6DC400A58043 /* FasTLogEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTLogEvent.m; sourceTree = "<group>"; };
 		F03D9CB41977CD1E00BF0422 /* FasTPurchasePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTPurchasePaymentViewController.h; sourceTree = "<group>"; };
 		F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTPurchasePaymentViewController.m; sourceTree = "<group>"; };
 		F07D4E6C1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsTicketsPopoverViewController.h; sourceTree = "<group>"; };
 		F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsTicketsPopoverViewController.m; sourceTree = "<group>"; };
-		F0F5DD6E197AA71D00303914 /* EPSPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPSPrinter.h; sourceTree = "<group>"; };
-		F0F5DD6F197AA71D00303914 /* EPSPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPSPrinter.m; sourceTree = "<group>"; };
+		F0F5DD6E197AA71D00303914 /* ESCPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCPrinter.h; sourceTree = "<group>"; };
+		F0F5DD6F197AA71D00303914 /* ESCPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCPrinter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +375,8 @@
 				6156BFA217BC4FCC0038009C /* FasTTicketPrinter.m */,
 				6156BFA317BC4FCC0038009C /* FasTTicketType.h */,
 				6156BFA417BC4FCC0038009C /* FasTTicketType.m */,
+				61BEBBA2197D6DC400A58043 /* FasTLogEvent.h */,
+				61BEBBA3197D6DC400A58043 /* FasTLogEvent.m */,
 			);
 			name = "FasT-objc-common";
 			path = "../submodules/FasT-objc-common";
@@ -480,8 +485,8 @@
 		F0F5DD71197AA72400303914 /* EPSPrinter */ = {
 			isa = PBXGroup;
 			children = (
-				F0F5DD6E197AA71D00303914 /* EPSPrinter.h */,
-				F0F5DD6F197AA71D00303914 /* EPSPrinter.m */,
+				F0F5DD6E197AA71D00303914 /* ESCPrinter.h */,
+				F0F5DD6F197AA71D00303914 /* ESCPrinter.m */,
 			);
 			name = EPSPrinter;
 			sourceTree = "<group>";
@@ -514,7 +519,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FasT;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Albisigns;
 			};
 			buildConfigurationList = 6156B60517BC4C9B0038009C /* Build configuration list for PBXProject "FasT-box-office" */;
@@ -600,6 +605,7 @@
 				6156BFD117BC50200038009C /* NSDictionary+RequestEncoding.m in Sources */,
 				6156BFD217BC50200038009C /* NSString+MKNetworkKitAdditions.m in Sources */,
 				6156BFD317BC50200038009C /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				61BEBBA4197D6DC400A58043 /* FasTLogEvent.m in Sources */,
 				6156BFD417BC50200038009C /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				6156BFD517BC50200038009C /* MKNetworkEngine.m in Sources */,
 				6156BFD617BC50200038009C /* MKNetworkOperation.m in Sources */,
@@ -613,7 +619,7 @@
 				6156C59B17BC504E0038009C /* NSData+SRB64Additions.m in Sources */,
 				6156C59C17BC504E0038009C /* SRWebSocket.m in Sources */,
 				6156C5E217BC52390038009C /* FasTConstants.m in Sources */,
-				F0F5DD70197AA71D00303914 /* EPSPrinter.m in Sources */,
+				F0F5DD70197AA71D00303914 /* ESCPrinter.m in Sources */,
 				6156C5E617BCC1820038009C /* FasTOrdersSearchViewController.m in Sources */,
 				6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */,
 				611C419217BD7A8700552192 /* FasTSettingsViewController.m in Sources */,
@@ -678,7 +684,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-force_flat_namespace";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -703,7 +709,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-force_flat_namespace";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -716,7 +722,7 @@
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "FasT-box-office/FasT-box-office-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -728,7 +734,7 @@
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "FasT-box-office/FasT-box-office-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

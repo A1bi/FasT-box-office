@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="eC4-jN-snL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="eC4-jN-snL">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
         <!--FasT Purchase Payment View Controller-->
@@ -98,7 +97,7 @@
                                 <rect key="frame" x="0.0" y="198" width="899" height="570"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FasTOrdersTableCell" id="MCu-Ca-QnW">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FasTOrdersTableCell" id="MCu-Ca-QnW">
                                         <rect key="frame" x="0.0" y="66" width="899" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MCu-Ca-QnW" id="Yjg-Lr-VHj">
@@ -135,7 +134,7 @@
                                             <segue destination="isR-3t-yKd" kind="push" identifier="FasTOrdersSearchDetailsSegue" id="fRN-VH-6sO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FasTOrdersCancelledTableCell" id="Rq1-vJ-uCF">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FasTOrdersCancelledTableCell" id="Rq1-vJ-uCF">
                                         <rect key="frame" x="0.0" y="66" width="899" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rq1-vJ-uCF" id="V4Z-CZ-Xea">
@@ -192,14 +191,14 @@
         <scene sceneID="isM-qs-7BK">
             <objects>
                 <tableViewController id="KKK-TJ-6kF" customClass="FasTSettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SdD-AW-ryq">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SdD-AW-ryq">
                         <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="6Xq-ND-eM1">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ticketPrinterSettingCell" textLabel="CRb-i1-YNK" detailTextLabel="QbZ-NZ-25G" style="IBUITableViewCellStyleValue1" id="wrN-js-WjU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ticketPrinterSettingCell" textLabel="CRb-i1-YNK" detailTextLabel="QbZ-NZ-25G" style="IBUITableViewCellStyleValue1" id="wrN-js-WjU">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wrN-js-WjU" id="CQl-FV-XKU">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -222,7 +221,7 @@
                                             <segue destination="xuy-J3-RyE" kind="push" id="3f9-y5-Tdt"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="receiptPrinterSettingCell" textLabel="uc7-DD-K4E" detailTextLabel="xEG-u1-zNH" style="IBUITableViewCellStyleValue1" id="bzS-cM-AuW">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="receiptPrinterSettingCell" textLabel="uc7-DD-K4E" detailTextLabel="xEG-u1-zNH" style="IBUITableViewCellStyleValue1" id="bzS-cM-AuW">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bzS-cM-AuW" id="bXo-h1-dBS">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -263,12 +262,12 @@
         <scene sceneID="Zdx-Fu-oNL">
             <objects>
                 <tableViewController id="isR-3t-yKd" customClass="FasTOrderDetailsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="45" sectionHeaderHeight="10" sectionFooterHeight="10" id="X9Q-zI-vLa">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="45" sectionHeaderHeight="10" sectionFooterHeight="10" id="X9Q-zI-vLa">
                         <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsInfoCell" id="Vqp-gn-Bzs">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsInfoCell" id="Vqp-gn-Bzs">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vqp-gn-Bzs" id="eAp-cr-erd">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -288,7 +287,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancellationCell" id="cyC-DS-6Rh">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancellationCell" id="cyC-DS-6Rh">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cyC-DS-6Rh" id="DM7-fM-1o0">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -308,7 +307,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketCell" rowHeight="73" id="Yzt-Rf-062">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketCell" rowHeight="73" id="Yzt-Rf-062">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yzt-Rf-062" id="TeV-7N-4XP">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -355,7 +354,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancelledTicketCell" rowHeight="73" id="1qx-jo-hmV">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancelledTicketCell" rowHeight="73" id="1qx-jo-hmV">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1qx-jo-hmV" id="bJN-ax-wir">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -397,7 +396,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsLogEventCell" id="7sD-0a-59s">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsLogEventCell" id="7sD-0a-59s">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7sD-0a-59s" id="DfZ-TM-Fzm">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -452,12 +451,12 @@
         <scene sceneID="0bt-jC-6g2">
             <objects>
                 <tableViewController id="bdZ-bt-BSQ" customClass="FasTOrderDetailsTicketsPopoverViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UVe-w2-G0X">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="UVe-w2-G0X">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverPayCell" textLabel="14m-dF-FqZ" style="IBUITableViewCellStyleDefault" id="zdu-wh-3Wq">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverPayCell" textLabel="14m-dF-FqZ" style="IBUITableViewCellStyleDefault" id="zdu-wh-3Wq">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zdu-wh-3Wq" id="3O3-6Q-lrR">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -471,7 +470,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverPrintCell" textLabel="daR-34-CJc" style="IBUITableViewCellStyleDefault" id="kuH-gy-1x5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverPrintCell" textLabel="daR-34-CJc" style="IBUITableViewCellStyleDefault" id="kuH-gy-1x5">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kuH-gy-1x5" id="8Ao-gO-stC">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -485,7 +484,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverNoneCell" textLabel="scH-e6-yyn" style="IBUITableViewCellStyleDefault" id="ehn-EL-NTq">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverNoneCell" textLabel="scH-e6-yyn" style="IBUITableViewCellStyleDefault" id="ehn-EL-NTq">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ehn-EL-NTq" id="mr8-n5-chW">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -535,7 +534,7 @@
                                 <rect key="frame" x="499" y="44" width="400" height="472"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FasTPurchaseSelectedProductCell" textLabel="mRx-Fd-L72" detailTextLabel="Dyu-kC-4V8" style="IBUITableViewCellStyleValue1" id="bca-Fi-USS">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FasTPurchaseSelectedProductCell" textLabel="mRx-Fd-L72" detailTextLabel="Dyu-kC-4V8" style="IBUITableViewCellStyleValue1" id="bca-Fi-USS">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bca-Fi-USS" id="hpR-Kd-zmo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -571,7 +570,7 @@
                                 <rect key="frame" x="0.0" y="44" width="400" height="472"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FasTPurchaseProductTicketsCell" textLabel="Nos-Ot-qRh" detailTextLabel="rHT-bi-Y4l" style="IBUITableViewCellStyleValue1" id="DJ2-sa-e8l">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FasTPurchaseProductTicketsCell" textLabel="Nos-Ot-qRh" detailTextLabel="rHT-bi-Y4l" style="IBUITableViewCellStyleValue1" id="DJ2-sa-e8l">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DJ2-sa-e8l" id="mMD-VF-4y0">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -591,7 +590,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FasTPurchaseProductCell" textLabel="pgU-rq-okm" detailTextLabel="1hT-Jc-Sq0" style="IBUITableViewCellStyleValue1" id="cv9-a6-yUX">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FasTPurchaseProductCell" textLabel="pgU-rq-okm" detailTextLabel="1hT-Jc-Sq0" style="IBUITableViewCellStyleValue1" id="cv9-a6-yUX">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cv9-a6-yUX" id="tAA-us-msp">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -738,12 +737,12 @@
         <scene sceneID="bvO-cL-Lv3">
             <objects>
                 <tableViewController id="xuy-J3-RyE" customClass="FasTTicketPrintersTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tC1-bc-3gn">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tC1-bc-3gn">
                         <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTTicketPrintersTableCell" id="4ZS-qH-bcL">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTTicketPrintersTableCell" id="4ZS-qH-bcL">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ZS-qH-bcL" id="GMk-uT-A1P">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -765,12 +764,12 @@
         <scene sceneID="vaU-ID-eFe">
             <objects>
                 <tableViewController id="6Os-dS-Z9e" customClass="FasTReceiptPrintersTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lFV-tx-5h6">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lFV-tx-5h6">
                         <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTReceiptPrintersTableCell" textLabel="048-pe-NLl" detailTextLabel="9Ab-zd-vx7" style="IBUITableViewCellStyleValue1" id="5H5-PN-wq2">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTReceiptPrintersTableCell" textLabel="048-pe-NLl" detailTextLabel="9Ab-zd-vx7" style="IBUITableViewCellStyleValue1" id="5H5-PN-wq2">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5H5-PN-wq2" id="KMH-wm-n3G">
                                     <autoresizingMask key="autoresizingMask"/>

@@ -31,14 +31,14 @@
     [super viewWillAppear:animated];
     _totalLabel.text = [FasTFormatter stringForPrice:_total];
     [self setDrawerClosed:YES];
-    [[EPSPrinter sharedPrinter] setDelegate:self];
-    [[EPSPrinter sharedPrinter] openCashDrawer];
+    [[ESCPrinter sharedPrinter] setDelegate:self];
+    [[ESCPrinter sharedPrinter] openCashDrawer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[EPSPrinter sharedPrinter] setDelegate:nil];
+    [[ESCPrinter sharedPrinter] setDelegate:nil];
 }
 
 - (void)setDrawerClosed:(BOOL)toggle
@@ -53,9 +53,9 @@
     [_delegate dismissedPurchasePaymentViewController];
 }
 
-#pragma mark eps printer delegate
+#pragma mark ESCPrinter delegate
 
-- (void)printer:(EPSPrinter *)printer drawerOpen:(BOOL)drawerOpen
+- (void)printer:(ESCPrinter *)printer drawerOpen:(BOOL)drawerOpen
 {
     if (!drawerOpen) [self finishBtnTapped:nil];
 }

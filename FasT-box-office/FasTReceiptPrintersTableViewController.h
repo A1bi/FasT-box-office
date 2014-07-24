@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class EPSPrinter;
+@class ESCPrinter;
 
 @interface FasTReceiptPrintersTableViewController : UITableViewController <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 {

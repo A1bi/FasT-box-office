@@ -11,6 +11,7 @@
 #import "FasTOrder.h"
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
+#import "FasTLogEvent.h"
 #import "FasTSeat.h"
 #import "FasTEventDate.h"
 #import "FasTApi.h"
@@ -223,11 +224,10 @@
         
         default: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"FasTOrderDetailsLogEventCell"];
-            NSArray *event = _order.logEvents[indexPath.row];
-            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[event[0] integerValue]];
+            FasTLogEvent *event = _order.logEvents[indexPath.row];
             
-            [(UILabel *)[cell viewWithTag:1] setText:[_dateFormatter stringFromDate:date]];
-            [(UILabel *)[cell viewWithTag:2] setText:event[1]];
+            [(UILabel *)[cell viewWithTag:1] setText:[_dateFormatter stringFromDate:event.date]];
+            [(UILabel *)[cell viewWithTag:2] setText:event.message];
         }
     }
     

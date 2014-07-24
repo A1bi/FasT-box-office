@@ -1,14 +1,14 @@
 //
-//  EPSPrinter.m
+//  ESCPrinter.m
 //  PrinterTest
 //
 //  Created by Albrecht Oster on 15.01.14.
 //  Copyright (c) 2014 Albisigns. All rights reserved.
 //
 
-#import "EPSPrinter.h"
+#import "ESCPrinter.h"
 
-@interface EPSPrinter ()
+@interface ESCPrinter ()
 
 - (id)initWithHost:(NSString *)hostname port:(NSInteger)p;
 - (void)handleInputStreamEvent:(NSStreamEvent)event;
@@ -26,25 +26,25 @@
 
 @end
 
-@implementation EPSPrinter
+@implementation ESCPrinter
 
-static EPSPrinter *sharedEPSPrinter = nil;
+static ESCPrinter *sharedESCPrinter = nil;
 
-+ (id)sharedPrinter
++ (ESCPrinter *)sharedPrinter
 {
-    return sharedEPSPrinter;
+    return sharedESCPrinter;
 }
 
-+ (id)initSharedPrinterWithHost:(NSString *)hostname port:(NSInteger)p
++ (ESCPrinter *)initSharedPrinterWithHost:(NSString *)hostname port:(NSInteger)p
 {
-    [sharedEPSPrinter release];
-    sharedEPSPrinter = [[super alloc] initWithHost:hostname port:p];
-    return sharedEPSPrinter;
+    [sharedESCPrinter release];
+    sharedESCPrinter = [[super alloc] initWithHost:hostname port:p];
+    return sharedESCPrinter;
 }
 
 - (id)init
 {
-    [NSException raise:@"EPSPrinterNotInitiatedException" format:@"An EPS printer has to be initiated by sending initSharedPrinterWithHost:port: first."];
+    [NSException raise:@"ESCPrinterNotInitiatedException" format:@"An ESC printer has to be initiated by sending initSharedPrinterWithHost:port: first."];
     return nil;
 }
 
@@ -99,7 +99,7 @@ static EPSPrinter *sharedEPSPrinter = nil;
 
 - (void)text:(NSString *)text
 {
-    [self sendData:[[text dataUsingEncoding:NSUTF8StringEncoding] mutableCopy]];
+    [self sendData:[[[text dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease]];
 }
 
 #if TARGET_OS_IPHONE
@@ -112,6 +112,7 @@ static EPSPrinter *sharedEPSPrinter = nil;
     
     NSUInteger width = image.size.width;
     NSUInteger height = image.size.height;
+    if (width <= 0 || height <= 0) return;
     
     uint8_t imageData[width*height];
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
@@ -158,17 +159,17 @@ static EPSPrinter *sharedEPSPrinter = nil;
     CGContextRelease(context);
 }
 
-- (void)setAlignment:(EPSPrinterAlignment)alignment
+- (void)setAlignment:(ESCPrinterAlignment)alignment
 {
     [self prepareDataFromString:"\x1b\x61" length:2 lastByte:alignment];
 }
 
-- (void)setPrintMode:(EPSPrinterPrintMode)mode
+- (void)setPrintMode:(ESCPrinterPrintMode)mode
 {
     [self prepareDataFromString:"\x1b\x21" length:2 lastByte:mode];
 }
 
-- (void)setCharacterSet:(EPSPrinterCharacterSet)set
+- (void)setCharacterSet:(ESCPrinterCharacterSet)set
 {
     [self prepareDataFromString:"\x1b\x52" length:2 lastByte:set];
 }
@@ -242,7 +243,7 @@ static EPSPrinter *sharedEPSPrinter = nil;
     [self releaseStreams];
     input = (NSInputStream *)read;
     output = (NSOutputStream *)write;
-    for (id stream in @[input, output]) {
+    for (NSStream *stream in @[input, output]) {
         [stream setDelegate:self];
         [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [stream open];

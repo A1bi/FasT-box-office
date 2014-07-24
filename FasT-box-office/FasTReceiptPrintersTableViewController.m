@@ -7,7 +7,7 @@
 //
 
 #import "FasTReceiptPrintersTableViewController.h"
-#import "EPSPrinter.h"
+#import "ESCPrinter.h"
 
 @interface FasTReceiptPrintersTableViewController ()
 
@@ -24,7 +24,7 @@
         
         _browser = [[NSNetServiceBrowser alloc] init];
         [_browser setDelegate:self];
-        [_browser searchForServicesOfType:@"_eps_printer._tcp." inDomain:@""];
+        [_browser searchForServicesOfType:@"_esc_printer._tcp." inDomain:@""];
     }
     return self;
 }
@@ -75,7 +75,7 @@
         NSNetService *printer = _foundPrinters[indexPath.row-1];
         [defaults setValue:printer.hostName forKey:@"FasTReceiptPrinterHostname"];
         [defaults setValue:@(printer.port) forKey:@"FasTReceiptPrinterPort"];
-        [EPSPrinter initSharedPrinterWithHost:printer.hostName port:printer.port];
+        [ESCPrinter initSharedPrinterWithHost:printer.hostName port:printer.port];
     } else {
         [defaults removeObjectForKey:@"FasTReceiptPrinterHostname"];
     }
