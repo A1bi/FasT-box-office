@@ -7,6 +7,7 @@
 //
 
 #import "FasTCartItem.h"
+#import "FasTFormatter.h"
 
 @implementation FasTCartItem
 
@@ -33,6 +34,17 @@
 {
     if (_quantity <= 0) return;
     _quantity--;
+}
+
+- (NSArray *)printableDescriptionLines
+{
+    return @[
+             @[
+                 self.name,
+                 [NSString stringWithFormat:@"%d x %@", self.quantity, [FasTFormatter stringForPrice:self.price]],
+                 [FasTFormatter stringForPrice:self.total]
+                 ]
+             ];
 }
 
 @end

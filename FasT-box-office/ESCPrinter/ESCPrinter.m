@@ -15,7 +15,7 @@
 - (void)handleOutputStreamEvent:(NSStreamEvent)event;
 - (void)prepareDataFromString:(char *)string length:(NSInteger)length;
 - (void)prepareDataFromString:(char *)string length:(NSInteger)length lastByte:(uint8_t)lastByte;
-- (void)sendData:(NSMutableData *)data;
+- (void)sendData:(NSData *)data;
 - (void)send;
 - (void)connect;
 - (void)closeStreams;
@@ -99,7 +99,8 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 - (void)text:(NSString *)text
 {
-    [self sendData:[[[text dataUsingEncoding:NSUTF8StringEncoding] mutableCopy] autorelease]];
+    NSData *data = [text dataUsingEncoding:NSWindowsCP1252StringEncoding];
+    [self sendData:data];
 }
 
 #if TARGET_OS_IPHONE
@@ -108,8 +109,15 @@ static ESCPrinter *sharedESCPrinter = nil;
 - (void)image:(NSImage *)image
 #endif
 {
-    uint8_t threshold = 150;
-    
+    [self image:image threshold:120];
+}
+
+#if TARGET_OS_IPHONE
+- (void)image:(UIImage *)image threshold:(uint8_t)threshold
+#else
+- (void)image:(NSImage *)image threshold:(uint8_t)threshold
+#endif
+{
     NSUInteger width = image.size.width;
     NSUInteger height = image.size.height;
     if (width <= 0 || height <= 0) return;
@@ -159,9 +167,34 @@ static ESCPrinter *sharedESCPrinter = nil;
     CGContextRelease(context);
 }
 
+- (void)horizontalLine
+{
+    NSInteger width = 56;
+    char line[width+2];
+    line[0] = line[width+1] = '\n';
+    for (NSInteger i = 1; i < width+1; i++) {
+        line[i] = '=';
+    }
+    [self setFont:ESCPrinterFontB adjustLineSpacing:YES];
+    [self prepareDataFromString:line length:width+2];
+    [self setFont:ESCPrinterFontA adjustLineSpacing:YES];
+}
+
 - (void)setAlignment:(ESCPrinterAlignment)alignment
 {
     [self prepareDataFromString:"\x1b\x61" length:2 lastByte:alignment];
+}
+
+- (void)setFont:(ESCPrinterFont)font
+{
+    [self setFont:font adjustLineSpacing:YES];
+}
+
+- (void)setFont:(ESCPrinterFont)font adjustLineSpacing:(BOOL)adjust
+{
+    uint8_t spacing[2] = {80, 55};
+    if (adjust) [self setLineSpacing:spacing[font]];
+    [self prepareDataFromString:"\x1b\x4d" length:2 lastByte:font];
 }
 
 - (void)setPrintMode:(ESCPrinterPrintMode)mode
@@ -180,6 +213,14 @@ static ESCPrinter *sharedESCPrinter = nil;
     [self prepareDataFromString:"\x1b\x33" length:2 lastByte:spacing];
 }
 
+- (void)setAbsolutePosition:(uint16_t)position
+{
+    char data[4] = "\x1b\x24";
+    data[2] = position & 0xff;
+    data[3] = (position >> 8) & 0xff;
+    [self prepareDataFromString:data length:4];
+}
+
 - (void)setTabPositions:(NSArray *)positions
 {
     [self prepareDataFromString:"\x1b\x44" length:2];
@@ -193,6 +234,7 @@ static ESCPrinter *sharedESCPrinter = nil;
 - (void)setupPrinter
 {
     [self toggleASB:YES];
+    [self prepareDataFromString:"\x1b\x74\x10" length:3];
 }
 
 - (void)toggleASB:(BOOL)toggle
@@ -297,13 +339,17 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 - (void)prepareDataFromString:(char *)string length:(NSInteger)length
 {
-    [self sendData:[NSMutableData dataWithBytes:string length:length]];
+    [self sendData:[NSData dataWithBytes:string length:length]];
 }
 
-- (void)sendData:(NSMutableData *)data
+- (void)sendData:(NSData *)data
 {
     if (!outputData) {
-        outputData = [data retain];
+        if ([outputData isKindOfClass:[NSMutableData class]]) {
+            outputData = [(NSMutableData*)data retain];
+        } else {
+            outputData = [data mutableCopy];
+        }
     } else {
         [outputData appendData:data];
     }

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ESCPrinter.h"
+#import "FasTReceiptPrinter.h"
 
 @protocol FasTPurchasePaymentViewControllerDelegate <NSObject>
 
@@ -22,7 +22,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *closeDrawerNoticeLabel;
 @property (retain, nonatomic) IBOutlet UIButton *finishBtn;
 @property (nonatomic, assign) id<FasTPurchasePaymentViewControllerDelegate> delegate;
-@property (nonatomic, assign) float total;
+@property (nonatomic, retain) NSArray *cartItems;
 
 - (IBAction)finishBtnTapped:(id)sender;
 

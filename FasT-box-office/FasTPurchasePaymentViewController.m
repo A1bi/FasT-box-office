@@ -9,6 +9,7 @@
 #import "FasTPurchasePaymentViewController.h"
 #import "FasTPurchaseViewController.h"
 #import "FasTFormatter.h"
+#import "FasTCartItem.h"
 
 @interface FasTPurchasePaymentViewController ()
 
@@ -23,16 +24,26 @@
     [_totalLabel release];
     [_closeDrawerNoticeLabel release];
     [_finishBtn release];
+    [_cartItems release];
     [super dealloc];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _totalLabel.text = [FasTFormatter stringForPrice:_total];
+    
+    float total = 0;
+    for (FasTCartItem *cartItem in _cartItems) {
+        total += cartItem.total;
+    }
+    
+    _totalLabel.text = [FasTFormatter stringForPrice:total];
     [self setDrawerClosed:YES];
-    [[ESCPrinter sharedPrinter] setDelegate:self];
-    [[ESCPrinter sharedPrinter] openCashDrawer];
+    
+    FasTReceiptPrinter *printer = [FasTReceiptPrinter sharedPrinter];
+    [printer setDelegate:self];
+    [printer openCashDrawer];
+    [printer printReceiptForCartItems:_cartItems];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

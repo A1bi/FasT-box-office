@@ -90,7 +90,7 @@
 {
     if ([segue.identifier isEqualToString:@"FasTPurchasePaymentSegue"]) {
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
-        payment.total = _total;
+        payment.cartItems = _cartItems;
         payment.delegate = self;
         
         if (_ticketsToPay.count > 0) {

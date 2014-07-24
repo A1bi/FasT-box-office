@@ -8,7 +8,7 @@
 
 #import "FasTAppDelegate.h"
 #import "FasTApi.h"
-#import "ESCPrinter.h"
+#import "FasTReceiptPrinter.h"
 
 @implementation FasTAppDelegate
 
@@ -20,7 +20,7 @@
     
     NSString *receiptPrinterHostname = [defaults valueForKey:@"FasTReceiptPrinterHostname"];
     if (receiptPrinterHostname && receiptPrinterHostname.length) {
-        [ESCPrinter initSharedPrinterWithHost:receiptPrinterHostname port:[[defaults valueForKey:@"FasTReceiptPrinterPort"] integerValue]];
+        [FasTReceiptPrinter initSharedPrinterWithHost:receiptPrinterHostname port:[[defaults valueForKey:@"FasTReceiptPrinterPort"] integerValue]];
     }
     
     return YES;

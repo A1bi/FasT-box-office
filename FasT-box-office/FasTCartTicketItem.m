@@ -9,6 +9,7 @@
 #import "FasTCartTicketItem.h"
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
+#import "FasTFormatter.h"
 
 @implementation FasTCartTicketItem
 
@@ -28,7 +29,21 @@
 
 - (NSString *)name
 {
-    return [NSString stringWithFormat:@"#%@ %@", _ticket.number, _ticket.type.name];
+    return [NSString stringWithFormat:@"%@ (#%@)", _ticket.type.name, _ticket.number];
+}
+
+- (NSArray *)printableDescriptionLines
+{
+    return @[
+             @[
+                 self.name,
+                 @"",
+                 [FasTFormatter stringForPrice:self.price]
+             ],
+             @[
+                 @"Ticket bezahlt"
+             ]
+           ];
 }
 
 - (void)increaseQuantity

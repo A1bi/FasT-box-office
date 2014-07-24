@@ -14,6 +14,7 @@
 @property (nonatomic) NSInteger quantity;
 @property (nonatomic, readonly) float total;
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSArray *printableDescriptionLines;
 
 - (void)increaseQuantity;
 - (void)decreaseQuantity;

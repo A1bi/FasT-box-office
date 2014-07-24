@@ -14,6 +14,11 @@ typedef NS_ENUM(uint8_t, ESCPrinterAlignment) {
     ESCPrinterAlignmentRight
 };
 
+typedef NS_OPTIONS(uint8_t, ESCPrinterFont) {
+    ESCPrinterFontA,
+    ESCPrinterFontB
+};
+
 typedef NS_OPTIONS(uint8_t, ESCPrinterPrintMode) {
     ESCPrinterPrintModeNone         = 0,
     ESCPrinterPrintModeFontB        = 1,
@@ -55,13 +60,19 @@ typedef NS_ENUM(uint8_t, ESCPrinterCharacterSet) {
 - (void)text:(NSString *)text;
 #if TARGET_OS_IPHONE
 - (void)image:(UIImage *)image;
+- (void)image:(UIImage *)image threshold:(uint8_t)threshold;
 #else
 - (void)image:(NSImage *)image;
+- (void)image:(NSImage *)image threshold:(uint8_t)threshold;
 #endif
+- (void)horizontalLine;
 - (void)setAlignment:(ESCPrinterAlignment)alignment;
+- (void)setFont:(ESCPrinterFont)font;
+- (void)setFont:(ESCPrinterFont)font adjustLineSpacing:(BOOL)adjust;
 - (void)setCharacterSet:(ESCPrinterCharacterSet)set;
 - (void)setPrintMode:(ESCPrinterPrintMode)mode;
 - (void)setLineSpacing:(uint8_t)spacing;
+- (void)setAbsolutePosition:(uint16_t)position;
 - (void)setTabPositions:(NSArray *)positions;
 - (void)openCashDrawer;
 
