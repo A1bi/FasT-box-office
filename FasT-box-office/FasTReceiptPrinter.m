@@ -92,9 +92,10 @@
             [self feed];
         }
     }
+    NSNumber *total = [cartItems valueForKeyPath:@"@sum.total"];
     [self setAlignment:ESCPrinterAlignmentRight];
     [self setPrintMode:ESCPrinterPrintModeEmphasized];
-    [self text:@"\nGesamt: 12,00 €"];
+    [self text:[NSString stringWithFormat:@"\nGesamt: %@", [FasTFormatter stringForPrice:total.floatValue]]];
     [self setPrintMode:ESCPrinterPrintModeNone];
 }
 

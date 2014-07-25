@@ -249,7 +249,9 @@ static ESCPrinter *sharedESCPrinter = nil;
     BOOL state = ((*status)[0] & 0x20) >> 5, state2;
     if (state != coverOpened) {
         coverOpened = state;
-        [_delegate printer:self coverOpen:state];
+        if ([_delegate respondsToSelector:@selector(printer:coverOpen:)]) {
+            [_delegate printer:self coverOpen:state];
+        }
         NSLog(@"Cover opened: %d", state);
     }
     
@@ -258,14 +260,18 @@ static ESCPrinter *sharedESCPrinter = nil;
     if (state != paperOut || state2 != paperNearEnd) {
         paperOut = state;
         paperNearEnd = state2;
-        [_delegate printer:self paperOut:state nearEnd:state2];
+        if ([_delegate respondsToSelector:@selector(printer:paperOut:nearEnd:)]) {
+            [_delegate printer:self paperOut:state nearEnd:state2];
+        }
         NSLog(@"paper out: %d, near end: %d", state, state2);
     }
     
     state = !(((*status)[0] & 0x4) >> 2);
     if (state != drawerOpened) {
         drawerOpened = state;
-        [_delegate printer:self drawerOpen:state];
+        if ([_delegate respondsToSelector:@selector(printer:drawerOpen:)]) {
+            [_delegate printer:self drawerOpen:state];
+        }
         NSLog(@"drawer open: %d", state);
     }
 }

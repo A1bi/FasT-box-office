@@ -83,7 +83,7 @@
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    return (![identifier isEqualToString:@"FasTPurchasePaymentSegue"] || _total > 0);
+    return (![identifier isEqualToString:@"FasTPurchasePaymentSegue"] || _cartItems.count > 0);
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -110,11 +110,8 @@
 
 - (void)updateTotal
 {
-    _total = 0;
-    for (FasTCartItem *cartItem in _cartItems) {
-        _total += cartItem.total;
-    }
-    _totalLabel.text = [NSString stringWithFormat:NSLocalizedStringByKey(@"selectedProductsTotalPrice"), [FasTFormatter stringForPrice:_total]];
+    NSNumber *total = [_cartItems valueForKeyPath:@"@sum.total"];
+    _totalLabel.text = [NSString stringWithFormat:NSLocalizedStringByKey(@"selectedProductsTotalPrice"), [FasTFormatter stringForPrice:total.floatValue]];
 }
 
 - (void)updateSelectedProductsTable

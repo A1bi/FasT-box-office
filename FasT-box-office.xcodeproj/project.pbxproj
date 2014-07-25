@@ -13,14 +13,10 @@
 		611C419517BD7F5300552192 /* FasTReceiptPrintersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419417BD7F5300552192 /* FasTReceiptPrintersTableViewController.m */; };
 		611C419C17BD950000552192 /* FasTPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C419A17BD950000552192 /* FasTPurchaseViewController.m */; };
 		611C41B117BE4A6F00552192 /* FasTOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41AF17BE4A6F00552192 /* FasTOrderViewController.m */; };
-		611C41B217BE4A6F00552192 /* FasTOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41B017BE4A6F00552192 /* FasTOrderViewController.xib */; };
 		611C41B617BE4A7700552192 /* FasTSeatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41B417BE4A7700552192 /* FasTSeatsViewController.m */; };
-		611C41B717BE4A7700552192 /* FasTSeatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41B517BE4A7700552192 /* FasTSeatsViewController.xib */; };
 		611C41BA17BE4A8300552192 /* FasTStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41B917BE4A8300552192 /* FasTStepViewController.m */; };
 		611C41BF17BE4AC200552192 /* FasTTicketTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41BD17BE4AC200552192 /* FasTTicketTypeViewController.m */; };
-		611C41C017BE4AC200552192 /* FasTTicketTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41BE17BE4AC200552192 /* FasTTicketTypeViewController.xib */; };
 		611C41C417BE4F5000552192 /* FasTTicketTypesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41C217BE4F5000552192 /* FasTTicketTypesViewController.m */; };
-		611C41C517BE4F5000552192 /* FasTTicketTypesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 611C41C317BE4F5000552192 /* FasTTicketTypesViewController.xib */; };
 		611C41CD17BFA4FC00552192 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 611C41CA17BFA4FC00552192 /* NSDate-Utilities.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6125CECE1981077200FB4C42 /* FasTProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 6125CECD1981077200FB4C42 /* FasTProduct.m */; };
 		6125CED61981095000FB4C42 /* FasTCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6125CED51981095000FB4C42 /* FasTCartItem.m */; };
@@ -614,12 +610,8 @@
 				6156B61817BC4C9B0038009C /* InfoPlist.strings in Resources */,
 				6156C5E917BCCD4D0038009C /* Localizable.strings in Resources */,
 				6156C5ED17BCD4BD0038009C /* Settings.bundle in Resources */,
-				611C41B217BE4A6F00552192 /* FasTOrderViewController.xib in Resources */,
 				6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */,
-				611C41B717BE4A7700552192 /* FasTSeatsViewController.xib in Resources */,
-				611C41C017BE4AC200552192 /* FasTTicketTypeViewController.xib in Resources */,
 				6125CEEA198140C700FB4C42 /* ReceiptHeaderImage.jpg in Resources */,
-				611C41C517BE4F5000552192 /* FasTTicketTypesViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

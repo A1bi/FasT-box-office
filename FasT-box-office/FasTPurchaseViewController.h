@@ -14,7 +14,6 @@
 {
     NSArray *_availableProducts;
     NSMutableArray *_cartItems;
-    float _total;
     FasTOrderViewController *orderController;
     NSMutableArray *_ticketsToPay;
 }

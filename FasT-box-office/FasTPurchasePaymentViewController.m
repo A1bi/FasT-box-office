@@ -14,6 +14,7 @@
 @interface FasTPurchasePaymentViewController ()
 
 - (void)setDrawerClosed:(BOOL)toggle;
+- (void)printReceipt;
 
 @end
 
@@ -32,18 +33,14 @@
 {
     [super viewWillAppear:animated];
     
-    float total = 0;
-    for (FasTCartItem *cartItem in _cartItems) {
-        total += cartItem.total;
-    }
-    
-    _totalLabel.text = [FasTFormatter stringForPrice:total];
+    NSNumber *total = [_cartItems valueForKeyPath:@"@sum.total"];
+    _totalLabel.text = [FasTFormatter stringForPrice:total.floatValue];
     [self setDrawerClosed:YES];
     
     FasTReceiptPrinter *printer = [FasTReceiptPrinter sharedPrinter];
     [printer setDelegate:self];
     [printer openCashDrawer];
-    [printer printReceiptForCartItems:_cartItems];
+    [self printReceipt];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -58,10 +55,20 @@
     _finishBtn.hidden = !toggle;
 }
 
+- (void)printReceipt
+{
+    [[FasTReceiptPrinter sharedPrinter] printReceiptForCartItems:_cartItems];
+}
+
 - (IBAction)finishBtnTapped:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
     [_delegate dismissedPurchasePaymentViewController];
+}
+
+- (IBAction)printReceiptBtnTapped:(id)sender
+{
+    [self printReceipt];
 }
 
 #pragma mark ESCPrinter delegate

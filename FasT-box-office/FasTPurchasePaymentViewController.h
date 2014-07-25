@@ -25,5 +25,6 @@
 @property (nonatomic, retain) NSArray *cartItems;
 
 - (IBAction)finishBtnTapped:(id)sender;
+- (IBAction)printReceiptBtnTapped:(id)sender;
 
 @end
