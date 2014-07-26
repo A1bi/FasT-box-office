@@ -83,7 +83,7 @@
             for (NSString *column in line) {
                 if (position[i] > 0) [self setAbsolutePosition:position[i]];
                 [self text:column];
-                i++;
+                if (i < 2) i++;
             }
             if (firstLine) {
                 [self setFont:ESCPrinterFontB adjustLineSpacing:YES];

@@ -76,7 +76,9 @@
         [defaults setValue:printer.hostName forKey:@"FasTReceiptPrinterHostname"];
         [defaults setValue:@(printer.port) forKey:@"FasTReceiptPrinterPort"];
         [FasTReceiptPrinter initSharedPrinterWithHost:printer.hostName port:printer.port];
+        [[FasTReceiptPrinter sharedPrinter] connect];
     } else {
+        [FasTReceiptPrinter nillify];
         [defaults removeObjectForKey:@"FasTReceiptPrinterHostname"];
     }
     

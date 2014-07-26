@@ -54,6 +54,10 @@ typedef NS_ENUM(uint8_t, ESCPrinterCharacterSet) {
 
 + (ESCPrinter *)initSharedPrinterWithHost:(NSString *)host port:(NSInteger)port;
 + (ESCPrinter *)sharedPrinter;
++ (void)nillify;
++ (BOOL)isPresent;
+- (void)connect;
+- (void)disconnect;
 - (void)feed;
 - (void)feedLines:(uint8_t)lines;
 - (void)cut;

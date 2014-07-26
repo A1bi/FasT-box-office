@@ -14,10 +14,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [FasTApi defaultApiWithClientType:@"seating" clientId:@"0"];
     [[FasTApi defaultApi] fetchCurrentEvent:NULL];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *receiptPrinterHostname = [defaults valueForKey:@"FasTReceiptPrinterHostname"];
     if (receiptPrinterHostname && receiptPrinterHostname.length) {
         [FasTReceiptPrinter initSharedPrinterWithHost:receiptPrinterHostname port:[[defaults valueForKey:@"FasTReceiptPrinterPort"] integerValue]];
@@ -29,6 +29,13 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [application setIdleTimerDisabled:YES];
+    
+    [[FasTReceiptPrinter sharedPrinter] connect];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    [[FasTReceiptPrinter sharedPrinter] disconnect];
 }
 
 - (void)dealloc

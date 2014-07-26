@@ -17,7 +17,6 @@
 - (void)prepareDataFromString:(char *)string length:(NSInteger)length lastByte:(uint8_t)lastByte;
 - (void)sendData:(NSData *)data;
 - (void)send;
-- (void)connect;
 - (void)closeStreams;
 - (void)releaseStreams;
 - (void)setupPrinter;
@@ -37,9 +36,20 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 + (ESCPrinter *)initSharedPrinterWithHost:(NSString *)hostname port:(NSInteger)p
 {
-    [sharedESCPrinter release];
+    [self nillify];
     sharedESCPrinter = [[super alloc] initWithHost:hostname port:p];
     return sharedESCPrinter;
+}
+
++ (void)nillify
+{
+    [sharedESCPrinter release];
+    sharedESCPrinter = nil;
+}
+
++ (BOOL)isPresent
+{
+    return !!sharedESCPrinter;
 }
 
 - (id)init
@@ -52,9 +62,6 @@ static ESCPrinter *sharedESCPrinter = nil;
 {
     self = [super init];
     if (self) {
-        spaceAvailable = NO;
-        dataIndex = 0;
-        connected = NO;
         coverOpened = NO;
         drawerOpened = NO;
         paperOut = NO;
@@ -62,14 +69,13 @@ static ESCPrinter *sharedESCPrinter = nil;
         
         host = CFHostCreateWithName(NULL, (CFStringRef)hostname);
         port = p;
-        [self connect];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [self closeStreams];
+    [self disconnect];
     [self releaseStreams];
     CFRelease(host);
     [outputData release];
@@ -77,6 +83,31 @@ static ESCPrinter *sharedESCPrinter = nil;
 }
 
 #pragma methods
+
+- (void)connect
+{
+    spaceAvailable = NO;
+    dataIndex = 0;
+    connected = NO;
+    
+    CFReadStreamRef read;
+    CFWriteStreamRef write;
+    CFStreamCreatePairWithSocketToCFHost(NULL, host, (int)port, &read, &write);
+    [self releaseStreams];
+    input = (NSInputStream *)read;
+    output = (NSOutputStream *)write;
+    for (NSStream *stream in @[input, output]) {
+        [stream setDelegate:self];
+        [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [stream open];
+    }
+}
+
+- (void)disconnect
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connect) object:nil];
+    [self closeStreams];
+}
 
 - (void)feed
 {
@@ -283,21 +314,6 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 #pragma mark private methods
 
-- (void)connect
-{
-    CFReadStreamRef read;
-    CFWriteStreamRef write;
-    CFStreamCreatePairWithSocketToCFHost(NULL, host, (int)port, &read, &write);
-    [self releaseStreams];
-    input = (NSInputStream *)read;
-    output = (NSOutputStream *)write;
-    for (NSStream *stream in @[input, output]) {
-        [stream setDelegate:self];
-        [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [stream open];
-    }
-}
-
 - (void)handleInputStreamEvent:(NSStreamEvent)event
 {
     switch (event) {
@@ -331,7 +347,7 @@ static ESCPrinter *sharedESCPrinter = nil;
         case NSStreamEventErrorOccurred:
             [self closeStreams];
             if (connected) {
-                [self connect];
+                [self performSelector:@selector(connect) withObject:nil afterDelay:2];
             } else {
                 NSLog(@"cannot connect to printer");
             }
@@ -350,8 +366,9 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 - (void)sendData:(NSData *)data
 {
+    if (!connected) return;
     if (!outputData) {
-        if ([outputData isKindOfClass:[NSMutableData class]]) {
+        if ([data isKindOfClass:[NSMutableData class]]) {
             outputData = [(NSMutableData*)data retain];
         } else {
             outputData = [data mutableCopy];

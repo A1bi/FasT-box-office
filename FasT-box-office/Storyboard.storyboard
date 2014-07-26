@@ -86,25 +86,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Ticket- oder Bestellnummer" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NXW-Sr-Kdg">
-                                <rect key="frame" x="20" y="79" width="859" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="79" width="859" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="didEnterSearchTerm:" destination="Fej-s0-EEf" eventType="editingDidEndOnExit" id="nBY-Zg-ing"/>
                                     <action selector="reload" destination="7VT-vI-fDe" eventType="editingDidEndOnExit" id="AyU-60-tt0"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Name des Bestellers" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Lhq-uv-3N5">
-                                <rect key="frame" x="20" y="133" width="859" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="didEnterSearchTerm:" destination="Fej-s0-EEf" eventType="editingDidEnd" id="Un1-uD-PmE"/>
-                                    <action selector="reload" destination="7VT-vI-fDe" eventType="editingDidEndOnExit" id="kzQ-Rj-bw4"/>
-                                </connections>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gjB-sT-JHf">
-                                <rect key="frame" x="0.0" y="198" width="899" height="570"/>
+                                <rect key="frame" x="0.0" y="228" width="899" height="540"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="FasTOrdersTableCell" id="MCu-Ca-QnW">
@@ -184,12 +175,23 @@
                                     <outlet property="delegate" destination="Fej-s0-EEf" id="zyn-kA-V7Y"/>
                                 </connections>
                             </tableView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Name des Bestellers" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Lhq-uv-3N5">
+                                <rect key="frame" x="20" y="147" width="859" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <action selector="didEnterSearchTerm:" destination="Fej-s0-EEf" eventType="editingDidEnd" id="Un1-uD-PmE"/>
+                                    <action selector="reload" destination="7VT-vI-fDe" eventType="editingDidEndOnExit" id="kzQ-Rj-bw4"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Suche nach Ticket oder Bestellung" id="Emy-Uf-QCv"/>
                     <connections>
                         <outlet property="tableView" destination="gjB-sT-JHf" id="kr1-Nr-cnl"/>
+                        <outletCollection property="searchFields" destination="Lhq-uv-3N5" id="9Q0-O8-V0Y"/>
+                        <outletCollection property="searchFields" destination="NXW-Sr-Kdg" id="tIC-tA-OJc"/>
                         <segue destination="isR-3t-yKd" kind="push" identifier="FasTOrdersSearchDirectDetailsSegue" id="sVl-uW-KNI"/>
                     </connections>
                 </viewController>

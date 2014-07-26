@@ -17,6 +17,7 @@
 #import "FasTTicketType.h"
 #import "FasTEventDate.h"
 #import "FasTTicketPrinter.h"
+#import "FasTReceiptPrinter.h"
 #import "MBProgressHUD.h"
 
 @interface FasTPurchaseViewController ()
@@ -28,7 +29,6 @@
 - (void)decreaseSelectedProductAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely;
 - (void)finishPurchase;
 - (void)finishedPurchase;
-- (void)showAlertWithTitle:(NSString *)title details:(NSString *)details;
 - (void)receivedTicketsToPay:(NSNotification *)note;
 
 @end
@@ -95,9 +95,7 @@
         
         if (_ticketsToPay.count > 0) {
             [[FasTApi defaultApi] markTickets:_ticketsToPay paid:YES pickedUp:YES];
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Tickets drucken?" message:@"Möchten Sie die zu bezahlenden Tickets ausdrucken?" delegate:self cancelButtonTitle:@"Nein" otherButtonTitles:@"Ja", nil];
-            [alert show];
+            [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPay];
         }
         //[self finishedPurchase];
     }
@@ -139,7 +137,7 @@
 
 - (IBAction)openCashDrawer
 {
-    //[[FasTCashDrawer defaultCashDrawer] open];
+    [[FasTReceiptPrinter sharedPrinter] openCashDrawer];
 }
 
 - (void)finishPurchase
@@ -186,12 +184,6 @@
     [_cartItems removeAllObjects];
     [self updateSelectedProductsTableAndTotal];
     [_ticketsToPay removeAllObjects];
-}
-
-- (void)showAlertWithTitle:(NSString *)title details:(NSString *)details
-{
-    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:title message:details delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] autorelease];
-    [alert show];
 }
 
 - (void)receivedTicketsToPay:(NSNotification *)note
@@ -313,15 +305,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self decreaseSelectedProductAtIndexPath:indexPath remove:YES];
         [self updateSelectedProductsTableAndTotal];
-    }
-}
-
-#pragma mark alert view delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPay];
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "FasTMainViewController.h"
+#import "FasTOrdersSearchViewController.h"
 
 @interface FasTMainViewController ()
 
@@ -49,6 +50,14 @@
 - (void)switchToPurchaseController
 {
     [self performSegueWithIdentifier:@"PurchaseSegue" sender:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"OrdersSearchSegue"]) {
+        FasTOrdersSearchViewController *search = [(UINavigationController *)segue.destinationViewController viewControllers][0];
+        [search clearFormAndResults];
+    }
 }
 
 @end

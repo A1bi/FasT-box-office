@@ -35,6 +35,7 @@
     [_tableView release];
     [orders release];
     [highlightedTicketId release];
+    [_searchFields release];
     [super dealloc];
 }
 
@@ -70,9 +71,18 @@
                 [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }
             
-            [[self tableView] reloadData];
+            [self.tableView reloadData];
         }
     }];
+}
+
+- (void)clearFormAndResults
+{
+    for (UITextField *field in _searchFields) {
+        field.text = nil;
+    }
+    [orders removeAllObjects];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
