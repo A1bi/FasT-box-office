@@ -23,10 +23,11 @@
 @interface FasTPurchaseViewController ()
 
 - (FasTProduct *)productForIndexPath:(NSIndexPath *)indexPath;
-- (void)updateSelectedProductsTableAndTotal;
 - (void)updateTotal;
-- (void)updateSelectedProductsTable;
-- (void)decreaseSelectedProductAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely;
+- (void)decreaseCartItemAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely;
+- (void)addCartItem:(FasTCartItem *)cartItem;
+- (void)removeCartItemIndexPathsFromTable:(NSArray *)indexPaths;
+- (void)reloadCartItemIndexPathsInTable:(NSArray *)indexPaths;
 - (void)finishPurchase;
 - (void)finishedPurchase;
 - (void)receivedTicketsToPay:(NSNotification *)note;
@@ -112,27 +113,35 @@
     _totalLabel.text = [NSString stringWithFormat:NSLocalizedStringByKey(@"selectedProductsTotalPrice"), [FasTFormatter stringForPrice:total.floatValue]];
 }
 
-- (void)updateSelectedProductsTable
-{
-    [self.cartItemsTable reloadData];
-}
-
-- (void)updateSelectedProductsTableAndTotal
-{
-    [self updateTotal];
-    [self updateSelectedProductsTable];
-}
-
-- (void)decreaseSelectedProductAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)completely
+- (void)decreaseCartItemAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)remove
 {
     FasTCartItem *cartItem = _cartItems[indexPath.row];
     [cartItem decreaseQuantity];
-    if (completely || cartItem.quantity < 1) {
+    if (remove || cartItem.quantity < 1) {
         if ([cartItem isKindOfClass:[FasTCartTicketItem class]]) {
             [_ticketsToPay removeObject:((FasTCartTicketItem *)cartItem).ticket];
         }
         [_cartItems removeObject:cartItem];
+        [self removeCartItemIndexPathsFromTable:@[indexPath]];
+    } else {
+        [self reloadCartItemIndexPathsInTable:@[indexPath]];
     }
+}
+
+- (void)addCartItem:(FasTCartItem *)cartItem
+{
+    [_cartItems addObject:cartItem];
+    [_cartItemsTable insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_cartItems.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)removeCartItemIndexPathsFromTable:(NSArray *)indexPaths
+{
+    [_cartItemsTable deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)reloadCartItemIndexPathsInTable:(NSArray *)indexPaths
+{
+    [_cartItemsTable reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (IBAction)openCashDrawer
@@ -181,9 +190,16 @@
 
 - (IBAction)clearPurchase:(id)sender
 {
-    [_cartItems removeAllObjects];
-    [self updateSelectedProductsTableAndTotal];
+    if (_cartItems.count < 1) return;
+    
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    for (NSInteger i = 0, c = _cartItems.count; i < c; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
     [_ticketsToPay removeAllObjects];
+    [_cartItems removeAllObjects];
+    [self removeCartItemIndexPathsFromTable:indexPaths];
+    [self updateTotal];
 }
 
 - (void)receivedTicketsToPay:(NSNotification *)note
@@ -193,11 +209,11 @@
         if (![_ticketsToPay containsObject:ticket]) {
             [_ticketsToPay addObject:ticket];
             FasTCartTicketItem *cartItem = [[[FasTCartTicketItem alloc] initWithTicket:ticket] autorelease];
-            [_cartItems addObject:cartItem];
+            [self addCartItem:cartItem];
         }
     }
     
-    [self updateSelectedProductsTableAndTotal];
+    [self updateTotal];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
 }
 
@@ -284,27 +300,29 @@
         FasTCartItem *cartItem = product.cartItem;
         if (!cartItem) {
             cartItem = [[[FasTCartProductItem alloc] initWithProduct:product] autorelease];
-            [_cartItems addObject:cartItem];
+            [self addCartItem:cartItem];
         } else {
             [cartItem increaseQuantity];
+            NSIndexPath *cartItemPath = [NSIndexPath indexPathForRow:[_cartItems indexOfObject:cartItem] inSection:0];
+            [self reloadCartItemIndexPathsInTable:@[cartItemPath]];
         }
     
     } else if ([identifier isEqualToString:@"FasTPurchaseProductTicketsCell"]) {
         
     
     } else {
-        [self decreaseSelectedProductAtIndexPath:indexPath remove:NO];
+        [self decreaseCartItemAtIndexPath:indexPath remove:NO];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self updateSelectedProductsTableAndTotal];
+    [self updateTotal];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self decreaseSelectedProductAtIndexPath:indexPath remove:YES];
-        [self updateSelectedProductsTableAndTotal];
+        [self decreaseCartItemAtIndexPath:indexPath remove:YES];
+        [self updateTotal];
     }
 }
 
