@@ -69,9 +69,6 @@
                                                             @[@"Gesamtbetrag", [_order localizedTotal]],
                                                             @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]]
                                                             ]];
-    if (_order.cancelled) {
-        [rows addObject:@[@"Stornierung", _order.cancelReason, @"FasTOrderDetailsCancellationCell"]];
-    }
     [_infoTableRows release];
     _infoTableRows = [[NSArray arrayWithArray:rows] retain];
 }
@@ -195,21 +192,19 @@
                     case 4:
                         if (ticket.cancelled) {
                             label.text = [NSString stringWithFormat:label.text, ticket.cancelReason];
-                        } else {
-                            NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Bezahlt: "] autorelease], *paid;
-                            if (ticket.paid) {
-                                paid = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
-                            } else {
-                                paid = [[NSMutableAttributedString alloc] initWithString:@"nein"];
-                                [paid addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
-                            }
-                            [text appendAttributedString:paid];
-                            label.attributedText = text;
                         }
                         break;
                     case 5:
                         if (!ticket.cancelled) {
-                            label.text = [NSString stringWithFormat:@"Abgeholt: %@", ticket.pickedUp ? @"ja" : @"nein"];
+                            NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Abgeholt: "] autorelease], *pickedUp;
+                            if (ticket.pickedUp) {
+                                pickedUp = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
+                            } else {
+                                pickedUp = [[[NSMutableAttributedString alloc] initWithString:@"nein"] autorelease];
+                                [pickedUp addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
+                            }
+                            [text appendAttributedString:pickedUp];
+                            label.attributedText = text;
                         }
                         break;
                     case 6:

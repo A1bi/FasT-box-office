@@ -48,7 +48,7 @@
     [hud setMode:MBProgressHUDModeIndeterminate];
     [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
     
-    [[FasTApi defaultApi] getResource:@"vorverkauf/bestellungen" withAction:@"suche" data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"search" data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
         [hud hide:YES];
         
         if (!response[@"error"]) {

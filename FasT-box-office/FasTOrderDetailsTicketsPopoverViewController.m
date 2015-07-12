@@ -8,6 +8,7 @@
 
 #import "FasTOrderDetailsTicketsPopoverViewController.h"
 #import "FasTTicket.h"
+#import "FasTOrder.h"
 #import "FasTTicketPrinter.h"
 #import "FasTApi.h"
 
@@ -38,23 +39,14 @@
         [_tickets release];
         _tickets = [tickets retain];
     }
+    FasTOrder *order = ((FasTTicket *)_tickets.firstObject).order;
     
     [_rows removeAllObjects];
-    BOOL pay = YES, print = YES;
-    for (FasTTicket *ticket in tickets) {
-        if (ticket.paid) {
-            if (pay) pay = NO;
-        } else {
-            if (print) print = NO;
-        }
-    }
     
-    if (pay) {
+    if (order.paid) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverPayCell"];
     }
-    if (print) {
-        [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
-    }
+    [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
     if (_rows.count == 0) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverNoneCell"];
     }
@@ -92,7 +84,7 @@
         
         [[FasTTicketPrinter sharedPrinter] printTickets:_tickets];
         
-        [[FasTApi defaultApi] markTickets:_tickets paid:NO pickedUp:YES];
+        [[FasTApi defaultApi] pickUpTickets:_tickets];
     }
     
     if ([_popover.delegate popoverControllerShouldDismissPopover:_popover]) {
