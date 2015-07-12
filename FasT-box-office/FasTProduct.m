@@ -10,12 +10,13 @@
 
 @implementation FasTProduct
 
-- (id)initWithName:(NSString *)name price:(float)price
+- (id)initWithId:(NSString *)pId name:(NSString *)name price:(float)price
 {
     self = [super init];
     if (self) {
         _name = [name retain];
         _price = price;
+        _productId = pId;
     }
     return self;
 }

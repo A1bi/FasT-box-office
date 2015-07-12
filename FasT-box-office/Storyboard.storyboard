@@ -424,7 +424,13 @@
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" title="Bestellungsdetails #%@" id="d1b-ZG-A2h"/>
+                    <navigationItem key="navigationItem" title="Bestellungsdetails #%@" id="d1b-ZG-A2h">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="pZA-74-5Iy">
+                            <connections>
+                                <action selector="openInSafari" destination="isR-3t-yKd" id="u2X-oA-chR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ticketsPopoverBarButton" destination="TwM-kz-4Wz" id="tX7-jH-jV8"/>

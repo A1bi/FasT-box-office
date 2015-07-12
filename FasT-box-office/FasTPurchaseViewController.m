@@ -28,7 +28,6 @@
 - (void)addCartItem:(FasTCartItem *)cartItem;
 - (void)removeCartItemIndexPathsFromTable:(NSArray *)indexPaths;
 - (void)reloadCartItemIndexPathsInTable:(NSArray *)indexPaths;
-- (void)finishPurchase;
 - (void)finishedPurchase;
 - (void)receivedTicketsToPay:(NSNotification *)note;
 
@@ -49,7 +48,7 @@
                       ];
         NSMutableArray *tmpProducts = [NSMutableArray array];
         for (NSArray *product in products) {
-            [tmpProducts addObject:[[[FasTProduct alloc] initWithName:product[1] price:[product[2] floatValue]] autorelease]];
+            [tmpProducts addObject:[[[FasTProduct alloc] initWithId:product[0] name:product[1] price:[product[2] floatValue]] autorelease]];
         }
         _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
         
@@ -93,12 +92,6 @@
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
         payment.cartItems = _cartItems;
         payment.delegate = self;
-        
-        if (_ticketsToPay.count > 0) {
-            [[FasTApi defaultApi] markTickets:_ticketsToPay paid:YES pickedUp:YES];
-            [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPay];
-        }
-        //[self finishedPurchase];
     }
 }
 
@@ -147,40 +140,6 @@
 - (IBAction)openCashDrawer
 {
     [[FasTReceiptPrinter sharedPrinter] openCashDrawer];
-}
-
-- (void)finishPurchase
-{
-//    NSDictionary *newOrder = nil;
-//    NSMutableArray *items = [NSMutableArray array];
-//    for (NSDictionary *productInfo in _selectedProducts) {
-//        if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
-//            NSMutableDictionary *tickets = [NSMutableDictionary dictionary];
-//            for (NSDictionary *type in [[orderController order] tickets]) {
-//                tickets[[type[@"type"] typeId]] = type[@"number"];
-//            }
-//            newOrder = @{@"date": [[[orderController order] date] dateId], @"tickets": tickets};
-//        } else {
-//            NSDictionary *itemInfo = @{ @"id": productInfo[@"id"], @"number": _selectedProducts[productInfo], @"type": productInfo[@"type"] };
-//            [items addObject:itemInfo];
-//        }
-//    }
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
-//    [[FasTApi defaultApi] finishPurchaseWithItems:items newOrder:newOrder total:total callback:^(NSDictionary *response) {
-//        [hud hide:YES];
-//        if (response && [response[@"ok"] boolValue]) {
-//            if (response[@"new_order"]) {
-//                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"new_order"] event:[[FasTApi defaultApi] event]] autorelease];
-//                [[FasTTicketPrinter sharedPrinter] printTicketsForOrder:order];
-//            }
-//            [self finishedPurchase];
-//        } else {
-//            [self showAlertWithTitle:NSLocalizedStringByKey(@"finishedPurchaseErrorTitle") details:NSLocalizedStringByKey(@"finishedPurchaseErrorDetails")];
-//        }
-//    }];
 }
 
 - (void)finishedPurchase

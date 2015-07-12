@@ -47,4 +47,14 @@
              ];
 }
 
+- (NSString *)productId
+{
+    return @"0";
+}
+
+- (NSString *)type
+{
+    return @"product";
+}
+
 @end

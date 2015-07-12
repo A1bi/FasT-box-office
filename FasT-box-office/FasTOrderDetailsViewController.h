@@ -22,5 +22,6 @@
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *ticketsPopoverBarButton;
 
 - (IBAction)selectAllTickets:(id)sender;
+- (IBAction)openInSafari;
 
 @end

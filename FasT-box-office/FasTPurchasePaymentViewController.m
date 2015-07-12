@@ -10,11 +10,13 @@
 #import "FasTPurchaseViewController.h"
 #import "FasTFormatter.h"
 #import "FasTCartItem.h"
+#import "FasTApi.h"
 
 @interface FasTPurchasePaymentViewController ()
 
 - (void)setDrawerClosed:(BOOL)toggle;
 - (void)printReceipt;
+- (void)savePurchase;
 
 @end
 
@@ -41,6 +43,8 @@
     [printer setDelegate:self];
     [printer openCashDrawer];
     [self printReceipt];
+    
+    [self savePurchase];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -69,6 +73,18 @@
 - (IBAction)printReceiptBtnTapped:(id)sender
 {
     [self printReceipt];
+}
+
+- (void)savePurchase
+{
+    NSMutableArray *items = [NSMutableArray array];
+    
+    for (FasTCartItem *item in _cartItems) {
+        NSDictionary *itemData = @{ @"type": item.type, @"number": @(item.quantity), @"id": item.productId };
+        [items addObject:itemData];
+    }
+    
+    [[FasTApi defaultApi] finishPurchase:@{ @"items": items }];
 }
 
 #pragma mark ESCPrinter delegate

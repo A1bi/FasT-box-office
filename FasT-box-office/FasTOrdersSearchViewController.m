@@ -54,20 +54,14 @@
         if (!response[@"error"]) {
             [orders removeAllObjects];
             
-            if (response[@"orders"]) {
-                for (NSDictionary *orderInfo in response[@"orders"]) {
-                    FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
-                    if ([order.created laterDate:[NSDate dateWithDaysBeforeNow:200]] == order.created) {
-                        [orders addObject:order];
-                    }
+            for (NSDictionary *orderInfo in response[@"orders"]) {
+                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
+                if ([order.created laterDate:[NSDate dateWithDaysBeforeNow:200]] == order.created) {
+                    [orders addObject:order];
                 }
+            }
             
-            } else if (response[@"order"]) {
-                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:[[FasTApi defaultApi] event]] autorelease];
-                [orders addObject:order];
-                if (response[@"ticket"]) {
-                    highlightedTicketId = [response[@"ticket"] retain];
-                }
+            if (((NSArray *)response[@"orders"]).count == 1) {
                 [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }
             

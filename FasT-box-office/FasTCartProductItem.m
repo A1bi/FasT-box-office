@@ -38,4 +38,9 @@
     return _product.name;
 }
 
+- (NSString *)productId
+{
+    return _product.productId;
+}
+
 @end

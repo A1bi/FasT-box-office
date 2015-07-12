@@ -46,6 +46,16 @@
            ];
 }
 
+- (NSString *)productId
+{
+    return _ticket.ticketId;
+}
+
+- (NSString *)type
+{
+    return @"ticket";
+}
+
 - (void)increaseQuantity
 {
 }

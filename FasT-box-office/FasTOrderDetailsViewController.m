@@ -63,11 +63,16 @@
 
 - (void)reload
 {
+    UIColor *color = _order.balance < 0 ? [UIColor redColor] : [UIColor greenColor];
+    
+    NSAttributedString *balance = [[[NSAttributedString alloc] initWithString:[_order localizedBalance] attributes:@{ NSForegroundColorAttributeName: color }] autorelease];
+    
     NSMutableArray *rows = [NSMutableArray arrayWithArray:@[
                                                             @[@"Nummer", _order.number],
                                                             @[@"Besteller", [_order fullNameWithLastNameFirst:YES]],
                                                             @[@"Gesamtbetrag", [_order localizedTotal]],
-                                                            @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]]
+                                                            @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]],
+                                                            @[@"Saldo", balance]
                                                             ]];
     [_infoTableRows release];
     _infoTableRows = [[NSArray arrayWithArray:rows] retain];
@@ -103,6 +108,12 @@
     }
     
     [self updateAfterTicketSelection];
+}
+
+- (IBAction)openInSafari
+{
+    NSString *url = [[FasTApi defaultApi] URLForOrder:_order];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)updateAfterTicketSelection
@@ -169,7 +180,12 @@
             NSArray *row = _infoTableRows[indexPath.row];
             cell = [tableView dequeueReusableCellWithIdentifier:row.count > 2 ? row[2] : @"FasTOrderDetailsInfoCell"];
             for (int i = 0; i < 2; i++) {
-                [(UILabel *)[cell viewWithTag:i+1] setText:row[i]];
+                UILabel *label = (UILabel *)[cell viewWithTag:i+1];
+                if ([row[i] isKindOfClass:[NSAttributedString class]]) {
+                    [label setAttributedText:row[i]];
+                } else {
+                    [label setText:row[i]];
+                }
             }
             break;
         }

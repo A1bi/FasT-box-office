@@ -18,5 +18,7 @@
 
 - (void)increaseQuantity;
 - (void)decreaseQuantity;
+- (NSString *)productId;
+- (NSString *)type;
 
 @end

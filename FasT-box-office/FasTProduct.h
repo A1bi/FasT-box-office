@@ -15,7 +15,8 @@
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) float price;
 @property (nonatomic, assign) FasTCartProductItem *cartItem;
+@property (nonatomic, readonly) NSString *productId;
 
-- (id)initWithName:(NSString *)name price:(float)price;
+- (id)initWithId:(NSString *)pId name:(NSString *)name price:(float)price;
 
 @end

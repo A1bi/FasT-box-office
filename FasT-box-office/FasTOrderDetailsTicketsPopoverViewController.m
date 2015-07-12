@@ -41,15 +41,24 @@
     }
     FasTOrder *order = ((FasTTicket *)_tickets.firstObject).order;
     
-    [_rows removeAllObjects];
+    BOOL pay = !order.paid;
+    if (pay) {
+        for (FasTTicket *ticket in tickets) {
+            if (ticket.pickedUp) {
+                pay = NO;
+                break;
+            }
+        }
+    }
     
-    if (order.paid) {
+    [_rows removeAllObjects];
+    if (pay) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverPayCell"];
     }
     [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
-    if (_rows.count == 0) {
-        [_rows addObject:@"FasTOrderDetailsTicketsPopoverNoneCell"];
-    }
+//    if (_rows.count == 0) {
+//        [_rows addObject:@"FasTOrderDetailsTicketsPopoverNoneCell"];
+//    }
 }
 
 #pragma mark table view data source
