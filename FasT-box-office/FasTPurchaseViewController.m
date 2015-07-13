@@ -8,19 +8,30 @@
 
 #import "FasTPurchaseViewController.h"
 #import "FasTMainViewController.h"
+#import "FasTOrderViewController.h"
 #import "FasTProduct.h"
 #import "FasTCartProductItem.h"
 #import "FasTCartTicketItem.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
+#import "FasTOrder.h"
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
+#import "FasTEvent.h"
 #import "FasTEventDate.h"
+#import "FasTSeat.h"
 #import "FasTTicketPrinter.h"
 #import "FasTReceiptPrinter.h"
 #import "MBProgressHUD.h"
 
 @interface FasTPurchaseViewController ()
+{
+    NSArray *_availableProducts;
+    NSMutableArray *_cartItems;
+    NSMutableArray *_ticketsToPay;
+    FasTEventDate *_todaysDate;
+    NSInteger _numberOfAvailableTickets;
+}
 
 - (FasTProduct *)productForIndexPath:(NSIndexPath *)indexPath;
 - (void)updateTotal;
@@ -29,7 +40,9 @@
 - (void)removeCartItemIndexPathsFromTable:(NSArray *)indexPaths;
 - (void)reloadCartItemIndexPathsInTable:(NSArray *)indexPaths;
 - (void)finishedPurchase;
+- (void)addTicketsToPay:(NSArray *)tickets;
 - (void)receivedTicketsToPay:(NSNotification *)note;
+- (void)updateNumberOfAvailableTickets;
 
 @end
 
@@ -55,10 +68,20 @@
         _cartItems = [[NSMutableArray alloc] init];
         _ticketsToPay = [[NSMutableArray alloc] init];
         
-//        orderController = [[FasTOrderViewController alloc] init];
-//        [orderController setDelegate:self];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
+        [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
+        [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
+                if ([date.date isToday]) {
+                    _todaysDate = date;
+                    break;
+                }
+            }
+            if (!_todaysDate) {
+                _todaysDate = [FasTApi defaultApi].event.dates.lastObject;
+            }
+        }];
     }
     return self;
 }
@@ -92,6 +115,8 @@
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
         payment.cartItems = _cartItems;
         payment.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"FasTOrderSegue"]) {
+        ((FasTOrderViewController *)segue.destinationViewController).delegate = self;
     }
 }
 
@@ -161,9 +186,8 @@
     [self updateTotal];
 }
 
-- (void)receivedTicketsToPay:(NSNotification *)note
+- (void)addTicketsToPay:(NSArray *)tickets
 {
-    NSArray *tickets = [note userInfo][@"tickets"];
     for (FasTTicket *ticket in tickets) {
         if (![_ticketsToPay containsObject:ticket]) {
             [_ticketsToPay addObject:ticket];
@@ -173,12 +197,30 @@
     }
     
     [self updateTotal];
+}
+
+- (void)receivedTicketsToPay:(NSNotification *)note
+{
+    NSArray *tickets = [note userInfo][@"tickets"];
+    [self addTicketsToPay:tickets];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
 }
 
 - (void)dismissedPurchasePaymentViewController
 {
     [self finishedPurchase];
+}
+
+- (void)updateNumberOfAvailableTickets
+{
+    _numberOfAvailableTickets = 0;
+    NSArray *seats = [[FasTApi defaultApi].event.seats[_todaysDate.dateId] allValues];
+    for (FasTSeat *seat in seats) {
+        if (!seat.taken) _numberOfAvailableTickets++;
+    }
+    
+    [self.availableProductsTable reloadData];
 }
 
 #pragma mark table view data source
@@ -218,7 +260,7 @@
         BOOL firstRow = indexPath.row == 0;
         cell = [tableView dequeueReusableCellWithIdentifier:firstRow ? @"FasTPurchaseProductTicketsCell" : @"FasTPurchaseProductCell"];
         if (firstRow) {
-            cell.detailTextLabel.text = [NSString stringWithFormat:cell.detailTextLabel.text, 0];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"für heute noch %i Tickets verfügbar", _numberOfAvailableTickets];
         } else {
             FasTProduct *product = [self productForIndexPath:indexPath];
             cell.textLabel.text = product.name;
@@ -267,7 +309,6 @@
         }
     
     } else if ([identifier isEqualToString:@"FasTPurchaseProductTicketsCell"]) {
-        
     
     } else {
         [self decreaseCartItemAtIndexPath:indexPath remove:NO];
@@ -287,27 +328,20 @@
 
 #pragma mark order controller delegate
 
-- (void)dismissorderViewController:(FasTOrderViewController *)ovc finished:(BOOL)finished
+- (void)didPlaceOrder:(FasTOrder *)order
 {
-//    [ovc dismissViewControllerAnimated:YES completion:NULL];
-//    if (!finished) return;
-//    
-//    FasTOrder *order = [ovc order];
-//    NSDictionary *product = @{@"type": @"order", @"name": @"Tickets", @"product": order, @"price": @([order total])};
-//    [_cartItems addObject:product];
-//    
-//    [self updateSelectedProductsTableAndTotal];
-}
-
-- (void)orderInViewControllerExpired:(FasTOrderViewController *)ovc
-{
-//    for (NSDictionary *productInfo in _cartItems) {
-//        if ([productInfo[@"type"] isEqualToString:@"order"] && !productInfo[@"id"]) {
-//            [_cartItems removeObject:productInfo];
-//            [self updateSelectedProductsTableAndTotal];
-//            return;
-//        }
-//    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setMode:MBProgressHUDModeIndeterminate];
+    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
+    [[FasTApi defaultApi] placeOrder:order callback:^(FasTOrder *order) {
+        [[FasTApi defaultApi] resetSeating];
+        
+        [self addTicketsToPay:order.tickets];
+        
+        [hud hide:YES];
+    }];
 }
 
 @end

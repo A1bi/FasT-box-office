@@ -11,12 +11,6 @@
 #import "FasTPurchasePaymentViewController.h"
 
 @interface FasTPurchaseViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, FasTPurchasePaymentViewControllerDelegate, FasTOrderViewControllerDelegate>
-{
-    NSArray *_availableProducts;
-    NSMutableArray *_cartItems;
-    FasTOrderViewController *orderController;
-    NSMutableArray *_ticketsToPay;
-}
 
 @property (retain, nonatomic) IBOutlet UITableView *cartItemsTable;
 @property (retain, nonatomic) IBOutlet UITableView *availableProductsTable;

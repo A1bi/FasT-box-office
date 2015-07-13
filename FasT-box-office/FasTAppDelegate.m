@@ -15,7 +15,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [FasTApi defaultApiWithClientType:@"seating" clientId:@"0"];
-    [[FasTApi defaultApi] fetchCurrentEvent:NULL];
+    [[FasTApi defaultApi] initNodeConnection];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *receiptPrinterHostname = [defaults valueForKey:@"FasTReceiptPrinterHostname"];

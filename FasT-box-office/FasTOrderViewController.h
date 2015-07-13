@@ -1,49 +1,27 @@
 //
 //  FasTOrderViewController.h
-//  FasT-retail
+//  FasT-box-office
 //
-//  Created by Albrecht Oster on 14.04.13.
-//  Copyright (c) 2013 Albisigns. All rights reserved.
+//  Created by Albrecht Oster on 12.07.15.
+//  Copyright (c) 2015 Albisigns. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @class FasTOrder;
-@class FasTEvent;
-@class FasTStepViewController;
-@class MBProgressHUD;
-
-@class FasTOrderViewController;
 
 @protocol FasTOrderViewControllerDelegate <NSObject>
 
-- (void)dismissorderViewController:(FasTOrderViewController *)ovc finished:(BOOL)finished;
-- (void)orderInViewControllerExpired:(FasTOrderViewController *)ovc;
+- (void)didPlaceOrder:(FasTOrder *)order;
 
 @end
 
-@interface FasTOrderViewController : UIViewController <UIAlertViewDelegate>
-{
-    FasTOrder *order;
-	UINavigationController *nvc;
-    int currentStepIndex;
-    NSArray *stepControllers;
-    FasTStepViewController *currentStepController;
-    id<FasTOrderViewControllerDelegate> delegate;
-    
-	IBOutlet UIButton *nextBtn;
-	IBOutlet UIButton *prevBtn;
-}
+@interface FasTOrderViewController : UINavigationController
 
-@property (nonatomic, readonly) FasTOrder *order;
-@property (nonatomic, assign) id<FasTOrderViewControllerDelegate> delegate;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelBtn;
+@property (nonatomic, assign) IBOutlet id<FasTOrderViewControllerDelegate> delegate;
+@property (nonatomic, retain) FasTOrder *order;
 
-- (IBAction)nextTapped:(id)sender;
-- (IBAction)prevTapped:(id)sender;
-
-- (FasTEvent *)event;
-- (void)updateNextButton;
-- (void)toggleWaitingSpinner:(BOOL)toggle;
-- (void)resetSeating;
+- (IBAction)cancel:(id)sender;
 
 @end
