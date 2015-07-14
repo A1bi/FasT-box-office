@@ -29,6 +29,7 @@
     NSArray *_availableProducts;
     NSMutableArray *_cartItems;
     NSMutableArray *_ticketsToPay;
+    NSMutableArray *_placedOrders;
     FasTEventDate *_todaysDate;
     NSInteger _numberOfAvailableTickets;
 }
@@ -40,6 +41,7 @@
 - (void)removeCartItemIndexPathsFromTable:(NSArray *)indexPaths;
 - (void)reloadCartItemIndexPathsInTable:(NSArray *)indexPaths;
 - (void)finishedPurchase;
+- (void)clearCart;
 - (void)addTicketsToPay:(NSArray *)tickets;
 - (void)receivedTicketsToPay:(NSNotification *)note;
 - (void)updateNumberOfAvailableTickets;
@@ -67,6 +69,7 @@
         
         _cartItems = [[NSMutableArray alloc] init];
         _ticketsToPay = [[NSMutableArray alloc] init];
+        _placedOrders = [[NSMutableArray alloc] init];
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
@@ -92,6 +95,7 @@
     [_availableProducts release];
     [_cartItems release];
     [_ticketsToPay release];
+    [_placedOrders release];
     [_cartItemsTable release];
     [_totalLabel release];
     [_availableProductsTable release];
@@ -134,6 +138,16 @@
 - (void)decreaseCartItemAtIndexPath:(NSIndexPath *)indexPath remove:(BOOL)remove
 {
     FasTCartItem *cartItem = _cartItems[indexPath.row];
+    
+    if ([cartItem isKindOfClass:[FasTCartTicketItem class]]) {
+        FasTTicket *ticket = ((FasTCartTicketItem *)cartItem).ticket;
+        for (FasTOrder *order in _placedOrders) {
+            if ([order.tickets indexOfObject:ticket] != NSNotFound) {
+                return;
+            }
+        }
+    }
+    
     [cartItem decreaseQuantity];
     if (remove || cartItem.quantity < 1) {
         if ([cartItem isKindOfClass:[FasTCartTicketItem class]]) {
@@ -169,10 +183,19 @@
 
 - (void)finishedPurchase
 {
-    [self clearPurchase:nil];
+    [self clearCart];
 }
 
-- (IBAction)clearPurchase:(id)sender
+- (void)cancelPurchase
+{
+    for (FasTOrder *order in _placedOrders) {
+        [[FasTApi defaultApi] cancelBoxOfficeOrder:order];
+    }
+    
+    [self clearCart];
+}
+
+- (void)clearCart
 {
     if (_cartItems.count < 1) return;
     
@@ -181,6 +204,7 @@
         [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
     [_ticketsToPay removeAllObjects];
+    [_placedOrders removeAllObjects];
     [_cartItems removeAllObjects];
     [self removeCartItemIndexPathsFromTable:indexPaths];
     [self updateTotal];
@@ -339,6 +363,7 @@
         [[FasTApi defaultApi] resetSeating];
         
         [self addTicketsToPay:order.tickets];
+        [_placedOrders addObject:order];
         
         [hud hide:YES];
     }];

@@ -11,11 +11,6 @@
 @class FasTOrder;
 
 @interface FasTOrderDetailsViewController : UITableViewController <UIPopoverControllerDelegate>
-{
-    NSArray *_infoTableRows;
-    NSDateFormatter *_dateFormatter;
-    BOOL _selectAllTicketsToggle;
-}
 
 @property (nonatomic, retain) FasTOrder *order;
 @property (nonatomic, retain) NSString *highlightedTicketId;

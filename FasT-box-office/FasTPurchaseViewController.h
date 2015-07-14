@@ -17,6 +17,6 @@
 @property (retain, nonatomic) IBOutlet UILabel *totalLabel;
 
 - (IBAction)openCashDrawer;
-- (IBAction)clearPurchase:(id)sender;
+- (IBAction)cancelPurchase;
 
 @end

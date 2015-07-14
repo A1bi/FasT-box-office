@@ -17,9 +17,14 @@
 #import "FasTApi.h"
 #import "FasTFormatter.h"
 #import "FasTTicketPrinter.h"
-#import "MBProgressHUD.h"
 
 @interface FasTOrderDetailsViewController ()
+{
+    NSArray *_infoTableRows;
+    NSDateFormatter *_dateFormatter;
+    BOOL _selectAllTicketsToggle;
+    NSObject *_ordersObserver;
+}
 
 - (void)reload;
 - (void)updateAfterTicketSelection;
@@ -59,6 +64,31 @@
     
     [self.tableView setEditing:YES animated:NO];
     [self.navigationController setToolbarHidden:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    _ordersObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"FasTUpdatedOrderInfo" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        FasTOrder *order = (FasTOrder *)note.userInfo[@"order"];
+        if ([_order.orderId isEqualToString:order.orderId]) {
+            self.order = order;
+            [self reload];
+            [self.tableView reloadData];
+        }
+    }];
+    [_ordersObserver retain];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_ordersObserver];
+    [_ordersObserver release];
+    _ordersObserver = nil;
+    
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)reload
