@@ -65,6 +65,7 @@
 		6156C5F017BCEA360038009C /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156C5EF17BCEA350038009C /* FasTOrderDetailsViewController.m */; };
 		6190F6041964A1D000F42B03 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6190F6031964A1D000F42B03 /* Storyboard.storyboard */; };
 		61BEBBA4197D6DC400A58043 /* FasTLogEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 61BEBBA3197D6DC400A58043 /* FasTLogEvent.m */; };
+		E43968590E816B8864AAFFD1 /* libPods-FasT-box-office.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83BF74064A9AE802C6DF0255 /* libPods-FasT-box-office.a */; };
 		F03D9CB61977CD1E00BF0422 /* FasTPurchasePaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */; };
 		F07D4E6E1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F07D4E6D1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.m */; };
 		F0B37E831B52E0A800731A1D /* FasTOrderDatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B37E821B52E0A800731A1D /* FasTOrderDatesViewController.m */; };
@@ -195,6 +196,9 @@
 		6190F6031964A1D000F42B03 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		61BEBBA2197D6DC400A58043 /* FasTLogEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTLogEvent.h; sourceTree = "<group>"; };
 		61BEBBA3197D6DC400A58043 /* FasTLogEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTLogEvent.m; sourceTree = "<group>"; };
+		759BBACEC13BC64A3AC7AEA0 /* Pods-FasT-box-office.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.debug.xcconfig"; sourceTree = "<group>"; };
+		83BF74064A9AE802C6DF0255 /* libPods-FasT-box-office.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FasT-box-office.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E11578EA49DABE7BD44153D0 /* Pods-FasT-box-office.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.release.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.release.xcconfig"; sourceTree = "<group>"; };
 		F03D9CB41977CD1E00BF0422 /* FasTPurchasePaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTPurchasePaymentViewController.h; sourceTree = "<group>"; };
 		F03D9CB51977CD1E00BF0422 /* FasTPurchasePaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTPurchasePaymentViewController.m; sourceTree = "<group>"; };
 		F07D4E6C1976E227007E9526 /* FasTOrderDetailsTicketsPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsTicketsPopoverViewController.h; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 		F0B37E881B52EB7100731A1D /* FasTOrderTicketTypesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderTicketTypesViewController.m; sourceTree = "<group>"; };
 		F0B37E8A1B52EF5200731A1D /* FasTOrderTicketTypesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderTicketTypesCell.h; sourceTree = "<group>"; };
 		F0B37E8B1B52EF5200731A1D /* FasTOrderTicketTypesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderTicketTypesCell.m; sourceTree = "<group>"; };
+		F0C930E81B565A09001572C3 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		F0F5DD6E197AA71D00303914 /* ESCPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCPrinter.h; sourceTree = "<group>"; };
 		F0F5DD6F197AA71D00303914 /* ESCPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCPrinter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,12 +227,22 @@
 				6156B60E17BC4C9B0038009C /* UIKit.framework in Frameworks */,
 				6156B61017BC4C9B0038009C /* Foundation.framework in Frameworks */,
 				6156B61217BC4C9B0038009C /* CoreGraphics.framework in Frameworks */,
+				E43968590E816B8864AAFFD1 /* libPods-FasT-box-office.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52A39F9A981B4E44508CA6A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				759BBACEC13BC64A3AC7AEA0 /* Pods-FasT-box-office.debug.xcconfig */,
+				E11578EA49DABE7BD44153D0 /* Pods-FasT-box-office.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		611C41BB17BE4A9F00552192 /* FasTOrderViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,9 +345,11 @@
 		6156B60117BC4C9B0038009C = {
 			isa = PBXGroup;
 			children = (
+				F0C930E81B565A09001572C3 /* Podfile */,
 				6156B61317BC4C9B0038009C /* FasT-box-office */,
 				6156B60C17BC4C9B0038009C /* Frameworks */,
 				6156B60B17BC4C9B0038009C /* Products */,
+				52A39F9A981B4E44508CA6A4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -359,6 +376,7 @@
 				6156B60D17BC4C9B0038009C /* UIKit.framework */,
 				6156B60F17BC4C9B0038009C /* Foundation.framework */,
 				6156B61117BC4C9B0038009C /* CoreGraphics.framework */,
+				83BF74064A9AE802C6DF0255 /* libPods-FasT-box-office.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -551,10 +569,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6156B62717BC4C9B0038009C /* Build configuration list for PBXNativeTarget "FasT-box-office" */;
 			buildPhases = (
+				970A0383E0A27A275B472834 /* Check Pods Manifest.lock */,
 				6156B60617BC4C9B0038009C /* Sources */,
 				6156B60717BC4C9B0038009C /* Frameworks */,
 				6156B60817BC4C9B0038009C /* Resources */,
 				6156C5E317BC52C90038009C /* ShellScript */,
+				AFCDF97F6CDB45B9EDEFD2C8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -626,6 +646,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "# This script automatically sets the version string of\n# an Xcode project from the Git repository containing the project.\n\nset -o errexit\nset -o nounset\n\nINFO_PLIST=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Info\"\n\nVERSION=$(git --git-dir=\"${PROJECT_DIR}/.git\" --work-tree=\"${PROJECT_DIR}/\" rev-list master | wc -l)\n\ndefaults write $INFO_PLIST CFBundleVersion $VERSION\n\necho \"VERSION: ${VERSION}\"";
+			showEnvVarsInLog = 0;
+		};
+		970A0383E0A27A275B472834 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AFCDF97F6CDB45B9EDEFD2C8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -787,6 +837,7 @@
 		};
 		6156B62817BC4C9B0038009C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 759BBACEC13BC64A3AC7AEA0 /* Pods-FasT-box-office.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -800,8 +851,9 @@
 		};
 		6156B62917BC4C9B0038009C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E11578EA49DABE7BD44153D0 /* Pods-FasT-box-office.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "FasT-box-office/FasT-box-office-Info.plist";

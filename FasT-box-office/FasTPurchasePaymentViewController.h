@@ -30,6 +30,7 @@
 - (IBAction)numKeyTapped:(UIButton *)sender;
 - (IBAction)resetCash;
 - (IBAction)payCash;
+- (IBAction)payElectronically;
 - (IBAction)dismiss;
 
 @end

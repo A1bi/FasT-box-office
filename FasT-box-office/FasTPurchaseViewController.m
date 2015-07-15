@@ -354,7 +354,6 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
     [[FasTApi defaultApi] placeOrder:order callback:^(FasTOrder *order) {
         [[FasTApi defaultApi] resetSeating];
         

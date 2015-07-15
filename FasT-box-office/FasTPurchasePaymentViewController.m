@@ -11,6 +11,8 @@
 #import "FasTFormatter.h"
 #import "FasTCartItem.h"
 #import "FasTApi.h"
+#import "MBProgressHUD.h"
+#import <iZettleSDK/iZettleSDK.h>
 
 @interface FasTPurchasePaymentViewController ()
 {
@@ -65,9 +67,7 @@
 
 - (IBAction)numKeyTapped:(UIButton *)sender
 {
-    if (_finished) {
-        return;
-    }
+    if (_finished) return;
     
     NSString *numKey = sender.titleLabel.text;
     _cashGiven = (_cashGiven * 100 * pow(10, numKey.length) + numKey.integerValue) / 100.0f;
@@ -88,9 +88,7 @@
 
 - (IBAction)resetCash
 {
-    if (_finished) {
-        return;
-    }
+    if (_finished) return;
     
     _cashGiven = 0;
     [self updateGivenLabel];
@@ -104,9 +102,7 @@
 
 - (void)payCash
 {
-    if (_finished || _cashGiven < _total) {
-        return;
-    }
+    if (_finished || _cashGiven < _total) return;
     [self finish];
     
     float change = _cashGiven - _total;
@@ -115,7 +111,20 @@
     self.givenLabel.layer.opacity = 0.2f;
     
     [[FasTReceiptPrinter sharedPrinter] openCashDrawer];
-    [self savePurchase];
+}
+
+- (void)payElectronically
+{
+    if (_finished || _total <= 0) return;
+    
+    NSDecimalNumber *total = [[[NSDecimalNumber alloc] initWithFloat:_total] autorelease];
+    [[iZettleSDK shared] chargeAmount:total currency:nil reference:@"bla" presentFromViewController:self completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {
+        if (paymentInfo) {
+            [self finish];
+            [self printReceipt];
+            self.givenLabel.hidden = YES;
+        }
+    }];
 }
 
 - (void)finish
@@ -123,6 +132,7 @@
     _finished = YES;
     self.cancelBtn.enabled = NO;
     self.dismissBtn.enabled = YES;
+    [self savePurchase];
 }
 
 - (IBAction)dismiss

@@ -8,6 +8,7 @@
 
 #import "FasTSettingsViewController.h"
 #import "FasTConstants.h"
+#import <iZettleSDK/iZettleSDK.h>
 
 @interface FasTSettingsViewController ()
 
@@ -38,6 +39,15 @@
     [[cell detailTextLabel] setText:deviceName ? deviceName : NSLocalizedStringByKey(@"select")];
     
     return cell;
+}
+
+#pragma mark - table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"electronicPaymentSettingCell"]) {
+        [[iZettleSDK shared] presentSettingsFromViewController:self];
+    }
 }
 
 @end
