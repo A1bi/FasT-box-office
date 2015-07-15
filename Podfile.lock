@@ -1,10 +1,19 @@
 PODS:
   - iZettleSDK (1.1.0)
+  - MBProgressHUD (0.9.1)
+  - MKNetworkKit (HEAD based on 0.87):
+    - Reachability (~> 3.1.0)
+  - Reachability (3.1.1)
 
 DEPENDENCIES:
   - iZettleSDK
+  - MBProgressHUD (~> 0.9.1)
+  - MKNetworkKit (HEAD)
 
 SPEC CHECKSUMS:
   iZettleSDK: c233d44bf95d0d4085f86736c922bef7402a8722
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MKNetworkKit: 60ad3c83b62183e40ba75ce772c9427c25b520de
+  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
 
 COCOAPODS: 0.37.2

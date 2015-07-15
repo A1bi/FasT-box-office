@@ -16,7 +16,6 @@
 #import "FasTEventDate.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
-#import "FasTTicketPrinter.h"
 
 @interface FasTOrderDetailsViewController ()
 {
