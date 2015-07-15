@@ -12,19 +12,24 @@
 @protocol FasTPurchasePaymentViewControllerDelegate <NSObject>
 
 @optional
-- (void)dismissedPurchasePaymentViewController;
+- (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished;
 
 @end
 
 @interface FasTPurchasePaymentViewController : UIViewController <ESCPrinterDelegate>
 
 @property (retain, nonatomic) IBOutlet UILabel *totalLabel;
-@property (retain, nonatomic) IBOutlet UILabel *closeDrawerNoticeLabel;
-@property (retain, nonatomic) IBOutlet UIButton *finishBtn;
+@property (retain, nonatomic) IBOutlet UILabel *givenLabel;
+@property (retain, nonatomic) IBOutlet UILabel *changeLabel;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *dismissBtn;
 @property (nonatomic, assign) id<FasTPurchasePaymentViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSArray *cartItems;
 
-- (IBAction)finishBtnTapped:(id)sender;
-- (IBAction)printReceiptBtnTapped:(id)sender;
+- (IBAction)printReceipt;
+- (IBAction)numKeyTapped:(UIButton *)sender;
+- (IBAction)resetCash;
+- (IBAction)payCash;
+- (IBAction)dismiss;
 
 @end

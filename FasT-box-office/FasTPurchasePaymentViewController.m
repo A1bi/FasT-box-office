@@ -13,10 +13,14 @@
 #import "FasTApi.h"
 
 @interface FasTPurchasePaymentViewController ()
+{
+    float _cashGiven, _total;
+    BOOL _finished;
+}
 
-- (void)setDrawerClosed:(BOOL)toggle;
-- (void)printReceipt;
+- (void)finish;
 - (void)savePurchase;
+- (void)updateGivenLabel;
 
 @end
 
@@ -25,9 +29,11 @@
 - (void)dealloc
 {
     [_totalLabel release];
-    [_closeDrawerNoticeLabel release];
-    [_finishBtn release];
     [_cartItems release];
+    [_givenLabel release];
+    [_changeLabel release];
+    [_dismissBtn release];
+    [_cancelBtn release];
     [super dealloc];
 }
 
@@ -36,15 +42,12 @@
     [super viewWillAppear:animated];
     
     NSNumber *total = [_cartItems valueForKeyPath:@"@sum.total"];
-    _totalLabel.text = [FasTFormatter stringForPrice:total.floatValue];
-    [self setDrawerClosed:YES];
+    _total = total.floatValue;
+    _totalLabel.text = [FasTFormatter stringForPrice:_total];
+    _finished = NO;
+    [self updateGivenLabel];
     
-    FasTReceiptPrinter *printer = [FasTReceiptPrinter sharedPrinter];
-    [printer setDelegate:self];
-    [printer openCashDrawer];
-    [self printReceipt];
-    
-    [self savePurchase];
+    [[FasTReceiptPrinter sharedPrinter] setDelegate:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -53,26 +56,22 @@
     [[ESCPrinter sharedPrinter] setDelegate:nil];
 }
 
-- (void)setDrawerClosed:(BOOL)toggle
+- (IBAction)printReceipt
 {
-    _closeDrawerNoticeLabel.hidden = toggle;
-    _finishBtn.hidden = !toggle;
+    if (_finished) {
+        [[FasTReceiptPrinter sharedPrinter] printReceiptForCartItems:_cartItems];
+    }
 }
 
-- (void)printReceipt
+- (IBAction)numKeyTapped:(UIButton *)sender
 {
-    [[FasTReceiptPrinter sharedPrinter] printReceiptForCartItems:_cartItems];
-}
-
-- (IBAction)finishBtnTapped:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    [_delegate dismissedPurchasePaymentViewController];
-}
-
-- (IBAction)printReceiptBtnTapped:(id)sender
-{
-    [self printReceipt];
+    if (_finished) {
+        return;
+    }
+    
+    NSString *numKey = sender.titleLabel.text;
+    _cashGiven = (_cashGiven * 100 * pow(10, numKey.length) + numKey.integerValue) / 100.0f;
+    [self updateGivenLabel];
 }
 
 - (void)savePurchase
@@ -87,11 +86,56 @@
     [[FasTApi defaultApi] finishPurchase:@{ @"items": items }];
 }
 
+- (IBAction)resetCash
+{
+    if (_finished) {
+        return;
+    }
+    
+    _cashGiven = 0;
+    [self updateGivenLabel];
+}
+
+- (void)updateGivenLabel
+{
+    self.givenLabel.text = [FasTFormatter stringForPrice:_cashGiven];
+    self.givenLabel.textColor = (_cashGiven >= _total) ? [UIColor greenColor] : [UIColor redColor];
+}
+
+- (void)payCash
+{
+    if (_finished || _cashGiven < _total) {
+        return;
+    }
+    [self finish];
+    
+    float change = _cashGiven - _total;
+    self.changeLabel.text = [FasTFormatter stringForPrice:change];
+    self.changeLabel.hidden = NO;
+    self.givenLabel.layer.opacity = 0.2f;
+    
+    [[FasTReceiptPrinter sharedPrinter] openCashDrawer];
+    [self savePurchase];
+}
+
+- (void)finish
+{
+    _finished = YES;
+    self.cancelBtn.enabled = NO;
+    self.dismissBtn.enabled = YES;
+}
+
+- (IBAction)dismiss
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [_delegate dismissedPurchasePaymentViewControllerFinished:_finished];
+}
+
 #pragma mark ESCPrinter delegate
 
 - (void)printer:(ESCPrinter *)printer drawerOpen:(BOOL)drawerOpen
 {
-    if (!drawerOpen) [self finishBtnTapped:nil];
+    
 }
 
 @end

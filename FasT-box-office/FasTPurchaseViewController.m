@@ -40,7 +40,6 @@
 - (void)addCartItem:(FasTCartItem *)cartItem;
 - (void)removeCartItemIndexPathsFromTable:(NSArray *)indexPaths;
 - (void)reloadCartItemIndexPathsInTable:(NSArray *)indexPaths;
-- (void)finishedPurchase;
 - (void)clearCart;
 - (void)addTicketsToPay:(NSArray *)tickets;
 - (void)receivedTicketsToPay:(NSNotification *)note;
@@ -181,11 +180,6 @@
     [[FasTReceiptPrinter sharedPrinter] openCashDrawer];
 }
 
-- (void)finishedPurchase
-{
-    [self clearCart];
-}
-
 - (void)cancelPurchase
 {
     for (FasTOrder *order in _placedOrders) {
@@ -231,9 +225,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
 }
 
-- (void)dismissedPurchasePaymentViewController
+- (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished
 {
-    [self finishedPurchase];
+    if (finished) {
+        [self clearCart];
+    }
 }
 
 - (void)updateNumberOfAvailableTickets
