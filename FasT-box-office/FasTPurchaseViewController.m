@@ -232,6 +232,11 @@
     }
 }
 
+- (void)paymentFinishedInPaymentViewController
+{
+    [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPay];
+}
+
 - (void)updateNumberOfAvailableTickets
 {
     _numberOfAvailableTickets = 0;

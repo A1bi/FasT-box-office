@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BA2DEAA9FCB3BD2AD0AAE6CB /* libPods-FasT-box-office.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE39B71ADADE4536EB5AE9BB /* libPods-FasT-box-office.a */; };
 		F032039A1B569AC9006D9937 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203991B569AC9006D9937 /* main.m */; };
-		F03203BE1B569B6E006D9937 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = F03203BD1B569B6E006D9937 /* assets */; };
 		F03203C51B569C87006D9937 /* FasTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203C41B569C87006D9937 /* FasTAppDelegate.m */; };
 		F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03203C61B569C9F006D9937 /* Storyboard.storyboard */; };
 		F03203EE1B569CF6006D9937 /* FasTCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203C91B569CF6006D9937 /* FasTCartItem.m */; };
@@ -64,6 +63,7 @@
 		F032112D1B56A993006D9937 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032112F1B56A993006D9937 /* Localizable.strings */; };
 		F03211341B56AA49006D9937 /* FasT-box-office-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */; };
 		F032113C1B56AB01006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
+		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +72,6 @@
 		EE39B71ADADE4536EB5AE9BB /* libPods-FasT-box-office.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FasT-box-office.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03203941B569AC9006D9937 /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03203991B569AC9006D9937 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F03203BD1B569B6E006D9937 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		F03203C31B569C87006D9937 /* FasTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTAppDelegate.h; sourceTree = "<group>"; };
 		F03203C41B569C87006D9937 /* FasTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTAppDelegate.m; sourceTree = "<group>"; };
 		F03203C61B569C9F006D9937 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
@@ -182,6 +181,7 @@
 		F03211301B56A9BE006D9937 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FasT-box-office-Info.plist"; sourceTree = "<group>"; };
 		F032113D1B56AB01006D9937 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ReceiptHeaderImage.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,7 +263,7 @@
 		F03203971B569AC9006D9937 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F03203BD1B569B6E006D9937 /* assets */,
+				F03211481B570949006D9937 /* assets */,
 				F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */,
 				F03211071B56A2F2006D9937 /* FasT-box-office-Prefix.pch */,
 				F03203991B569AC9006D9937 /* main.m */,
@@ -400,10 +400,10 @@
 		F032113F1B56B376006D9937 /* purchase */ = {
 			isa = PBXGroup;
 			children = (
-				F03203E41B569CF6006D9937 /* FasTPurchasePaymentViewController.h */,
-				F03203E51B569CF6006D9937 /* FasTPurchasePaymentViewController.m */,
 				F03203E61B569CF6006D9937 /* FasTPurchaseViewController.h */,
 				F03203E71B569CF6006D9937 /* FasTPurchaseViewController.m */,
+				F03203E41B569CF6006D9937 /* FasTPurchasePaymentViewController.h */,
+				F03203E51B569CF6006D9937 /* FasTPurchasePaymentViewController.m */,
 				F03211451B56B451006D9937 /* models */,
 				F03203E81B569CF6006D9937 /* FasTReceiptPrinter.h */,
 				F03203E91B569CF6006D9937 /* FasTReceiptPrinter.m */,
@@ -485,6 +485,14 @@
 			name = models;
 			sourceTree = "<group>";
 		};
+		F03211481B570949006D9937 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -545,12 +553,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F03203BE1B569B6E006D9937 /* assets in Resources */,
 				F032113C1B56AB01006D9937 /* InfoPlist.strings in Resources */,
 				F032112D1B56A993006D9937 /* Localizable.strings in Resources */,
 				F03204021B569D03006D9937 /* Settings.bundle in Resources */,
 				F03211341B56AA49006D9937 /* FasT-box-office-Info.plist in Resources */,
 				F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */,
+				F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,7 +775,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PODS_ROOT)/iZettleSDK/iZettleSDK\"",
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/PrivateFrameworks,
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
@@ -787,7 +795,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PODS_ROOT)/iZettleSDK/iZettleSDK\"",
-					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/PrivateFrameworks,
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";

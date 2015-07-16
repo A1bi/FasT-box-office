@@ -298,6 +298,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bitte Kassenlade schließen!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctW-Tl-CjV">
+                                <rect key="frame" x="311" y="81" width="236" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.12549020350000001" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -305,6 +311,7 @@
                     <size key="freeformSize" width="580" height="650"/>
                     <connections>
                         <outlet property="cancelBtn" destination="hob-Ps-R1r" id="mg0-Yb-HOS"/>
+                        <outlet property="cashDrawerAlertLabel" destination="ctW-Tl-CjV" id="AOk-9W-bdJ"/>
                         <outlet property="changeLabel" destination="Ydw-70-s25" id="JOi-tr-BPS"/>
                         <outlet property="dismissBtn" destination="hkj-4D-j00" id="XWW-bm-7ec"/>
                         <outlet property="givenLabel" destination="xFM-uk-CJJ" id="u9U-HM-bfQ"/>

@@ -38,17 +38,6 @@ typedef NS_ENUM(uint8_t, ESCPrinterCharacterSet) {
 @protocol ESCPrinterDelegate;
 
 @interface ESCPrinter : NSObject <NSStreamDelegate>
-{
-    CFHostRef host;
-    NSInteger port;
-    NSInputStream *input;
-    NSOutputStream *output;
-    BOOL spaceAvailable, connected;
-    NSMutableData *outputData;
-    NSUInteger dataIndex;
-    BOOL coverOpened, drawerOpened, paperOut, paperNearEnd;
-    uint8_t lineSpacing;
-}
 
 @property (nonatomic, assign) id<ESCPrinterDelegate> delegate;
 
@@ -69,7 +58,7 @@ typedef NS_ENUM(uint8_t, ESCPrinterCharacterSet) {
 - (void)image:(NSImage *)image;
 - (void)image:(NSImage *)image threshold:(uint8_t)threshold;
 #endif
-- (void)horizontalLine;
+- (void)horizontalLine:(BOOL)doubleLine;
 - (void)setAlignment:(ESCPrinterAlignment)alignment;
 - (void)setFont:(ESCPrinterFont)font;
 - (void)setFont:(ESCPrinterFont)font adjustLineSpacing:(BOOL)adjust;

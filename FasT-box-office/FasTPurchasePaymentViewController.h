@@ -12,6 +12,7 @@
 @protocol FasTPurchasePaymentViewControllerDelegate <NSObject>
 
 @optional
+- (void)paymentFinishedInPaymentViewController;
 - (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished;
 
 @end
@@ -21,6 +22,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *totalLabel;
 @property (retain, nonatomic) IBOutlet UILabel *givenLabel;
 @property (retain, nonatomic) IBOutlet UILabel *changeLabel;
+@property (retain, nonatomic) IBOutlet UILabel *cashDrawerAlertLabel;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *dismissBtn;
 @property (nonatomic, assign) id<FasTPurchasePaymentViewControllerDelegate> delegate;

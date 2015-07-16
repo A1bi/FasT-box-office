@@ -9,8 +9,20 @@
 #import "ESCPrinter.h"
 
 @interface ESCPrinter ()
+{
+    CFHostRef host;
+    NSInteger port;
+    NSInputStream *input;
+    NSOutputStream *output;
+    BOOL spaceAvailable, connected;
+    NSMutableData *outputData;
+    NSUInteger dataIndex;
+    BOOL coverOpened, drawerOpened, paperOut, paperNearEnd;
+    uint8_t lineSpacing;
+}
 
 - (id)initWithHost:(NSString *)hostname port:(NSInteger)p;
+- (void)connectionTimedOut;
 - (void)handleInputStreamEvent:(NSStreamEvent)event;
 - (void)handleOutputStreamEvent:(NSStreamEvent)event;
 - (void)prepareDataFromString:(char *)string length:(NSInteger)length;
@@ -22,6 +34,8 @@
 - (void)setupPrinter;
 - (void)toggleASB:(BOOL)toggle;
 - (void)parseStatusFromData:(uint8_t[])data length:(NSInteger)length;
+- (void)sendHeartbeat;
+- (void)cancelAllTimers;
 
 @end
 
@@ -90,6 +104,9 @@ static ESCPrinter *sharedESCPrinter = nil;
     dataIndex = 0;
     connected = NO;
     
+    [self cancelAllTimers];
+    [self performSelector:@selector(connectionTimedOut) withObject:self afterDelay:2];
+    
     CFReadStreamRef read;
     CFWriteStreamRef write;
     CFStreamCreatePairWithSocketToCFHost(NULL, host, (int)port, &read, &write);
@@ -105,8 +122,12 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 - (void)disconnect
 {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connect) object:nil];
     [self closeStreams];
+}
+
+- (void)connectionTimedOut
+{
+    [self handleOutputStreamEvent:NSStreamEventErrorOccurred];
 }
 
 - (void)feed
@@ -198,13 +219,13 @@ static ESCPrinter *sharedESCPrinter = nil;
     CGContextRelease(context);
 }
 
-- (void)horizontalLine
+- (void)horizontalLine:(BOOL)doubleLine
 {
     NSInteger width = 56;
     char line[width+2];
     line[0] = line[width+1] = '\n';
     for (NSInteger i = 1; i < width+1; i++) {
-        line[i] = '=';
+        line[i] = doubleLine ? '=' : '-';
     }
     [self setFont:ESCPrinterFontB adjustLineSpacing:YES];
     [self prepareDataFromString:line length:width+2];
@@ -336,7 +357,9 @@ static ESCPrinter *sharedESCPrinter = nil;
 {
     switch (event) {
         case NSStreamEventOpenCompleted:
+            [self cancelAllTimers];
             connected = YES;
+            [self sendHeartbeat];
             [self setupPrinter];
             break;
             
@@ -346,12 +369,7 @@ static ESCPrinter *sharedESCPrinter = nil;
             
         case NSStreamEventErrorOccurred:
             [self closeStreams];
-            if (connected) {
-                [self performSelector:@selector(connect) withObject:nil afterDelay:2];
-            } else {
-                NSLog(@"cannot connect to printer");
-            }
-            connected = NO;
+            [self performSelector:@selector(connect) withObject:nil afterDelay:2];
             break;
             
         default:
@@ -408,6 +426,8 @@ static ESCPrinter *sharedESCPrinter = nil;
 
 - (void)closeStreams
 {
+    [self cancelAllTimers];
+    connected = NO;
     [input close];
     [output close];
 }
@@ -416,6 +436,18 @@ static ESCPrinter *sharedESCPrinter = nil;
 {
     [input release];
     [output release];
+}
+
+- (void)sendHeartbeat
+{
+    char heartbeat = 0;
+    [self sendData:[NSData dataWithBytes:&heartbeat length:1]];
+    [self performSelector:@selector(sendHeartbeat) withObject:self afterDelay:3];
+}
+
+- (void)cancelAllTimers
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
 #pragma mark stream delegate

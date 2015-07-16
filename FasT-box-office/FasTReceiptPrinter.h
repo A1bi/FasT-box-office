@@ -9,6 +9,7 @@
 #import "ESCPrinter.h"
 
 @class FasTFormatter;
+@class iZettleSDKPaymentInfo;
 
 @interface FasTReceiptPrinter : ESCPrinter
 {
@@ -18,6 +19,7 @@
 }
 
 + (FasTReceiptPrinter *)sharedPrinter;
-- (void)printReceiptForCartItems:(NSArray *)cartItems;
+- (void)printReceiptForCartItems:(NSArray *)cartItems withCashPaymentInfo:(NSDictionary *)paymentInfo;
+- (void)printReceiptForCartItems:(NSArray *)cartItems withElectronicCashPaymentInfo:(iZettleSDKPaymentInfo *)paymentInfo;
 
 @end

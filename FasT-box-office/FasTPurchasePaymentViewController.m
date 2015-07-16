@@ -18,10 +18,11 @@
 {
     float _cashGiven, _total;
     BOOL _finished;
+    iZettleSDKPaymentInfo *_electronicPaymentInfo;
 }
 
 - (void)finish;
-- (void)savePurchase;
+- (void)savePurchaseWithPayMethod:(NSString *)payMethod;
 - (void)updateGivenLabel;
 
 @end
@@ -36,6 +37,8 @@
     [_changeLabel release];
     [_dismissBtn release];
     [_cancelBtn release];
+    [_electronicPaymentInfo release];
+    [_cashDrawerAlertLabel release];
     [super dealloc];
 }
 
@@ -61,7 +64,11 @@
 - (IBAction)printReceipt
 {
     if (_finished) {
-        [[FasTReceiptPrinter sharedPrinter] printReceiptForCartItems:_cartItems];
+        if (_electronicPaymentInfo) {
+            [[FasTReceiptPrinter sharedPrinter] printReceiptForCartItems:_cartItems withElectronicCashPaymentInfo:_electronicPaymentInfo];
+        } else {
+            [[FasTReceiptPrinter sharedPrinter] printReceiptForCartItems:_cartItems withCashPaymentInfo:@{ @"given": @(_cashGiven), @"change": @(_cashGiven - _total) }];
+        }
     }
 }
 
@@ -74,7 +81,7 @@
     [self updateGivenLabel];
 }
 
-- (void)savePurchase
+- (void)savePurchaseWithPayMethod:(NSString *)payMethod
 {
     NSMutableArray *items = [NSMutableArray array];
     
@@ -83,7 +90,7 @@
         [items addObject:itemData];
     }
     
-    [[FasTApi defaultApi] finishPurchase:@{ @"items": items }];
+    [[FasTApi defaultApi] finishPurchase:@{ @"items": items, @"pay_method": payMethod }];
 }
 
 - (IBAction)resetCash
@@ -104,6 +111,7 @@
 {
     if (_finished || _cashGiven < _total) return;
     [self finish];
+    [self savePurchaseWithPayMethod:@"cash"];
     
     float change = _cashGiven - _total;
     self.changeLabel.text = [FasTFormatter stringForPrice:change];
@@ -121,6 +129,8 @@
     [[iZettleSDK shared] chargeAmount:total currency:nil reference:@"bla" presentFromViewController:self completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {
         if (paymentInfo) {
             [self finish];
+            [self savePurchaseWithPayMethod:@"electronic_cash"];
+            _electronicPaymentInfo = [paymentInfo retain];
             [self printReceipt];
             self.givenLabel.hidden = YES;
         }
@@ -132,7 +142,7 @@
     _finished = YES;
     self.cancelBtn.enabled = NO;
     self.dismissBtn.enabled = YES;
-    [self savePurchase];
+    [self.delegate paymentFinishedInPaymentViewController];
 }
 
 - (IBAction)dismiss
@@ -145,7 +155,7 @@
 
 - (void)printer:(ESCPrinter *)printer drawerOpen:(BOOL)drawerOpen
 {
-    
+    _cashDrawerAlertLabel.hidden = !drawerOpen;
 }
 
 @end
