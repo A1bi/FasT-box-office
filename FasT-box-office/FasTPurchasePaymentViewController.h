@@ -23,6 +23,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *givenLabel;
 @property (retain, nonatomic) IBOutlet UILabel *changeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *cashDrawerAlertLabel;
+@property (retain, nonatomic) IBOutlet UIButton *electronicPaymentBtn;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *cancelBtn;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *dismissBtn;
 @property (nonatomic, assign) id<FasTPurchasePaymentViewControllerDelegate> delegate;

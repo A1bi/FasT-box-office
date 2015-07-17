@@ -15,8 +15,10 @@
 @property (nonatomic, retain) FasTOrder *order;
 @property (nonatomic, retain) NSString *highlightedTicketId;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *ticketsPopoverBarButton;
+@property (retain, nonatomic) IBOutlet UIBarButtonItem *refundBarButton;
 
 - (IBAction)selectAllTickets:(id)sender;
 - (IBAction)openInSafari;
+- (IBAction)refundBalance;
 
 @end

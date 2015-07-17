@@ -49,6 +49,7 @@
     [_highlightedTicketId release];
     [_dateFormatter release];
     [_ticketsPopoverBarButton release];
+    [_refundBarButton release];
     [super dealloc];
 }
 
@@ -105,6 +106,8 @@
                                                             ]];
     [_infoTableRows release];
     _infoTableRows = [[NSArray arrayWithArray:rows] retain];
+    
+    self.refundBarButton.enabled = _order.balance > 0;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -143,6 +146,11 @@
 {
     NSString *url = [[FasTApi defaultApi] URLForOrder:_order];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+- (IBAction)refundBalance
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddRefund" object:nil userInfo:@{ @"amount": @(_order.balance), @"order": _order }];
 }
 
 - (void)updateAfterTicketSelection
@@ -297,6 +305,7 @@
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
     [[self tableView] reloadData];
+    [self updateAfterTicketSelection];
     return YES;
 }
 

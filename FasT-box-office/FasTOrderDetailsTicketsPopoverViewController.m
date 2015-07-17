@@ -44,25 +44,37 @@
     }
     FasTOrder *order = ((FasTTicket *)_tickets.firstObject).order;
     
-    BOOL pay = !order.paid;
-    if (pay) {
-        for (FasTTicket *ticket in tickets) {
-            if (ticket.pickedUp) {
-                pay = NO;
-                break;
-            }
+    BOOL pay = order.balance < 0;
+    BOOL refund = order.balance > 0;
+    BOOL cancel = YES;
+    for (FasTTicket *ticket in tickets) {
+        if (ticket.pickedUp || ticket.cancelled) {
+            pay = NO;
+        }
+        if (refund && !ticket.cancelled) {
+            refund = NO;
+        }
+        if (ticket.cancelled) {
+            cancel = NO;
         }
     }
     
     [_rows removeAllObjects];
+    
     if (pay) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverPayCell"];
     }
-    [_rows addObject:@"FasTOrderDetailsTicketsPopoverCancelCell"];
-    [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
-//    if (_rows.count == 0) {
-//        [_rows addObject:@"FasTOrderDetailsTicketsPopoverNoneCell"];
-//    }
+    if (refund) {
+        [_rows addObject:@"FasTOrderDetailsTicketsPopoverRefundCell"];
+    } else if (cancel) {
+        [_rows addObject:@"FasTOrderDetailsTicketsPopoverCancelCell"];
+    } else {
+        [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
+    }
+    
+    if (_rows.count == 0) {
+        [_rows addObject:@"FasTOrderDetailsTicketsPopoverNoneCell"];
+    }
 }
 
 #pragma mark table view data source
@@ -123,6 +135,14 @@
         [alert addAction:cancelAction];
         
         [self presentViewController:alert animated:YES completion:NULL];
+        
+    } else if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverRefundCell"]) {
+        FasTOrder *order = ((FasTTicket *)_tickets.firstObject).order;
+        float sum = ((NSNumber *)[_tickets valueForKeyPath:@"@sum.price"]).floatValue;
+        float amount = MIN(order.balance, sum);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddRefund" object:nil userInfo:@{ @"amount": @(amount), @"order": order }];
+        [self dismiss];
     }
 }
 

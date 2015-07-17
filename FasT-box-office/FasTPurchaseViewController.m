@@ -12,6 +12,7 @@
 #import "FasTProduct.h"
 #import "FasTCartProductItem.h"
 #import "FasTCartTicketItem.h"
+#import "FasTCartRefundItem.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
 #import "FasTOrder.h"
@@ -43,7 +44,9 @@
 - (void)clearCart;
 - (void)addTicketsToPay:(NSArray *)tickets;
 - (void)receivedTicketsToPay:(NSNotification *)note;
+- (void)receivedRefund:(NSNotification *)note;
 - (void)updateNumberOfAvailableTickets;
+- (void)switchToSelf;
 
 @end
 
@@ -53,18 +56,15 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        NSArray *products = @[
-                      @[@"1", @"Programmheft", @(1)],
-                      @[@"2", @"Regenponcho", @(1)],
-                      @[@"3", @"Tasse", @(5)],
-                      @[@"4", @"T-Shirt", @(19.95)],
-                      @[@"5", @"Kappe", @(9)]
-                      ];
-        NSMutableArray *tmpProducts = [NSMutableArray array];
-        for (NSArray *product in products) {
-            [tmpProducts addObject:[[[FasTProduct alloc] initWithId:product[0] name:product[1] price:[product[2] floatValue]] autorelease]];
-        }
-        _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
+        [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"products" callback:^(NSDictionary *response) {
+            NSMutableArray *tmpProducts = [NSMutableArray array];
+            for (NSDictionary *productInfo in response[@"products"]) {
+                FasTProduct *product = [[[FasTProduct alloc] initWithId:productInfo[@"id"] name:productInfo[@"name"] price:((NSNumber *)productInfo[@"price"]).floatValue] autorelease];
+                [tmpProducts addObject:product];
+            }
+            _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
+            [self.availableProductsTable reloadData];
+        }];
         
         _cartItems = [[NSMutableArray alloc] init];
         _ticketsToPay = [[NSMutableArray alloc] init];
@@ -72,6 +72,7 @@
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
+        [center addObserver:self selector:@selector(receivedRefund:) name:@"FasTPurchaseControllerAddRefund" object:nil];
         [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
         [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
@@ -222,7 +223,16 @@
     NSArray *tickets = [note userInfo][@"tickets"];
     [self addTicketsToPay:tickets];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
+    [self switchToSelf];
+}
+
+- (void)receivedRefund:(NSNotification *)note
+{
+    float amount = ((NSNumber *)note.userInfo[@"amount"]).floatValue;
+    FasTCartRefundItem *refund = [[[FasTCartRefundItem alloc] initWithAmount:amount order:note.userInfo[@"order"]] autorelease];
+    [self addCartItem:refund];
+    [self updateTotal];
+    [self switchToSelf];
 }
 
 - (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished
@@ -246,6 +256,11 @@
     }
     
     [self.availableProductsTable reloadData];
+}
+
+- (void)switchToSelf
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
 }
 
 #pragma mark table view data source

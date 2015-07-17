@@ -57,4 +57,9 @@
     return @"product";
 }
 
+- (NSDictionary *)apiInfo
+{
+    return @{ @"type": self.type, @"number": @(self.quantity), @"id": self.productId };
+}
+
 @end

@@ -20,5 +20,6 @@
 - (void)decreaseQuantity;
 - (NSString *)productId;
 - (NSString *)type;
+- (NSDictionary *)apiInfo;
 
 @end

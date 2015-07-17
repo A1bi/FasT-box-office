@@ -39,6 +39,7 @@
     [_cancelBtn release];
     [_electronicPaymentInfo release];
     [_cashDrawerAlertLabel release];
+    [_electronicPaymentBtn release];
     [super dealloc];
 }
 
@@ -49,6 +50,7 @@
     NSNumber *total = [_cartItems valueForKeyPath:@"@sum.total"];
     _total = total.floatValue;
     _totalLabel.text = [FasTFormatter stringForPrice:_total];
+    _electronicPaymentBtn.hidden = _total <= 0;
     _finished = NO;
     [self updateGivenLabel];
     
@@ -86,8 +88,7 @@
     NSMutableArray *items = [NSMutableArray array];
     
     for (FasTCartItem *item in _cartItems) {
-        NSDictionary *itemData = @{ @"type": item.type, @"number": @(item.quantity), @"id": item.productId };
-        [items addObject:itemData];
+        [items addObject:item.apiInfo];
     }
     
     [[FasTApi defaultApi] finishPurchase:@{ @"items": items, @"pay_method": payMethod }];
@@ -123,7 +124,7 @@
 
 - (void)payElectronically
 {
-    if (_finished || _total <= 0) return;
+    if (_finished) return;
     
     NSDecimalNumber *total = [[[NSDecimalNumber alloc] initWithFloat:_total] autorelease];
     [[iZettleSDK shared] chargeAmount:total currency:nil reference:@"bla" presentFromViewController:self completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {

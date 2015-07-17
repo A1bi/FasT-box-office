@@ -314,6 +314,7 @@
                         <outlet property="cashDrawerAlertLabel" destination="ctW-Tl-CjV" id="AOk-9W-bdJ"/>
                         <outlet property="changeLabel" destination="Ydw-70-s25" id="JOi-tr-BPS"/>
                         <outlet property="dismissBtn" destination="hkj-4D-j00" id="XWW-bm-7ec"/>
+                        <outlet property="electronicPaymentBtn" destination="TIh-X8-aC7" id="4dI-hA-XYd"/>
                         <outlet property="givenLabel" destination="xFM-uk-CJJ" id="u9U-HM-bfQ"/>
                         <outlet property="totalLabel" destination="HU2-hr-AeX" id="L7U-N7-qzf"/>
                     </connections>
@@ -417,6 +418,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="isR-3t-yKd" kind="push" identifier="FasTOrdersSearchDetailsSegue" id="bzY-Yl-viM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -603,7 +607,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancelledTicketCell" rowHeight="73" id="1qx-jo-hmV">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsCancelledTicketCell" rowHeight="73" id="1qx-jo-hmV">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1qx-jo-hmV" id="bJN-ax-wir">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -685,6 +689,12 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Yzu-JG-fp4"/>
+                        <barButtonItem enabled="NO" title="vollen Saldo erstatten" id="2ey-14-HuW">
+                            <connections>
+                                <action selector="refundBalance" destination="isR-3t-yKd" id="aRG-vM-ltk"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Bestellungsdetails #%@" id="d1b-ZG-A2h">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="pZA-74-5Iy">
@@ -695,6 +705,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="refundBarButton" destination="2ey-14-HuW" id="9sR-4C-OmR"/>
                         <outlet property="ticketsPopoverBarButton" destination="TwM-kz-4Wz" id="tX7-jH-jV8"/>
                     </connections>
                 </tableViewController>
@@ -753,12 +764,26 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverNoneCell" textLabel="rtt-37-lj8" style="IBUITableViewCellStyleDefault" id="Jvn-cw-FDB">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverRefundCell" textLabel="rtt-37-lj8" style="IBUITableViewCellStyleDefault" id="Jvn-cw-FDB">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jvn-cw-FDB" id="LEw-oo-Qmq">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="keine Aktionen möglich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rtt-37-lj8">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="erstatten" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rtt-37-lj8">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FasTOrderDetailsTicketsPopoverNoneCell" textLabel="oIa-Rb-MTg" style="IBUITableViewCellStyleDefault" id="MCY-E0-oL3">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MCY-E0-oL3" id="fBb-ab-kQP">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="keine Aktionen möglich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oIa-Rb-MTg">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1069,7 +1094,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gesamt: 24,00 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKc-Xm-HfK">
-                                <rect key="frame" x="594" y="555" width="285" height="48"/>
+                                <rect key="frame" x="499" y="555" width="380" height="48"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -1300,6 +1325,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fRN-VH-6sO"/>
+        <segue reference="bzY-Yl-viM"/>
     </inferredMetricsTieBreakers>
 </document>
