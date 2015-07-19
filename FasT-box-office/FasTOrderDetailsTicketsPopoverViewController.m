@@ -68,9 +68,8 @@
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverRefundCell"];
     } else if (cancel) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverCancelCell"];
-    } else {
-        [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
     }
+    [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
     
     if (_rows.count == 0) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverNoneCell"];

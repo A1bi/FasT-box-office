@@ -79,11 +79,15 @@
     uint16_t position[] = {0, 210, 410};
     for (FasTCartItem *cartItem in cartItems) {
         BOOL firstLine = YES;
-        [self setFont:ESCPrinterFontA adjustLineSpacing:YES];
         for (NSArray *line in cartItem.printableDescriptionLines) {
             int i = 0;
             for (NSString *column in line) {
                 if (position[i] > 0) [self setAbsolutePosition:position[i]];
+                if (column.length > 16) {
+                    [self setFont:ESCPrinterFontB adjustLineSpacing:YES];
+                } else {
+                    [self setFont:ESCPrinterFontA adjustLineSpacing:YES];
+                }
                 [self text:column];
                 if (i < 2) i++;
             }

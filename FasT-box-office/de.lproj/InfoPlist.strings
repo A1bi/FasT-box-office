@@ -1,3 +1,4 @@
 "CFBundleDisplayName" = "FasT Abendkasse";
 "CFBundleName" = "FasT Abendkasse";
+"NSLocationUsageDescription" = "EC-Karten-Zahlungen müssen per Ortung validiert werden.";
 "NSLocationWhenInUseUsageDescription" = "EC-Karten-Zahlungen müssen per Ortung validiert werden.";

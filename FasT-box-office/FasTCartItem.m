@@ -41,7 +41,7 @@
     return @[
              @[
                  self.name,
-                 [NSString stringWithFormat:@"%d x %@", self.quantity, [FasTFormatter stringForPrice:self.price]],
+                 [NSString stringWithFormat:@"%li x %@", (long)self.quantity, [FasTFormatter stringForPrice:self.price]],
                  [FasTFormatter stringForPrice:self.total]
                  ]
              ];

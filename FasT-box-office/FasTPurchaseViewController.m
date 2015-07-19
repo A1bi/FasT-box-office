@@ -300,7 +300,7 @@
         BOOL firstRow = indexPath.row == 0;
         cell = [tableView dequeueReusableCellWithIdentifier:firstRow ? @"FasTPurchaseProductTicketsCell" : @"FasTPurchaseProductCell"];
         if (firstRow) {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"für heute noch %i Tickets verfügbar", _numberOfAvailableTickets];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"für heute noch %li Tickets verfügbar", (long)_numberOfAvailableTickets];
         } else {
             FasTProduct *product = [self productForIndexPath:indexPath];
             cell.textLabel.text = product.name;

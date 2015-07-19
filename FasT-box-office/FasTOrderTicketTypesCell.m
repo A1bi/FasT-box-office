@@ -19,7 +19,7 @@
 }
 
 - (IBAction)numberChanged:(UIStepper *)sender {
-    _numberLabel.text = [NSString stringWithFormat:@"%i", (NSInteger)sender.value];
+    _numberLabel.text = [NSString stringWithFormat:@"%li", (long)sender.value];
 }
 
 - (void)dealloc {

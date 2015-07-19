@@ -27,7 +27,14 @@
 {
     [super viewDidLoad];
     
-    _dates = [FasTApi defaultApi].event.dates;
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"date >= %@", [NSDate date]];
+    _dates = [[[FasTApi defaultApi].event.dates filteredArrayUsingPredicate:pred] retain];
+}
+
+- (void)dealloc
+{
+    [_dates release];
+    [super dealloc];
 }
 
 #pragma mark - Table view data source
@@ -45,14 +52,12 @@
     
     FasTEventDate *date = _dates[indexPath.row];
     cell.textLabel.text = [FasTFormatter stringForEventDate:date.date];
-    cell.selected = [date.date isToday];
     
     return cell;
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *path = [self.tableView indexPathForCell:sender];
     

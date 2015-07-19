@@ -10,7 +10,7 @@
 
 @class FasTOrder;
 
-@protocol FasTOrderViewControllerDelegate <NSObject>
+@protocol FasTOrderViewControllerDelegate <UINavigationControllerDelegate>
 
 - (void)didPlaceOrder:(FasTOrder *)order;
 

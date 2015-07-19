@@ -173,7 +173,7 @@
             return @"Allgemein";
             break;
         case 1:
-            return [NSString stringWithFormat:@"%d Tickets", _order.numberOfTickets];
+            return [NSString stringWithFormat:@"%li Tickets", (long)_order.numberOfTickets];
             break;
         default:
             return @"Protokoll";
@@ -257,6 +257,17 @@
                                 [pickedUp addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
                             }
                             [text appendAttributedString:pickedUp];
+                            label.attributedText = text;
+                        } else {
+                            NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Wiederverkauft: "] autorelease], *resold;
+                            if (ticket.seat.taken) {
+                                resold = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
+                                [resold addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0, 2)];
+                            } else {
+                                resold = [[[NSMutableAttributedString alloc] initWithString:@"nein"] autorelease];
+                                [resold addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
+                            }
+                            [text appendAttributedString:resold];
                             label.attributedText = text;
                         }
                         break;

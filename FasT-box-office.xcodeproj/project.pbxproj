@@ -61,10 +61,9 @@
 		F03211191B56A5BD006D9937 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F03211181B56A5BD006D9937 /* libicucore.dylib */; };
 		F032111A1B56A5DE006D9937 /* FasTTicketPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F03204211B569DBE006D9937 /* FasTTicketPrinter.m */; };
 		F032112D1B56A993006D9937 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032112F1B56A993006D9937 /* Localizable.strings */; };
-		F03211341B56AA49006D9937 /* FasT-box-office-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */; };
-		F032113C1B56AB01006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 		F032114D1B586144006D9937 /* FasTCartRefundItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartRefundItem.m */; };
+		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -558,10 +557,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F032113C1B56AB01006D9937 /* InfoPlist.strings in Resources */,
+				F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */,
 				F032112D1B56A993006D9937 /* Localizable.strings in Resources */,
 				F03204021B569D03006D9937 /* Settings.bundle in Resources */,
-				F03211341B56AA49006D9937 /* FasT-box-office-Info.plist in Resources */,
 				F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */,
 				F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */,
 			);

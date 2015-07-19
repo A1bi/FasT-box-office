@@ -18,6 +18,8 @@
 
 @implementation FasTOrderViewController
 
+@dynamic delegate;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
