@@ -10,7 +10,7 @@
 
 @class FasTOrder;
 
-@interface FasTCartRefundItem : FasTCartItem
+@interface FasTCartOrderPaymentItem : FasTCartItem
 
 - (id)initWithAmount:(float)amount order:(FasTOrder *)order;
 

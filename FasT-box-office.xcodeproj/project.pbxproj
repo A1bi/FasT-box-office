@@ -62,7 +62,7 @@
 		F032111A1B56A5DE006D9937 /* FasTTicketPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F03204211B569DBE006D9937 /* FasTTicketPrinter.m */; };
 		F032112D1B56A993006D9937 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032112F1B56A993006D9937 /* Localizable.strings */; };
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
-		F032114D1B586144006D9937 /* FasTCartRefundItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartRefundItem.m */; };
+		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -182,8 +182,8 @@
 		F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FasT-box-office-Info.plist"; sourceTree = "<group>"; };
 		F032113D1B56AB01006D9937 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ReceiptHeaderImage.jpg; sourceTree = "<group>"; };
-		F032114B1B586144006D9937 /* FasTCartRefundItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCartRefundItem.h; sourceTree = "<group>"; };
-		F032114C1B586144006D9937 /* FasTCartRefundItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTCartRefundItem.m; sourceTree = "<group>"; };
+		F032114B1B586144006D9937 /* FasTCartOrderPaymentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCartOrderPaymentItem.h; sourceTree = "<group>"; };
+		F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTCartOrderPaymentItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,8 +481,8 @@
 				F03203CB1B569CF6006D9937 /* FasTCartProductItem.m */,
 				F03203CC1B569CF6006D9937 /* FasTCartTicketItem.h */,
 				F03203CD1B569CF6006D9937 /* FasTCartTicketItem.m */,
-				F032114B1B586144006D9937 /* FasTCartRefundItem.h */,
-				F032114C1B586144006D9937 /* FasTCartRefundItem.m */,
+				F032114B1B586144006D9937 /* FasTCartOrderPaymentItem.h */,
+				F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */,
 				F03203E21B569CF6006D9937 /* FasTProduct.h */,
 				F03203E31B569CF6006D9937 /* FasTProduct.m */,
 			);
@@ -639,7 +639,7 @@
 				F03207A61B569DC0006D9937 /* FasTTicketType.m in Sources */,
 				F03207A11B569DC0006D9937 /* FasTSeatingView.m in Sources */,
 				F03203FD1B569CF6006D9937 /* FasTPurchaseViewController.m in Sources */,
-				F032114D1B586144006D9937 /* FasTCartRefundItem.m in Sources */,
+				F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */,
 				F03207A31B569DC0006D9937 /* FasTTicket.m in Sources */,
 				F032079C1B569DC0006D9937 /* FasTEventDate.m in Sources */,
 				F03204001B569CF6006D9937 /* FasTSettingsViewController.m in Sources */,

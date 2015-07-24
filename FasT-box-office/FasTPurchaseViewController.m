@@ -12,7 +12,7 @@
 #import "FasTProduct.h"
 #import "FasTCartProductItem.h"
 #import "FasTCartTicketItem.h"
-#import "FasTCartRefundItem.h"
+#import "FasTCartOrderPaymentItem.h"
 #import "FasTFormatter.h"
 #import "FasTApi.h"
 #import "FasTOrder.h"
@@ -44,7 +44,7 @@
 - (void)clearCart;
 - (void)addTicketsToPay:(NSArray *)tickets;
 - (void)receivedTicketsToPay:(NSNotification *)note;
-- (void)receivedRefund:(NSNotification *)note;
+- (void)receivedOrderPayment:(NSNotification *)note;
 - (void)updateNumberOfAvailableTickets;
 - (void)switchToSelf;
 
@@ -72,7 +72,7 @@
         
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
-        [center addObserver:self selector:@selector(receivedRefund:) name:@"FasTPurchaseControllerAddRefund" object:nil];
+        [center addObserver:self selector:@selector(receivedOrderPayment:) name:@"FasTPurchaseControllerAddOrderPayment" object:nil];
         [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
         [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
@@ -226,11 +226,11 @@
     [self switchToSelf];
 }
 
-- (void)receivedRefund:(NSNotification *)note
+- (void)receivedOrderPayment:(NSNotification *)note
 {
     float amount = ((NSNumber *)note.userInfo[@"amount"]).floatValue;
-    FasTCartRefundItem *refund = [[[FasTCartRefundItem alloc] initWithAmount:amount order:note.userInfo[@"order"]] autorelease];
-    [self addCartItem:refund];
+    FasTCartOrderPaymentItem *payment = [[[FasTCartOrderPaymentItem alloc] initWithAmount:amount order:note.userInfo[@"order"]] autorelease];
+    [self addCartItem:payment];
     [self updateTotal];
     [self switchToSelf];
 }

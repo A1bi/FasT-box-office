@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 Albisigns. All rights reserved.
 //
 
-#import "FasTCartRefundItem.h"
+#import "FasTCartOrderPaymentItem.h"
 #import "FasTOrder.h"
 #import "FasTFormatter.h"
 
-@interface FasTCartRefundItem ()
+@interface FasTCartOrderPaymentItem ()
 {
     FasTOrder *_order;
     float _amount;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation FasTCartRefundItem
+@implementation FasTCartOrderPaymentItem
 
 - (id)initWithAmount:(float)amount order:(FasTOrder *)order
 {
@@ -38,19 +38,21 @@
 
 - (float)price
 {
-    return -_amount;
+    return _amount;
 }
 
 - (NSString *)name
 {
-    return [NSString stringWithFormat:@"Erstattung (#%@)", _order.number];
+    NSString *caption = _amount > 0 ? @"Differenz" : @"Erstattung";
+    return [NSString stringWithFormat:@"%@ (#%@)", caption, _order.number];
 }
 
 - (NSArray *)printableDescriptionLines
 {
+    NSString *caption = _amount > 0 ? @"Differenzzahlung" : @"Erstattung";
     return @[
              @[
-                 @"Erstattung",
+                 caption,
                  @"",
                  [FasTFormatter stringForPrice:self.price]
                  ],
@@ -62,7 +64,7 @@
 
 - (NSDictionary *)apiInfo
 {
-    return @{ @"type": @"refund", @"amount": @(_amount), @"order": _order.orderId };
+    return @{ @"type": @"order_payment", @"amount": @(_amount), @"order": _order.orderId };
 }
 
 - (void)increaseQuantity

@@ -107,7 +107,7 @@
     [_infoTableRows release];
     _infoTableRows = [[NSArray arrayWithArray:rows] retain];
     
-    self.refundBarButton.enabled = _order.balance > 0;
+    self.refundBarButton.enabled = _order.balance != 0;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -148,9 +148,9 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
-- (IBAction)refundBalance
+- (IBAction)payBalance
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddRefund" object:nil userInfo:@{ @"amount": @(_order.balance), @"order": _order }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddOrderPayment" object:nil userInfo:@{ @"amount": @(-_order.balance), @"order": _order }];
 }
 
 - (void)updateAfterTicketSelection

@@ -19,6 +19,6 @@
 
 - (IBAction)selectAllTickets:(id)sender;
 - (IBAction)openInSafari;
-- (IBAction)refundBalance;
+- (IBAction)payBalance;
 
 @end
