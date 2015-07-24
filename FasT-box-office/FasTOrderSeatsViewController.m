@@ -16,11 +16,14 @@
 #import "FasTTicket.h"
 #import "FasTApi.h"
 
+#define DegreesToRadians(x) ((x) * M_PI / 180.0)
+
 @interface FasTOrderSeatsViewController ()
 {
     FasTOrder *_order;
     FasTEventDate *_date;
     NSMutableArray *_chosenSeats;
+    BOOL seatingViewRotated;
     
     UIAlertView *errorAlert;
 }
@@ -39,6 +42,8 @@
     
     _order = ((FasTOrderViewController *)self.navigationController).order;
     _chosenSeats = [[NSMutableArray array] retain];
+    
+    seatingViewRotated = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -116,6 +121,19 @@
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringByKey(@"notEnoughSeatsErrorTitle") message:message delegate:nil cancelButtonTitle:NSLocalizedStringByKey(@"dismissAlert") otherButtonTitles:nil] autorelease];
         [alert show];
     }
+}
+
+- (IBAction)rotateSeatingView
+{
+    [UIView beginAnimations:@"rotate" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    seatingViewRotated = !seatingViewRotated;
+    CGFloat angle = seatingViewRotated ? DegreesToRadians(180) : 0;
+    _seatingView.transform = CGAffineTransformMakeRotation(angle);
+    
+    [UIView commitAnimations];
 }
 
 #pragma mark seating delegate methods

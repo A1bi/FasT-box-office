@@ -14,5 +14,6 @@
 @property (nonatomic, retain) IBOutlet FasTSeatingView *seatingView;
 
 - (IBAction)placeOrder:(id)sender;
+- (IBAction)rotateSeatingView;
 
 @end
