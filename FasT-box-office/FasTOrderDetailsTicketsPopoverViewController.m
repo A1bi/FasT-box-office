@@ -46,12 +46,15 @@
     
     BOOL pay = order.balance < 0;
     BOOL cancel = YES;
+    BOOL resale = YES;
     for (FasTTicket *ticket in tickets) {
         if (ticket.pickedUp || ticket.cancelled) {
             pay = NO;
         }
         if (ticket.cancelled) {
             cancel = NO;
+        } else if (ticket.resale) {
+            resale = NO;
         }
     }
     
@@ -62,6 +65,9 @@
     }
     if (cancel) {
         [_rows addObject:@"FasTOrderDetailsTicketsPopoverCancelCell"];
+        if (resale) {
+            [_rows addObject:@"FasTOrderDetailsTicketsPopoverResaleCell"];
+        }
     }
     [_rows addObject:@"FasTOrderDetailsTicketsPopoverPrintCell"];
     
@@ -108,15 +114,29 @@
         [alert addAction:action];
         [self presentViewController:alert animated:YES completion:NULL];
         
-    } else if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverCancelCell"]) {
-        NSString *message = [NSString stringWithFormat:@"Möchten Sie %i Tickets wirklich stornieren?", _tickets.count];
+    } else if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverCancelCell"] || [identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverResaleCell"]) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Tickets stornieren" message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"stornieren" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        NSString *alertTitle, *alertMessage, *actionTitle;
+        SEL apiSelector;
+        if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverCancelCell"]) {
+            alertMessage = [NSString stringWithFormat:@"Möchten Sie %i Tickets wirklich stornieren?", _tickets.count];
+            alertTitle = @"Tickets stornieren";
+            actionTitle = @"stornieren";
+            apiSelector = @selector(cancelTickets:callback:);
+            
+        } else {
+            alertMessage = [NSString stringWithFormat:@"Möchten Sie %i Tickets wirklich zum Weiterverkauf freigeben?", _tickets.count];
+            alertTitle = @"Tickets zum Weiterverkauf freigeben";
+            actionTitle = @"freigeben";
+            apiSelector = @selector(enableResaleForTickets:callback:);
+        }
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [hud setMode:MBProgressHUDModeIndeterminate];
             [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
-            [[FasTApi defaultApi] cancelTickets:_tickets callback:^(FasTOrder *order) {
+            [[FasTApi defaultApi] performSelector:apiSelector withObject:_tickets withObject:^(FasTOrder *order) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTUpdatedOrderInfo" object:nil userInfo:@{ @"order": order }];
                 [hud hide:YES];
             }];
@@ -128,7 +148,7 @@
         [alert addAction:cancelAction];
         
         [self presentViewController:alert animated:YES completion:NULL];
-        
+    
     }
 }
 

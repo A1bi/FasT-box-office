@@ -62,6 +62,7 @@
             }
             
             if (((NSArray *)response[@"orders"]).count == 1) {
+                highlightedTicketId = response[@"ticket_id"];
                 [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }
             

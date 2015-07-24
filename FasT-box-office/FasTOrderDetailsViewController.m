@@ -249,26 +249,29 @@
                         break;
                     case 5:
                         if (!ticket.cancelled) {
-                            NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Abgeholt: "] autorelease], *pickedUp;
-                            if (ticket.pickedUp) {
-                                pickedUp = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
+                            if (ticket.resale) {
+                                NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Weiterverkauf "] autorelease], *resold;
+                                if (ticket.seat.taken) {
+                                    resold = [[[NSMutableAttributedString alloc] initWithString:@"erfolgreich"] autorelease];
+                                    [resold addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0, 11)];
+                                } else {
+                                    resold = [[[NSMutableAttributedString alloc] initWithString:@"möglich"] autorelease];
+                                    [resold addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, 7)];
+                                }
+                                [text appendAttributedString:resold];
+                                label.attributedText = text;
+                            
                             } else {
-                                pickedUp = [[[NSMutableAttributedString alloc] initWithString:@"nein"] autorelease];
-                                [pickedUp addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
+                                NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Abgeholt: "] autorelease], *pickedUp;
+                                if (ticket.pickedUp) {
+                                    pickedUp = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
+                                } else {
+                                    pickedUp = [[[NSMutableAttributedString alloc] initWithString:@"nein"] autorelease];
+                                    [pickedUp addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
+                                }
+                                [text appendAttributedString:pickedUp];
+                                label.attributedText = text;
                             }
-                            [text appendAttributedString:pickedUp];
-                            label.attributedText = text;
-                        } else {
-                            NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] initWithString:@"Wiederverkauft: "] autorelease], *resold;
-                            if (ticket.seat.taken) {
-                                resold = [[[NSMutableAttributedString alloc] initWithString:@"ja"] autorelease];
-                                [resold addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:NSMakeRange(0, 2)];
-                            } else {
-                                resold = [[[NSMutableAttributedString alloc] initWithString:@"nein"] autorelease];
-                                [resold addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 4)];
-                            }
-                            [text appendAttributedString:resold];
-                            label.attributedText = text;
                         }
                         break;
                     case 6:
