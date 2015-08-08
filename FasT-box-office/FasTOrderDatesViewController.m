@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"date >= %@", [NSDate date]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"date >= %@", [NSDate dateWithTimeIntervalSinceNow:-1800]];
     _dates = [[[FasTApi defaultApi].event.dates filteredArrayUsingPredicate:pred] retain];
 }
 

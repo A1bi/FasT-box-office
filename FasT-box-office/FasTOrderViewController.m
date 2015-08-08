@@ -28,6 +28,7 @@
     
     self.order = [[[FasTOrder alloc] init] autorelease];
     
+    [[FasTApi defaultApi] resetSeating];
     [[FasTApi defaultApi] unlockSeats];
 }
 
