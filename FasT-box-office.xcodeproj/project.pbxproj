@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA2DEAA9FCB3BD2AD0AAE6CB /* libPods-FasT-box-office.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE39B71ADADE4536EB5AE9BB /* libPods-FasT-box-office.a */; };
+		3051D8620200909A628119E1 /* Pods_FasT_box_office.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87BF9E78E3353FED640280AE /* Pods_FasT_box_office.framework */; };
 		F032039A1B569AC9006D9937 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203991B569AC9006D9937 /* main.m */; };
 		F03203C51B569C87006D9937 /* FasTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203C41B569C87006D9937 /* FasTAppDelegate.m */; };
 		F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03203C61B569C9F006D9937 /* Storyboard.storyboard */; };
@@ -47,18 +47,9 @@
 		F03207A61B569DC0006D9937 /* FasTTicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = F03204251B569DBE006D9937 /* FasTTicketType.m */; };
 		F0320A401B569E69006D9937 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320A3D1B569E69006D9937 /* NSDate-Utilities.m */; };
 		F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320A581B569EE7006D9937 /* ESCPrinter.m */; };
-		F0320E501B569FAB006D9937 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320B041B569FA9006D9937 /* SocketIO.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F0320E511B569FAB006D9937 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320B061B569FA9006D9937 /* SocketIOJSONSerialization.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F0320E521B569FAB006D9937 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320B081B569FA9006D9937 /* SocketIOPacket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F0320E531B569FAB006D9937 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320B0B1B569FA9006D9937 /* SocketIOTransportWebsocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F0320E541B569FAB006D9937 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320B0D1B569FA9006D9937 /* SocketIOTransportXHR.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F03210C01B569FAB006D9937 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = F0320E111B569FAB006D9937 /* base64.c */; };
-		F03210C11B569FAB006D9937 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320E141B569FAB006D9937 /* NSData+SRB64Additions.m */; };
-		F03210C21B569FAB006D9937 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320E171B569FAB006D9937 /* SRWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F03211031B56A235006D9937 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03211021B56A235006D9937 /* CoreGraphics.framework */; };
 		F03211051B56A241006D9937 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03211041B56A241006D9937 /* UIKit.framework */; };
 		F03211061B56A280006D9937 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03211001B56A1A7006D9937 /* QuartzCore.framework */; };
-		F03211191B56A5BD006D9937 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F03211181B56A5BD006D9937 /* libicucore.dylib */; };
 		F032111A1B56A5DE006D9937 /* FasTTicketPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F03204211B569DBE006D9937 /* FasTTicketPrinter.m */; };
 		F032112D1B56A993006D9937 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032112F1B56A993006D9937 /* Localizable.strings */; };
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
@@ -67,9 +58,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		23389E06C3306F7E3523B6BA /* Pods-FasT-box-office.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.debug.xcconfig"; sourceTree = "<group>"; };
-		69933584CF2CC13CFFF09D09 /* Pods-FasT-box-office.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.release.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.release.xcconfig"; sourceTree = "<group>"; };
-		EE39B71ADADE4536EB5AE9BB /* libPods-FasT-box-office.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FasT-box-office.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		87BF9E78E3353FED640280AE /* Pods_FasT_box_office.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FasT_box_office.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB45CD37D5DDF7B61EA5C33B /* Pods-FasT-box-office.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.debug.xcconfig"; sourceTree = "<group>"; };
+		B0F4386667092663DD1AE547 /* Pods-FasT-box-office.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.release.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.release.xcconfig"; sourceTree = "<group>"; };
 		F03203941B569AC9006D9937 /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03203991B569AC9006D9937 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F03203C31B569C87006D9937 /* FasTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTAppDelegate.h; sourceTree = "<group>"; };
@@ -155,29 +146,10 @@
 		F0320A3E1B569E69006D9937 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F0320A571B569EE7006D9937 /* ESCPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESCPrinter.h; sourceTree = "<group>"; };
 		F0320A581B569EE7006D9937 /* ESCPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESCPrinter.m; sourceTree = "<group>"; };
-		F0320B031B569FA9006D9937 /* SocketIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
-		F0320B041B569FA9006D9937 /* SocketIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
-		F0320B051B569FA9006D9937 /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
-		F0320B061B569FA9006D9937 /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
-		F0320B071B569FA9006D9937 /* SocketIOPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
-		F0320B081B569FA9006D9937 /* SocketIOPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
-		F0320B091B569FA9006D9937 /* SocketIOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
-		F0320B0A1B569FA9006D9937 /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
-		F0320B0B1B569FA9006D9937 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
-		F0320B0C1B569FA9006D9937 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
-		F0320B0D1B569FA9006D9937 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
-		F0320E111B569FAB006D9937 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
-		F0320E121B569FAB006D9937 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
-		F0320E131B569FAB006D9937 /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SRB64Additions.h"; sourceTree = "<group>"; };
-		F0320E141B569FAB006D9937 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SRB64Additions.m"; sourceTree = "<group>"; };
-		F0320E151B569FAB006D9937 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
-		F0320E161B569FAB006D9937 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
-		F0320E171B569FAB006D9937 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		F03211001B56A1A7006D9937 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F03211021B56A235006D9937 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F03211041B56A241006D9937 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F03211071B56A2F2006D9937 /* FasT-box-office-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FasT-box-office-Prefix.pch"; sourceTree = "<group>"; };
-		F03211181B56A5BD006D9937 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		F03211301B56A9BE006D9937 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FasT-box-office-Info.plist"; sourceTree = "<group>"; };
 		F032113D1B56AB01006D9937 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -191,22 +163,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F03211191B56A5BD006D9937 /* libicucore.dylib in Frameworks */,
 				F03211061B56A280006D9937 /* QuartzCore.framework in Frameworks */,
 				F03211051B56A241006D9937 /* UIKit.framework in Frameworks */,
 				F03211031B56A235006D9937 /* CoreGraphics.framework in Frameworks */,
-				BA2DEAA9FCB3BD2AD0AAE6CB /* libPods-FasT-box-office.a in Frameworks */,
+				3051D8620200909A628119E1 /* Pods_FasT_box_office.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		134162EAAA42A377FE1B548A /* Pods */ = {
+		543882CB25CA3F56C4E57613 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				23389E06C3306F7E3523B6BA /* Pods-FasT-box-office.debug.xcconfig */,
-				69933584CF2CC13CFFF09D09 /* Pods-FasT-box-office.release.xcconfig */,
+				AB45CD37D5DDF7B61EA5C33B /* Pods-FasT-box-office.debug.xcconfig */,
+				B0F4386667092663DD1AE547 /* Pods-FasT-box-office.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -214,13 +185,11 @@
 		C2C558E913E8D50D246B8771 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F0320AFE1B569FA9006D9937 /* socket.IO */,
 				F0320A3A1B569E69006D9937 /* NSDate-Extensions */,
-				F03211181B56A5BD006D9937 /* libicucore.dylib */,
 				F03211041B56A241006D9937 /* UIKit.framework */,
 				F03211021B56A235006D9937 /* CoreGraphics.framework */,
 				F03211001B56A1A7006D9937 /* QuartzCore.framework */,
-				EE39B71ADADE4536EB5AE9BB /* libPods-FasT-box-office.a */,
+				87BF9E78E3353FED640280AE /* Pods_FasT_box_office.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -231,9 +200,9 @@
 				F03203961B569AC9006D9937 /* FasT-box-office */,
 				F03204031B569DBE006D9937 /* FasT-objc-common */,
 				F0320A561B569EE7006D9937 /* ESCPrinter */,
-				134162EAAA42A377FE1B548A /* Pods */,
 				C2C558E913E8D50D246B8771 /* Frameworks */,
 				F03203951B569AC9006D9937 /* Products */,
+				543882CB25CA3F56C4E57613 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -349,56 +318,6 @@
 			path = "FasT-box-office/ESCPrinter";
 			sourceTree = SOURCE_ROOT;
 		};
-		F0320AFE1B569FA9006D9937 /* socket.IO */ = {
-			isa = PBXGroup;
-			children = (
-				F0320B031B569FA9006D9937 /* SocketIO.h */,
-				F0320B041B569FA9006D9937 /* SocketIO.m */,
-				F0320B051B569FA9006D9937 /* SocketIOJSONSerialization.h */,
-				F0320B061B569FA9006D9937 /* SocketIOJSONSerialization.m */,
-				F0320B071B569FA9006D9937 /* SocketIOPacket.h */,
-				F0320B081B569FA9006D9937 /* SocketIOPacket.m */,
-				F0320B091B569FA9006D9937 /* SocketIOTransport.h */,
-				F0320B0A1B569FA9006D9937 /* SocketIOTransportWebsocket.h */,
-				F0320B0B1B569FA9006D9937 /* SocketIOTransportWebsocket.m */,
-				F0320B0C1B569FA9006D9937 /* SocketIOTransportXHR.h */,
-				F0320B0D1B569FA9006D9937 /* SocketIOTransportXHR.m */,
-				F0320B1D1B569FA9006D9937 /* submodules */,
-			);
-			name = socket.IO;
-			path = submodules/socket.IO;
-			sourceTree = "<group>";
-		};
-		F0320B1D1B569FA9006D9937 /* submodules */ = {
-			isa = PBXGroup;
-			children = (
-				F0320CDC1B569FAA006D9937 /* socket-rocket */,
-			);
-			path = submodules;
-			sourceTree = "<group>";
-		};
-		F0320CDC1B569FAA006D9937 /* socket-rocket */ = {
-			isa = PBXGroup;
-			children = (
-				F0320E101B569FAB006D9937 /* SocketRocket */,
-			);
-			path = "socket-rocket";
-			sourceTree = "<group>";
-		};
-		F0320E101B569FAB006D9937 /* SocketRocket */ = {
-			isa = PBXGroup;
-			children = (
-				F0320E111B569FAB006D9937 /* base64.c */,
-				F0320E121B569FAB006D9937 /* base64.h */,
-				F0320E131B569FAB006D9937 /* NSData+SRB64Additions.h */,
-				F0320E141B569FAB006D9937 /* NSData+SRB64Additions.m */,
-				F0320E151B569FAB006D9937 /* SocketRocket-Prefix.pch */,
-				F0320E161B569FAB006D9937 /* SRWebSocket.h */,
-				F0320E171B569FAB006D9937 /* SRWebSocket.m */,
-			);
-			path = SocketRocket;
-			sourceTree = "<group>";
-		};
 		F032113F1B56B376006D9937 /* purchase */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,11 +423,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F03203B71B569AC9006D9937 /* Build configuration list for PBXNativeTarget "FasT-box-office" */;
 			buildPhases = (
-				B933CA3441C8189E0950E9EF /* Check Pods Manifest.lock */,
+				67ED9211406E3082C8C10C6D /* [CP] Check Pods Manifest.lock */,
 				F03203901B569AC9006D9937 /* Sources */,
 				F03203911B569AC9006D9937 /* Frameworks */,
 				F03203921B569AC9006D9937 /* Resources */,
-				304D8ACFDBAEB7D815919D16 /* Copy Pods Resources */,
+				A15D16A894F379120A8DB733 /* [CP] Embed Pods Frameworks */,
+				F96B6BFFC7B0EBD1C45F0A05 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -525,7 +445,7 @@
 		F032038C1B569AC9006D9937 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Albisigns;
 				TargetAttributes = {
 					F03203931B569AC9006D9937 = {
@@ -568,34 +488,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		304D8ACFDBAEB7D815919D16 /* Copy Pods Resources */ = {
+		67ED9211406E3082C8C10C6D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B933CA3441C8189E0950E9EF /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A15D16A894F379120A8DB733 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F96B6BFFC7B0EBD1C45F0A05 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -611,18 +546,14 @@
 				F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */,
 				F03207A51B569DC0006D9937 /* FasTTicketPrintersTableViewController.m in Sources */,
 				F03203F81B569CF6006D9937 /* FasTOrderTicketTypesCell.m in Sources */,
-				F0320E511B569FAB006D9937 /* SocketIOJSONSerialization.m in Sources */,
 				F03203FF1B569CF6006D9937 /* FasTReceiptPrintersTableViewController.m in Sources */,
-				F0320E501B569FAB006D9937 /* SocketIO.m in Sources */,
 				F03203F71B569CF6006D9937 /* FasTOrdersSearchViewController.m in Sources */,
 				F032079A1B569DC0006D9937 /* FasTConstants.m in Sources */,
 				F03203F51B569CF6006D9937 /* FasTOrderDetailsViewController.m in Sources */,
 				F03203F01B569CF6006D9937 /* FasTCartTicketItem.m in Sources */,
-				F0320E521B569FAB006D9937 /* SocketIOPacket.m in Sources */,
 				F03203F31B569CF6006D9937 /* FasTOrderDatesViewController.m in Sources */,
 				F03203FB1B569CF6006D9937 /* FasTProduct.m in Sources */,
 				F03203FC1B569CF6006D9937 /* FasTPurchasePaymentViewController.m in Sources */,
-				F0320E541B569FAB006D9937 /* SocketIOTransportXHR.m in Sources */,
 				F03203C51B569C87006D9937 /* FasTAppDelegate.m in Sources */,
 				F032079F1B569DC0006D9937 /* FasTOrder.m in Sources */,
 				F03203F61B569CF6006D9937 /* FasTOrderSeatsViewController.m in Sources */,
@@ -630,10 +561,8 @@
 				F03203FE1B569CF6006D9937 /* FasTReceiptPrinter.m in Sources */,
 				F03203FA1B569CF6006D9937 /* FasTOrderViewController.m in Sources */,
 				F03203F21B569CF6006D9937 /* FasTMainViewControllerSegue.m in Sources */,
-				F03210C11B569FAB006D9937 /* NSData+SRB64Additions.m in Sources */,
 				F03203EE1B569CF6006D9937 /* FasTCartItem.m in Sources */,
 				F03203F91B569CF6006D9937 /* FasTOrderTicketTypesViewController.m in Sources */,
-				F03210C01B569FAB006D9937 /* base64.c in Sources */,
 				F032079E1B569DC0006D9937 /* FasTLogEvent.m in Sources */,
 				F0320A401B569E69006D9937 /* NSDate-Utilities.m in Sources */,
 				F03207A61B569DC0006D9937 /* FasTTicketType.m in Sources */,
@@ -644,11 +573,9 @@
 				F032079C1B569DC0006D9937 /* FasTEventDate.m in Sources */,
 				F03204001B569CF6006D9937 /* FasTSettingsViewController.m in Sources */,
 				F03207991B569DC0006D9937 /* FasTBarcode3of9.m in Sources */,
-				F03210C21B569FAB006D9937 /* SRWebSocket.m in Sources */,
 				F032039A1B569AC9006D9937 /* main.m in Sources */,
 				F03207A01B569DC0006D9937 /* FasTSeat.m in Sources */,
 				F032079D1B569DC0006D9937 /* FasTFormatter.m in Sources */,
-				F0320E531B569FAB006D9937 /* SocketIOTransportWebsocket.m in Sources */,
 				F03203F41B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */,
 				F032079B1B569DC0006D9937 /* FasTEvent.m in Sources */,
 				F03207A21B569DC0006D9937 /* FasTSeatView.m in Sources */,
@@ -681,6 +608,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -698,6 +626,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -730,6 +659,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -771,9 +701,10 @@
 		};
 		F03203B81B569AC9006D9937 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23389E06C3306F7E3523B6BA /* Pods-FasT-box-office.debug.xcconfig */;
+			baseConfigurationReference = AB45CD37D5DDF7B61EA5C33B /* Pods-FasT-box-office.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -783,17 +714,19 @@
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.albisigns.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		F03203B91B569AC9006D9937 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69933584CF2CC13CFFF09D09 /* Pods-FasT-box-office.release.xcconfig */;
+			baseConfigurationReference = B0F4386667092663DD1AE547 /* Pods-FasT-box-office.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -803,8 +736,9 @@
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.albisigns.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
