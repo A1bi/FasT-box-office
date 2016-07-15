@@ -43,7 +43,6 @@
 		F03207A11B569DC0006D9937 /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F032041B1B569DBE006D9937 /* FasTSeatingView.m */; };
 		F03207A21B569DC0006D9937 /* FasTSeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = F032041D1B569DBE006D9937 /* FasTSeatView.m */; };
 		F03207A31B569DC0006D9937 /* FasTTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = F032041F1B569DBE006D9937 /* FasTTicket.m */; };
-		F03207A51B569DC0006D9937 /* FasTTicketPrintersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03204231B569DBE006D9937 /* FasTTicketPrintersTableViewController.m */; };
 		F03207A61B569DC0006D9937 /* FasTTicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = F03204251B569DBE006D9937 /* FasTTicketType.m */; };
 		F0320A401B569E69006D9937 /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320A3D1B569E69006D9937 /* NSDate-Utilities.m */; };
 		F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F0320A581B569EE7006D9937 /* ESCPrinter.m */; };
@@ -131,15 +130,8 @@
 		F032041F1B569DBE006D9937 /* FasTTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicket.m; sourceTree = "<group>"; };
 		F03204201B569DBE006D9937 /* FasTTicketPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketPrinter.h; sourceTree = "<group>"; };
 		F03204211B569DBE006D9937 /* FasTTicketPrinter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketPrinter.m; sourceTree = "<group>"; };
-		F03204221B569DBE006D9937 /* FasTTicketPrintersTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketPrintersTableViewController.h; sourceTree = "<group>"; };
-		F03204231B569DBE006D9937 /* FasTTicketPrintersTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketPrintersTableViewController.m; sourceTree = "<group>"; };
 		F03204241B569DBE006D9937 /* FasTTicketType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketType.h; sourceTree = "<group>"; };
 		F03204251B569DBE006D9937 /* FasTTicketType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketType.m; sourceTree = "<group>"; };
-		F03204271B569DBE006D9937 /* PKJob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKJob.h; sourceTree = "<group>"; };
-		F03204281B569DBE006D9937 /* PKPaper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPaper.h; sourceTree = "<group>"; };
-		F03204291B569DBE006D9937 /* PKPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPrinter.h; sourceTree = "<group>"; };
-		F032042A1B569DBE006D9937 /* PKPrinterBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPrinterBrowser.h; sourceTree = "<group>"; };
-		F032042B1B569DBE006D9937 /* PKPrintSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPrintSettings.h; sourceTree = "<group>"; };
 		F0320A3B1B569E69006D9937 /* do-git */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.csh; path = "do-git"; sourceTree = "<group>"; };
 		F0320A3C1B569E69006D9937 /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
 		F0320A3D1B569E69006D9937 /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
@@ -274,27 +266,12 @@
 				F032041F1B569DBE006D9937 /* FasTTicket.m */,
 				F03204201B569DBE006D9937 /* FasTTicketPrinter.h */,
 				F03204211B569DBE006D9937 /* FasTTicketPrinter.m */,
-				F03204221B569DBE006D9937 /* FasTTicketPrintersTableViewController.h */,
-				F03204231B569DBE006D9937 /* FasTTicketPrintersTableViewController.m */,
 				F03204241B569DBE006D9937 /* FasTTicketType.h */,
 				F03204251B569DBE006D9937 /* FasTTicketType.m */,
-				F03204261B569DBE006D9937 /* PrintKit */,
 			);
 			name = "FasT-objc-common";
 			path = "submodules/FasT-objc-common";
 			sourceTree = SOURCE_ROOT;
-		};
-		F03204261B569DBE006D9937 /* PrintKit */ = {
-			isa = PBXGroup;
-			children = (
-				F03204271B569DBE006D9937 /* PKJob.h */,
-				F03204281B569DBE006D9937 /* PKPaper.h */,
-				F03204291B569DBE006D9937 /* PKPrinter.h */,
-				F032042A1B569DBE006D9937 /* PKPrinterBrowser.h */,
-				F032042B1B569DBE006D9937 /* PKPrintSettings.h */,
-			);
-			path = PrintKit;
-			sourceTree = "<group>";
 		};
 		F0320A3A1B569E69006D9937 /* NSDate-Extensions */ = {
 			isa = PBXGroup;
@@ -544,7 +521,6 @@
 				F03203EF1B569CF6006D9937 /* FasTCartProductItem.m in Sources */,
 				F03203F11B569CF6006D9937 /* FasTMainViewController.m in Sources */,
 				F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */,
-				F03207A51B569DC0006D9937 /* FasTTicketPrintersTableViewController.m in Sources */,
 				F03203F81B569CF6006D9937 /* FasTOrderTicketTypesCell.m in Sources */,
 				F03203FF1B569CF6006D9937 /* FasTReceiptPrintersTableViewController.m in Sources */,
 				F03203F71B569CF6006D9937 /* FasTOrdersSearchViewController.m in Sources */,
@@ -646,10 +622,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-framework",
-					PrintKit,
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -689,10 +662,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"-framework",
-					PrintKit,
-				);
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -710,7 +680,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PODS_ROOT)/iZettleSDK/iZettleSDK\"",
-					"$(SDKROOT)/System/Library/PrivateFrameworks",
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
@@ -732,7 +701,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PODS_ROOT)/iZettleSDK/iZettleSDK\"",
-					"$(SDKROOT)/System/Library/PrivateFrameworks",
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";

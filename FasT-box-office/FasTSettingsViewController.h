@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FasTSettingsViewController : UITableViewController
+@interface FasTSettingsViewController : UITableViewController <UIPrinterPickerControllerDelegate>
 
 @end

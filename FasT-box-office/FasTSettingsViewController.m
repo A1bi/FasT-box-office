@@ -47,7 +47,25 @@
 {
     if ([[tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"electronicPaymentSettingCell"]) {
         [[iZettleSDK shared] presentSettingsFromViewController:self];
+    } else if ([[tableView cellForRowAtIndexPath:indexPath].reuseIdentifier isEqualToString:@"ticketPrinterSettingCell"]) {
+        UIPrinterPickerController *printerPicker = [UIPrinterPickerController printerPickerControllerWithInitiallySelectedPrinter:nil];
+        printerPicker.delegate = self;
+        [printerPicker presentAnimated:YES completionHandler:^(UIPrinterPickerController * _Nonnull printerPickerController, BOOL userDidSelect, NSError * _Nullable error) {
+            if (userDidSelect && !error) {
+                UIPrinter *printer = printerPickerController.selectedPrinter;
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:printer.displayName forKey:FasTTicketPrinterUrlPrefKey];
+                [defaults setObject:printer.URL.absoluteString forKey:FasTTicketPrinterUrlPrefKey];
+            }
+        }];
     }
+}
+
+#pragma mark - printer picker delegate
+
+- (UIViewController *)printerPickerControllerParentViewController:(UIPrinterPickerController *)printerPickerController
+{
+    return self;
 }
 
 @end
