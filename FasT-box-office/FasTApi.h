@@ -21,11 +21,11 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 @class FasTEvent;
 @class FasTOrder;
 @class SocketIOClient;
-@class MKNetworkEngine;
+@class AFHTTPSessionManager;
 
 @interface FasTApi : NSObject
 {
-    MKNetworkEngine *netEngine;
+    AFHTTPSessionManager *http;
     SocketIOClient *sIO;
     FasTEvent *event;
     NSString *clientType;

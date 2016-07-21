@@ -27,7 +27,7 @@
     orders = [[NSMutableArray alloc] init];
     
     // orders can be at most 200 days old
-    ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 200] retain];
+    ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 200] retain];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -68,7 +68,7 @@
                 }
             }
             
-            if (((NSArray *)response[@"orders"]).count == 1) {
+            if (orders.count == 1) {
                 highlightedTicketId = response[@"ticket_id"];
                 [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }

@@ -14,7 +14,7 @@
 #import "FasTTicketType.h"
 
 @import SocketIOClientSwift;
-@import MKNetworkKit;
+@import AFNetworking;
 
 NSString * const FasTApiIsReadyNotification = @"FasTApiIsReadyNotification";
 NSString * const FasTApiUpdatedSeatsNotification = @"FasTApiUpdatedSeatsNotification";
@@ -27,11 +27,9 @@ NSString * const FasTApiCannotConnectNotification = @"FasTApiCannotConnectNotifi
 static FasTApi *defaultApi = nil;
 
 #ifdef DEBUG
-    static NSString *kFasTApiUrl = @"ao-mbp.local:4000";
-    static BOOL kFasTApiSSL = NO;
+#define kFasTApiUrl @"http://ao-mbp.local:4000"
 #else
-    static NSString *kFasTApiUrl = @"www.theater-kaisersesch.de";
-    static BOOL kFasTApiSSL = YES;
+#define kFasTApiUrl @"https://www.theater-kaisersesch.de"
 #endif
 
 #define kFasTApiTimeOut 10
@@ -41,7 +39,6 @@ static FasTApi *defaultApi = nil;
 - (id)initWithClientType:(NSString *)cType clientId:(NSString *)cId;
 - (void)makeJsonRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)makeJsonRequestWithResource:(NSString *)resource action:(NSString *)action method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
-- (void)makeRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(void (^)(NSData *))callback;
 - (void)makeRequestWithAction:(NSString *)action method:(NSString *)method tickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback;
 - (void)connectToNode;
 - (void)postNotificationWithName:(NSString *)name info:(NSDictionary *)info;
@@ -92,7 +89,9 @@ static FasTApi *defaultApi = nil;
 {
     self = [super init];
     if (self) {
-        netEngine = [[MKNetworkEngine alloc] initWithHostName:kFasTApiUrl];
+        http = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kFasTApiUrl]];
+        [http setRequestSerializer:[AFJSONRequestSerializer serializer]];
+        [http setResponseSerializer:[AFJSONResponseSerializer serializer]];
         
         clientType = [cType retain];
         clientId = [cId retain];
@@ -102,7 +101,7 @@ static FasTApi *defaultApi = nil;
 
 - (void)dealloc
 {
-    [netEngine release];
+    [http release];
     [sIO release];
     [event release];
     [clientType release];
@@ -135,41 +134,26 @@ static FasTApi *defaultApi = nil;
 
 - (void)makeJsonRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback
 {
-	MKNetworkOperation *op = [netEngine operationWithPath:path params:data httpMethod:method ssl:kFasTApiSSL];
-    [op addHeaders:@{@"Accept": @"application/json"}];
-	[op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
-#ifdef DEBUG
-    [op setShouldContinueWithInvalidCertificate:YES];
-#endif
-	
-    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-		if (callback) callback([completedOperation responseJSON]);
-        
-	} errorHandler:^(MKNetworkOperation *completedOperation, NSError* error) {
-		NSLog(@"%@", error);
-        if (callback) callback(nil);
-	}];
-	
-	[netEngine enqueueOperation:op];
-}
-
-- (void)makeRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(void (^)(NSData *))callback
-{
-    MKNetworkOperation *op = [netEngine operationWithPath:path params:data httpMethod:method ssl:kFasTApiSSL];
-    [op setPostDataEncoding:MKNKPostDataEncodingTypeJSON];
-#ifdef DEBUG
-    [op setShouldContinueWithInvalidCertificate:YES];
-#endif
-	
-    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-		if (callback) callback([completedOperation responseData]);
-        
-	} errorHandler:^(MKNetworkOperation *completedOperation, NSError* error) {
-		NSLog(@"%@", error);
-        if (callback) callback(nil);
-	}];
-	
-	[netEngine enqueueOperation:op];
+    void(^success)(NSURLSessionDataTask *task, id responseObject) = ^(NSURLSessionDataTask *task, id responseObject) {
+        if (callback) {
+            callback(responseObject);
+        }
+    };
+    
+    void(^failure)(NSURLSessionDataTask *task, NSError *error) = ^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"%@", error);
+        if (callback) {
+            callback(nil);
+        }
+    };
+    
+    if ([method isEqualToString:@"POST"]) {
+        [http POST:path parameters:data progress:nil success:success failure:failure];
+    } else if ([method isEqualToString:@"PATCH"]) {
+        [http PATCH:path parameters:data success:success failure:failure];
+    } else {
+        [http GET:path parameters:data progress:nil success:success failure:failure];
+    }
 }
 
 - (void)resetSeating
@@ -262,9 +246,11 @@ static FasTApi *defaultApi = nil;
 - (void)fetchPrintableForTickets:(NSArray *)tickets callback:(void (^)(NSData *data))callback
 {
     NSArray *ticketIds = [self ticketIdsForTickets:tickets];
-    
-    [self makeRequestWithPath:@"api/box_office/ticket_printable" method:@"POST" data:@{ @"ticket_ids": ticketIds } callback:^(NSData *data) {
-        callback(data);
+    [http GET:@"api/box_office/ticket_printable" parameters:@{ @"ticket_ids": ticketIds } progress:nil success:NULL failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain]) {
+            NSData *data = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+            callback(data);
+        }
     }];
 }
 
@@ -285,8 +271,7 @@ static FasTApi *defaultApi = nil;
 
 - (NSString *)URLForOrder:(FasTOrder *)order
 {
-    NSString *scheme = kFasTApiSSL ? @"https" : @"http";
-    return [NSString stringWithFormat:@"%@://%@/vorverkauf/bestellungen/%@", scheme, kFasTApiUrl, order.orderId];
+    return [NSString stringWithFormat:@"%@/vorverkauf/bestellungen/%@", kFasTApiUrl, order.orderId];
 }
 
 - (NSArray *)ticketIdsForTickets:(NSArray *)tickets
@@ -303,9 +288,9 @@ static FasTApi *defaultApi = nil;
     if (nodeConnectionInitiated) return;
     nodeConnectionInitiated = true;
     
-    NSString *scheme = kFasTApiSSL ? @"https" : @"http";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", scheme, kFasTApiUrl]];
-    sIO = [[SocketIOClient alloc] initWithSocketURL:url options:@{@"log": @YES, @"path": @"/node/", @"nsp": [NSString stringWithFormat:@"/%@", clientType]}];
+    NSURL *url = [NSURL URLWithString:kFasTApiUrl];
+    NSDictionary *options = @{@"log": @YES, @"path": @"/node/", @"nsp": [NSString stringWithFormat:@"/%@", clientType]};
+    sIO = [[SocketIOClient alloc] initWithSocketURL:url options:options];
     
     inHibernation = YES;
     

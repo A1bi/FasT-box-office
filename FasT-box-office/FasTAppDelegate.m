@@ -10,6 +10,7 @@
 #import "FasTApi.h"
 #import "FasTReceiptPrinter.h"
 @import iZettleSDK;
+@import AFNetworking;
 
 @implementation FasTAppDelegate
 
@@ -19,6 +20,8 @@
     [[FasTApi defaultApi] initNodeConnection];
     
     [[iZettleSDK shared] startWithAPIKey:@"360E8DAABB8C8283D1F4B0D79CDB0B55"];
+    
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *receiptPrinterHostname = [defaults valueForKey:@"FasTReceiptPrinterHostname"];
