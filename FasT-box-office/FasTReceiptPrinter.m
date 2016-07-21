@@ -9,7 +9,7 @@
 #import "FasTReceiptPrinter.h"
 #import "FasTCartItem.h"
 #import "FasTFormatter.h"
-#import <iZettleSDK/iZettleSDK.h>
+@import iZettleSDK;
 
 @interface ESCPrinter ()
 

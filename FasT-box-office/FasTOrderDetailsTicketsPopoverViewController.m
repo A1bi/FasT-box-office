@@ -11,7 +11,7 @@
 #import "FasTOrder.h"
 #import "FasTTicketPrinter.h"
 #import "FasTApi.h"
-#import "MBProgressHUD.h"
+@import MBProgressHUD;
 
 @interface FasTOrderDetailsTicketsPopoverViewController ()
 
@@ -119,13 +119,13 @@
         NSString *alertTitle, *alertMessage, *actionTitle;
         SEL apiSelector;
         if ([identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverCancelCell"]) {
-            alertMessage = [NSString stringWithFormat:@"Möchten Sie %i Tickets wirklich stornieren?", _tickets.count];
+            alertMessage = [NSString stringWithFormat:@"Möchten Sie %tu Tickets wirklich stornieren?", _tickets.count];
             alertTitle = @"Tickets stornieren";
             actionTitle = @"stornieren";
             apiSelector = @selector(cancelTickets:callback:);
             
         } else {
-            alertMessage = [NSString stringWithFormat:@"Möchten Sie %i Tickets wirklich zum Weiterverkauf freigeben?", _tickets.count];
+            alertMessage = [NSString stringWithFormat:@"Möchten Sie %tu Tickets wirklich zum Weiterverkauf freigeben?", _tickets.count];
             alertTitle = @"Tickets zum Weiterverkauf freigeben";
             actionTitle = @"freigeben";
             apiSelector = @selector(enableResaleForTickets:callback:);

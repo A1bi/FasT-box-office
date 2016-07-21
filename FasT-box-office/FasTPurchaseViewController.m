@@ -23,7 +23,7 @@
 #import "FasTSeat.h"
 #import "FasTTicketPrinter.h"
 #import "FasTReceiptPrinter.h"
-#import "MBProgressHUD.h"
+@import MBProgressHUD;
 
 @interface FasTPurchaseViewController ()
 {
@@ -76,7 +76,7 @@
         [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
         [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
             for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
-                if ([date.date isToday]) {
+                if ([[NSCalendar currentCalendar] isDateInToday:date.date]) {
                     _todaysDate = date;
                     break;
                 }

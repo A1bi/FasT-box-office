@@ -10,9 +10,12 @@
 #import "FasTApi.h"
 #import "FasTOrder.h"
 #import "FasTOrderDetailsViewController.h"
-#import "MBProgressHUD.h"
+@import MBProgressHUD;
 
 @interface FasTOrdersSearchViewController ()
+{
+    NSDate *ordersStartDate;
+}
 
 @end
 
@@ -22,6 +25,9 @@
 {
     [super viewDidLoad];
     orders = [[NSMutableArray alloc] init];
+    
+    // orders can be at most 200 days old
+    ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 200] retain];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -35,6 +41,7 @@
     [_tableView release];
     [orders release];
     [highlightedTicketId release];
+    [ordersStartDate release];
     [_searchFields release];
     [super dealloc];
 }
@@ -56,7 +63,7 @@
             
             for (NSDictionary *orderInfo in response[@"orders"]) {
                 FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
-                if ([order.created laterDate:[NSDate dateWithDaysBeforeNow:200]] == order.created) {
+                if ([order.created laterDate:ordersStartDate] == order.created) {
                     [orders addObject:order];
                 }
             }

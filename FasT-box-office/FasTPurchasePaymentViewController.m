@@ -11,8 +11,8 @@
 #import "FasTFormatter.h"
 #import "FasTCartItem.h"
 #import "FasTApi.h"
-#import "MBProgressHUD.h"
-#import <iZettleSDK/iZettleSDK.h>
+@import MBProgressHUD;
+@import iZettleSDK;
 
 @interface FasTPurchasePaymentViewController ()
 {

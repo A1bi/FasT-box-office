@@ -8,7 +8,7 @@
 
 #import "FasTSettingsViewController.h"
 #import "FasTConstants.h"
-#import <iZettleSDK/iZettleSDK.h>
+@import iZettleSDK;
 
 @interface FasTSettingsViewController ()
 

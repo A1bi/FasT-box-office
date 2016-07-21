@@ -9,7 +9,7 @@
 #import "FasTAppDelegate.h"
 #import "FasTApi.h"
 #import "FasTReceiptPrinter.h"
-#import <iZettleSDK/iZettleSDK.h>
+@import iZettleSDK;
 
 @implementation FasTAppDelegate
 
