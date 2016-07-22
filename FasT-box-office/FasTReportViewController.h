@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FasTReportBillViewController.h"
 
-@interface FasTReportViewController : UITableViewController
+@interface FasTReportViewController : UITableViewController <FasTReportBillViewControllerDelegate>
 
 @end

@@ -22,6 +22,7 @@
 		F02F879E1D41728100B5B0F3 /* FasTTicketPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F878F1D41728100B5B0F3 /* FasTTicketPrinter.m */; };
 		F02F879F1D41728100B5B0F3 /* FasTTicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87911D41728100B5B0F3 /* FasTTicketType.m */; };
 		F02F87A31D422BD500B5B0F3 /* FasTReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87A21D422BD500B5B0F3 /* FasTReportViewController.m */; };
+		F02F87A71D423B2200B5B0F3 /* FasTReportBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87A61D423B2200B5B0F3 /* FasTReportBillViewController.m */; };
 		F032039A1B569AC9006D9937 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203991B569AC9006D9937 /* main.m */; };
 		F03203C51B569C87006D9937 /* FasTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203C41B569C87006D9937 /* FasTAppDelegate.m */; };
 		F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F03203C61B569C9F006D9937 /* Storyboard.storyboard */; };
@@ -86,6 +87,8 @@
 		F02F87911D41728100B5B0F3 /* FasTTicketType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicketType.m; sourceTree = "<group>"; };
 		F02F87A11D422BD500B5B0F3 /* FasTReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTReportViewController.h; sourceTree = "<group>"; };
 		F02F87A21D422BD500B5B0F3 /* FasTReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTReportViewController.m; sourceTree = "<group>"; };
+		F02F87A51D423B2200B5B0F3 /* FasTReportBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTReportBillViewController.h; sourceTree = "<group>"; };
+		F02F87A61D423B2200B5B0F3 /* FasTReportBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTReportBillViewController.m; sourceTree = "<group>"; };
 		F03203941B569AC9006D9937 /* FasT-box-office.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FasT-box-office.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03203991B569AC9006D9937 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F03203C31B569C87006D9937 /* FasTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTAppDelegate.h; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 			children = (
 				F02F87A11D422BD500B5B0F3 /* FasTReportViewController.h */,
 				F02F87A21D422BD500B5B0F3 /* FasTReportViewController.m */,
+				F02F87A51D423B2200B5B0F3 /* FasTReportBillViewController.h */,
+				F02F87A61D423B2200B5B0F3 /* FasTReportBillViewController.m */,
 			);
 			name = report;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				F03203F11B569CF6006D9937 /* FasTMainViewController.m in Sources */,
 				F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */,
 				F03203F81B569CF6006D9937 /* FasTOrderTicketTypesCell.m in Sources */,
+				F02F87A71D423B2200B5B0F3 /* FasTReportBillViewController.m in Sources */,
 				F03203FF1B569CF6006D9937 /* FasTReceiptPrintersTableViewController.m in Sources */,
 				F02F879F1D41728100B5B0F3 /* FasTTicketType.m in Sources */,
 				F02F87991D41728100B5B0F3 /* FasTOrder.m in Sources */,

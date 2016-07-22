@@ -23,6 +23,7 @@
 @implementation FasTReportViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self refreshData];
 }
 
@@ -38,10 +39,24 @@
     }];
 }
 
+- (void)dismissBillControllerWithSuccess:(BOOL)success {
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    if (success) {
+        [self refreshData];
+    }
+}
+
 - (void)dealloc {
     [products release];
     [billings release];
     [super dealloc];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"FasTReportBillSegue"]) {
+        FasTReportBillViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
