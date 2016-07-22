@@ -1069,7 +1069,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="%@ x %@" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-eU-7WZ">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%@ x %@" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vx-eU-7WZ">
                                                     <rect key="frame" x="162" y="12" width="138" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1083,6 +1083,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3vx-eU-7WZ" firstAttribute="leading" secondItem="mRx-Fd-L72" secondAttribute="trailing" constant="90" id="0xm-FP-dSu"/>
+                                                <constraint firstItem="3vx-eU-7WZ" firstAttribute="top" secondItem="Dyu-kC-4V8" secondAttribute="top" id="MO0-3w-IJy"/>
+                                                <constraint firstItem="Dyu-kC-4V8" firstAttribute="leading" secondItem="3vx-eU-7WZ" secondAttribute="trailing" constant="42" id="pn8-Jw-YEg"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -1158,32 +1163,32 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKd-et-OSH">
-                                <rect key="frame" x="332" y="670" width="234" height="47"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
-                                <state key="normal" title="Warenkorb leeren">
-                                    <color key="titleColor" red="0.9332540761" green="0.065893878569999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelPurchase" destination="WAc-pj-Rng" eventType="touchUpInside" id="ar0-Jh-9Mk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWJ-bm-TQB">
-                                <rect key="frame" x="20" y="670" width="174" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWJ-bm-TQB">
+                                <rect key="frame" x="20" y="670" width="188" height="47"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <state key="normal" title="Kasse öffnen"/>
                                 <connections>
                                     <action selector="openCashDrawer" destination="WAc-pj-Rng" eventType="touchUpInside" id="UZm-tR-eEL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbr-PG-OHe">
-                                <rect key="frame" x="649" y="670" width="230" height="47"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbr-PG-OHe">
+                                <rect key="frame" x="631" y="670" width="248" height="47"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <state key="normal" title="Kauf abschließen">
                                     <color key="titleColor" red="0.11363265290231465" green="0.68862516983695654" blue="0.18107296559773783" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="Od7-Si-dwM" kind="modal" identifier="FasTPurchasePaymentSegue" modalPresentationStyle="formSheet" id="25M-rE-egZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKd-et-OSH">
+                                <rect key="frame" x="321" y="670" width="256" height="47"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                <state key="normal" title="Warenkorb leeren">
+                                    <color key="titleColor" red="0.9332540761" green="0.065893878569999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelPurchase" destination="WAc-pj-Rng" eventType="touchUpInside" id="ar0-Jh-9Mk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1230,7 +1235,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyD-WE-Eak">
-                                        <rect key="frame" x="15" y="403" width="103" height="79"/>
+                                        <rect key="frame" x="12" y="343" width="103" height="79"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="Suchen">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1240,13 +1245,23 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oye-w8-Caa">
-                                        <rect key="frame" x="15" y="286" width="96" height="70"/>
+                                        <rect key="frame" x="15" y="226" width="96" height="70"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="Kasse">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <segue destination="WAc-pj-Rng" kind="custom" identifier="PurchaseSegue" customClass="FasTMainViewControllerSegue" id="ies-mj-AvR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69J-og-J9y">
+                                        <rect key="frame" x="4" y="462" width="119" height="79"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Abrechnung">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="IeV-pO-MpV" kind="custom" identifier="ReportSegue" customClass="FasTMainViewControllerSegue" id="tgw-8J-o2d"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1334,6 +1349,35 @@
             </objects>
             <point key="canvasLocation" x="882.5" y="1170"/>
         </scene>
+        <!--Abrechnung-->
+        <scene sceneID="NYb-rY-KV8">
+            <objects>
+                <tableViewController id="RTb-mw-XKL" customClass="FasTReportViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="PC4-e0-WYI">
+                        <rect key="frame" x="0.0" y="0.0" width="899" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="iZu-0U-gXg">
+                                <rect key="frame" x="0.0" y="114" width="899" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iZu-0U-gXg" id="ovo-sS-sGH">
+                                    <rect key="frame" x="0.0" y="0.0" width="899" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RTb-mw-XKL" id="rfw-Li-34A"/>
+                            <outlet property="delegate" destination="RTb-mw-XKL" id="X5f-of-bpF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Abrechnung" id="OKq-nl-Aog"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1q-U3-tPO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969.5" y="2075"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Ap-oQ-Jpp">
             <objects>
@@ -1353,6 +1397,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKc-gx-rMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="882.5" y="306"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lbO-oh-chB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IeV-pO-MpV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="899" height="768"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MKL-SW-WwG">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RTb-mw-XKL" kind="relationship" relationship="rootViewController" id="uZF-EU-1s3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xYB-hw-rm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="882.5" y="2075"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
