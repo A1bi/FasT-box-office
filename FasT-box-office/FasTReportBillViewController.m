@@ -28,11 +28,9 @@
 }
 
 - (IBAction)submit:(id)sender {
-    NSString *amountText = [_amountField.text stringByReplacingOccurrencesOfString:@"," withString:@"."];
-    
     NSNumberFormatter *formatter = [[[NSNumberFormatter alloc] init] autorelease];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
-    NSNumber *amount = [formatter numberFromString:amountText];
+    NSNumber *amount = [formatter numberFromString:_amountField.text];
     
     if (amount.floatValue != 0) {
         amount = [NSNumber numberWithFloat:amount.floatValue * -1];

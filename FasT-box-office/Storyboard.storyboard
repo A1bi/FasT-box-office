@@ -1399,7 +1399,7 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KTJ-A5-kQm">
                                 <rect key="frame" x="0.0" y="0.0" width="500" height="44"/>
                                 <items>
-                                    <navigationItem title="Neue Kassebuchung" id="PEf-qe-6Oo">
+                                    <navigationItem title="Neue Kassenbuchung" id="PEf-qe-6Oo">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="01R-2n-CaY">
                                             <connections>
                                                 <action selector="cancel:" destination="DZf-p2-3Oo" id="Jn8-rH-zuD"/>
