@@ -127,7 +127,7 @@
     if (_finished) return;
     
     NSDecimalNumber *total = [[[NSDecimalNumber alloc] initWithFloat:_total] autorelease];
-    [[iZettleSDK shared] chargeAmount:total currency:nil reference:@"bla" presentFromViewController:self completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {
+    [[iZettleSDK shared] chargeAmount:total currency:nil reference:@"Abendkasse" presentFromViewController:self completion:^(iZettleSDKPaymentInfo *paymentInfo, NSError *error) {
         if (paymentInfo) {
             [self finish];
             [self savePurchaseWithPayMethod:@"electronic_cash"];

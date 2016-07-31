@@ -56,16 +56,6 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"products" callback:^(NSDictionary *response) {
-            NSMutableArray *tmpProducts = [NSMutableArray array];
-            for (NSDictionary *productInfo in response[@"products"]) {
-                FasTProduct *product = [[[FasTProduct alloc] initWithId:productInfo[@"id"] name:productInfo[@"name"] price:((NSNumber *)productInfo[@"price"]).floatValue] autorelease];
-                [tmpProducts addObject:product];
-            }
-            _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
-            [self.availableProductsTable reloadData];
-        }];
-        
         _cartItems = [[NSMutableArray alloc] init];
         _ticketsToPay = [[NSMutableArray alloc] init];
         _placedOrders = [[NSMutableArray alloc] init];
@@ -84,6 +74,16 @@
             if (!_todaysDate) {
                 _todaysDate = [FasTApi defaultApi].event.dates.lastObject;
             }
+            
+            [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"products" callback:^(NSDictionary *response) {
+                NSMutableArray *tmpProducts = [NSMutableArray array];
+                for (NSDictionary *productInfo in response[@"products"]) {
+                    FasTProduct *product = [[[FasTProduct alloc] initWithId:productInfo[@"id"] name:productInfo[@"name"] price:((NSNumber *)productInfo[@"price"]).floatValue] autorelease];
+                    [tmpProducts addObject:product];
+                }
+                _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
+                [self.availableProductsTable reloadData];
+            }];
         }];
     }
     return self;
