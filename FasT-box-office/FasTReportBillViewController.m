@@ -37,7 +37,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSDictionary *data = @{ @"amount": amount, @"reason": _reasonField.text };
         [[FasTApi defaultApi] postResource:@"api/box_office" withAction:@"bill" data:data callback:^(NSDictionary *response) {
-            [hud hide:YES];
+            [hud hideAnimated:YES];
             [self dismissWithSuccess:YES];
         }];
     }

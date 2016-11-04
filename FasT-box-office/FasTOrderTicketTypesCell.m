@@ -14,10 +14,6 @@
 
 @implementation FasTOrderTicketTypesCell
 
-- (void)awakeFromNib {
-    
-}
-
 - (IBAction)numberChanged:(UIStepper *)sender {
     _numberLabel.text = [NSString stringWithFormat:@"%li", (long)sender.value];
 }

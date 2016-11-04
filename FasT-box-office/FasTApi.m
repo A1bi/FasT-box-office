@@ -13,7 +13,7 @@
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
 
-@import SocketIOClientSwift;
+@import SocketIO;
 @import AFNetworking;
 
 NSString * const FasTApiIsReadyNotification = @"FasTApiIsReadyNotification";
@@ -158,7 +158,7 @@ static FasTApi *defaultApi = nil;
 
 - (void)resetSeating
 {
-    [sIO emit:@"reset" withItems:@[]];
+    [sIO emit:@"reset" with:@[]];
 }
 
 - (void)unlockSeats
@@ -196,16 +196,17 @@ static FasTApi *defaultApi = nil;
 - (void)setDate:(NSString *)dateId numberOfSeats:(NSInteger)numberOfSeats callback:(FasTApiResponseBlock)callback
 {
     NSDictionary *data = @{ @"date": dateId, @"numberOfSeats": @(numberOfSeats) };
-    [sIO emitWithAck:@"setDateAndNumberOfSeats" withItems:@[data]](0, ^(NSArray* data) {
+    OnAckCallback *ackCallback = [sIO emitWithAck:@"setDateAndNumberOfSeats" with:@[data]];
+    [ackCallback timingOutAfter:5 callback:^(NSArray *data) {
         NSDictionary *response = data.count > 0 ? data[0] : nil;
         callback(response);
-    });
+    }];
 }
 
 - (void)chooseSeatWithId:(NSString *)seatId
 {
     NSDictionary *data = @{ @"seatId": seatId };
-    [sIO emit:@"chooseSeat" withItems:@[data]];
+    [sIO emit:@"chooseSeat" with:@[data]];
 }
 
 - (void)connectToNode
@@ -290,7 +291,7 @@ static FasTApi *defaultApi = nil;
     
     NSURL *url = [NSURL URLWithString:kFasTApiUrl];
     NSDictionary *options = @{@"log": @YES, @"path": @"/node/", @"nsp": [NSString stringWithFormat:@"/%@", clientType]};
-    sIO = [[SocketIOClient alloc] initWithSocketURL:url options:options];
+    sIO = [[SocketIOClient alloc] initWithSocketURL:url config:options];
     
     inHibernation = YES;
     

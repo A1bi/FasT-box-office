@@ -53,10 +53,10 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
+    hud.label.text = NSLocalizedStringByKey(@"pleaseWait");
     
     [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"search" data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
-        [hud hide:YES];
+        [hud hideAnimated:YES];
         
         if (!response[@"error"]) {
             [orders removeAllObjects];

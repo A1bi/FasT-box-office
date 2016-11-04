@@ -380,7 +380,7 @@
         [self addTicketsToPay:order.tickets];
         [_placedOrders addObject:order];
         
-        [hud hide:YES];
+        [hud hideAnimated:YES];
     }];
 }
 

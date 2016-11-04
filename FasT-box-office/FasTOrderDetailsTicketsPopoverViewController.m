@@ -135,10 +135,10 @@
         UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [hud setMode:MBProgressHUDModeIndeterminate];
-            [hud setLabelText:NSLocalizedStringByKey(@"pleaseWait")];
+            hud.label.text = NSLocalizedStringByKey(@"pleaseWait");
             [[FasTApi defaultApi] performSelector:apiSelector withObject:_tickets withObject:^(FasTOrder *order) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTUpdatedOrderInfo" object:nil userInfo:@{ @"order": order }];
-                [hud hide:YES];
+                [hud hideAnimated:YES];
             }];
             
             [self dismiss];
