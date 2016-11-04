@@ -19,7 +19,7 @@
     "ABB939127996C66F7E852A780552ADEEF03C6B13" : "FasT-box-officesubmodules\/FasT-objc-common\/submodules\/socket.IO\/submodules\/socket-rocket",
     "2FF848319764E0EFB4BD54544F7E2E2A0760261A" : "FasT-box-officesubmodules\/FasT-objc-common\/submodules\/MKNetworkKit",
     "1F601A37F0218B98FD4991D9D51BA9E46A39A47A" : "FasT-box-officesubmodules\/NSDate-Extensions",
-    "12D55410060795FD69C81764DE07E17E046FE729" : "FasT-box-office",
+    "12D55410060795FD69C81764DE07E17E046FE729" : "FasT-box-office\/",
     "43AC92FD7017ECDE18489EEA6AD2FD795E158D7E" : "FasT-box-officesubmodules\/FasT-objc-common\/submodules\/socket.IO"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "FasT-box-office",

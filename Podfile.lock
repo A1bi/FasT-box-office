@@ -15,21 +15,21 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - iZettleSDK (1.3.0)
-  - MBProgressHUD (0.9.1)
-  - Socket.IO-Client-Swift (6.1.4)
+  - MBProgressHUD (1.0.0)
+  - Socket.IO-Client-Swift (8.1.1)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.0)
+  - AFNetworking (~> 3.1.0)
   - iZettleSDK (~> 1.3.0)
-  - MBProgressHUD (~> 0.9.1)
-  - Socket.IO-Client-Swift (~> 6.1.4)
+  - MBProgressHUD (~> 1.0.0)
+  - Socket.IO-Client-Swift (~> 8.1.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   iZettleSDK: c192ec6ea6cf3a2c923ddf5191d3882f929a151f
-  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  Socket.IO-Client-Swift: 79dfbbe170d7816c84e2d3cc2baa3d227549e067
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  Socket.IO-Client-Swift: 5c18fa2af9df8a19d20e4df815141103c1f7079b
 
-PODFILE CHECKSUM: 2e3f97ef5dd0068cafaa28384c16632c6aa54156
+PODFILE CHECKSUM: ad11bafdb5e1ec91de48e44aa24c9b186b9dc566
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1
