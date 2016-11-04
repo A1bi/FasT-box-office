@@ -13,6 +13,7 @@
 #import "FasTTicketType.h"
 #import "FasTLogEvent.h"
 #import "FasTSeat.h"
+#import "FasTEvent.h"
 #import "FasTEventDate.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
@@ -275,7 +276,10 @@
                         }
                         break;
                     case 6:
-                        label.text = [NSString stringWithFormat:label.text, ticket.seat.blockName, ticket.seat.number];
+                        label.hidden = !ticket.date.event.isBoundToSeats;
+                        if (!label.hidden) {
+                            label.text = [NSString stringWithFormat:label.text, ticket.seat.blockName, ticket.seat.number];
+                        }
                 }
             }
             if ([_highlightedTicketId isKindOfClass:[NSString class]] && [_highlightedTicketId isEqualToString:ticket.ticketId]) {

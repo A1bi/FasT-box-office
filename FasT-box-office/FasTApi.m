@@ -158,12 +158,16 @@ static FasTApi *defaultApi = nil;
 
 - (void)resetSeating
 {
-    [sIO emit:@"reset" with:@[]];
+    if (seatingId) {
+        [sIO emit:@"reset" with:@[]];
+    }
 }
 
 - (void)unlockSeats
 {
-    [self makeJsonRequestWithPath:@"api/box_office/unlock_seats" method:@"POST" data:@{ @"seating_id": seatingId } callback:NULL];
+    if (seatingId) {
+        [self makeJsonRequestWithPath:@"api/box_office/unlock_seats" method:@"POST" data:@{ @"seating_id": seatingId } callback:NULL];
+    }
 }
 
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order
@@ -236,7 +240,10 @@ static FasTApi *defaultApi = nil;
         ticketsInfo[ticket.type.typeId] = @(number);
     }
     
-    NSDictionary *orderInfo = @{ @"date": order.date.dateId, @"seatingId": seatingId, @"tickets": ticketsInfo };
+    NSMutableDictionary *orderInfo = [@{ @"date": order.date.dateId, @"tickets": ticketsInfo } mutableCopy];
+    if (seatingId) {
+        orderInfo[@"seatingId"] = seatingId;
+    }
     
     [self makeJsonRequestWithPath:@"api/box_office/place_order" method:@"POST" data:@{ @"order": orderInfo } callback:^(NSDictionary *response) {
         FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:event] autorelease];
@@ -360,7 +367,11 @@ static FasTApi *defaultApi = nil;
     if (inHibernation) [self postNotificationWithName:FasTApiConnectingNotification info:nil];
     inHibernation = NO;
     [self fetchCurrentEvent:^() {
-        [self connectToNode];
+        if (event.isBoundToSeats) {
+            [self connectToNode];
+        } else {
+            [self postNotificationWithName:FasTApiIsReadyNotification info:nil];
+        }
     }];
 }
 

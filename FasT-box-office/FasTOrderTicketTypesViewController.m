@@ -87,7 +87,11 @@
         FasTOrder *order = ((FasTOrderViewController *)self.navigationController).order;
         order.tickets = tickets;
         
-        return YES;
+        if (![FasTApi defaultApi].event.isBoundToSeats) {
+            [((FasTOrderViewController *)self.navigationController).delegate didPlaceOrder:order];
+        } else {
+            return YES;
+        }
     }
     
     return NO;

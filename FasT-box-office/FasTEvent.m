@@ -13,7 +13,7 @@
 
 @implementation FasTEvent
 
-@synthesize name, dates, ticketTypes, seats;
+@synthesize name, dates, ticketTypes, seats, isBoundToSeats;
 
 - (id)initWithInfo:(NSDictionary *)info
 {
@@ -46,6 +46,8 @@
                 [seat release];
             }
         }
+        
+        isBoundToSeats = [info[@"bound_to_seats"] boolValue];
     }
     return self;
 }

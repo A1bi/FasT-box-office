@@ -14,12 +14,14 @@
     NSArray *dates;
     NSArray *ticketTypes;
     NSMutableDictionary *seats;
+    BOOL isBoundToSeats;
 }
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *dates;
 @property (nonatomic, retain) NSArray *ticketTypes;
 @property (nonatomic, readonly) NSMutableDictionary *seats;
+@property (nonatomic, assign) BOOL isBoundToSeats;
 
 - (id)initWithInfo:(NSDictionary *)info;
 - (void)updateSeats:(NSDictionary *)seatsInfo;
