@@ -413,7 +413,7 @@
 		F032038C1B569AC9006D9937 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Albisigns;
 				TargetAttributes = {
 					F03203931B569AC9006D9937 = {
@@ -668,7 +668,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AB45CD37D5DDF7B61EA5C33B /* Pods-FasT-box-office.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
@@ -693,7 +692,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B0F4386667092663DD1AE547 /* Pods-FasT-box-office.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;

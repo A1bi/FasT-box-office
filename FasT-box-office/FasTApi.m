@@ -240,7 +240,7 @@ static FasTApi *defaultApi = nil;
         ticketsInfo[ticket.type.typeId] = @(number);
     }
     
-    NSMutableDictionary *orderInfo = [@{ @"date": order.date.dateId, @"tickets": ticketsInfo } mutableCopy];
+    NSMutableDictionary *orderInfo = [[@{ @"date": order.date.dateId, @"tickets": ticketsInfo } mutableCopy] autorelease];
     if (seatingId) {
         orderInfo[@"seatingId"] = seatingId;
     }

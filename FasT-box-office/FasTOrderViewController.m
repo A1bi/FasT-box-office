@@ -52,8 +52,9 @@
 
 - (void)dealloc
 {
+    [_order release];
+    [_cancelBtn release];
     [super dealloc];
-    [_order dealloc];
 }
 
 @end

@@ -33,6 +33,8 @@
 - (void)dealloc
 {
     [_rows release];
+    [_popover release];
+    [_tickets release];
     [super dealloc];
 }
 

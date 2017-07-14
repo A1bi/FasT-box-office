@@ -115,7 +115,7 @@
             return cell;
         }
     }
-    return nil;
+    return [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
 @end
