@@ -55,8 +55,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"OrdersSearchSegue"]) {
-        FasTOrdersSearchViewController *search = [(UINavigationController *)segue.destinationViewController viewControllers][0];
-        [search clearFormAndResults];
+        NSArray *vcs = ((UINavigationController *)segue.destinationViewController).viewControllers;
+        if (vcs.count < 2) {
+            FasTOrdersSearchViewController *search = vcs.firstObject;
+            [search clearFormAndResults];
+        }
     }
 }
 

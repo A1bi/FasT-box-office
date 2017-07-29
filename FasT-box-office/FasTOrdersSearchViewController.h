@@ -15,7 +15,7 @@
 }
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
-@property (retain, nonatomic) IBOutletCollection(UITextField) NSArray *searchFields;
+@property (retain, nonatomic) IBOutlet UITextField *searchField;
 
 - (IBAction)didEnterSearchTerm:(UITextField *)sender;
 - (void)clearFormAndResults;

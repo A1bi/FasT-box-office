@@ -94,19 +94,19 @@
 
 - (void)reload
 {
-    UIColor *color = _order.balance < 0 ? [UIColor redColor] : [UIColor greenColor];
+    UIColor *color = _order.paid ? [UIColor greenColor] : [UIColor redColor];
+    NSAttributedString *paid = [[[NSAttributedString alloc] initWithString:(_order.paid ? @"ja" : @"nein") attributes:@{ NSForegroundColorAttributeName: color, NSFontAttributeName: [UIFont boldSystemFontOfSize:18] }] autorelease];
     
-    NSAttributedString *balance = [[[NSAttributedString alloc] initWithString:[_order localizedBalance] attributes:@{ NSForegroundColorAttributeName: color }] autorelease];
-    
-    NSMutableArray *rows = [NSMutableArray arrayWithArray:@[
-                                                            @[@"Nummer", _order.number],
-                                                            @[@"Besteller", [_order fullNameWithLastNameFirst:YES]],
-                                                            @[@"Gesamtbetrag", [_order localizedTotal]],
-                                                            @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]],
-                                                            @[@"Saldo", balance]
-                                                            ]];
     [_infoTableRows release];
-    _infoTableRows = [[NSArray arrayWithArray:rows] retain];
+    _infoTableRows = [NSMutableArray arrayWithArray:@[
+        @[@"Nummer", _order.number],
+        @[@"Besteller", [_order fullNameWithLastNameFirst:YES]],
+        @[@"Gesamtbetrag", [_order localizedTotal]],
+        @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]],
+        @[@"bezahlt", paid],
+        @[@"Saldo", [_order localizedBalance]]
+    ]];
+    [_infoTableRows retain];
     
     self.refundBarButton.enabled = _order.balance != 0;
 }

@@ -21,28 +21,35 @@
 
 @implementation FasTOrdersSearchViewController
 
-- (void)viewDidLoad
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    [super viewDidLoad];
-    orders = [[NSMutableArray alloc] init];
-    
-    // orders can be at most 200 days old
-    ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 200] retain];
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        orders = [[NSMutableArray alloc] init];
+        
+        // orders can be at most 200 days old
+        ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 200] retain];
+    }
+    return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+    
+    if (orders.count < 1) {
+        [_searchField becomeFirstResponder];
+    }
 }
 
 - (void)dealloc
 {
     [_tableView release];
+    [_searchField release];
     [orders release];
     [highlightedTicketId release];
     [ordersStartDate release];
-    [_searchFields release];
     [super dealloc];
 }
 
@@ -80,9 +87,7 @@
 
 - (void)clearFormAndResults
 {
-    for (UITextField *field in _searchFields) {
-        field.text = nil;
-    }
+    _searchField.text = nil;
     [orders removeAllObjects];
     [self.tableView reloadData];
 }
