@@ -69,9 +69,9 @@
 {
     [self setAlignment:ESCPrinterAlignmentCenter];
     [self setFont:ESCPrinterFontB adjustLineSpacing:YES];
-    [self text:@"Wir wünschen Ihnen viel Spaß bei\n„Ladykillers“!\n"];
+    [self text:@"Wir wünschen Ihnen viel Spaß bei\n„Ein Sommernachtstraum“!\n"];
     [self feedLines:2];
-    [self text:@"Freilichtbühne am schiefen Turm e. V.\nPostfach 1262\n56759 Kaisersesch\ninfo@theater-kaisersesch.de\n(02653) 282709"];
+    [self text:@"Freilichtbühne am schiefen Turm e. V.\nPostfach 1262\n56759 Kaisersesch\ninfo@theater-kaisersesch.de\n(02653) 282709\nUmsatzsteuer-ID: DE295892528"];
 }
 
 - (void)printCartItems:(NSArray *)cartItems
