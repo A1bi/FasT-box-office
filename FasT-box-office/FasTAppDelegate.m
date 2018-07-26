@@ -11,6 +11,7 @@
 #import "FasTReceiptPrinter.h"
 @import iZettleSDK;
 @import AFNetworking;
+@import Sentry;
 
 @implementation FasTAppDelegate
 
@@ -22,6 +23,14 @@
     [[iZettleSDK shared] startWithAPIKey:@"360E8DAABB8C8283D1F4B0D79CDB0B55"];
     
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+    NSError *error = nil;
+    SentryClient *client = [[SentryClient alloc] initWithDsn:@"https://5af12ad54ae04c27b41df3485083d378@sentry.a0s.de/6" didFailWithError:&error];
+    SentryClient.sharedClient = client;
+    [SentryClient.sharedClient startCrashHandlerWithError:&error];
+    if (nil != error) {
+        NSLog(@"%@", error);
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *receiptPrinterHostname = [defaults valueForKey:@"FasTReceiptPrinterHostname"];
