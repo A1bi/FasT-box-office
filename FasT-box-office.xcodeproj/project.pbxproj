@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3051D8620200909A628119E1 /* Pods_FasT_box_office.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87BF9E78E3353FED640280AE /* Pods_FasT_box_office.framework */; };
+		F0079951210A8E21001FADBC /* FasTTodaysOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0079950210A8E21001FADBC /* FasTTodaysOrdersViewController.m */; };
 		F02F87921D41728100B5B0F3 /* FasTApi.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87771D41728100B5B0F3 /* FasTApi.m */; };
 		F02F87941D41728100B5B0F3 /* FasTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F877B1D41728100B5B0F3 /* FasTConstants.m */; };
 		F02F87951D41728100B5B0F3 /* FasTEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F877D1D41728100B5B0F3 /* FasTEvent.m */; };
@@ -53,12 +54,15 @@
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
+		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		87BF9E78E3353FED640280AE /* Pods_FasT_box_office.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FasT_box_office.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB45CD37D5DDF7B61EA5C33B /* Pods-FasT-box-office.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.debug.xcconfig"; sourceTree = "<group>"; };
 		B0F4386667092663DD1AE547 /* Pods-FasT-box-office.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FasT-box-office.release.xcconfig"; path = "Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office.release.xcconfig"; sourceTree = "<group>"; };
+		F007994F210A8E21001FADBC /* FasTTodaysOrdersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTTodaysOrdersViewController.h; sourceTree = "<group>"; };
+		F0079950210A8E21001FADBC /* FasTTodaysOrdersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTTodaysOrdersViewController.m; sourceTree = "<group>"; };
 		F02F87761D41728100B5B0F3 /* FasTApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTApi.h; sourceTree = "<group>"; };
 		F02F87771D41728100B5B0F3 /* FasTApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTApi.m; sourceTree = "<group>"; };
 		F02F877A1D41728100B5B0F3 /* FasTConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTConstants.h; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 		F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ReceiptHeaderImage.jpg; sourceTree = "<group>"; };
 		F032114B1B586144006D9937 /* FasTCartOrderPaymentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCartOrderPaymentItem.h; sourceTree = "<group>"; };
 		F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTCartOrderPaymentItem.m; sourceTree = "<group>"; };
+		F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrdersListViewController.h; sourceTree = "<group>"; };
+		F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,37 +187,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F02F87A01D41728A00B5B0F3 /* common */ = {
+		F02F87A01D41728A00B5B0F3 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				F02F87761D41728100B5B0F3 /* FasTApi.h */,
-				F02F87771D41728100B5B0F3 /* FasTApi.m */,
-				F02F877A1D41728100B5B0F3 /* FasTConstants.h */,
-				F02F877B1D41728100B5B0F3 /* FasTConstants.m */,
 				F02F877C1D41728100B5B0F3 /* FasTEvent.h */,
 				F02F877D1D41728100B5B0F3 /* FasTEvent.m */,
 				F02F877E1D41728100B5B0F3 /* FasTEventDate.h */,
 				F02F877F1D41728100B5B0F3 /* FasTEventDate.m */,
-				F02F87801D41728100B5B0F3 /* FasTFormatter.h */,
-				F02F87811D41728100B5B0F3 /* FasTFormatter.m */,
 				F02F87821D41728100B5B0F3 /* FasTLogEvent.h */,
 				F02F87831D41728100B5B0F3 /* FasTLogEvent.m */,
 				F02F87841D41728100B5B0F3 /* FasTOrder.h */,
 				F02F87851D41728100B5B0F3 /* FasTOrder.m */,
 				F02F87861D41728100B5B0F3 /* FasTSeat.h */,
 				F02F87871D41728100B5B0F3 /* FasTSeat.m */,
-				F02F87881D41728100B5B0F3 /* FasTSeatingView.h */,
-				F02F87891D41728100B5B0F3 /* FasTSeatingView.m */,
-				F02F878A1D41728100B5B0F3 /* FasTSeatView.h */,
-				F02F878B1D41728100B5B0F3 /* FasTSeatView.m */,
 				F02F878C1D41728100B5B0F3 /* FasTTicket.h */,
 				F02F878D1D41728100B5B0F3 /* FasTTicket.m */,
-				F02F878E1D41728100B5B0F3 /* FasTTicketPrinter.h */,
-				F02F878F1D41728100B5B0F3 /* FasTTicketPrinter.m */,
 				F02F87901D41728100B5B0F3 /* FasTTicketType.h */,
 				F02F87911D41728100B5B0F3 /* FasTTicketType.m */,
 			);
-			name = common;
+			name = models;
 			sourceTree = "<group>";
 		};
 		F02F87A41D422BDC00B5B0F3 /* report */ = {
@@ -255,9 +249,12 @@
 				F03211401B56B39F006D9937 /* order details */,
 				F03211411B56B3B4006D9937 /* new order */,
 				F03211421B56B3C0006D9937 /* orders search */,
+				F041CCDE210A8DAD002568BE /* today's unpaid */,
 				F02F87A41D422BDC00B5B0F3 /* report */,
 				F03211431B56B3FA006D9937 /* Settings */,
-				F02F87A01D41728A00B5B0F3 /* common */,
+				F02F87A01D41728A00B5B0F3 /* models */,
+				F041CCDD210A8CF0002568BE /* common */,
+				F0F8F1E6210A8CA1005FAF06 /* common UI */,
 				F03203971B569AC9006D9937 /* Supporting Files */,
 			);
 			path = "FasT-box-office";
@@ -382,6 +379,43 @@
 				F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */,
 			);
 			name = assets;
+			sourceTree = "<group>";
+		};
+		F041CCDD210A8CF0002568BE /* common */ = {
+			isa = PBXGroup;
+			children = (
+				F02F87761D41728100B5B0F3 /* FasTApi.h */,
+				F02F87771D41728100B5B0F3 /* FasTApi.m */,
+				F02F877A1D41728100B5B0F3 /* FasTConstants.h */,
+				F02F877B1D41728100B5B0F3 /* FasTConstants.m */,
+				F02F87801D41728100B5B0F3 /* FasTFormatter.h */,
+				F02F87811D41728100B5B0F3 /* FasTFormatter.m */,
+				F02F878E1D41728100B5B0F3 /* FasTTicketPrinter.h */,
+				F02F878F1D41728100B5B0F3 /* FasTTicketPrinter.m */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		F041CCDE210A8DAD002568BE /* today's unpaid */ = {
+			isa = PBXGroup;
+			children = (
+				F007994F210A8E21001FADBC /* FasTTodaysOrdersViewController.h */,
+				F0079950210A8E21001FADBC /* FasTTodaysOrdersViewController.m */,
+			);
+			name = "today's unpaid";
+			sourceTree = "<group>";
+		};
+		F0F8F1E6210A8CA1005FAF06 /* common UI */ = {
+			isa = PBXGroup;
+			children = (
+				F02F87881D41728100B5B0F3 /* FasTSeatingView.h */,
+				F02F87891D41728100B5B0F3 /* FasTSeatingView.m */,
+				F02F878A1D41728100B5B0F3 /* FasTSeatView.h */,
+				F02F878B1D41728100B5B0F3 /* FasTSeatView.m */,
+				F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */,
+				F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */,
+			);
+			name = "common UI";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,6 +573,7 @@
 				F02F87981D41728100B5B0F3 /* FasTLogEvent.m in Sources */,
 				F02F87A31D422BD500B5B0F3 /* FasTReportViewController.m in Sources */,
 				F03203F21B569CF6006D9937 /* FasTMainViewControllerSegue.m in Sources */,
+				F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */,
 				F03203EE1B569CF6006D9937 /* FasTCartItem.m in Sources */,
 				F03203F91B569CF6006D9937 /* FasTOrderTicketTypesViewController.m in Sources */,
 				F02F87921D41728100B5B0F3 /* FasTApi.m in Sources */,
@@ -551,6 +586,7 @@
 				F02F87971D41728100B5B0F3 /* FasTFormatter.m in Sources */,
 				F032039A1B569AC9006D9937 /* main.m in Sources */,
 				F02F87961D41728100B5B0F3 /* FasTEventDate.m in Sources */,
+				F0079951210A8E21001FADBC /* FasTTodaysOrdersViewController.m in Sources */,
 				F03203F41B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

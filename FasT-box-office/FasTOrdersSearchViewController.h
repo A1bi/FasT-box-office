@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FasTOrdersListViewController.h"
 
-@interface FasTOrdersSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FasTOrdersSearchViewController : FasTOrdersListViewController <UITableViewDataSource, UITableViewDelegate>
 {
-    NSMutableArray *orders;
     NSString *highlightedTicketId;
 }
 
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (retain, nonatomic) IBOutlet UITextField *searchField;
 
 - (IBAction)didEnterSearchTerm:(UITextField *)sender;

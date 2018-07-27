@@ -10,6 +10,7 @@
 #import "FasTApi.h"
 #import "FasTOrder.h"
 #import "FasTOrderDetailsViewController.h"
+
 @import MBProgressHUD;
 
 @interface FasTOrdersSearchViewController ()
@@ -25,8 +26,6 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        orders = [[NSMutableArray alloc] init];
-        
         // orders can be at most 200 days old
         ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 200] retain];
     }
@@ -36,7 +35,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
     
     if (orders.count < 1) {
         [_searchField becomeFirstResponder];
@@ -45,9 +43,7 @@
 
 - (void)dealloc
 {
-    [_tableView release];
     [_searchField release];
-    [orders release];
     [highlightedTicketId release];
     [ordersStartDate release];
     [super dealloc];
@@ -76,7 +72,7 @@
             }
             
             if (orders.count == 1) {
-                highlightedTicketId = response[@"ticket_id"];
+                highlightedTicketId = [response[@"ticket_id"] retain];
                 [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
             }
             
@@ -92,36 +88,6 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [orders count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [orders count] ? @"Suchergebnisse" : @"Keine Bestellungen gefunden";
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    FasTOrder *order = orders[[indexPath row]];
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:(order.cancelled) ? @"FasTOrdersCancelledTableCell" : @"FasTOrdersTableCell"];
-    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"#%@", [order number]]];
-    [(UILabel *)[cell viewWithTag:2] setText:[order fullNameWithLastNameFirst:YES]];
-    [(UILabel *)[cell viewWithTag:3] setText:[NSString stringWithFormat:NSLocalizedStringByKey(@"numberOfTickets"), [order numberOfTickets]]];
-    [(UILabel *)[cell viewWithTag:4] setText:[order localizedTotal]];
-    
-    return cell;
-}
-
 #pragma mark storyboard delegate
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -131,8 +97,7 @@
         details.order = [orders firstObject];
         details.highlightedTicketId = highlightedTicketId;
     } else {
-        NSIndexPath *path = [_tableView indexPathForCell:sender];
-        details.order = orders[path.row];
+        [super prepareForSegue:segue sender:sender];
     }
 }
 
