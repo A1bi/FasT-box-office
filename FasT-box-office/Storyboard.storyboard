@@ -1417,7 +1417,7 @@
                                             <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="qce-BH-chl" kind="custom" identifier="TodaysSegue" customClass="FasTMainViewControllerSegue" id="uFx-wu-Ah1"/>
+                                            <segue destination="qce-BH-chl" kind="custom" identifier="TodaysOrdersSegue" customClass="FasTMainViewControllerSegue" id="uFx-wu-Ah1"/>
                                         </connections>
                                     </button>
                                 </subviews>

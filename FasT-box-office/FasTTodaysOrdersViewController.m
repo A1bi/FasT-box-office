@@ -46,6 +46,7 @@
 - (void)updateOrders
 {
     [refresh beginRefreshing];
+    [self retain];
     
     [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"todays" callback:^(NSDictionary *response) {
         
@@ -61,6 +62,7 @@
         }
         
         [refresh endRefreshing];
+        [self release];
     }];
 }
 

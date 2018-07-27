@@ -25,7 +25,7 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     NSError *error = nil;
-    SentryClient *client = [[SentryClient alloc] initWithDsn:@"https://5af12ad54ae04c27b41df3485083d378@sentry.a0s.de/6" didFailWithError:&error];
+    SentryClient *client = [[[SentryClient alloc] initWithDsn:@"https://5af12ad54ae04c27b41df3485083d378@sentry.a0s.de/6" didFailWithError:&error] autorelease];
     SentryClient.sharedClient = client;
     [SentryClient.sharedClient startCrashHandlerWithError:&error];
     if (nil != error) {
