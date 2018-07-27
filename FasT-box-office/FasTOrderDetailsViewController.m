@@ -24,8 +24,11 @@
     NSDateFormatter *_dateFormatter;
     BOOL _selectAllTicketsToggle;
     NSObject *_ordersObserver;
+    
+    UIRefreshControl *_refresh;
 }
 
+- (void)update;
 - (void)reload;
 - (void)updateAfterTicketSelection;
 
@@ -51,6 +54,7 @@
     [_dateFormatter release];
     [_ticketsPopoverBarButton release];
     [_refundBarButton release];
+    [_refresh release];
     [super dealloc];
 }
 
@@ -62,6 +66,10 @@
         [self reload];
         self.navigationItem.title = [NSString stringWithFormat:self.navigationItem.title, _order.number];
     }
+    
+    _refresh = [[UIRefreshControl alloc] init];
+    [_refresh addTarget:self action:@selector(update) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:_refresh];
     
     [self.tableView setEditing:YES animated:NO];
     [self.navigationController setToolbarHidden:NO];
@@ -90,6 +98,19 @@
     
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)update
+{
+    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:[NSString stringWithFormat:@"orders/%@", _order.orderId] callback:^(NSDictionary *response) {
+        if (response[@"order"]) {
+            self.order = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:[[FasTApi defaultApi] event]] autorelease];
+            [self reload];
+            [self.tableView reloadData];
+        }
+        
+        [_refresh endRefreshing];
+    }];
 }
 
 - (void)reload
