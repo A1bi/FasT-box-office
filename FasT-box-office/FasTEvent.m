@@ -13,12 +13,13 @@
 
 @implementation FasTEvent
 
-@synthesize name, dates, ticketTypes, seats, isBoundToSeats;
+@synthesize eventId, name, dates, ticketTypes, seats, isBoundToSeats;
 
 - (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
     if (self) {
+        [self setEventId:info[@"id"]];
         [self setName:info[@"name"]];
         
         NSMutableArray *tmp = [NSMutableArray array];
@@ -54,6 +55,7 @@
 
 - (void)dealloc
 {
+    [eventId release];
     [name release];
     [dates release];
     [ticketTypes release];

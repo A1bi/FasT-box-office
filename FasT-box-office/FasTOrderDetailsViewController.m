@@ -299,7 +299,7 @@
                     case 6:
                         label.hidden = !ticket.date.event.isBoundToSeats;
                         if (!label.hidden) {
-                            label.text = [NSString stringWithFormat:label.text, ticket.seat.blockName, ticket.seat.number];
+                            label.text = [NSString stringWithFormat:label.text, ticket.seat.fullNumber];
                         }
                 }
             }

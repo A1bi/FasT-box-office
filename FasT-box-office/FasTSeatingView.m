@@ -88,8 +88,6 @@ static float    kSizeFactorsY = 2.8;
     CGRect frame;
 	frame.size.width = [sizes[0] floatValue];
 	frame.size.height = [sizes[1] floatValue];
-	frame.origin.x = [grid[0] floatValue] * [seat posX];
-	frame.origin.y = [grid[1] floatValue] * [seat posY];
 	
 	FasTSeatView *seatView = [[[FasTSeatView alloc] initWithFrame:frame seatId:[seat seatId]] autorelease];
     [seatView setDelegate:[self delegate]];

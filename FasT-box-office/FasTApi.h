@@ -27,21 +27,21 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 {
     AFHTTPSessionManager *http;
     SocketIOClient *sIO;
-    FasTEvent *event;
+    NSDictionary *events;
     NSString *clientType;
     NSString *clientId;
     NSString *seatingId;
     BOOL inHibernation, nodeConnectionInitiated;
 }
 
-@property (nonatomic, retain) FasTEvent *event;
+@property (nonatomic, readonly) NSDictionary *events;
 @property (nonatomic, readonly) NSString *clientType;
 @property (nonatomic, readonly) NSString *clientId;
 
 + (FasTApi *)defaultApi;
 + (FasTApi *)defaultApiWithClientType:(NSString *)cType clientId:(NSString *)cId;
 
-- (void)fetchCurrentEvent:(void (^)())callback;
+- (void)fetchEvents:(void (^)(void))callback;
 - (void)initNodeConnection;
 - (void)getResource:(NSString *)resource withAction:(NSString *)action callback:(FasTApiResponseBlock)callback;
 - (void)getResource:(NSString *)resource withAction:(NSString *)action data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
@@ -58,5 +58,6 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order;
 - (void)cancelTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
 - (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
+- (FasTEvent *)event;
 
 @end

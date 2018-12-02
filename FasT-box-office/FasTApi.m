@@ -47,7 +47,6 @@ static FasTApi *defaultApi = nil;
 - (void)scheduleReconnect;
 - (void)abortAndReconnect;
 - (void)killScheduledTasks;
-- (void)initEventWithInfo:(NSDictionary *)info;
 - (void)appWillResignActive;
 - (NSArray *)ticketIdsForTickets:(NSArray *)tickets;
 
@@ -55,7 +54,7 @@ static FasTApi *defaultApi = nil;
 
 @implementation FasTApi
 
-@synthesize event, clientType, clientId;
+@synthesize events, clientType, clientId;
 
 + (FasTApi *)defaultApi
 {
@@ -103,7 +102,7 @@ static FasTApi *defaultApi = nil;
 {
     [http release];
     [sIO release];
-    [event release];
+    [events release];
     [clientType release];
     [clientId release];
     [super dealloc];
@@ -220,10 +219,16 @@ static FasTApi *defaultApi = nil;
 
 #pragma mark class methods
 
-- (void)fetchCurrentEvent:(void (^)())callback
+- (void)fetchEvents:(void (^)(void))callback
 {
-    [self getResource:@"api/box_office" withAction:@"event" callback:^(NSDictionary *response) {
-        [self initEventWithInfo:response];
+    NSMutableDictionary *tmpEvents = [NSMutableDictionary dictionary];
+    [self getResource:@"api/box_office" withAction:@"events" callback:^(NSDictionary *response) {
+        for (NSDictionary *eventInfo in response[@"events"]) {
+            FasTEvent *event = [[[FasTEvent alloc] initWithInfo:eventInfo] autorelease];
+            tmpEvents[event.eventId] = event;
+        }
+        [events release];
+        events = [[tmpEvents copy] retain];
         if (callback) callback();
     }];
 }
@@ -246,7 +251,7 @@ static FasTApi *defaultApi = nil;
     }
     
     [self makeJsonRequestWithPath:@"api/box_office/place_order" method:@"POST" data:@{ @"order": orderInfo } callback:^(NSDictionary *response) {
-        FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:event] autorelease];
+        FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:self.event] autorelease];
         callback(newOrder);
     }];
 }
@@ -336,7 +341,7 @@ static FasTApi *defaultApi = nil;
     
     [sIO on:@"updateSeats" callback:^(NSArray *args, SocketAckEmitter *ack) {
         NSDictionary *seats = args[0][@"seats"];
-        [event updateSeats:seats];
+        [self.event updateSeats:seats];
 
         [self postNotificationWithName:FasTApiUpdatedSeatsNotification info:seats];
     }];
@@ -366,12 +371,8 @@ static FasTApi *defaultApi = nil;
     
     if (inHibernation) [self postNotificationWithName:FasTApiConnectingNotification info:nil];
     inHibernation = NO;
-    [self fetchCurrentEvent:^() {
-        if (event.isBoundToSeats) {
-            [self connectToNode];
-        } else {
-            [self postNotificationWithName:FasTApiIsReadyNotification info:nil];
-        }
+    [self fetchEvents:^() {
+        [self connectToNode];
     }];
 }
 
@@ -401,15 +402,14 @@ static FasTApi *defaultApi = nil;
     [self performSelector:@selector(prepareNodeConnection) withObject:nil afterDelay:5];
 }
 
-- (void)initEventWithInfo:(NSDictionary *)info
-{
-    FasTEvent *ev = [[[FasTEvent alloc] initWithInfo:info] autorelease];
-    [self setEvent:ev];
-}
-
 - (void)appWillResignActive
 {
     [self killScheduledTasks];
+}
+
+- (FasTEvent *)event
+{
+    return (FasTEvent *)events.allValues.lastObject;
 }
 
 @end
