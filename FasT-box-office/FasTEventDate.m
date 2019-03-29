@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        event = [e retain];
+        event = e;
         
         NSInteger dateTimestamp = [info[@"date"] integerValue];
         date = [[NSDate dateWithTimeIntervalSince1970:dateTimestamp] retain];
@@ -32,7 +32,6 @@
 {
     [date release];
     [dateId release];
-    [event release];
     [super dealloc];
 }
 

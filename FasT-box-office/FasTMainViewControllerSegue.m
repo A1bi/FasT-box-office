@@ -18,7 +18,6 @@
     if (!vc) {
         main.containedViewControllers[identifier] = destination;
     } else {
-        [destination release];
         destination = vc;
     }
     return [super initWithIdentifier:identifier source:source destination:destination];

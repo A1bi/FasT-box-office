@@ -59,32 +59,6 @@
         _cartItems = [[NSMutableArray alloc] init];
         _ticketsToPay = [[NSMutableArray alloc] init];
         _placedOrders = [[NSMutableArray alloc] init];
-        
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
-        [center addObserver:self selector:@selector(receivedOrderPayment:) name:@"FasTPurchaseControllerAddOrderPayment" object:nil];
-        [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
-        [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-            for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
-                if ([[NSCalendar currentCalendar] isDateInToday:date.date]) {
-                    _todaysDate = date;
-                    break;
-                }
-            }
-            if (!_todaysDate) {
-                _todaysDate = [FasTApi defaultApi].event.dates.lastObject;
-            }
-            
-            [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"products" callback:^(NSDictionary *response) {
-                NSMutableArray *tmpProducts = [NSMutableArray array];
-                for (NSDictionary *productInfo in response[@"products"]) {
-                    FasTProduct *product = [[[FasTProduct alloc] initWithId:productInfo[@"id"] name:productInfo[@"name"] price:((NSNumber *)productInfo[@"price"]).floatValue] autorelease];
-                    [tmpProducts addObject:product];
-                }
-                _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
-                [self.availableProductsTable reloadData];
-            }];
-        }];
     }
     return self;
 }
@@ -105,6 +79,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
+    [center addObserver:self selector:@selector(receivedOrderPayment:) name:@"FasTPurchaseControllerAddOrderPayment" object:nil];
+    [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
+    [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        _todaysDate = nil;
+        for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
+            if ([[NSCalendar currentCalendar] isDateInToday:date.date]) {
+                _todaysDate = date;
+                break;
+            }
+        }
+        if (!_todaysDate) {
+            _todaysDate = [FasTApi defaultApi].event.dates.lastObject;
+        }
+    }];
+    
+    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"products" callback:^(NSDictionary *response) {
+        NSMutableArray *tmpProducts = [NSMutableArray array];
+        for (NSDictionary *productInfo in response[@"products"]) {
+            FasTProduct *product = [[[FasTProduct alloc] initWithId:productInfo[@"id"] name:productInfo[@"name"] price:((NSNumber *)productInfo[@"price"]).floatValue] autorelease];
+            [tmpProducts addObject:product];
+        }
+        [_availableProducts release];
+        _availableProducts = [[NSArray alloc] initWithArray:tmpProducts];
+        [self.availableProductsTable reloadData];
+    }];
+    
     [self updateTotal];
 }
 
@@ -126,6 +129,8 @@
 
 - (FasTProduct *)productForIndexPath:(NSIndexPath *)indexPath
 {
+    if (!_availableProducts) return 0;
+    
     return _availableProducts[indexPath.row - 1];
 }
 
@@ -249,6 +254,8 @@
 
 - (void)updateNumberOfAvailableTickets
 {
+    if (!_todaysDate) return;
+    
     _numberOfAvailableTickets = 0;
     NSArray *seats = [[FasTApi defaultApi].event.seats[_todaysDate.dateId] allValues];
     for (FasTSeat *seat in seats) {
@@ -268,7 +275,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == _availableProductsTable) {
-        return _availableProducts.count + 1;
+        return (_availableProducts ? _availableProducts.count : 0) + 1;
     } else {
         return _cartItems.count;
     }
@@ -300,7 +307,7 @@
         BOOL firstRow = indexPath.row == 0;
         cell = [tableView dequeueReusableCellWithIdentifier:firstRow ? @"FasTPurchaseProductTicketsCell" : @"FasTPurchaseProductCell"];
         if (firstRow) {
-            if (_todaysDate.event.isBoundToSeats) {
+            if (_todaysDate && _todaysDate.event.isBoundToSeats) {
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"für heute noch %li Tickets verfügbar", (long)_numberOfAvailableTickets];
             } else {
                 cell.detailTextLabel.text = nil;

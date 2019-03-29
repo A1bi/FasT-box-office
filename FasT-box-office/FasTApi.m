@@ -222,7 +222,7 @@ static FasTApi *defaultApi = nil;
             tmpEvents[event.eventId] = event;
         }
         [events release];
-        events = [[tmpEvents copy] retain];
+        events = [[NSDictionary dictionaryWithDictionary:tmpEvents] retain];
         if (callback) callback();
     }];
 }
