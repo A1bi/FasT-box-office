@@ -54,8 +54,6 @@
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
-		F048DEE2224DEA9F0039E664 /* debug.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */; };
-		F048DEE4224DEAC40039E664 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F048DEE3224DEAC40039E664 /* release.xcconfig */; };
 		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -462,7 +460,7 @@
 		F032038C1B569AC9006D9937 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Albisigns;
 				TargetAttributes = {
 					F03203931B569AC9006D9937 = {
@@ -495,9 +493,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F048DEE4224DEAC40039E664 /* release.xcconfig in Resources */,
 				F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */,
-				F048DEE2224DEA9F0039E664 /* debug.local.xcconfig in Resources */,
 				F032112D1B56A993006D9937 /* Localizable.strings in Resources */,
 				F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */,
 				F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */,
