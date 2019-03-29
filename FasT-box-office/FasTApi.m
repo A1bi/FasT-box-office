@@ -26,12 +26,6 @@ NSString * const FasTApiCannotConnectNotification = @"FasTApiCannotConnectNotifi
 
 static FasTApi *defaultApi = nil;
 
-#ifdef DEBUG
-#define kFasTApiUrl @"http://ao-mbp.local:4000"
-#else
-#define kFasTApiUrl @"https://www.theater-kaisersesch.de"
-#endif
-
 #define kFasTApiTimeOut 10
 
 @interface FasTApi ()
@@ -88,7 +82,7 @@ static FasTApi *defaultApi = nil;
 {
     self = [super init];
     if (self) {
-        http = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kFasTApiUrl]];
+        http = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:API_HOST]];
         [http setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [http setResponseSerializer:[AFJSONResponseSerializer serializer]];
         
@@ -284,7 +278,7 @@ static FasTApi *defaultApi = nil;
 
 - (NSString *)URLForOrder:(FasTOrder *)order
 {
-    return [NSString stringWithFormat:@"%@/vorverkauf/bestellungen/%@", kFasTApiUrl, order.orderId];
+    return [NSString stringWithFormat:@"%@/vorverkauf/bestellungen/%@", API_HOST, order.orderId];
 }
 
 - (NSArray *)ticketIdsForTickets:(NSArray *)tickets
@@ -301,7 +295,7 @@ static FasTApi *defaultApi = nil;
     if (nodeConnectionInitiated) return;
     nodeConnectionInitiated = true;
     
-    NSURL *url = [NSURL URLWithString:kFasTApiUrl];
+    NSURL *url = [NSURL URLWithString:API_HOST];
     NSDictionary *options = @{@"log": @YES, @"path": @"/node/", @"nsp": [NSString stringWithFormat:@"/%@", clientType]};
     sIO = [[SocketIOClient alloc] initWithSocketURL:url config:options];
     

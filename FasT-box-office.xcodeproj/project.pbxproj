@@ -54,6 +54,8 @@
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
+		F048DEE2224DEA9F0039E664 /* debug.local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */; };
+		F048DEE4224DEAC40039E664 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F048DEE3224DEAC40039E664 /* release.xcconfig */; };
 		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +150,9 @@
 		F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ReceiptHeaderImage.jpg; sourceTree = "<group>"; };
 		F032114B1B586144006D9937 /* FasTCartOrderPaymentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTCartOrderPaymentItem.h; sourceTree = "<group>"; };
 		F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTCartOrderPaymentItem.m; sourceTree = "<group>"; };
+		F048DEE0224DEA860039E664 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.local.xcconfig; sourceTree = "<group>"; };
+		F048DEE3224DEAC40039E664 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrdersListViewController.h; sourceTree = "<group>"; };
 		F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -263,6 +268,7 @@
 		F03203971B569AC9006D9937 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F048DEDF224DEA640039E664 /* Config */,
 				F03211481B570949006D9937 /* assets */,
 				F03211331B56AA49006D9937 /* FasT-box-office-Info.plist */,
 				F03211071B56A2F2006D9937 /* FasT-box-office-Prefix.pch */,
@@ -405,6 +411,16 @@
 			name = "today's unpaid";
 			sourceTree = "<group>";
 		};
+		F048DEDF224DEA640039E664 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				F048DEE0224DEA860039E664 /* debug.xcconfig */,
+				F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */,
+				F048DEE3224DEAC40039E664 /* release.xcconfig */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		F0F8F1E6210A8CA1005FAF06 /* common UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,7 +495,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F048DEE4224DEAC40039E664 /* release.xcconfig in Resources */,
 				F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */,
+				F048DEE2224DEA9F0039E664 /* debug.local.xcconfig in Resources */,
 				F032112D1B56A993006D9937 /* Localizable.strings in Resources */,
 				F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */,
 				F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */,
@@ -615,6 +633,7 @@
 /* Begin XCBuildConfiguration section */
 		F03203B51B569AC9006D9937 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F048DEE0224DEA860039E664 /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -653,6 +672,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					"API_HOST=@\\\"$(API_HOST)\\\"",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -673,6 +693,7 @@
 		};
 		F03203B61B569AC9006D9937 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F048DEE3224DEAC40039E664 /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
@@ -707,6 +728,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "API_HOST=@\\\"$(API_HOST)\\\"";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -741,7 +763,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.albisigns.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.a0s.${PRODUCT_NAME:rfc1034identifier}.debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6ac67505-b572-44a3-b319-d2c067cd3062";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Development";
@@ -768,7 +790,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.albisigns.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.a0s.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4892eec6-8b0d-4aa8-b73b-ae7b84d9131f";
 				PROVISIONING_PROFILE_SPECIFIER = "iOS Adhoc";
