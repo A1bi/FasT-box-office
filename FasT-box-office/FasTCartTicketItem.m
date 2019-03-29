@@ -22,6 +22,12 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [_ticket release];
+    [super dealloc];
+}
+
 - (float)price
 {
     return _ticket.price;

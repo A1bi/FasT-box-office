@@ -21,7 +21,7 @@
 {
     self = [super init];
     if (self) {
-        order = [o retain];
+        order = o;
         date = d;
         
         ticketId = [info[@"id"] retain];
@@ -46,7 +46,6 @@
 {
     [ticketId release];
     [number release];
-    [order release];
     [checkinErrors release];
     [cancelReason release];
     [super dealloc];

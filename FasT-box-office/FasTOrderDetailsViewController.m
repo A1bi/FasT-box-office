@@ -7,16 +7,18 @@
 //
 
 #import "FasTOrderDetailsViewController.h"
-#import "FasTOrderDetailsTicketsPopoverViewController.h"
 #import "FasTOrder.h"
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
+#import "FasTTicketPrinter.h"
 #import "FasTLogEvent.h"
 #import "FasTSeat.h"
 #import "FasTEvent.h"
 #import "FasTEventDate.h"
 #import "FasTApi.h"
 #import "FasTFormatter.h"
+
+@import MBProgressHUD;
 
 @interface FasTOrderDetailsViewController ()
 {
@@ -31,6 +33,8 @@
 - (void)update;
 - (void)reload;
 - (void)updateAfterTicketSelection;
+- (void)showAlertForTicketActionWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle handler:(void (^)(void))handler;
+- (void)performApiAction:(SEL)apiSelector onTickets:(NSArray *)tickets;
 
 @end
 
@@ -132,20 +136,6 @@
     self.refundBarButton.enabled = _order.balance != 0;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"FasTOrderDetailsTicketsPopoverSegue"]) {
-        FasTOrderDetailsTicketsPopoverViewController *popover = segue.destinationViewController;
-        NSMutableArray *tickets = [NSMutableArray array];
-        for (NSIndexPath *path in self.tableView.indexPathsForSelectedRows) {
-            [tickets addObject:_order.tickets[path.row]];
-        }
-        popover.tickets = tickets;
-        popover.popover = ((UIStoryboardPopoverSegue *)segue).popoverController;
-        popover.popover.delegate = self;
-    }
-}
-
 - (IBAction)selectAllTickets:(id)sender
 {
     NSIndexPath *indexPath;
@@ -162,6 +152,93 @@
     }
     
     [self updateAfterTicketSelection];
+}
+
+- (IBAction)showTicketActionSheet:(id)sender {
+    NSMutableArray *tickets = [NSMutableArray array];
+    for (NSIndexPath *path in self.tableView.indexPathsForSelectedRows) {
+        [tickets addObject:_order.tickets[path.row]];
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    alert.popoverPresentationController.barButtonItem = _ticketsPopoverBarButton;
+    UIAlertAction *action;
+    
+    BOOL pay = !_order.paid;
+    BOOL cancelOrResale = YES;
+    for (FasTTicket *ticket in tickets) {
+        if (ticket.pickedUp || ticket.cancelled || ticket.resale) {
+            pay = NO;
+        }
+        if (ticket.cancelled || ticket.resale) {
+            cancelOrResale = NO;
+        }
+    }
+    
+    // pay
+    if (pay) {
+        action = [UIAlertAction actionWithTitle:@"bezahlen" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseControllerAddTicketsToPay" object:nil userInfo:@{ @"tickets": tickets }];
+        }];
+        [alert addAction:action];
+    }
+    
+    // print
+    action = [UIAlertAction actionWithTitle:@"drucken" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[FasTTicketPrinter sharedPrinter] printTickets:tickets];
+        [[FasTApi defaultApi] pickUpTickets:tickets];
+    }];
+    [alert addAction:action];
+    
+    if (cancelOrResale) {
+        // resale
+        action = [UIAlertAction actionWithTitle:@"zum Weiterverkauf freigeben" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            NSString *message = [NSString stringWithFormat:@"Möchten Sie %tu Tickets wirklich zum Weiterverkauf freigeben?", tickets.count];
+            [self showAlertForTicketActionWithTitle:@"Tickets zum Weiterverkauf freigeben" message:message actionTitle:@"freigeben" handler:^{
+                [self performApiAction:@selector(enableResaleForTickets:callback:) onTickets:tickets];
+            }];
+        }];
+        [alert addAction:action];
+
+        // cancellation
+        action = [UIAlertAction actionWithTitle:@"stornieren" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            NSString *message = [NSString stringWithFormat:@"Möchten Sie %tu Tickets wirklich stornieren?", tickets.count];
+            [self showAlertForTicketActionWithTitle:@"Tickets stornieren" message:message actionTitle:@"stornieren" handler:^{
+                [self performApiAction:@selector(cancelTickets:callback:) onTickets:tickets];
+            }];
+        }];
+        [alert addAction:action];
+    }
+    
+    [self presentViewController:alert animated:YES completion:NULL];
+}
+
+- (void)showAlertForTicketActionWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle handler:(void (^)(void))handler {
+    UIAlertController *confirmation = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *confirmationAction;
+    confirmationAction = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (handler) {
+            handler();
+        }
+    }];
+    [confirmation addAction:confirmationAction];
+    
+    confirmationAction = [UIAlertAction actionWithTitle:@"abbrechen" style:UIAlertActionStyleCancel handler:NULL];
+    [confirmation addAction:confirmationAction];
+    
+    [self presentViewController:confirmation animated:YES completion:NULL];
+}
+
+- (void)performApiAction:(SEL)apiSelector onTickets:(NSArray *)tickets {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setMode:MBProgressHUDModeIndeterminate];
+    hud.label.text = NSLocalizedStringByKey(@"pleaseWait");
+    
+    [[FasTApi defaultApi] performSelector:apiSelector withObject:tickets withObject:^(FasTOrder *order) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTUpdatedOrderInfo" object:nil userInfo:@{ @"order": order }];
+        [hud hideAnimated:YES];
+    }];
 }
 
 - (IBAction)openInSafari
@@ -337,15 +414,6 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) [self updateAfterTicketSelection];
-}
-
-#pragma mark popover controller delegate
-
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
-{
-    [[self tableView] reloadData];
-    [self updateAfterTicketSelection];
-    return YES;
 }
 
 @end

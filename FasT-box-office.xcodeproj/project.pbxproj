@@ -33,7 +33,6 @@
 		F03203F11B569CF6006D9937 /* FasTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203CF1B569CF6006D9937 /* FasTMainViewController.m */; };
 		F03203F21B569CF6006D9937 /* FasTMainViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203D11B569CF6006D9937 /* FasTMainViewControllerSegue.m */; };
 		F03203F31B569CF6006D9937 /* FasTOrderDatesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203D31B569CF6006D9937 /* FasTOrderDatesViewController.m */; };
-		F03203F41B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203D51B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m */; };
 		F03203F51B569CF6006D9937 /* FasTOrderDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203D71B569CF6006D9937 /* FasTOrderDetailsViewController.m */; };
 		F03203F61B569CF6006D9937 /* FasTOrderSeatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203D91B569CF6006D9937 /* FasTOrderSeatsViewController.m */; };
 		F03203F71B569CF6006D9937 /* FasTOrdersSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F03203DB1B569CF6006D9937 /* FasTOrdersSearchViewController.m */; };
@@ -110,8 +109,6 @@
 		F03203D11B569CF6006D9937 /* FasTMainViewControllerSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTMainViewControllerSegue.m; sourceTree = "<group>"; };
 		F03203D21B569CF6006D9937 /* FasTOrderDatesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDatesViewController.h; sourceTree = "<group>"; };
 		F03203D31B569CF6006D9937 /* FasTOrderDatesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDatesViewController.m; sourceTree = "<group>"; };
-		F03203D41B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsTicketsPopoverViewController.h; sourceTree = "<group>"; };
-		F03203D51B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsTicketsPopoverViewController.m; sourceTree = "<group>"; };
 		F03203D61B569CF6006D9937 /* FasTOrderDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderDetailsViewController.h; sourceTree = "<group>"; };
 		F03203D71B569CF6006D9937 /* FasTOrderDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTOrderDetailsViewController.m; sourceTree = "<group>"; };
 		F03203D81B569CF6006D9937 /* FasTOrderSeatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTOrderSeatsViewController.h; sourceTree = "<group>"; };
@@ -304,8 +301,6 @@
 		F03211401B56B39F006D9937 /* order details */ = {
 			isa = PBXGroup;
 			children = (
-				F03203D41B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.h */,
-				F03203D51B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m */,
 				F03203D61B569CF6006D9937 /* FasTOrderDetailsViewController.h */,
 				F03203D71B569CF6006D9937 /* FasTOrderDetailsViewController.m */,
 			);
@@ -601,7 +596,6 @@
 				F032039A1B569AC9006D9937 /* main.m in Sources */,
 				F02F87961D41728100B5B0F3 /* FasTEventDate.m in Sources */,
 				F0079951210A8E21001FADBC /* FasTTodaysOrdersViewController.m in Sources */,
-				F03203F41B569CF6006D9937 /* FasTOrderDetailsTicketsPopoverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

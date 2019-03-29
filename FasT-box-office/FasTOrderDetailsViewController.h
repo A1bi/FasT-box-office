@@ -10,7 +10,7 @@
 
 @class FasTOrder;
 
-@interface FasTOrderDetailsViewController : UITableViewController <UIPopoverControllerDelegate>
+@interface FasTOrderDetailsViewController : UITableViewController
 
 @property (nonatomic, retain) FasTOrder *order;
 @property (nonatomic, retain) NSString *highlightedTicketId;
