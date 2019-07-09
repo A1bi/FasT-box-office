@@ -27,9 +27,6 @@
     [self addCancelBtnToViewController:self.topViewController];
     
     self.order = [[[FasTOrder alloc] init] autorelease];
-    
-    [[FasTApi defaultApi] resetSeating];
-    [[FasTApi defaultApi] unlockSeats];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated

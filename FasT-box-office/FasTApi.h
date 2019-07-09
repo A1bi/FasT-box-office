@@ -9,29 +9,20 @@
 #import <Foundation/Foundation.h>
 
 FOUNDATION_EXPORT NSString * const FasTApiIsReadyNotification;
-FOUNDATION_EXPORT NSString * const FasTApiUpdatedSeatsNotification;
-FOUNDATION_EXPORT NSString * const FasTApiUpdatedOrdersNotification;
-FOUNDATION_EXPORT NSString * const FasTApiOrderExpiredNotification;
-FOUNDATION_EXPORT NSString * const FasTApiConnectingNotification;
-FOUNDATION_EXPORT NSString * const FasTApiDisconnectedNotification;
-FOUNDATION_EXPORT NSString * const FasTApiCannotConnectNotification;
 
 typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 
 @class FasTEvent;
 @class FasTOrder;
-@class SocketIOClient;
 @class AFHTTPSessionManager;
 
 @interface FasTApi : NSObject
 {
     AFHTTPSessionManager *http;
-    SocketIOClient *sIO;
     NSDictionary *events;
     NSString *clientType;
     NSString *clientId;
     NSString *seatingId;
-    BOOL inHibernation, nodeConnectionInitiated;
 }
 
 @property (nonatomic, readonly) NSDictionary *events;
@@ -42,7 +33,6 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 + (FasTApi *)defaultApiWithClientType:(NSString *)cType clientId:(NSString *)cId;
 
 - (void)fetchEvents:(void (^)(void))callback;
-- (void)initNodeConnection;
 - (void)getResource:(NSString *)resource withAction:(NSString *)action callback:(FasTApiResponseBlock)callback;
 - (void)getResource:(NSString *)resource withAction:(NSString *)action data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)postResource:(NSString *)resource withAction:(NSString *)action data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
@@ -52,9 +42,7 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 - (void)placeOrder:(FasTOrder *)order callback:(void (^)(FasTOrder *order))callback;
 - (NSString *)URLForOrder:(FasTOrder *)order;
 - (void)setDate:(NSString *)dateId numberOfSeats:(NSInteger)numberOfSeats callback:(FasTApiResponseBlock)callback;
-- (void)chooseSeatWithId:(NSString *)seatId;
 - (void)resetSeating;
-- (void)unlockSeats;
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order;
 - (void)cancelTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
 - (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;

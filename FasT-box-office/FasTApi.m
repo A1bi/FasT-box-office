@@ -13,16 +13,9 @@
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
 
-@import SocketIO;
 @import AFNetworking;
 
 NSString * const FasTApiIsReadyNotification = @"FasTApiIsReadyNotification";
-NSString * const FasTApiUpdatedSeatsNotification = @"FasTApiUpdatedSeatsNotification";
-NSString * const FasTApiUpdatedOrdersNotification = @"FasTApiUpdatedOrdersNotification";
-NSString * const FasTApiOrderExpiredNotification = @"FasTApiOrderExpiredNotification";
-NSString * const FasTApiConnectingNotification = @"FasTApiConnectingNotification";
-NSString * const FasTApiDisconnectedNotification = @"FasTApiDisconnectedNotification";
-NSString * const FasTApiCannotConnectNotification = @"FasTApiCannotConnectNotification";
 
 static FasTApi *defaultApi = nil;
 
@@ -34,14 +27,7 @@ static FasTApi *defaultApi = nil;
 - (void)makeJsonRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)makeJsonRequestWithResource:(NSString *)resource action:(NSString *)action method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)makeRequestWithAction:(NSString *)action method:(NSString *)method tickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback;
-- (void)connectToNode;
 - (void)postNotificationWithName:(NSString *)name info:(NSDictionary *)info;
-- (void)prepareNodeConnection;
-- (void)disconnect;
-- (void)scheduleReconnect;
-- (void)abortAndReconnect;
-- (void)killScheduledTasks;
-- (void)appWillResignActive;
 - (NSArray *)ticketIdsForTickets:(NSArray *)tickets;
 
 @end
@@ -95,7 +81,6 @@ static FasTApi *defaultApi = nil;
 - (void)dealloc
 {
     [http release];
-    [sIO release];
     [events release];
     [clientType release];
     [clientId release];
@@ -149,13 +134,6 @@ static FasTApi *defaultApi = nil;
     }
 }
 
-- (void)resetSeating
-{
-    if (seatingId) {
-        [sIO emit:@"reset" with:@[]];
-    }
-}
-
 - (void)unlockSeats
 {
     if (seatingId) {
@@ -188,27 +166,14 @@ static FasTApi *defaultApi = nil;
     [self makeRequestWithAction:@"enable_resale_for_tickets" method:@"PATCH" tickets:tickets callback:callback];
 }
 
-#pragma mark node methods
-
 - (void)setDate:(NSString *)dateId numberOfSeats:(NSInteger)numberOfSeats callback:(FasTApiResponseBlock)callback
 {
-    NSDictionary *data = @{ @"date": dateId, @"numberOfSeats": @(numberOfSeats) };
-    OnAckCallback *ackCallback = [sIO emitWithAck:@"setDateAndNumberOfSeats" with:@[data]];
-    [ackCallback timingOutAfter:5 callback:^(NSArray *data) {
-        NSDictionary *response = data.count > 0 ? data[0] : nil;
-        callback(response);
-    }];
-}
-
-- (void)chooseSeatWithId:(NSString *)seatId
-{
-    NSDictionary *data = @{ @"seatId": seatId };
-    [sIO emit:@"chooseSeat" with:@[data]];
-}
-
-- (void)connectToNode
-{
-    [sIO connect];
+//    NSDictionary *data = @{ @"date": dateId, @"numberOfSeats": @(numberOfSeats) };
+//    OnAckCallback *ackCallback = [sIO emitWithAck:@"setDateAndNumberOfSeats" with:@[data]];
+//    [ackCallback timingOutAfter:5 callback:^(NSArray *data) {
+//        NSDictionary *response = data.count > 0 ? data[0] : nil;
+//        callback(response);
+//    }];
 }
 
 #pragma mark class methods
@@ -290,115 +255,10 @@ static FasTApi *defaultApi = nil;
     return ticketIds;
 }
 
-- (void)initNodeConnection
-{
-    if (nodeConnectionInitiated) return;
-    nodeConnectionInitiated = true;
-    
-    NSURL *url = [NSURL URLWithString:API_HOST];
-    NSDictionary *options = @{@"log": @YES, @"path": @"/node/", @"nsp": [NSString stringWithFormat:@"/%@", clientType]};
-    sIO = [[SocketIOClient alloc] initWithSocketURL:url config:options];
-    
-    inHibernation = YES;
-    
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(appWillResignActive) name:UIApplicationWillResignActiveNotification object:nil];
-    [center addObserver:self selector:@selector(disconnect) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [center addObserver:self selector:@selector(prepareNodeConnection) name:UIApplicationWillEnterForegroundNotification object:nil];
-    
-    [self prepareNodeConnection];
-    
-    [sIO on:@"connect" callback:^(NSArray *args, SocketAckEmitter *ack) {
-        [self killScheduledTasks];
-        
-        [self postNotificationWithName:FasTApiIsReadyNotification info:nil];
-    }];
-    
-    [sIO on:@"disconnect" callback:^(NSArray *args, SocketAckEmitter *ack) {
-        [self killScheduledTasks];
-        if (inHibernation) return;
-        
-        [self postNotificationWithName:FasTApiDisconnectedNotification info:nil];
-        
-        [self scheduleReconnect];
-    }];
-    
-    [sIO on:@"error" callback:^(NSArray *args, SocketAckEmitter *ack) {
-        [self killScheduledTasks];
-        if (inHibernation) return;
-    
-        [self postNotificationWithName:FasTApiCannotConnectNotification info:nil];
-    
-        [self scheduleReconnect];
-    }];
-    
-    
-    [sIO on:@"updateSeats" callback:^(NSArray *args, SocketAckEmitter *ack) {
-        NSDictionary *seats = args[0][@"seats"];
-        [self.event updateSeats:seats];
-
-        [self postNotificationWithName:FasTApiUpdatedSeatsNotification info:seats];
-    }];
-    
-    [sIO on:@"gotSeatingId" callback:^(NSArray *args, SocketAckEmitter *ack) {
-        [seatingId release];
-        seatingId = [args[0][@"id"] retain];
-    }];
-    
-    [sIO on:@"expired" callback:^(NSArray *args, SocketAckEmitter *ack) {
-        [self postNotificationWithName:FasTApiOrderExpiredNotification info:nil];
-    }];
-}
-
 - (void)postNotificationWithName:(NSString *)name info:(NSDictionary *)info
 {
     NSNotification *notification = [NSNotification notificationWithName:name object:self userInfo:info];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (void)prepareNodeConnection
-{
-    if (!clientType) return;
-    
-    [self killScheduledTasks];
-//    [self performSelector:@selector(abortAndReconnect) withObject:nil afterDelay:kFasTApiTimeOut];
-    
-    if (inHibernation) [self postNotificationWithName:FasTApiConnectingNotification info:nil];
-    inHibernation = NO;
-    [self fetchEvents:^() {
-        [self connectToNode];
-    }];
-}
-
-- (void)disconnect
-{
-    inHibernation = YES;
-//    [netEngine cancelAllOperations];
-    [sIO disconnect];
-}
-
-- (void)abortAndReconnect
-{
-    [self disconnect];
-    inHibernation = NO;
-    [self scheduleReconnect];
-    
-    [self postNotificationWithName:FasTApiCannotConnectNotification info:nil];
-}
-
-- (void)killScheduledTasks
-{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-}
-
-- (void)scheduleReconnect
-{
-    [self performSelector:@selector(prepareNodeConnection) withObject:nil afterDelay:5];
-}
-
-- (void)appWillResignActive
-{
-    [self killScheduledTasks];
 }
 
 - (FasTEvent *)event

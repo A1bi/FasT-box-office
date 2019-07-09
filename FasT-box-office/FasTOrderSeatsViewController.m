@@ -50,8 +50,6 @@
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSeatsWithNotification:) name:FasTApiUpdatedSeatsNotification object:nil];
-    
     FasTEventDate *date = _order.date;
     if (_date != date) {
         _date = date;

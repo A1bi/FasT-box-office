@@ -83,7 +83,7 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
     [center addObserver:self selector:@selector(receivedOrderPayment:) name:@"FasTPurchaseControllerAddOrderPayment" object:nil];
-    [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
+//    [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
     [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         _todaysDate = nil;
         for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {

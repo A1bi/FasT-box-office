@@ -17,8 +17,6 @@
 		F02F87981D41728100B5B0F3 /* FasTLogEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87831D41728100B5B0F3 /* FasTLogEvent.m */; };
 		F02F87991D41728100B5B0F3 /* FasTOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87851D41728100B5B0F3 /* FasTOrder.m */; };
 		F02F879A1D41728100B5B0F3 /* FasTSeat.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87871D41728100B5B0F3 /* FasTSeat.m */; };
-		F02F879B1D41728100B5B0F3 /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87891D41728100B5B0F3 /* FasTSeatingView.m */; };
-		F02F879C1D41728100B5B0F3 /* FasTSeatView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F878B1D41728100B5B0F3 /* FasTSeatView.m */; };
 		F02F879D1D41728100B5B0F3 /* FasTTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F878D1D41728100B5B0F3 /* FasTTicket.m */; };
 		F02F879E1D41728100B5B0F3 /* FasTTicketPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F878F1D41728100B5B0F3 /* FasTTicketPrinter.m */; };
 		F02F879F1D41728100B5B0F3 /* FasTTicketType.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87911D41728100B5B0F3 /* FasTTicketType.m */; };
@@ -255,6 +253,7 @@
 				F02F87A01D41728A00B5B0F3 /* models */,
 				F041CCDD210A8CF0002568BE /* common */,
 				F0F8F1E6210A8CA1005FAF06 /* common UI */,
+				F061035322D28F1800801101 /* legacy */,
 				F03203971B569AC9006D9937 /* Supporting Files */,
 			);
 			path = "FasT-box-office";
@@ -414,13 +413,20 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		F0F8F1E6210A8CA1005FAF06 /* common UI */ = {
+		F061035322D28F1800801101 /* legacy */ = {
 			isa = PBXGroup;
 			children = (
 				F02F87881D41728100B5B0F3 /* FasTSeatingView.h */,
 				F02F87891D41728100B5B0F3 /* FasTSeatingView.m */,
 				F02F878A1D41728100B5B0F3 /* FasTSeatView.h */,
 				F02F878B1D41728100B5B0F3 /* FasTSeatView.m */,
+			);
+			name = legacy;
+			sourceTree = "<group>";
+		};
+		F0F8F1E6210A8CA1005FAF06 /* common UI */ = {
+			isa = PBXGroup;
+			children = (
 				F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */,
 				F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */,
 			);
@@ -470,6 +476,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				Base,
 				de,
 			);
@@ -522,13 +529,11 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/KSCrash/KSCrash.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
-				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
-				"${BUILT_PRODUCTS_DIR}/StarscreamSocketIO/StarscreamSocketIO.framework",
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettleSDK.framework",
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettleShared.framework",
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettlePayments.framework",
@@ -539,15 +544,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KSCrash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StarscreamSocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettleSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettleShared.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettlePayments.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -557,7 +560,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F02F879B1D41728100B5B0F3 /* FasTSeatingView.m in Sources */,
 				F03203EF1B569CF6006D9937 /* FasTCartProductItem.m in Sources */,
 				F03203F11B569CF6006D9937 /* FasTMainViewController.m in Sources */,
 				F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */,
@@ -576,7 +578,6 @@
 				F03203F61B569CF6006D9937 /* FasTOrderSeatsViewController.m in Sources */,
 				F02F879D1D41728100B5B0F3 /* FasTTicket.m in Sources */,
 				F03203FE1B569CF6006D9937 /* FasTReceiptPrinter.m in Sources */,
-				F02F879C1D41728100B5B0F3 /* FasTSeatView.m in Sources */,
 				F03203FA1B569CF6006D9937 /* FasTOrderViewController.m in Sources */,
 				F02F87951D41728100B5B0F3 /* FasTEvent.m in Sources */,
 				F02F87981D41728100B5B0F3 /* FasTLogEvent.m in Sources */,
