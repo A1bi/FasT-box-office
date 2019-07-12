@@ -15,6 +15,7 @@
     FasTEventDate *date;
     NSInteger numberOfSeats;
     WKUserContentController *contentController;
+    BOOL isReady;
 }
 
 - (void)reloadSeating;
@@ -59,12 +60,12 @@
         
         if (previousDate.event != date.event) {
             [self reloadSeating];
-        } else {
-            [self updateDateAndNumberOfSeats];
+            [previousDate release];
+            return;
         }
-        
-        [previousDate release];
     }
+    
+    [self updateDateAndNumberOfSeats];
 }
 
 - (void)updateDateAndNumberOfSeats
@@ -77,6 +78,8 @@
 
 - (void)resetSeats
 {
+    numberOfSeats = 0;
+    
     [self callScriptMethod:@"reset" withParams:nil completion:NULL];
 }
 
@@ -89,6 +92,8 @@
 
 - (void)callScriptMethod:(NSString *)method withParams:(NSString *)params completion:(void (^)(id _Nullable))completion
 {
+    if (!isReady) return;
+    
     if (!params) params = @"";
     NSString *script = [NSString stringWithFormat:@"seating.%@(%@);", method, params];
     [self evaluateJavaScript:script completionHandler:^(id result, NSError * _Nullable error) {
@@ -102,6 +107,8 @@
 
 - (void)reloadSeating
 {
+    isReady = NO;
+    
     NSURL *url = [self urlForSeatingWithEvent];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self loadRequest:request];
@@ -119,6 +126,8 @@
 {
     NSDictionary *data = (NSDictionary *)message.body;
     if ([data[@"event"] isEqualToString:@"becameReady"]) {
+        isReady = YES;
+        
         [socketId release];
         socketId = [data[@"socketId"] retain];
         

@@ -21,19 +21,13 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 {
     AFHTTPSessionManager *http;
     NSDictionary *events;
-    NSString *clientType;
-    NSString *clientId;
-    NSString *seatingId;
     FasTSeatingView *seatingView;
 }
 
 @property (nonatomic, readonly) NSDictionary *events;
-@property (nonatomic, readonly) NSString *clientType;
-@property (nonatomic, readonly) NSString *clientId;
 @property (nonatomic, readonly) FasTSeatingView *seatingView;
 
 + (FasTApi *)defaultApi;
-+ (FasTApi *)defaultApiWithClientType:(NSString *)cType clientId:(NSString *)cId;
 
 - (void)fetchEvents:(void (^)(void))callback;
 - (void)getResource:(NSString *)resource withAction:(NSString *)action callback:(FasTApiResponseBlock)callback;

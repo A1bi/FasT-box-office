@@ -24,7 +24,6 @@ static FasTApi *defaultApi = nil;
 
 @interface FasTApi ()
 
-- (id)initWithClientType:(NSString *)cType clientId:(NSString *)cId;
 - (void)makeJsonRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)makeJsonRequestWithResource:(NSString *)resource action:(NSString *)action method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)makeRequestWithAction:(NSString *)action method:(NSString *)method tickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback;
@@ -35,22 +34,12 @@ static FasTApi *defaultApi = nil;
 
 @implementation FasTApi
 
-@synthesize events, clientType, clientId, seatingView;
+@synthesize events, seatingView;
 
 + (FasTApi *)defaultApi
 {
-	if (!defaultApi) {
-        [NSException raise:@"FasTApiNotInitiatedException" format:@"FasTApi has to be initiated by sending initWithClientType: first."];
-        return nil;
-    }
-	
-	return defaultApi;
-}
-
-+ (FasTApi *)defaultApiWithClientType:(NSString *)cType clientId:(NSString *)cId
-{
     if (!defaultApi) {
-        defaultApi = [[super allocWithZone:NULL] initWithClientType:cType clientId:cId];
+        defaultApi = [[super allocWithZone:NULL] init];
     }
     return defaultApi;
 }
@@ -62,19 +51,11 @@ static FasTApi *defaultApi = nil;
 
 - (id)init
 {
-    return defaultApi;
-}
-
-- (id)initWithClientType:(NSString *)cType clientId:(NSString *)cId
-{
     self = [super init];
     if (self) {
         http = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:API_HOST]];
         [http setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [http setResponseSerializer:[AFJSONResponseSerializer serializer]];
-        
-        clientType = [cType retain];
-        clientId = [cId retain];
 
         seatingView = [[FasTSeatingView alloc] init];
 
@@ -87,8 +68,6 @@ static FasTApi *defaultApi = nil;
 {
     [http release];
     [events release];
-    [clientType release];
-    [clientId release];
     [seatingView release];
     [super dealloc];
 }
@@ -137,13 +116,6 @@ static FasTApi *defaultApi = nil;
         [http PATCH:path parameters:data success:success failure:failure];
     } else {
         [http GET:path parameters:data progress:nil success:success failure:failure];
-    }
-}
-
-- (void)unlockSeats
-{
-    if (seatingId) {
-        [self makeJsonRequestWithPath:@"api/box_office/unlock_seats" method:@"POST" data:@{ @"seating_id": seatingId } callback:NULL];
     }
 }
 
@@ -202,8 +174,8 @@ static FasTApi *defaultApi = nil;
     }
     
     NSMutableDictionary *orderInfo = [[@{ @"date": order.date.dateId, @"tickets": ticketsInfo } mutableCopy] autorelease];
-    if (seatingId) {
-        orderInfo[@"seatingId"] = seatingId;
+    if (seatingView.socketId) {
+        orderInfo[@"seatingId"] = seatingView.socketId;
     }
     
     [self makeJsonRequestWithPath:@"api/box_office/place_order" method:@"POST" data:@{ @"order": orderInfo } callback:^(NSDictionary *response) {
