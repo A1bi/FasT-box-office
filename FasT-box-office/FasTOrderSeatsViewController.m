@@ -60,9 +60,9 @@
 - (IBAction)placeOrder:(id)sender
 {
     [[[FasTApi defaultApi] seatingView] validate:^(BOOL valid) {
-        if (valid && false) {
-            [((FasTOrderViewController *)self.navigationController).delegate didPlaceOrder:_order];
-        }
+        if (!valid) return;
+
+        [((FasTOrderViewController *)self.navigationController).delegate didPlaceOrder:_order];
     }];
 }
 

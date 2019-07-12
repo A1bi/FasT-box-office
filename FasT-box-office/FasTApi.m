@@ -173,12 +173,12 @@ static FasTApi *defaultApi = nil;
         ticketsInfo[ticket.type.typeId] = @(number);
     }
     
-    NSMutableDictionary *orderInfo = [[@{ @"date": order.date.dateId, @"tickets": ticketsInfo } mutableCopy] autorelease];
-    if (seatingView.socketId) {
-        orderInfo[@"seatingId"] = seatingView.socketId;
-    }
+    NSMutableDictionary *data = [NSMutableDictionary dictionary];
+    data[@"box_office_id"] = @(1);
+    data[@"socket_id"] = seatingView.socketId;
+    data[@"order"] = @{ @"date": order.date.dateId, @"tickets": ticketsInfo };
     
-    [self makeJsonRequestWithPath:@"api/box_office/place_order" method:@"POST" data:@{ @"order": orderInfo } callback:^(NSDictionary *response) {
+    [self makeJsonRequestWithPath:@"api/ticketing/box_office/orders" method:@"POST" data:data callback:^(NSDictionary *response) {
         FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:self.event] autorelease];
         callback(newOrder);
     }];
