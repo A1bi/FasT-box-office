@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - iZettleSDK (1.7.1)
+  - iZettleSDK (2.1)
   - KSCrash/Core (1.15.21):
     - KSCrash/Reporting/Filters/Basic
   - KSCrash/Recording (1.15.21):
@@ -35,7 +35,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
-  - iZettleSDK (~> 1.7.1)
+  - iZettleSDK (~> 2.1.0)
   - MBProgressHUD (~> 1.1.0)
   - Sentry (from `https://github.com/getsentry/sentry-cocoa.git`, tag `3.13.1`)
 
@@ -58,11 +58,11 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  iZettleSDK: d06e7c47a17d423ec5148f3d03ae713eca7d5d46
+  iZettleSDK: 86913e788acd2656f3b7bcb729a9613f0a9a065e
   KSCrash: 47bc2f48bb5537f112432cfbea9a359aaf7a6cc5
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   Sentry: c6c852d5a982dd42de8c35f7da4116af6081ebbd
 
-PODFILE CHECKSUM: c1dfafd9e82dd0a1ba866b2359957da834f35e88
+PODFILE CHECKSUM: 2e010475cee53e7595838f7327590d0c001684a5
 
 COCOAPODS: 1.7.4

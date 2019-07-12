@@ -543,6 +543,7 @@
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettleSDK.framework",
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettleShared.framework",
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettlePayments.framework",
+				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettleTransport.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -553,6 +554,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettleSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettleShared.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettlePayments.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettleTransport.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -760,7 +762,7 @@
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.a0s.${PRODUCT_NAME:rfc1034identifier}.debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -787,7 +789,7 @@
 				);
 				GCC_PREFIX_HEADER = "FasT-box-office/FasT-box-office-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.a0s.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
