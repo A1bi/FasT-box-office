@@ -15,22 +15,15 @@
 #import "FasTOrder.h"
 #import "FasTTicket.h"
 #import "FasTApi.h"
+#import "FasTSeatingView.h"
 
 #define DegreesToRadians(x) ((x) * M_PI / 180.0)
 
 @interface FasTOrderSeatsViewController ()
 {
     FasTOrder *_order;
-    FasTEventDate *_date;
-    NSMutableArray *_chosenSeats;
     BOOL seatingViewRotated;
-    
-    UIAlertView *errorAlert;
 }
-
-- (void)updateSeatsWithInfo:(NSDictionary *)seats;
-- (void)updateSeatsWithNotification:(NSNotification *)note;
-- (void)updateSeats;
 
 @end
 
@@ -41,7 +34,11 @@
     [super viewDidLoad];
     
     _order = ((FasTOrderViewController *)self.navigationController).order;
-    _chosenSeats = [[NSMutableArray array] retain];
+
+    FasTSeatingView *seatingView = [[FasTApi defaultApi] seatingView];
+    [_seatingView addSubview:seatingView];
+    seatingView.frame = CGRectMake(0, 0, _seatingView.frame.size.width, _seatingView.frame.size.height);
+    seatingView.bounds = CGRectMake(0, 0, _seatingView.frame.size.width, _seatingView.frame.size.height);
     
     seatingViewRotated = NO;
 }
@@ -50,75 +47,23 @@
 {
     [super viewWillAppear:animated];
     
-    FasTEventDate *date = _order.date;
-    if (_date != date) {
-        _date = date;
-        [self updateSeats];
-    }
-    
-    [[FasTApi defaultApi] setDate:_date.dateId numberOfSeats:_order.numberOfTickets callback:^(NSDictionary *response) {
-        
-    }];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [errorAlert dismissWithClickedButtonIndex:0 animated:NO];
+    [[[FasTApi defaultApi] seatingView] setDate:_order.date numberOfSeats:_order.numberOfTickets];
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [errorAlert release];
     [_seatingView release];
-    [_chosenSeats release];
     [super dealloc];
 }
 
 #pragma mark class methods
 
-- (void)updateSeatsWithInfo:(NSDictionary *)seats
-{
-    NSDictionary *dateSeats = seats[_date.dateId];
-    if (!dateSeats) return;
-    
-    for (NSString *seatId in dateSeats) {
-        FasTSeat *seat = dateSeats[seatId];
-        if (![seat isKindOfClass:[FasTSeat class]]) {
-            seat = _date.event.seats[_date.dateId][seatId];
-        }
-        [_seatingView updatedSeat:seat];
-        
-        if ([seat chosen]) {
-            [_chosenSeats addObject:seat];
-        } else {
-            [_chosenSeats removeObject:seat];
-        }
-    }
-}
-
-- (void)updateSeatsWithNotification:(NSNotification *)note
-{
-    [self updateSeatsWithInfo:[note userInfo]];
-}
-
-- (void)updateSeats
-{
-    [_chosenSeats removeAllObjects];
-    [self updateSeatsWithInfo:_date.event.seats];
-}
-
 - (IBAction)placeOrder:(id)sender
 {
-    if (_chosenSeats.count == _order.tickets.count) {
-        [((FasTOrderViewController *)self.navigationController).delegate didPlaceOrder:_order];
-    } else {
-        NSString *message = [NSString stringWithFormat:NSLocalizedStringByKey(@"notEnoughSeatsErrorMessage"), _order.tickets.count];
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedStringByKey(@"notEnoughSeatsErrorTitle") message:message delegate:nil cancelButtonTitle:NSLocalizedStringByKey(@"dismissAlert") otherButtonTitles:nil] autorelease];
-        [alert show];
-    }
+    [[[FasTApi defaultApi] seatingView] validate:^(BOOL valid) {
+        if (valid && false) {
+            [((FasTOrderViewController *)self.navigationController).delegate didPlaceOrder:_order];
+        }
+    }];
 }
 
 - (IBAction)rotateSeatingView
@@ -132,13 +77,6 @@
     _seatingView.transform = CGAffineTransformMakeRotation(angle);
     
     [UIView commitAnimations];
-}
-
-#pragma mark seating delegate methods
-
-- (void)didChooseSeatView:(FasTSeatView *)seatView
-{
-    [[FasTApi defaultApi] chooseSeatWithId:[seatView seatId]];
 }
 
 @end

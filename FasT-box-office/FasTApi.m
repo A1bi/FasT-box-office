@@ -12,6 +12,7 @@
 #import "FasTOrder.h"
 #import "FasTTicket.h"
 #import "FasTTicketType.h"
+#import "FasTSeatingView.h"
 
 @import AFNetworking;
 
@@ -34,7 +35,7 @@ static FasTApi *defaultApi = nil;
 
 @implementation FasTApi
 
-@synthesize events, clientType, clientId;
+@synthesize events, clientType, clientId, seatingView;
 
 + (FasTApi *)defaultApi
 {
@@ -74,6 +75,10 @@ static FasTApi *defaultApi = nil;
         
         clientType = [cType retain];
         clientId = [cId retain];
+
+        seatingView = [[FasTSeatingView alloc] init];
+
+        [self fetchEvents:NULL];
     }
     return self;
 }
@@ -84,6 +89,7 @@ static FasTApi *defaultApi = nil;
     [events release];
     [clientType release];
     [clientId release];
+    [seatingView release];
     [super dealloc];
 }
 
@@ -166,16 +172,6 @@ static FasTApi *defaultApi = nil;
     [self makeRequestWithAction:@"enable_resale_for_tickets" method:@"PATCH" tickets:tickets callback:callback];
 }
 
-- (void)setDate:(NSString *)dateId numberOfSeats:(NSInteger)numberOfSeats callback:(FasTApiResponseBlock)callback
-{
-//    NSDictionary *data = @{ @"date": dateId, @"numberOfSeats": @(numberOfSeats) };
-//    OnAckCallback *ackCallback = [sIO emitWithAck:@"setDateAndNumberOfSeats" with:@[data]];
-//    [ackCallback timingOutAfter:5 callback:^(NSArray *data) {
-//        NSDictionary *response = data.count > 0 ? data[0] : nil;
-//        callback(response);
-//    }];
-}
-
 #pragma mark class methods
 
 - (void)fetchEvents:(void (^)(void))callback
@@ -188,6 +184,7 @@ static FasTApi *defaultApi = nil;
         }
         [events release];
         events = [[NSDictionary dictionaryWithDictionary:tmpEvents] retain];
+        
         if (callback) callback();
     }];
 }
@@ -239,6 +236,11 @@ static FasTApi *defaultApi = nil;
 - (void)finishPurchase:(NSDictionary *)data
 {
     [self makeJsonRequestWithResource:@"api/box_office" action:@"purchase" method:@"POST" data:data callback:NULL];
+}
+
+- (void)resetSeating
+{
+    [seatingView resetSeats];
 }
 
 - (NSString *)URLForOrder:(FasTOrder *)order

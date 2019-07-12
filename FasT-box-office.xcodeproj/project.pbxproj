@@ -51,6 +51,7 @@
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
+		F061035422D537A600801101 /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87891D41728100B5B0F3 /* FasTSeatingView.m */; };
 		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -388,6 +389,8 @@
 				F02F877B1D41728100B5B0F3 /* FasTConstants.m */,
 				F02F87801D41728100B5B0F3 /* FasTFormatter.h */,
 				F02F87811D41728100B5B0F3 /* FasTFormatter.m */,
+				F02F87881D41728100B5B0F3 /* FasTSeatingView.h */,
+				F02F87891D41728100B5B0F3 /* FasTSeatingView.m */,
 				F02F878E1D41728100B5B0F3 /* FasTTicketPrinter.h */,
 				F02F878F1D41728100B5B0F3 /* FasTTicketPrinter.m */,
 			);
@@ -416,8 +419,6 @@
 		F061035322D28F1800801101 /* legacy */ = {
 			isa = PBXGroup;
 			children = (
-				F02F87881D41728100B5B0F3 /* FasTSeatingView.h */,
-				F02F87891D41728100B5B0F3 /* FasTSeatingView.m */,
 				F02F878A1D41728100B5B0F3 /* FasTSeatView.h */,
 				F02F878B1D41728100B5B0F3 /* FasTSeatView.m */,
 			);
@@ -566,6 +567,7 @@
 				F03203F81B569CF6006D9937 /* FasTOrderTicketTypesCell.m in Sources */,
 				F02F87A71D423B2200B5B0F3 /* FasTReportBillViewController.m in Sources */,
 				F03203FF1B569CF6006D9937 /* FasTReceiptPrintersTableViewController.m in Sources */,
+				F061035422D537A600801101 /* FasTSeatingView.m in Sources */,
 				F02F879F1D41728100B5B0F3 /* FasTTicketType.m in Sources */,
 				F02F87991D41728100B5B0F3 /* FasTOrder.m in Sources */,
 				F03203F71B569CF6006D9937 /* FasTOrdersSearchViewController.m in Sources */,

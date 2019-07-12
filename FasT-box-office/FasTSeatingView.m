@@ -1,5 +1,5 @@
 //
-//  FasTSeatsView.m
+//  FasTSeatingView.m
 //  FasT-retail
 //
 //  Created by Albrecht Oster on 11.04.13.
@@ -7,131 +7,123 @@
 //
 
 #import "FasTSeatingView.h"
-#import "FasTSeatView.h"
-#import "FasTSeat.h"
-
-static int      kMaxCellsX = 150;
-static int      kMaxCellsY = 60;
-static float    kSizeFactorsX = 2.8;
-static float    kSizeFactorsY = 2.8;
+#import "FasTEvent.h"
+#import "FasTEventDate.h"
 
 @interface FasTSeatingView ()
+{
+    FasTEventDate *date;
+    NSInteger numberOfSeats;
+    WKUserContentController *contentController;
+}
 
-- (FasTSeatView *)addSeat:(FasTSeat *)seat;
+- (void)reloadSeating;
+- (void)updateDateAndNumberOfSeats;
+- (void)callScriptMethod:(NSString *)method withParams:(NSString *)params completion:(void (^)(id _Nullable))completion;
+- (NSURL *)urlForSeatingWithEvent;
 
 @end
 
 @implementation FasTSeatingView
 
-@synthesize delegate;
+@synthesize socketId;
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)init
 {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        CGSize scrollSize = CGSizeMake(self.bounds.size.width * 1.8, self.bounds.size.height);
-        scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-        [scrollView setContentSize:scrollSize];
-        [scrollView setMinimumZoomScale:1];
-        [scrollView setMaximumZoomScale:1.5];
-        [scrollView setDelegate:self];
-        [self addSubview:scrollView];
-        
-        CGRect frame;
-        frame.size = scrollSize;
-        frame.origin = CGPointZero;
-        seatsView = [[UIView alloc] initWithFrame:frame];
-        [scrollView addSubview:seatsView];
-        
-        CGFloat stageHeight = scrollSize.height * .1, margin = 0;
-        frame = CGRectMake(margin, scrollSize.height - stageHeight, scrollSize.width - margin * 2, stageHeight);
-        stageView = [[UIView alloc] initWithFrame:frame];
-        [stageView setBackgroundColor:[UIColor blueColor]];
-        [scrollView addSubview:stageView];
-        
-        frame.origin.x = 0, frame.origin.y = 0;
-        UILabel *stageLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
-        [stageLabel setBackgroundColor:[UIColor clearColor]];
-        [stageLabel setTextColor:[UIColor whiteColor]];
-        [stageLabel setFont:[UIFont boldSystemFontOfSize:20]];
-        [stageLabel setText:NSLocalizedStringByKey(@"stage")];
-        [stageLabel setTextAlignment:NSTextAlignmentCenter];
-        [stageView addSubview:stageLabel];
-        
-		seatViews = [[NSMutableDictionary dictionary] retain];
-        
-        scrollSize.height *= .9;
-        grid = [@[ @(scrollSize.width / kMaxCellsX), @(scrollSize.height / kMaxCellsY) ] retain];
-        sizes = [@[ @([grid[0] floatValue] * kSizeFactorsX), @([grid[1] floatValue] * kSizeFactorsY) ] retain];
-    }
+    WKUserContentController *contentController = [[[WKUserContentController alloc] init] autorelease];
+    [contentController addScriptMessageHandler:self name:@"seating"];
+    
+    WKWebViewConfiguration *config = [[[WKWebViewConfiguration alloc] init] autorelease];
+    config.userContentController = contentController;
+    
+    self = [super initWithFrame:CGRectZero configuration:config];
     return self;
-}
-
-- (void)updatedSeat:(FasTSeat *)seat
-{
-    FasTSeatView *seatView = seatViews[[seat seatId]];
-    if (!seatView) {
-        seatView = [self addSeat:seat];
-    }
-    
-    FasTSeatViewState newState = FasTSeatViewStateAvailable;
-    if ([seat chosen]) {
-        newState = FasTSeatViewStateChosen;
-    } else if ([seat taken]) {
-        newState = FasTSeatViewStateTaken;
-    }
-    [seatView setState:newState];
-}
-
-- (FasTSeatView *)addSeat:(FasTSeat *)seat
-{
-    CGRect frame;
-	frame.size.width = [sizes[0] floatValue];
-	frame.size.height = [sizes[1] floatValue];
-	
-	FasTSeatView *seatView = [[[FasTSeatView alloc] initWithFrame:frame seatId:[seat seatId]] autorelease];
-    [seatView setDelegate:[self delegate]];
-    seatViews[[seat seatId]] = seatView;
-	[seatsView addSubview:seatView];
-    
-    NSString *colorMethod = [NSString stringWithFormat:@"%@Color", @"blue"];
-    UIColor *color = [[UIColor class] performSelector:NSSelectorFromString(colorMethod)];
-    seatView.layer.borderColor = color.CGColor;
-    seatView.layer.borderWidth = 2;
-    seatView.numberLabel.text = seat.number;
-    
-    return seatView;
 }
 
 - (void)dealloc
 {
-    [grid release];
-    [sizes release];
-    [seatViews release];
-    [stageView release];
-    [scrollView release];
-    [seatsView release];
+    [date release];
+    [contentController release];
     [super dealloc];
 }
 
-#pragma mark scroll view delegate
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+- (void)setDate:(FasTEventDate *)d numberOfSeats:(NSInteger)n
 {
-    return seatsView;
-}
-
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
-{
+    if (date == d && numberOfSeats == n) return;
     
+    numberOfSeats = n;
+    
+    FasTEventDate *previousDate = date;
+    if (date != d) {
+        date = [d retain];
+        
+        if (previousDate.event != date.event) {
+            [self reloadSeating];
+        } else {
+            [self updateDateAndNumberOfSeats];
+        }
+        
+        [previousDate release];
+    }
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)s
+- (void)updateDateAndNumberOfSeats
 {
-    CGRect frame = stageView.frame;
-    frame.size.width = s.contentSize.width;
-    frame.origin.y = s.contentSize.height - frame.size.height;
-    stageView.frame = frame;
+    if (!date || numberOfSeats < 1) return;
+    
+    NSString *params = [NSString stringWithFormat:@"%@, %ld", date.dateId, (long)numberOfSeats];
+    [self callScriptMethod:@"setDateAndNumberOfSeats" withParams:params completion:NULL];
+}
+
+- (void)resetSeats
+{
+    [self callScriptMethod:@"reset" withParams:nil completion:NULL];
+}
+
+- (void)validate:(void (^)(BOOL))completion
+{
+    [self callScriptMethod:@"validate" withParams:nil completion:^(id result) {
+        if (completion) completion([(NSNumber *)result boolValue]);
+    }];
+}
+
+- (void)callScriptMethod:(NSString *)method withParams:(NSString *)params completion:(void (^)(id _Nullable))completion
+{
+    if (!params) params = @"";
+    NSString *script = [NSString stringWithFormat:@"seating.%@(%@);", method, params];
+    [self evaluateJavaScript:script completionHandler:^(id result, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"%@", error.description);
+        } else if (completion) {
+            completion(result);
+        }
+    }];
+}
+
+- (void)reloadSeating
+{
+    NSURL *url = [self urlForSeatingWithEvent];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self loadRequest:request];
+}
+
+- (NSURL *)urlForSeatingWithEvent
+{
+    NSString *url = [NSString stringWithFormat:@"%@/api/ticketing/box_office/seating?event_id=%@", API_HOST, date.event.eventId];
+    return [NSURL URLWithString:url];
+}
+
+#pragma mark script message handler
+
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
+{
+    NSDictionary *data = (NSDictionary *)message.body;
+    if ([data[@"event"] isEqualToString:@"becameReady"]) {
+        [socketId release];
+        socketId = [data[@"socketId"] retain];
+        
+        [self updateDateAndNumberOfSeats];
+    }
 }
 
 @end

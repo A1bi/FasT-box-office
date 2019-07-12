@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "FasTSeatingView.h"
 
-@interface FasTOrderSeatsViewController : UIViewController <FasTSeatingViewDelegate>
+@interface FasTOrderSeatsViewController : UIViewController
 
-@property (nonatomic, retain) IBOutlet FasTSeatingView *seatingView;
+@property (nonatomic, retain) IBOutlet UIView *seatingView;
 
 - (IBAction)placeOrder:(id)sender;
 - (IBAction)rotateSeatingView;

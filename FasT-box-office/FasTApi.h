@@ -14,6 +14,7 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 
 @class FasTEvent;
 @class FasTOrder;
+@class FasTSeatingView;
 @class AFHTTPSessionManager;
 
 @interface FasTApi : NSObject
@@ -23,11 +24,13 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
     NSString *clientType;
     NSString *clientId;
     NSString *seatingId;
+    FasTSeatingView *seatingView;
 }
 
 @property (nonatomic, readonly) NSDictionary *events;
 @property (nonatomic, readonly) NSString *clientType;
 @property (nonatomic, readonly) NSString *clientId;
+@property (nonatomic, readonly) FasTSeatingView *seatingView;
 
 + (FasTApi *)defaultApi;
 + (FasTApi *)defaultApiWithClientType:(NSString *)cType clientId:(NSString *)cId;
@@ -41,7 +44,6 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 - (void)finishPurchase:(NSDictionary *)info;
 - (void)placeOrder:(FasTOrder *)order callback:(void (^)(FasTOrder *order))callback;
 - (NSString *)URLForOrder:(FasTOrder *)order;
-- (void)setDate:(NSString *)dateId numberOfSeats:(NSInteger)numberOfSeats callback:(FasTApiResponseBlock)callback;
 - (void)resetSeating;
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order;
 - (void)cancelTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;

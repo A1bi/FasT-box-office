@@ -1,34 +1,22 @@
 //
-//  FasTSeatsView.h
+//  FasTSeatingView.h
 //  FasT-retail
 //
 //  Created by Albrecht Oster on 11.04.13.
 //  Copyright (c) 2013 Albisigns. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
-@class FasTSeatingView;
-@class FasTSeatView;
-@class FasTSeat;
+@class FasTEventDate;
 
-@protocol FasTSeatingViewDelegate <NSObject>
+@interface FasTSeatingView : WKWebView <WKScriptMessageHandler>
 
-- (void)didChooseSeatView:(FasTSeatView *)seatView;
+@property (nonatomic, readonly) NSString *socketId;
 
-@end
-
-@interface FasTSeatingView : UIView <UIScrollViewDelegate>
-{
-	NSMutableDictionary *seatViews;
-    NSArray *grid, *sizes;
-    
-    UIScrollView *scrollView;
-    UIView *seatsView, *stageView;
-}
-
-@property (nonatomic, assign) IBOutlet id<FasTSeatingViewDelegate> delegate;
-
-- (void)updatedSeat:(FasTSeat *)seat;
+- (id)init;
+- (void)setDate:(FasTEventDate *)date numberOfSeats:(NSInteger)numberOfSeats;
+- (void)resetSeats;
+- (void)validate:(void (^)(BOOL))completion;
 
 @end

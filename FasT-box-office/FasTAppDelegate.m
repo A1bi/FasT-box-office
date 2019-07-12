@@ -18,10 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [FasTApi defaultApiWithClientType:@"seating" clientId:@"0"];
-    [[FasTApi defaultApi] initNodeConnection];
     
     [[iZettleSDK shared] startWithAPIKey:@"360E8DAABB8C8283D1F4B0D79CDB0B55"];
-    
+
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     NSError *error = nil;
