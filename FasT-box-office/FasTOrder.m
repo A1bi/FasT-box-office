@@ -12,12 +12,13 @@
 #import "FasTTicket.h"
 #import "FasTLogEvent.h"
 #import "FasTFormatter.h"
+#import "FasTApi.h"
 
 @implementation FasTOrder
 
 @synthesize orderId, number, date, tickets, created, total, balance, paid, firstName, lastName, logEvents;
 
-- (id)initWithInfo:(NSDictionary *)info event:(FasTEvent *)event
+- (id)initWithInfo:(NSDictionary *)info
 {
     self = [super init];
     if (self) {
@@ -35,6 +36,8 @@
         for (itemInfo in info[@"log_events"]) {
             [logEvents addObject:[[[FasTLogEvent alloc] initWithInfo:itemInfo] autorelease]];
         }
+        
+        FasTEvent *event = [FasTApi defaultApi].events[info[@"event_id"]];
         
         NSMutableArray *tmpTickets = [NSMutableArray array];
         for (itemInfo in info[@"tickets"]) {

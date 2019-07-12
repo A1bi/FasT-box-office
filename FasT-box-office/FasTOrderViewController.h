@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class FasTOrder;
+@class FasTEvent;
 
 @protocol FasTOrderViewControllerDelegate <UINavigationControllerDelegate>
 
@@ -20,6 +21,7 @@
 
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *cancelBtn;
 @property (nonatomic, assign) IBOutlet id<FasTOrderViewControllerDelegate> delegate;
+@property (nonatomic, retain) FasTEvent *event;
 @property (nonatomic, retain) FasTOrder *order;
 
 - (IBAction)cancel:(id)sender;

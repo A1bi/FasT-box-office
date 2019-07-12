@@ -28,7 +28,8 @@
     [super viewDidLoad];
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"date >= %@", [NSDate dateWithTimeIntervalSinceNow:-1800]];
-    _dates = [[[FasTApi defaultApi].event.dates filteredArrayUsingPredicate:pred] retain];
+    FasTOrderViewController *vc = (FasTOrderViewController *)self.navigationController;
+    _dates = [[vc.event.dates filteredArrayUsingPredicate:pred] retain];
 }
 
 - (void)dealloc

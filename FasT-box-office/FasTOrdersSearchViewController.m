@@ -65,7 +65,7 @@
             [orders removeAllObjects];
             
             for (NSDictionary *orderInfo in response[@"orders"]) {
-                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo event:[[FasTApi defaultApi] event]] autorelease];
+                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo] autorelease];
                 if ([order.created laterDate:ordersStartDate] == order.created) {
                     [orders addObject:order];
                 }

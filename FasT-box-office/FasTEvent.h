@@ -10,7 +10,7 @@
 
 @interface FasTEvent : NSObject
 {
-    NSNumber *eventId;
+    NSString *eventId;
     NSString *name;
     NSArray *dates;
     NSArray *ticketTypes;
@@ -18,7 +18,7 @@
     BOOL isBoundToSeats;
 }
 
-@property (nonatomic, retain) NSNumber *eventId;
+@property (nonatomic, retain) NSString *eventId;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *dates;
 @property (nonatomic, retain) NSArray *ticketTypes;

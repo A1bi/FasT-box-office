@@ -83,19 +83,6 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
     [center addObserver:self selector:@selector(receivedOrderPayment:) name:@"FasTPurchaseControllerAddOrderPayment" object:nil];
-//    [center addObserver:self selector:@selector(updateNumberOfAvailableTickets) name:FasTApiUpdatedSeatsNotification object:nil];
-    [center addObserverForName:FasTApiIsReadyNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-        _todaysDate = nil;
-        for (FasTEventDate *date in [FasTApi defaultApi].event.dates) {
-            if ([[NSCalendar currentCalendar] isDateInToday:date.date]) {
-                _todaysDate = date;
-                break;
-            }
-        }
-        if (!_todaysDate) {
-            _todaysDate = [FasTApi defaultApi].event.dates.lastObject;
-        }
-    }];
     
     [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"products" callback:^(NSDictionary *response) {
         NSMutableArray *tmpProducts = [NSMutableArray array];
@@ -254,13 +241,8 @@
 
 - (void)updateNumberOfAvailableTickets
 {
-    if (!_todaysDate) return;
-    
+    // TODO: fix
     _numberOfAvailableTickets = 0;
-    NSArray *seats = [[FasTApi defaultApi].event.seats[_todaysDate.dateId] allValues];
-    for (FasTSeat *seat in seats) {
-        if (!seat.taken) _numberOfAvailableTickets++;
-    }
     
     [self.availableProductsTable reloadData];
 }

@@ -32,7 +32,7 @@
 @property (nonatomic, assign) BOOL paid;
 @property (nonatomic, readonly) NSMutableArray *logEvents;
 
-- (id)initWithInfo:(NSDictionary *)info event:(FasTEvent *)event;
+- (id)initWithInfo:(NSDictionary *)info;
 - (NSString *)fullNameWithLastNameFirst:(BOOL)flag;
 - (NSString *)localizedTotal;
 - (NSString *)localizedBalance;

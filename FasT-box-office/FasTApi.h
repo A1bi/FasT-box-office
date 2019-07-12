@@ -12,7 +12,6 @@ FOUNDATION_EXPORT NSString * const FasTApiIsReadyNotification;
 
 typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 
-@class FasTEvent;
 @class FasTOrder;
 @class FasTSeatingView;
 @class AFHTTPSessionManager;
@@ -42,6 +41,5 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order;
 - (void)cancelTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
 - (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
-- (FasTEvent *)event;
 
 @end

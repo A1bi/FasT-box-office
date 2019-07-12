@@ -52,6 +52,7 @@
 		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
 		F061035422D537A600801101 /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87891D41728100B5B0F3 /* FasTSeatingView.m */; };
+		F09517FB22D8A30A00862770 /* FasTOrderEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */; };
 		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,8 @@
 		F048DEE0224DEA860039E664 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.local.xcconfig; sourceTree = "<group>"; };
 		F048DEE3224DEAC40039E664 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		F09517F922D8A30A00862770 /* FasTOrderEventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrderEventsViewController.h; sourceTree = "<group>"; };
+		F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrderEventsViewController.m; sourceTree = "<group>"; };
 		F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrdersListViewController.h; sourceTree = "<group>"; };
 		F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -312,6 +315,8 @@
 			children = (
 				F03203E01B569CF6006D9937 /* FasTOrderViewController.h */,
 				F03203E11B569CF6006D9937 /* FasTOrderViewController.m */,
+				F09517F922D8A30A00862770 /* FasTOrderEventsViewController.h */,
+				F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */,
 				F03203D21B569CF6006D9937 /* FasTOrderDatesViewController.h */,
 				F03203D31B569CF6006D9937 /* FasTOrderDatesViewController.m */,
 				F03203DE1B569CF6006D9937 /* FasTOrderTicketTypesViewController.h */,
@@ -572,6 +577,7 @@
 				F02F87991D41728100B5B0F3 /* FasTOrder.m in Sources */,
 				F03203F71B569CF6006D9937 /* FasTOrdersSearchViewController.m in Sources */,
 				F03203F51B569CF6006D9937 /* FasTOrderDetailsViewController.m in Sources */,
+				F09517FB22D8A30A00862770 /* FasTOrderEventsViewController.m in Sources */,
 				F03203F01B569CF6006D9937 /* FasTCartTicketItem.m in Sources */,
 				F03203F31B569CF6006D9937 /* FasTOrderDatesViewController.m in Sources */,
 				F03203FB1B569CF6006D9937 /* FasTProduct.m in Sources */,

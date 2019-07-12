@@ -108,7 +108,7 @@
 {
     [[FasTApi defaultApi] getResource:@"api/box_office" withAction:[NSString stringWithFormat:@"orders/%@", _order.orderId] callback:^(NSDictionary *response) {
         if (response[@"order"]) {
-            self.order = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:[[FasTApi defaultApi] event]] autorelease];
+            self.order = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
             [self reload];
             [self.tableView reloadData];
         }

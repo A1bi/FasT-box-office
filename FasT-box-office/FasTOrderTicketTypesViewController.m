@@ -14,20 +14,20 @@
 #import "FasTTicketType.h"
 #import "FasTTicket.h"
 #import "FasTEvent.h"
+#import "FasTEventDate.h"
 
 @interface FasTOrderTicketTypesViewController ()
-{
-    NSArray *_ticketTypes;
-}
+
+- (NSArray *)ticketTypes;
 
 @end
 
 @implementation FasTOrderTicketTypesViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    _ticketTypes = [FasTApi defaultApi].event.ticketTypes;
+- (NSArray *)ticketTypes
+{
+    FasTOrderViewController *vc = (FasTOrderViewController *)self.navigationController;
+    return vc.event.ticketTypes;
 }
 
 #pragma mark - Table view data source
@@ -37,13 +37,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _ticketTypes.count + 1;
+    return [self ticketTypes].count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
-    if (indexPath.row < _ticketTypes.count) {
-        FasTTicketType *type = _ticketTypes[indexPath.row];
+    if (indexPath.row < [self ticketTypes].count) {
+        FasTTicketType *type = [self ticketTypes][indexPath.row];
         
         cell = [tableView dequeueReusableCellWithIdentifier:@"ticketTypeRow" forIndexPath:indexPath];
         
@@ -59,7 +59,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row < _ticketTypes.count) {
+    if (indexPath.row < [self ticketTypes].count) {
         return 81;
     } else {
         return 60;
@@ -72,7 +72,7 @@
 {
     NSMutableArray *tickets = [NSMutableArray array];
     NSInteger i = 0;
-    for (FasTTicketType *type in _ticketTypes) {
+    for (FasTTicketType *type in [self ticketTypes]) {
         FasTOrderTicketTypesCell *cell = (FasTOrderTicketTypesCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i++ inSection:0]];
         for (NSInteger j = 0; j < cell.stepper.value; j++) {
             
@@ -87,7 +87,7 @@
         FasTOrder *order = ((FasTOrderViewController *)self.navigationController).order;
         order.tickets = tickets;
         
-        if (![FasTApi defaultApi].event.isBoundToSeats) {
+        if (!order.date.event.isBoundToSeats) {
             [((FasTOrderViewController *)self.navigationController).delegate didPlaceOrder:order];
         } else {
             return YES;

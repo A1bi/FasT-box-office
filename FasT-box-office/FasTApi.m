@@ -129,7 +129,7 @@ static FasTApi *defaultApi = nil;
     NSArray *ticketIds = [self ticketIdsForTickets:tickets];
     
     [self makeJsonRequestWithPath:[NSString stringWithFormat:@"api/box_office/%@", action] method:method data:@{ @"ticket_ids": ticketIds } callback:^(NSDictionary *response) {
-        FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:self.event] autorelease];
+        FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
         callback(order);
     }];
 }
@@ -179,7 +179,7 @@ static FasTApi *defaultApi = nil;
     data[@"order"] = @{ @"date": order.date.dateId, @"tickets": ticketsInfo };
     
     [self makeJsonRequestWithPath:@"api/ticketing/box_office/orders" method:@"POST" data:data callback:^(NSDictionary *response) {
-        FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"] event:self.event] autorelease];
+        FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
         callback(newOrder);
     }];
 }
@@ -233,11 +233,6 @@ static FasTApi *defaultApi = nil;
 {
     NSNotification *notification = [NSNotification notificationWithName:name object:self userInfo:info];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
-}
-
-- (FasTEvent *)event
-{
-    return (FasTEvent *)events.allValues.lastObject;
 }
 
 @end
