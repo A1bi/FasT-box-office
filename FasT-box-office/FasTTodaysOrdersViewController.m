@@ -48,8 +48,7 @@
     [refresh beginRefreshing];
     [self retain];
     
-    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"todays" callback:^(NSDictionary *response) {
-        
+    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:nil data:@{ @"unpaid": @(1), @"event_today": @(1) } callback:^(NSDictionary *response) {
         if (!response[@"error"]) {
             [orders removeAllObjects];
             

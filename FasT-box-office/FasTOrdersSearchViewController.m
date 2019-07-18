@@ -58,7 +58,7 @@
     [hud setMode:MBProgressHUDModeIndeterminate];
     hud.label.text = NSLocalizedStringByKey(@"pleaseWait");
     
-    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"search" data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:@"" data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
         [hud hideAnimated:YES];
         
         if (!response[@"error"]) {

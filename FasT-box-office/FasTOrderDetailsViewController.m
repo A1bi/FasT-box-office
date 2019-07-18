@@ -106,7 +106,7 @@
 
 - (void)update
 {
-    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:[NSString stringWithFormat:@"orders/%@", _order.orderId] callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:_order.orderId callback:^(NSDictionary *response) {
         if (response[@"order"]) {
             self.order = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
             [self reload];

@@ -187,7 +187,7 @@ static FasTApi *defaultApi = nil;
 - (void)fetchPrintableForTickets:(NSArray *)tickets callback:(void (^)(NSData *data))callback
 {
     NSArray *ticketIds = [self ticketIdsForTickets:tickets];
-    [http GET:@"api/box_office/ticket_printable" parameters:@{ @"ticket_ids": ticketIds } progress:nil success:NULL failure:^(NSURLSessionDataTask *task, NSError *error) {
+    [http GET:@"api/ticketing/box_office/tickets.pdf" parameters:@{ @"ids": ticketIds } progress:nil success:NULL failure:^(NSURLSessionDataTask *task, NSError *error) {
         if ([error.domain isEqualToString:AFURLResponseSerializationErrorDomain]) {
             NSData *data = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
             callback(data);
@@ -201,8 +201,8 @@ static FasTApi *defaultApi = nil;
         ticket.pickedUp = YES;
     }
     
-    NSDictionary *data = @{ @"ticket_ids": [self ticketIdsForTickets:tickets] };
-    [self makeJsonRequestWithResource:@"api/box_office" action:@"pick_up_tickets" method:@"PATCH" data:data callback:NULL];
+    NSDictionary *data = @{ @"ids": [self ticketIdsForTickets:tickets], @"ticket": @{ @"picked_up": @(YES) } };
+    [self makeJsonRequestWithResource:@"api/ticketing/box_office/tickets" action:@"" method:@"PATCH" data:data callback:NULL];
 }
 
 - (void)finishPurchase:(NSDictionary *)data
