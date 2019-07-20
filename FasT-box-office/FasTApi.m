@@ -26,7 +26,7 @@ static FasTApi *defaultApi = nil;
 
 - (void)makeJsonRequestWithPath:(NSString *)path method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)makeJsonRequestWithResource:(NSString *)resource action:(NSString *)action method:(NSString *)method data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
-- (void)makeRequestWithAction:(NSString *)action method:(NSString *)method tickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback;
+- (void)patchTickets:(NSArray *)tickets data:(NSDictionary *)data callback:(void (^)(void))callback;
 - (void)postNotificationWithName:(NSString *)name info:(NSDictionary *)info;
 - (NSArray *)ticketIdsForTickets:(NSArray *)tickets;
 
@@ -114,6 +114,8 @@ static FasTApi *defaultApi = nil;
         [http POST:path parameters:data progress:nil success:success failure:failure];
     } else if ([method isEqualToString:@"PATCH"]) {
         [http PATCH:path parameters:data success:success failure:failure];
+    } else if ([method isEqualToString:@"DELETE"]) {
+        [http DELETE:path parameters:data success:success failure:failure];
     } else {
         [http GET:path parameters:data progress:nil success:success failure:failure];
     }
@@ -121,7 +123,7 @@ static FasTApi *defaultApi = nil;
 
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order
 {
-    [self makeJsonRequestWithPath:@"api/box_office/cancel_order" method:@"PATCH" data:@{ @"id": order.orderId } callback:NULL];
+    [self makeJsonRequestWithResource:@"api/ticketing/box_office/orders" action:order.orderId method:@"DELETE" data:nil callback:NULL];
 }
 
 - (void)makeRequestWithAction:(NSString *)action method:(NSString *)method tickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback
@@ -134,14 +136,31 @@ static FasTApi *defaultApi = nil;
     }];
 }
 
-- (void)cancelTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback
+- (void)patchTickets:(NSArray *)tickets data:(NSDictionary *)data callback:(void (^)(void))callback
 {
-    [self makeRequestWithAction:@"cancel_tickets" method:@"PATCH" tickets:tickets callback:callback];
+    NSArray *ticketIds = [self ticketIdsForTickets:tickets];
+    NSDictionary *requestData = @{ @"ids": ticketIds, @"ticket": data };
+    
+    [self makeJsonRequestWithPath:@"api/ticketing/box_office/tickets" method:@"PATCH" data:requestData callback:^(NSDictionary *response) {
+        if (callback) {
+            callback();
+        }
+    }];
 }
 
-- (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback
+- (void)cancelTickets:(NSArray *)tickets callback:(void (^)(void))callback
 {
-    [self makeRequestWithAction:@"enable_resale_for_tickets" method:@"PATCH" tickets:tickets callback:callback];
+    [self patchTickets:tickets data:@{ @"cancelled": @(YES) } callback:callback];
+}
+
+- (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(void))callback
+{
+    [self patchTickets:tickets data:@{ @"resale": @(YES) } callback:callback];
+}
+
+- (void)pickUpTickets:(NSArray *)tickets callback:(void (^)(void))callback
+{
+    [self patchTickets:tickets data:@{ @"picked_up": @(YES) } callback:callback];
 }
 
 #pragma mark class methods
@@ -193,16 +212,6 @@ static FasTApi *defaultApi = nil;
             callback(data);
         }
     }];
-}
-
-- (void)pickUpTickets:(NSArray *)tickets
-{
-    for (FasTTicket *ticket in tickets) {
-        ticket.pickedUp = YES;
-    }
-    
-    NSDictionary *data = @{ @"ids": [self ticketIdsForTickets:tickets], @"ticket": @{ @"picked_up": @(YES) } };
-    [self makeJsonRequestWithResource:@"api/ticketing/box_office/tickets" action:@"" method:@"PATCH" data:data callback:NULL];
 }
 
 - (void)finishPurchase:(NSDictionary *)data

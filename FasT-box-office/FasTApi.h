@@ -33,13 +33,13 @@ typedef void (^FasTApiResponseBlock)(NSDictionary *response);
 - (void)getResource:(NSString *)resource withAction:(NSString *)action data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)postResource:(NSString *)resource withAction:(NSString *)action data:(NSDictionary *)data callback:(FasTApiResponseBlock)callback;
 - (void)fetchPrintableForTickets:(NSArray *)tickets callback:(void (^)(NSData *))callback;
-- (void)pickUpTickets:(NSArray *)tickets;
 - (void)finishPurchase:(NSDictionary *)info;
 - (void)placeOrder:(FasTOrder *)order callback:(void (^)(FasTOrder *order))callback;
 - (NSString *)URLForOrder:(FasTOrder *)order;
 - (void)resetSeating;
 - (void)cancelBoxOfficeOrder:(FasTOrder *)order;
-- (void)cancelTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
-- (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(FasTOrder *order))callback;
+- (void)cancelTickets:(NSArray *)tickets callback:(void (^)(void))callback;
+- (void)enableResaleForTickets:(NSArray *)tickets callback:(void (^)(void))callback;
+- (void)pickUpTickets:(NSArray *)tickets callback:(void (^)(void))callback;
 
 @end

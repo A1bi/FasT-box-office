@@ -25,7 +25,6 @@
     NSArray *_infoTableRows;
     NSDateFormatter *_dateFormatter;
     BOOL _selectAllTicketsToggle;
-    NSObject *_ordersObserver;
     
     UIRefreshControl *_refresh;
 }
@@ -79,33 +78,10 @@
     [self.navigationController setToolbarHidden:NO];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    _ordersObserver = [[NSNotificationCenter defaultCenter] addObserverForName:@"FasTUpdatedOrderInfo" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        FasTOrder *order = (FasTOrder *)note.userInfo[@"order"];
-        if ([_order.orderId isEqualToString:order.orderId]) {
-            self.order = order;
-            [self reload];
-            [self.tableView reloadData];
-        }
-    }];
-    [_ordersObserver retain];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_ordersObserver];
-    [_ordersObserver release];
-    _ordersObserver = nil;
-    
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)update
 {
+    [_refresh beginRefreshing];
+    
     [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:_order.orderId callback:^(NSDictionary *response) {
         if (response[@"order"]) {
             self.order = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
@@ -170,7 +146,7 @@
         if (ticket.pickedUp || ticket.cancelled || ticket.resale) {
             pay = NO;
         }
-        if (ticket.cancelled || ticket.resale) {
+        if (ticket.cancelled) {
             cancelOrResale = NO;
         }
     }
@@ -186,7 +162,7 @@
     // print
     action = [UIAlertAction actionWithTitle:@"drucken" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [[FasTTicketPrinter sharedPrinter] printTickets:tickets];
-        [[FasTApi defaultApi] pickUpTickets:tickets];
+        [[FasTApi defaultApi] pickUpTickets:tickets callback:NULL];
     }];
     [alert addAction:action];
     
@@ -236,7 +212,7 @@
     hud.label.text = NSLocalizedStringByKey(@"pleaseWait");
     
     [[FasTApi defaultApi] performSelector:apiSelector withObject:tickets withObject:^(FasTOrder *order) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTUpdatedOrderInfo" object:nil userInfo:@{ @"order": order }];
+        [self update];
         [hud hideAnimated:YES];
     }];
 }
