@@ -126,25 +126,13 @@ static FasTApi *defaultApi = nil;
     [self makeJsonRequestWithResource:@"api/ticketing/box_office/orders" action:order.orderId method:@"DELETE" data:nil callback:NULL];
 }
 
-- (void)makeRequestWithAction:(NSString *)action method:(NSString *)method tickets:(NSArray *)tickets callback:(void (^)(FasTOrder *))callback
-{
-    NSArray *ticketIds = [self ticketIdsForTickets:tickets];
-    
-    [self makeJsonRequestWithPath:[NSString stringWithFormat:@"api/box_office/%@", action] method:method data:@{ @"ticket_ids": ticketIds } callback:^(NSDictionary *response) {
-        FasTOrder *order = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
-        callback(order);
-    }];
-}
-
 - (void)patchTickets:(NSArray *)tickets data:(NSDictionary *)data callback:(void (^)(void))callback
 {
     NSArray *ticketIds = [self ticketIdsForTickets:tickets];
     NSDictionary *requestData = @{ @"ids": ticketIds, @"ticket": data };
     
     [self makeJsonRequestWithPath:@"api/ticketing/box_office/tickets" method:@"PATCH" data:requestData callback:^(NSDictionary *response) {
-        if (callback) {
-            callback();
-        }
+        if (callback) callback();
     }];
 }
 
