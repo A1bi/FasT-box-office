@@ -51,6 +51,7 @@
 		F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F03211491B570969006D9937 /* ReceiptHeaderImage.jpg */; };
 		F032114D1B586144006D9937 /* FasTCartOrderPaymentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F032114C1B586144006D9937 /* FasTCartOrderPaymentItem.m */; };
 		F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F032113E1B56AB01006D9937 /* InfoPlist.strings */; };
+		F04EC4AF22E4713E0071B402 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F04EC4AE22E4713E0071B402 /* LaunchScreen.storyboard */; };
 		F061035422D537A600801101 /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87891D41728100B5B0F3 /* FasTSeatingView.m */; };
 		F09517FB22D8A30A00862770 /* FasTOrderEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */; };
 		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
@@ -148,6 +149,7 @@
 		F048DEE0224DEA860039E664 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.local.xcconfig; sourceTree = "<group>"; };
 		F048DEE3224DEAC40039E664 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		F04EC4AE22E4713E0071B402 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F09517F922D8A30A00862770 /* FasTOrderEventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrderEventsViewController.h; sourceTree = "<group>"; };
 		F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrderEventsViewController.m; sourceTree = "<group>"; };
 		F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrdersListViewController.h; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				F03203C61B569C9F006D9937 /* Storyboard.storyboard */,
+				F04EC4AE22E4713E0071B402 /* LaunchScreen.storyboard */,
 				F03203C31B569C87006D9937 /* FasTAppDelegate.h */,
 				F03203C41B569C87006D9937 /* FasTAppDelegate.m */,
 				F03211441B56B437006D9937 /* main */,
@@ -467,7 +470,7 @@
 		F032038C1B569AC9006D9937 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = Albisigns;
 				TargetAttributes = {
 					F03203931B569AC9006D9937 = {
@@ -509,6 +512,7 @@
 				F032114E1B592ED8006D9937 /* InfoPlist.strings in Resources */,
 				F032112D1B56A993006D9937 /* Localizable.strings in Resources */,
 				F03203C71B569C9F006D9937 /* Storyboard.storyboard in Resources */,
+				F04EC4AF22E4713E0071B402 /* LaunchScreen.storyboard in Resources */,
 				F032114A1B570969006D9937 /* ReceiptHeaderImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +546,6 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FasT-box-office/Pods-FasT-box-office-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/KSCrash/KSCrash.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry/Sentry.framework",
 				"${PODS_ROOT}/iZettleSDK/iZettleSDK/iZettleSDK.framework",
@@ -553,7 +556,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KSCrash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iZettleSDK.framework",
@@ -643,6 +645,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -703,6 +706,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -755,7 +759,6 @@
 			baseConfigurationReference = AB45CD37D5DDF7B61EA5C33B /* Pods-FasT-box-office.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -781,7 +784,6 @@
 			baseConfigurationReference = B0F4386667092663DD1AE547 /* Pods-FasT-box-office.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;

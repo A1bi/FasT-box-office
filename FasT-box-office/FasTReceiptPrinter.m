@@ -22,7 +22,7 @@
 - (void)printHeader;
 - (void)printCartItems:(NSArray *)cartItems;
 - (void)printFooter;
-- (void)printReceiptForCartItems:(NSArray *)cartItems withPaymentBlock:(void (^)())paymentBlock;
+- (void)printReceiptForCartItems:(NSArray *)cartItems withPaymentBlock:(void (^)(void))paymentBlock;
 
 @end
 
@@ -105,7 +105,7 @@
     [self setPrintMode:ESCPrinterPrintModeNone];
 }
 
-- (void)printReceiptForCartItems:(NSArray *)cartItems withPaymentBlock:(void (^)())paymentBlock
+- (void)printReceiptForCartItems:(NSArray *)cartItems withPaymentBlock:(void (^)(void))paymentBlock
 {
     [self printHeader];
     [self horizontalLine:YES];
