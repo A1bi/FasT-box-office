@@ -28,7 +28,7 @@
 }
 
 - (void)refreshData {
-    [[FasTApi defaultApi] getResource:@"api/box_office" withAction:@"report" callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/transactions" withAction:nil callback:^(NSDictionary *response) {
         [products release];
         products = [response[@"products"] retain];
         [billings release];

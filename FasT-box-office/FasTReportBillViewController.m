@@ -36,7 +36,7 @@
         amount = [NSNumber numberWithFloat:amount.floatValue * -1];
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         NSDictionary *data = @{ @"amount": amount, @"reason": _reasonField.text };
-        [[FasTApi defaultApi] postResource:@"api/box_office" withAction:@"bill" data:data callback:^(NSDictionary *response) {
+        [[FasTApi defaultApi] postResource:@"api/ticketing/box_office/transactions" withAction:nil data:data callback:^(NSDictionary *response) {
             [hud hideAnimated:YES];
             [self dismissWithSuccess:YES];
         }];
