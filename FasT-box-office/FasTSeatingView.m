@@ -10,18 +10,22 @@
 #import "FasTEvent.h"
 #import "FasTEventDate.h"
 
+@import MBProgressHUD;
+
 @interface FasTSeatingView ()
 {
     FasTEventDate *date;
     NSInteger numberOfSeats;
     WKUserContentController *contentController;
     BOOL isReady;
+    MBProgressHUD *hud;
 }
 
 - (void)reloadSeating;
 - (void)updateDateAndNumberOfSeats;
 - (void)callScriptMethod:(NSString *)method withParams:(NSString *)params completion:(void (^)(id _Nullable))completion;
 - (NSURL *)urlForSeatingWithEvent;
+- (void)toggleLoadingHud:(BOOL)toggle;
 
 @end
 
@@ -38,6 +42,9 @@
     config.userContentController = contentController;
     
     self = [super initWithFrame:CGRectZero configuration:config];
+    if (self) {
+        [self addObserver:self forKeyPath:@"loading" options:0 context:nil];
+    }
     return self;
 }
 
@@ -45,6 +52,7 @@
 {
     [date release];
     [contentController release];
+    [hud release];
     [super dealloc];
 }
 
@@ -114,10 +122,31 @@
     [self loadRequest:request];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"loading"] && object == self) {
+        [self toggleLoadingHud:self.loading];
+    }
+}
+
 - (NSURL *)urlForSeatingWithEvent
 {
     NSString *url = [NSString stringWithFormat:@"%@/api/ticketing/box_office/seating?event_id=%@", API_HOST, date.event.eventId];
     return [NSURL URLWithString:url];
+}
+
+- (void)toggleLoadingHud:(BOOL)toggle
+{
+    if (toggle) {
+        if (hud) return;
+        
+        hud = [[MBProgressHUD showHUDAddedTo:self animated:NO] retain];
+    
+    } else {
+        [hud hideAnimated:NO];
+        [hud release];
+        hud = nil;
+    }
 }
 
 #pragma mark script message handler
@@ -132,7 +161,12 @@
         socketId = [data[@"socketId"] retain];
         
         [self updateDateAndNumberOfSeats];
+    
+    } else if ([data[@"event"] isEqualToString:@"connecting"]) {
+        isReady = NO;
     }
+    
+    [self toggleLoadingHud:!isReady];
 }
 
 @end
