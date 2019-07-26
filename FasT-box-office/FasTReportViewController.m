@@ -16,18 +16,18 @@
     float balance;
 }
 
-- (void)refreshData;
-
 @end
 
 @implementation FasTReportViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self refreshData];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self refreshData:nil];
 }
 
-- (void)refreshData {
+- (IBAction)refreshData:(UIRefreshControl *)sender {
+    [sender beginRefreshing];
+    
     [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/transactions" withAction:nil callback:^(NSDictionary *response) {
         [products release];
         products = [response[@"products"] retain];
@@ -36,13 +36,14 @@
         balance = ((NSNumber *)response[@"balance"]).floatValue;
         
         [self.tableView reloadData];
+        [sender endRefreshing];
     }];
 }
 
 - (void)dismissBillControllerWithSuccess:(BOOL)success {
     [self dismissViewControllerAnimated:YES completion:NULL];
     if (success) {
-        [self refreshData];
+        [self refreshData:nil];
     }
 }
 

@@ -28,11 +28,8 @@
     refresh = [[UIRefreshControl alloc] init];
     [refresh addTarget:self action:@selector(updateOrders) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refresh];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrders) name:@"FasTPurchaseFinished" object:nil];
     
     [self updateOrders];
 }
@@ -40,6 +37,7 @@
 - (void)dealloc
 {
     [refresh release];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 

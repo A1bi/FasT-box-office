@@ -230,6 +230,7 @@
 - (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished
 {
     if (finished) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseFinished" object:self];
         [self clearCart];
     }
 }
