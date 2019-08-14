@@ -156,7 +156,7 @@ static FasTApi *defaultApi = nil;
 - (void)fetchEvents:(void (^)(void))callback
 {
     NSMutableDictionary *tmpEvents = [NSMutableDictionary dictionary];
-    [self getResource:@"api/box_office" withAction:@"events" callback:^(NSDictionary *response) {
+    [self getResource:@"api/ticketing/box_office/events" withAction:@"" callback:^(NSDictionary *response) {
         for (NSDictionary *eventInfo in response[@"events"]) {
             FasTEvent *event = [[[FasTEvent alloc] initWithInfo:eventInfo] autorelease];
             tmpEvents[event.eventId] = event;
@@ -204,7 +204,7 @@ static FasTApi *defaultApi = nil;
 
 - (void)finishPurchase:(NSDictionary *)data
 {
-    [self makeJsonRequestWithResource:@"api/box_office" action:@"purchase" method:@"POST" data:data callback:NULL];
+    [self makeJsonRequestWithResource:@"api/ticketing/box_office/purchases" action:@"" method:@"POST" data:data callback:NULL];
 }
 
 - (void)resetSeating
