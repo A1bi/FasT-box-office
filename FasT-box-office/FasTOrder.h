@@ -19,7 +19,7 @@
 	FasTEventDate *date; // TODO: remove this and rework the whole ticket number part in the ordering process
     NSArray *tickets;
     NSMutableArray *logEvents;
-    NSDate *created;
+    NSDate *createdAt;
     float total, balance;
     BOOL paid;
 }
@@ -27,7 +27,7 @@
 @property (nonatomic, readonly) NSString *orderId, *number, *firstName, *lastName;
 @property (nonatomic, retain) FasTEventDate *date;
 @property (nonatomic, retain) NSArray *tickets;
-@property (nonatomic, readonly) NSDate *created;
+@property (nonatomic, readonly) NSDate *createdAt;
 @property (nonatomic, assign) float total, balance;
 @property (nonatomic, assign) BOOL paid;
 @property (nonatomic, readonly) NSMutableArray *logEvents;

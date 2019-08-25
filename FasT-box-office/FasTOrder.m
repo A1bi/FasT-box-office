@@ -16,7 +16,7 @@
 
 @implementation FasTOrder
 
-@synthesize orderId, number, date, tickets, created, total, balance, paid, firstName, lastName, logEvents;
+@synthesize orderId, number, date, tickets, createdAt, total, balance, paid, firstName, lastName, logEvents;
 
 - (id)initWithInfo:(NSDictionary *)info
 {
@@ -27,7 +27,7 @@
         total = [info[@"total"] floatValue];
         balance = [info[@"balance"] floatValue];
         paid = [info[@"paid"] boolValue];
-        created = [[NSDate dateWithTimeIntervalSince1970:[info[@"created"] intValue]] retain];
+        createdAt = [[NSDate dateWithTimeIntervalSince1970:[info[@"created_at"] intValue]] retain];
         firstName = [info[@"first_name"] retain];
         lastName = [info[@"last_name"] retain];
         
@@ -56,7 +56,7 @@
     [number release];
 	[tickets release];
     [date release];
-    [created release];
+    [createdAt release];
     [firstName release];
     [lastName release];
     [logEvents release];

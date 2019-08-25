@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        self.date = [NSDate dateWithTimeIntervalSince1970:[info[@"date"] integerValue]];
+        self.date = [NSDate dateWithTimeIntervalSince1970:[info[@"created_at"] integerValue]];
         self.message = info[@"message"];
     }
     return self;

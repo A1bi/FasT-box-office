@@ -103,7 +103,7 @@
         @[@"Nummer", _order.number],
         @[@"Besteller", [_order fullNameWithLastNameFirst:YES]],
         @[@"Gesamtbetrag", [_order localizedTotal]],
-        @[@"aufgegeben", [_dateFormatter stringFromDate:_order.created]],
+        @[@"aufgegeben", [_dateFormatter stringFromDate:_order.createdAt]],
         @[@"bezahlt", paid],
         @[@"Saldo", [_order localizedBalance]]
     ]];

@@ -60,24 +60,22 @@
     
     [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:nil data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
         [hud hideAnimated:YES];
-        
-        if (!response[@"error"]) {
-            [orders removeAllObjects];
-            
-            for (NSDictionary *orderInfo in response[@"orders"]) {
-                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo] autorelease];
-                if ([order.created laterDate:ordersStartDate] == order.created) {
-                    [orders addObject:order];
-                }
+
+        [orders removeAllObjects];
+
+        for (NSDictionary *orderInfo in response[@"orders"]) {
+            FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo] autorelease];
+            if ([order.createdAt laterDate:ordersStartDate] == order.createdAt) {
+                [orders addObject:order];
             }
-            
-            if (orders.count == 1) {
-                highlightedTicketId = [response[@"ticket_id"] retain];
-                [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
-            }
-            
-            [self.tableView reloadData];
         }
+
+        if (orders.count == 1) {
+            highlightedTicketId = [response[@"ticket_id"] retain];
+            [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
+        }
+
+        [self.tableView reloadData];
     }];
 }
 

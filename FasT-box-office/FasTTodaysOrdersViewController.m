@@ -47,16 +47,14 @@
     [self retain];
     
     [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:nil data:@{ @"unpaid": @(1), @"event_today": @(1) } callback:^(NSDictionary *response) {
-        if (!response[@"error"]) {
-            [orders removeAllObjects];
-            
-            for (NSDictionary *orderInfo in response[@"orders"]) {
-                FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo] autorelease];
-                [orders addObject:order];
-            }
-            
-            [self.tableView reloadData];
+        [orders removeAllObjects];
+        
+        for (NSDictionary *orderInfo in response[@"orders"]) {
+            FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo] autorelease];
+            [orders addObject:order];
         }
+        
+        [self.tableView reloadData];
         
         [refresh endRefreshing];
         [self release];
