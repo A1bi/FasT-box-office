@@ -11,7 +11,7 @@
 
 @implementation FasTTicketType
 
-@synthesize name, info, typeId, price, exclusive;
+@synthesize name, info, typeId, price, availability;
 
 - (id)initWithInfo:(NSDictionary *)i
 {
@@ -21,7 +21,14 @@
         name = [i[@"name"] retain];
         info = [i[@"info"] retain];
         price = [i[@"price"] floatValue];
-        exclusive = [i[@"exclusive"] boolValue];
+
+        if ([i[@"availability"] isEqualToString:@"exclusive"]) {
+            availability = FasTTicketTypeAvailabilityExclusive;
+        } else if ([i[@"availability"] isEqualToString:@"box_office"]) {
+            availability = FasTTicketTypeAvailabilityBoxOffice;
+        } else {
+            availability = FasTTicketTypeAvailabilityUniversal;
+        }
     }
     return self;
 }

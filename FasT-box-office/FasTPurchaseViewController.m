@@ -290,7 +290,7 @@
         BOOL firstRow = indexPath.row == 0;
         cell = [tableView dequeueReusableCellWithIdentifier:firstRow ? @"FasTPurchaseProductTicketsCell" : @"FasTPurchaseProductCell"];
         if (firstRow) {
-            if (_todaysDate && _todaysDate.event.isBoundToSeats) {
+            if (_todaysDate && _todaysDate.event.hasSeatingPlan) {
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"für heute noch %li Tickets verfügbar", (long)_numberOfAvailableTickets];
             } else {
                 cell.detailTextLabel.text = nil;

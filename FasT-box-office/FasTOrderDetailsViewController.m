@@ -350,7 +350,7 @@
                         }
                         break;
                     case 6:
-                        label.hidden = !ticket.date.event.isBoundToSeats;
+                        label.hidden = !ticket.date.event.hasSeatingPlan;
                         if (!label.hidden) {
                             label.text = [NSString stringWithFormat:label.text, ticket.seat.fullNumber];
                         }

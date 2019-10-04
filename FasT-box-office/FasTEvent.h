@@ -15,7 +15,7 @@
     NSArray *dates;
     NSArray *ticketTypes;
     NSMutableDictionary *seats;
-    BOOL isBoundToSeats;
+    BOOL hasSeatingPlan;
 }
 
 @property (nonatomic, retain) NSString *eventId;
@@ -23,7 +23,7 @@
 @property (nonatomic, retain) NSArray *dates;
 @property (nonatomic, retain) NSArray *ticketTypes;
 @property (nonatomic, readonly) NSMutableDictionary *seats;
-@property (nonatomic, assign) BOOL isBoundToSeats;
+@property (nonatomic, assign) BOOL hasSeatingPlan;
 
 - (id)initWithInfo:(NSDictionary *)info;
 - (void)updateSeats:(NSDictionary *)seatsInfo;

@@ -8,17 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    FasTTicketTypeAvailabilityUniversal,
+    FasTTicketTypeAvailabilityExclusive,
+    FasTTicketTypeAvailabilityBoxOffice
+} FasTTicketTypeAvailability;
+
 @interface FasTTicketType : NSObject
 {
     float price;
     NSString *name, *info;
     NSString *typeId;
-    BOOL exclusive;
+    FasTTicketTypeAvailability availability;
 }
 
 @property (nonatomic, readonly) NSString *name, *info, *typeId;
 @property (nonatomic, readonly) float price;
-@property (nonatomic, readonly) BOOL exclusive;
+@property (nonatomic, readonly) FasTTicketTypeAvailability availability;
 
 - (id)initWithInfo:(NSDictionary *)info;
 
