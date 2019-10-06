@@ -13,7 +13,6 @@
 
 @optional
 - (void)paymentFinishedInPaymentViewController;
-- (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished;
 
 @end
 

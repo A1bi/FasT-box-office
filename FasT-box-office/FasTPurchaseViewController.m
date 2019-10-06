@@ -29,7 +29,8 @@
 {
     NSArray *_availableProducts;
     NSMutableArray *_cartItems;
-    NSMutableArray *_ticketsToPay;
+    NSMutableArray *_ticketsInCart;
+    NSMutableArray *_ticketsToPrint;
     NSMutableArray *_placedOrders;
     FasTEventDate *_todaysDate;
     NSInteger _numberOfAvailableTickets;
@@ -45,6 +46,7 @@
 - (void)addTicketsToPay:(NSArray *)tickets;
 - (void)receivedTicketsToPay:(NSNotification *)note;
 - (void)receivedOrderPayment:(NSNotification *)note;
+- (void)printTicketsInCart;
 - (void)updateNumberOfAvailableTickets;
 - (void)switchToSelf;
 
@@ -57,7 +59,8 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _cartItems = [[NSMutableArray alloc] init];
-        _ticketsToPay = [[NSMutableArray alloc] init];
+        _ticketsInCart = [[NSMutableArray alloc] init];
+        _ticketsToPrint = [[NSMutableArray alloc] init];
         _placedOrders = [[NSMutableArray alloc] init];
     }
     return self;
@@ -68,7 +71,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_availableProducts release];
     [_cartItems release];
-    [_ticketsToPay release];
+    [_ticketsInCart release];
+    [_ticketsToPrint release];
     [_placedOrders release];
     [_cartItemsTable release];
     [_totalLabel release];
@@ -109,6 +113,9 @@
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
         payment.cartItems = _cartItems;
         payment.delegate = self;
+
+        [self printTicketsInCart];
+
     } else if ([segue.identifier isEqualToString:@"FasTOrderSegue"]) {
         ((FasTOrderViewController *)segue.destinationViewController).delegate = self;
     }
@@ -143,7 +150,7 @@
     [cartItem decreaseQuantity];
     if (remove || cartItem.quantity < 1) {
         if ([cartItem isKindOfClass:[FasTCartTicketItem class]]) {
-            [_ticketsToPay removeObject:((FasTCartTicketItem *)cartItem).ticket];
+            [_ticketsInCart removeObject:((FasTCartTicketItem *)cartItem).ticket];
         }
         [_cartItems removeObject:cartItem];
         [self removeCartItemIndexPathsFromTable:@[indexPath]];
@@ -190,7 +197,8 @@
     for (NSInteger i = 0, c = _cartItems.count; i < c; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
-    [_ticketsToPay removeAllObjects];
+    [_ticketsInCart removeAllObjects];
+    [_ticketsToPrint removeAllObjects];
     [_placedOrders removeAllObjects];
     [_cartItems removeAllObjects];
     [self removeCartItemIndexPathsFromTable:indexPaths];
@@ -200,10 +208,14 @@
 - (void)addTicketsToPay:(NSArray *)tickets
 {
     for (FasTTicket *ticket in tickets) {
-        if (![_ticketsToPay containsObject:ticket]) {
-            [_ticketsToPay addObject:ticket];
+        if (![_ticketsInCart containsObject:ticket]) {
+            [_ticketsInCart addObject:ticket];
             FasTCartTicketItem *cartItem = [[[FasTCartTicketItem alloc] initWithTicket:ticket] autorelease];
             [self addCartItem:cartItem];
+        }
+
+        if (![_ticketsToPrint containsObject:ticket]) {
+            [_ticketsToPrint addObject:ticket];
         }
     }
     
@@ -227,17 +239,16 @@
     [self switchToSelf];
 }
 
-- (void)dismissedPurchasePaymentViewControllerFinished:(BOOL)finished
+- (void)printTicketsInCart
 {
-    if (finished) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseFinished" object:self];
-        [self clearCart];
-    }
+    [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPrint];
+    [_ticketsToPrint removeAllObjects];
 }
 
 - (void)paymentFinishedInPaymentViewController
 {
-    [[FasTTicketPrinter sharedPrinter] printTickets:_ticketsToPay];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTPurchaseFinished" object:self];
+    [self clearCart];
 }
 
 - (void)updateNumberOfAvailableTickets

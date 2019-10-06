@@ -63,6 +63,12 @@
     [[ESCPrinter sharedPrinter] setDelegate:nil];
 }
 
+- (void)setCartItems:(NSArray *)cartItems
+{
+    [_cartItems release];
+    _cartItems = [cartItems copy];
+}
+
 - (IBAction)printReceipt
 {
     if (_finished) {
@@ -149,7 +155,6 @@
 - (IBAction)dismiss
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
-    [_delegate dismissedPurchasePaymentViewControllerFinished:_finished];
 }
 
 #pragma mark ESCPrinter delegate
