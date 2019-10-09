@@ -186,6 +186,11 @@ static FasTApi *defaultApi = nil;
     data[@"order"] = @{ @"date": order.date.dateId, @"tickets": ticketsInfo };
     
     [self makeJsonRequestWithPath:@"api/ticketing/box_office/orders" method:@"POST" data:data callback:^(NSDictionary *response) {
+        if (!response) {
+            callback(nil);
+            return;
+        }
+
         FasTOrder *newOrder = [[[FasTOrder alloc] initWithInfo:response[@"order"]] autorelease];
         callback(newOrder);
     }];

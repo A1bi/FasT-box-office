@@ -49,6 +49,7 @@
 - (void)printTicketsInCart;
 - (void)updateNumberOfAvailableTickets;
 - (void)switchToSelf;
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message;
 
 @end
 
@@ -264,6 +265,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"FasTSwitchToPurchaseController" object:self];
 }
 
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)message
+{
+    UIAlertController *confirmation = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *confirmationAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL];
+    [confirmation addAction:confirmationAction];
+
+    [self presentViewController:confirmation animated:YES completion:NULL];
+}
+
 #pragma mark table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -379,11 +390,16 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
+    
     [[FasTApi defaultApi] placeOrder:order callback:^(FasTOrder *order) {
-        [[FasTApi defaultApi] resetSeating];
-        
-        [self addTicketsToPay:order.tickets];
-        [_placedOrders addObject:order];
+        if (order) {
+            [[FasTApi defaultApi] resetSeating];
+            [self addTicketsToPay:order.tickets];
+            [_placedOrders addObject:order];
+
+        } else {
+            [self showAlertWithTitle:@"Fehler bei der Buchung" message:@"Leider ist beim Buchen der Tickets etwas schiefgelaufen."];
+        }
         
         [hud hideAnimated:YES];
     }];
