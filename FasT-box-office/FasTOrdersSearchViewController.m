@@ -26,8 +26,8 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        // orders can be at most 200 days old
-        ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 200] retain];
+        // orders can be at most 365 days old
+        ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 365] retain];
     }
     return self;
 }
