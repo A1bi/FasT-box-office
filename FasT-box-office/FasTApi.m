@@ -209,7 +209,7 @@ static FasTApi *defaultApi = nil;
 
 - (void)finishPurchase:(NSDictionary *)data
 {
-    [self makeJsonRequestWithResource:@"api/ticketing/box_office/purchases" action:@"" method:@"POST" data:data callback:NULL];
+    [self makeJsonRequestWithPath:@"api/ticketing/box_office/purchases" method:@"POST" data:data callback:NULL];
 }
 
 - (void)resetSeating
