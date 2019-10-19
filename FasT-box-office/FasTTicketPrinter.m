@@ -57,7 +57,7 @@ static FasTTicketPrinter *sharedPrinter = nil;
 - (void)initPrinter
 {
     NSString *printerUrl = [[NSUserDefaults standardUserDefaults] objectForKey:FasTTicketPrinterUrlPrefKey];
-    if (printerUrl && (!printer || ![printer.URL.absoluteString isEqualToString:printerUrl])) {
+    if (printerUrl) {
         [printer release];
         printer = [[UIPrinter printerWithURL:[NSURL URLWithString:printerUrl]] retain];
         [printer contactPrinter:NULL];
@@ -67,6 +67,8 @@ static FasTTicketPrinter *sharedPrinter = nil;
 - (void)printTickets:(NSArray *)tickets
 {
     if (!printer || tickets.count < 1) return;
+    
+    [self initPrinter];
     
     [[FasTApi defaultApi] fetchPrintableForTickets:tickets callback:^(NSData *data) {
         UIPrintInteractionController *printController = [UIPrintInteractionController sharedPrintController];
