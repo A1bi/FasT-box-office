@@ -114,6 +114,10 @@
         FasTPurchasePaymentViewController *payment = segue.destinationViewController;
         payment.cartItems = _cartItems;
         payment.delegate = self;
+        
+        if (@available(iOS 13.0, *)) {
+            [payment setModalInPresentation:YES];
+        }
 
         [self printTicketsInCart];
 
