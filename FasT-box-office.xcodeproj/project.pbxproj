@@ -81,8 +81,6 @@
 		F02F87871D41728100B5B0F3 /* FasTSeat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeat.m; sourceTree = "<group>"; };
 		F02F87881D41728100B5B0F3 /* FasTSeatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeatingView.h; sourceTree = "<group>"; };
 		F02F87891D41728100B5B0F3 /* FasTSeatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeatingView.m; sourceTree = "<group>"; };
-		F02F878A1D41728100B5B0F3 /* FasTSeatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTSeatView.h; sourceTree = "<group>"; };
-		F02F878B1D41728100B5B0F3 /* FasTSeatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTSeatView.m; sourceTree = "<group>"; };
 		F02F878C1D41728100B5B0F3 /* FasTTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicket.h; sourceTree = "<group>"; };
 		F02F878D1D41728100B5B0F3 /* FasTTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTTicket.m; sourceTree = "<group>"; };
 		F02F878E1D41728100B5B0F3 /* FasTTicketPrinter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTTicketPrinter.h; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 				F02F87A01D41728A00B5B0F3 /* models */,
 				F041CCDD210A8CF0002568BE /* common */,
 				F0F8F1E6210A8CA1005FAF06 /* common UI */,
-				F061035322D28F1800801101 /* legacy */,
 				F03203971B569AC9006D9937 /* Supporting Files */,
 			);
 			path = "FasT-box-office";
@@ -422,15 +419,6 @@
 				F048DEE3224DEAC40039E664 /* release.xcconfig */,
 			);
 			name = Config;
-			sourceTree = "<group>";
-		};
-		F061035322D28F1800801101 /* legacy */ = {
-			isa = PBXGroup;
-			children = (
-				F02F878A1D41728100B5B0F3 /* FasTSeatView.h */,
-				F02F878B1D41728100B5B0F3 /* FasTSeatView.m */,
-			);
-			name = legacy;
 			sourceTree = "<group>";
 		};
 		F0F8F1E6210A8CA1005FAF06 /* common UI */ = {
@@ -763,7 +751,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.5.8;
+				CURRENT_PROJECT_VERSION = 1.6.0;
 				DEVELOPMENT_TEAM = V48L6BF6M3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -773,7 +761,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.5.8;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.a0s.${PRODUCT_NAME:rfc1034identifier}.debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6ac67505-b572-44a3-b319-d2c067cd3062";
@@ -791,7 +779,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 1.5.8;
+				CURRENT_PROJECT_VERSION = 1.6.0;
 				DEVELOPMENT_TEAM = V48L6BF6M3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -801,7 +789,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.5.8;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.albisigns.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4892eec6-8b0d-4aa8-b73b-ae7b84d9131f";

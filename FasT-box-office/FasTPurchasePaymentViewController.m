@@ -111,7 +111,7 @@
 - (void)updateGivenLabel
 {
     self.givenLabel.text = [FasTFormatter stringForPrice:_cashGiven];
-    self.givenLabel.textColor = (_cashGiven >= _total) ? [UIColor greenColor] : [UIColor redColor];
+    self.givenLabel.textColor = (_cashGiven >= _total) ? [UIColor systemGreenColor] : [UIColor systemRedColor];
 }
 
 - (void)payCash
