@@ -150,6 +150,7 @@
 		F04EC4AE22E4713E0071B402 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F09517F922D8A30A00862770 /* FasTOrderEventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrderEventsViewController.h; sourceTree = "<group>"; };
 		F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrderEventsViewController.m; sourceTree = "<group>"; };
+		F0CBCFA526A1BB7800CC186C /* release.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.local.xcconfig; sourceTree = "<group>"; };
 		F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrdersListViewController.h; sourceTree = "<group>"; };
 		F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -417,6 +418,7 @@
 				F048DEE0224DEA860039E664 /* debug.xcconfig */,
 				F048DEE1224DEA9F0039E664 /* debug.local.xcconfig */,
 				F048DEE3224DEAC40039E664 /* release.xcconfig */,
+				F0CBCFA526A1BB7800CC186C /* release.local.xcconfig */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -670,6 +672,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"API_HOST=@\\\"$(API_HOST)\\\"",
+					"API_AUTH_TOKEN=@\\\"$(API_AUTH_TOKEN)\\\"",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -726,7 +729,10 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "API_HOST=@\\\"$(API_HOST)\\\"";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"API_HOST=@\\\"$(API_HOST)\\\"",
+					"API_AUTH_TOKEN=@\\\"$(API_AUTH_TOKEN)\\\"",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -751,7 +757,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.6.0;
+				CURRENT_PROJECT_VERSION = 1.6.1;
 				DEVELOPMENT_TEAM = V48L6BF6M3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -761,7 +767,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.a0s.${PRODUCT_NAME:rfc1034identifier}.debug";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6ac67505-b572-44a3-b319-d2c067cd3062";
@@ -779,7 +785,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CURRENT_PROJECT_VERSION = 1.6.0;
+				CURRENT_PROJECT_VERSION = 1.6.1;
 				DEVELOPMENT_TEAM = V48L6BF6M3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -789,7 +795,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FasT-box-office/FasT-box-office-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.albisigns.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4892eec6-8b0d-4aa8-b73b-ae7b84d9131f";

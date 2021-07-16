@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Albisigns. All rights reserved.
 //
 
+#ifndef API_AUTH_TOKEN
+#error "API Auth Token not set"
+#endif
+
 #import "FasTApi.h"
 #import "FasTEvent.h"
 #import "FasTEventDate.h"
@@ -54,8 +58,12 @@ static FasTApi *defaultApi = nil;
     self = [super init];
     if (self) {
         http = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:API_HOST]];
+        
         [http setRequestSerializer:[AFJSONRequestSerializer serializer]];
         [http setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        
+        NSString *auth = [NSString stringWithFormat:@"Token %@", API_AUTH_TOKEN];
+        [http.requestSerializer setValue:auth forHTTPHeaderField:@"Authorization"];
 
         seatingView = [[FasTSeatingView alloc] init];
 

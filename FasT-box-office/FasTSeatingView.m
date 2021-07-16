@@ -118,7 +118,10 @@
     isReady = NO;
     
     NSURL *url = [self urlForSeatingWithEvent];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    NSString *auth = [NSString stringWithFormat:@"Token %@", API_AUTH_TOKEN];
+    [request setValue:auth forHTTPHeaderField:@"Authorization"];
     [self loadRequest:request];
 }
 
