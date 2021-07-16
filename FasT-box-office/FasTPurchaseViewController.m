@@ -89,7 +89,7 @@
     [center addObserver:self selector:@selector(receivedTicketsToPay:) name:@"FasTPurchaseControllerAddTicketsToPay" object:nil];
     [center addObserver:self selector:@selector(receivedOrderPayment:) name:@"FasTPurchaseControllerAddOrderPayment" object:nil];
     
-    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/products" withAction:@"" callback:^(NSDictionary *response) {
+    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/products" withAction:nil callback:^(NSDictionary *response) {
         NSMutableArray *tmpProducts = [NSMutableArray array];
         for (NSDictionary *productInfo in response[@"products"]) {
             FasTProduct *product = [[[FasTProduct alloc] initWithId:productInfo[@"id"] name:productInfo[@"name"] price:((NSNumber *)productInfo[@"price"]).floatValue] autorelease];

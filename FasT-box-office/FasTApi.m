@@ -164,7 +164,7 @@ static FasTApi *defaultApi = nil;
 - (void)fetchEvents:(void (^)(void))callback
 {
     NSMutableDictionary *tmpEvents = [NSMutableDictionary dictionary];
-    [self getResource:@"api/ticketing/box_office/events" withAction:@"" callback:^(NSDictionary *response) {
+    [self getResource:@"api/ticketing/box_office/events" withAction:nil callback:^(NSDictionary *response) {
         for (NSDictionary *eventInfo in response[@"events"]) {
             FasTEvent *event = [[[FasTEvent alloc] initWithInfo:eventInfo] autorelease];
             tmpEvents[event.eventId] = event;
