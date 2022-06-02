@@ -27,7 +27,7 @@ DEPENDENCIES:
   - Sentry (~> 4.4.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - AFNetworking
     - iZettleSDK
     - MBProgressHUD
@@ -41,4 +41,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ebdf3ee827ac9f08b894475e5347768869d436f1
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.3
