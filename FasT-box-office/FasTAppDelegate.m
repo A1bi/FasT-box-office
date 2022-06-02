@@ -16,12 +16,19 @@
 @implementation FasTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{   
-    [[iZettleSDK shared] startWithAPIKey:@"360E8DAABB8C8283D1F4B0D79CDB0B55"];
+{
+    NSError *error = nil;
+    
+    iZettleSDKAuthorization *authProvider = [[iZettleSDKAuthorization alloc] initWithClientID:@"a9478ba6-4cda-4697-934b-ab2d812b6c2a" callbackURL:[NSURL URLWithString:@"fast-box-office://zettle-login-callback"] error:&error enforcedUserAccount:^NSString * _Nullable{
+        return @"info@theater-kaisersesch.de";
+    }];
+    if (nil != error) {
+        NSLog(@"%@", error);
+    }
+    [[iZettleSDK shared] startWithAuthorizationProvider:authProvider];
 
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
-    NSError *error = nil;
     SentryClient *client = [[[SentryClient alloc] initWithDsn:@"https://5af12ad54ae04c27b41df3485083d378@sentry.a0s.de/6" didFailWithError:&error] autorelease];
     SentryClient.sharedClient = client;
     [SentryClient.sharedClient startCrashHandlerWithError:&error];
