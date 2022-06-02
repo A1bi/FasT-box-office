@@ -29,12 +29,9 @@
 
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
-    SentryClient *client = [[[SentryClient alloc] initWithDsn:@"https://5af12ad54ae04c27b41df3485083d378@sentry.a0s.de/6" didFailWithError:&error] autorelease];
-    SentryClient.sharedClient = client;
-    [SentryClient.sharedClient startCrashHandlerWithError:&error];
-    if (nil != error) {
-        NSLog(@"%@", error);
-    }
+    [SentrySDK startWithConfigureOptions:^(SentryOptions *options) {
+        options.dsn = @"https://4e0a64484a7a497d8beec8da9a923abd@glitchtip.a0s.de/7";
+    }];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *receiptPrinterHostname = [defaults valueForKey:@"FasTReceiptPrinterHostname"];
