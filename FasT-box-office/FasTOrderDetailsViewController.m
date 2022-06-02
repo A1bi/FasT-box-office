@@ -220,7 +220,7 @@
 - (IBAction)openInSafari
 {
     NSString *url = [[FasTApi defaultApi] URLForOrder:_order];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
 }
 
 - (IBAction)payBalance
