@@ -1,4 +1,5 @@
 "CFBundleDisplayName" = "FasT Abendkasse";
 "CFBundleName" = "FasT Abendkasse";
-"NSLocationUsageDescription" = "EC-Karten-Zahlungen müssen per Ortung validiert werden.";
-"NSLocationWhenInUseUsageDescription" = "EC-Karten-Zahlungen müssen per Ortung validiert werden.";
+"NSBluetoothAlwaysUsageDescription" = "Kartenzahlungen nutzen Bluetooth für die Kommunikation mit dem Karten-Terminal.";
+"NSBluetoothPeripheralUsageDescription" = "Kartenzahlungen nutzen Bluetooth für die Kommunikation mit dem Karten-Terminal.";
+"NSLocationWhenInUseUsageDescription" = "Kartenzahlungen müssen per Ortung validiert werden.";
