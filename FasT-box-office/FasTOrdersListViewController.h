@@ -11,7 +11,11 @@
 @interface FasTOrdersListViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *orders;
+    UIRefreshControl *refresh;
 }
+
+- (void)updateOrders;
+- (void)fetchOrders:(NSDictionary *)params callback:(void (^)(NSDictionary *))callback;
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 

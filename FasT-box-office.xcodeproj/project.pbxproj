@@ -54,6 +54,7 @@
 		F04EC4AF22E4713E0071B402 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F04EC4AE22E4713E0071B402 /* LaunchScreen.storyboard */; };
 		F061035422D537A600801101 /* FasTSeatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F02F87891D41728100B5B0F3 /* FasTSeatingView.m */; };
 		F09517FB22D8A30A00862770 /* FasTOrderEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */; };
+		F0B4ED192885EA90001AAB72 /* FasTRecentOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B4ED182885EA90001AAB72 /* FasTRecentOrdersViewController.m */; };
 		F0FDB14F210A898C00DC8CB1 /* FasTOrdersListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +151,8 @@
 		F04EC4AE22E4713E0071B402 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F09517F922D8A30A00862770 /* FasTOrderEventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrderEventsViewController.h; sourceTree = "<group>"; };
 		F09517FA22D8A30A00862770 /* FasTOrderEventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrderEventsViewController.m; sourceTree = "<group>"; };
+		F0B4ED172885EA86001AAB72 /* FasTRecentOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FasTRecentOrdersViewController.h; sourceTree = "<group>"; };
+		F0B4ED182885EA90001AAB72 /* FasTRecentOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FasTRecentOrdersViewController.m; sourceTree = "<group>"; };
 		F0CBCFA526A1BB7800CC186C /* release.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.local.xcconfig; sourceTree = "<group>"; };
 		F0FDB14D210A898B00DC8CB1 /* FasTOrdersListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FasTOrdersListViewController.h; sourceTree = "<group>"; };
 		F0FDB14E210A898B00DC8CB1 /* FasTOrdersListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FasTOrdersListViewController.m; sourceTree = "<group>"; };
@@ -254,6 +257,7 @@
 				F03211411B56B3B4006D9937 /* new order */,
 				F03211421B56B3C0006D9937 /* orders search */,
 				F041CCDE210A8DAD002568BE /* today's unpaid */,
+				F0B4ED1A2885EA97001AAB72 /* recent */,
 				F02F87A41D422BDC00B5B0F3 /* report */,
 				F03211431B56B3FA006D9937 /* Settings */,
 				F02F87A01D41728A00B5B0F3 /* models */,
@@ -423,6 +427,15 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		F0B4ED1A2885EA97001AAB72 /* recent */ = {
+			isa = PBXGroup;
+			children = (
+				F0B4ED172885EA86001AAB72 /* FasTRecentOrdersViewController.h */,
+				F0B4ED182885EA90001AAB72 /* FasTRecentOrdersViewController.m */,
+			);
+			name = recent;
+			sourceTree = "<group>";
+		};
 		F0F8F1E6210A8CA1005FAF06 /* common UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0B4ED192885EA90001AAB72 /* FasTRecentOrdersViewController.m in Sources */,
 				F03203EF1B569CF6006D9937 /* FasTCartProductItem.m in Sources */,
 				F03203F11B569CF6006D9937 /* FasTMainViewController.m in Sources */,
 				F0320A591B569EE7006D9937 /* ESCPrinter.m in Sources */,

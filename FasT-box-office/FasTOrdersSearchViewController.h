@@ -12,6 +12,7 @@
 @interface FasTOrdersSearchViewController : FasTOrdersListViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NSString *highlightedTicketId;
+    NSString *searchTerm;
 }
 
 @property (retain, nonatomic) IBOutlet UITextField *searchField;

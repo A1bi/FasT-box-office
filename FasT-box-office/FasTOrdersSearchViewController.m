@@ -13,24 +13,7 @@
 
 @import MBProgressHUD;
 
-@interface FasTOrdersSearchViewController ()
-{
-    NSDate *ordersStartDate;
-}
-
-@end
-
 @implementation FasTOrdersSearchViewController
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        // orders can be at most 365 days old
-        ordersStartDate = [[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 365] retain];
-    }
-    return self;
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -45,38 +28,34 @@
 {
     [_searchField release];
     [highlightedTicketId release];
-    [ordersStartDate release];
     [super dealloc];
 }
 
-- (void)didEnterSearchTerm:(UITextField *)sender
+- (void)updateOrders
 {
-    NSString *searchTerm = sender.text;
-    if ([searchTerm length] < 1) return;
+    if (!searchTerm) return;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     hud.label.text = NSLocalizedStringByKey(@"pleaseWait");
     
-    [[FasTApi defaultApi] getResource:@"api/ticketing/box_office/orders" withAction:nil data:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
+    [self fetchOrders:@{ @"q": searchTerm } callback:^(NSDictionary *response) {
         [hud hideAnimated:YES];
-
-        [orders removeAllObjects];
-
-        for (NSDictionary *orderInfo in response[@"orders"]) {
-            FasTOrder *order = [[[FasTOrder alloc] initWithInfo:orderInfo] autorelease];
-            if ([order.createdAt laterDate:ordersStartDate] == order.createdAt) {
-                [orders addObject:order];
-            }
-        }
-
+        
         if (orders.count == 1) {
             highlightedTicketId = [response[@"ticket_id"] retain];
             [self performSegueWithIdentifier:@"FasTOrdersSearchDirectDetailsSegue" sender:self];
         }
-
-        [self.tableView reloadData];
     }];
+}
+
+- (void)didEnterSearchTerm:(UITextField *)sender
+{
+    [searchTerm release];
+    searchTerm = [sender.text retain];
+    if ([searchTerm length] < 1) return;
+
+    [self updateOrders];
 }
 
 - (void)clearFormAndResults
